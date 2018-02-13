@@ -1,0 +1,44 @@
+[
+  {
+    "name": "eGFR",
+    "currentValue": "110",
+    "unit": "mL/min",
+    "standing": 2,
+    "trend": 1
+  },
+  {
+    "name": "Blood Sugar",
+    "currentValue": "5.5",
+    "unit": "mmol/L",
+    "standing": 1,
+    "trend": 0
+  },
+  {
+    "name": "Body Weight",
+    "currentValue": "310",
+    "unit": "lbs",
+    "standing": 0,
+    "trend": 2
+  },
+  {
+    "name": "Potassium",
+    "currentValue": "4.1",
+    "unit": "mEq/L",
+    "standing": 2,
+    "trend": 1
+  },
+  {
+    "name": "Phosphorus",
+    "currentValue": "10",
+    "unit": "mEq/L",
+    "standing": 1,
+    "trend": 2
+  },
+  {
+    "name": "Haemoglobin A1c",
+    "currentValue": "5",
+    "unit": "mmoH/min",
+    "standing": 0,
+    "trend": 2
+  }
+]

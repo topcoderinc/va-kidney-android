@@ -1,0 +1,4 @@
+<vector android:height="24dp" android:viewportHeight="1000"
+    android:viewportWidth="1000" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#fff" android:name="Rectangle 10 copy 2" android:pathData="m375.9 63v88.7h-70.9v53.3h70.9v159.8h-70.9v53.3h70.9v177.5h-70.9v53.3h70.9v266.3h53.2v-266.3h141.9v-53.3h-141.9v-177.5h88.7v-53.3h-88.7v-159.8h212.8v-53.3h-212.8v-88.7z"/>
+</vector>

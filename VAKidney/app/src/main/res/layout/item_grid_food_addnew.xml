@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorLightGray"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.topcoder.vakidney.CustomView.SquareLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/bg_white_rounded"
+        >
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="@dimen/app_standard_padding"
+            app:srcCompat="@drawable/ic_addmeal"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/colorLightGray"
+            />
+
+
+        <TextView
+            android:id="@+id/tvAddMeal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/app_standard_padding"
+            android:layout_marginTop="@dimen/app_standard_padding"
+            android:gravity="center"
+            android:text="Add New Meal"
+            android:textColor="@color/colorAccent"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+
+    </com.topcoder.vakidney.CustomView.SquareLinearLayout>
+
+</RelativeLayout>

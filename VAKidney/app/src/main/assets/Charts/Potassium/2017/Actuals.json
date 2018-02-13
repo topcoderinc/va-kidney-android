@@ -1,0 +1,51 @@
+[
+  {
+    "month": "Jan",
+    "potassiumlevel": 5.3
+  },
+  {
+    "month": "Feb",
+    "potassiumlevel": 5.7
+  },
+  {
+    "month": "Mar",
+    "potassiumlevel": 5.1
+  },
+  {
+    "month": "Apr",
+    "potassiumlevel": 5.8
+  },
+  {
+    "month": "May",
+    "potassiumlevel": 5.6
+  },
+  {
+    "month": "Jun",
+    "potassiumlevel": 5.3
+  },
+  {
+    "month": "Jul",
+    "potassiumlevel": 4.9
+  },
+  {
+    "month": "Aug",
+    "potassiumlevel": 6.6
+  },
+  {
+    "month": "Sep",
+    "potassiumlevel": 6.3
+  },
+  {
+    "month": "Oct",
+    "potassiumlevel": 6.0
+  },
+  {
+    "month": "Nov",
+    "potassiumlevel": 5.3
+  },
+  {
+    "month": "Dec",
+    "potassiumlevel": 5.8
+  }
+
+]

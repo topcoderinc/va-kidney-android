@@ -1,0 +1,51 @@
+[
+  {
+    "month": "Jan",
+    "bloodsugar": 113
+  },
+  {
+    "month": "Feb",
+    "bloodsugar": 156
+  },
+  {
+    "month": "Mar",
+    "bloodsugar": 123
+  },
+  {
+    "month": "Apr",
+    "bloodsugar": 145
+  },
+  {
+    "month": "May",
+    "bloodsugar": 123
+  },
+  {
+    "month": "Jun",
+    "bloodsugar": 115
+  },
+  {
+    "month": "Jul",
+    "bloodsugar": 134
+  },
+  {
+    "month": "Aug",
+    "bloodsugar": 123
+  },
+  {
+    "month": "Sep",
+    "bloodsugar": 145
+  },
+  {
+    "month": "Oct",
+    "bloodsugar": 143
+  },
+  {
+    "month": "Nov",
+    "bloodsugar": 112
+  },
+  {
+    "month": "Dec",
+    "bloodsugar": 156
+  }
+
+]

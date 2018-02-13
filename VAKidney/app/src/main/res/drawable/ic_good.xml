@@ -1,0 +1,7 @@
+<vector android:height="24dp" android:viewportHeight="500"
+    android:viewportWidth="500" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#0083be" android:name="Ellipse 8" android:pathData="m243.5 35c122.9 0 222.5 99.6 222.5 222.5c0 122.9 -99.6 222.5 -222.5 222.5c-122.9 0 -222.5 -99.6 -222.5 -222.5c0 -122.9 99.6 -222.5 222.5 -222.5z"/>
+    <path android:fillColor="#003f72" android:name="Ellipse 8" android:pathData="m243.5 38c121.2 0 219.5 98.3 219.5 219.5c0 121.2 -98.3 219.5 -219.5 219.5c-121.2 0 -219.5 -98.3 -219.5 -219.5c0 -121.2 98.3 -219.5 219.5 -219.5zm0 -3c-122.9 0 -222.5 99.6 -222.5 222.5c0 122.9 99.6 222.5 222.5 222.5c122.9 0 222.5 -99.6 222.5 -222.5c0 -122.9 -99.6 -222.5 -222.5 -222.5z"/>
+    <path android:fillColor="#003f72" android:name="Ellipse 9 copy" android:pathData="m164 154.2c-21.9 0 -39.7 19.6 -39.7 43.7c0 24.1 17.8 43.7 39.7 43.7c21.9 0 39.7 -19.6 39.7 -43.7c0 -24.1 -17.8 -43.7 -39.7 -43.7zm158.9 0c-21.9 0 -39.7 19.6 -39.7 43.7c0 24.1 17.8 43.7 39.7 43.7c21.9 0 39.7 -19.6 39.7 -43.7c0 -24.1 -17.8 -43.7 -39.7 -43.7z"/>
+    <path android:fillColor="#003f72" android:name="Rounded Rectangle 6" android:pathData="m144.2 313.1c0 0 55.9 15.9 108.3 15.9c46.5 0 90.3 -15.9 90.3 -15.9c11 0 19.9 8.9 19.9 19.9c0 11 -8.9 19.9 -19.9 19.9c0 0 -44.3 15.9 -91.1 15.9c-52.3 0 -107.6 -15.9 -107.6 -15.9c-11 0 -19.9 -8.9 -19.9 -19.9c0 -11 8.9 -19.9 19.9 -19.9z"/>
+</vector>

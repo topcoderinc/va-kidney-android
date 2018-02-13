@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorLightGray"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.topcoder.vakidney.CustomView.SquareLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_white_rounded"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/app_standard_padding"
+            android:weightSum="2"
+            >
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:src="@drawable/stock_632439546"
+                app:riv_corner_radius="5dp"
+                />
+
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:src="@drawable/stock_613666608"
+                app:riv_corner_radius="5dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:weightSum="2"
+            >
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:src="@drawable/stock_632439546"
+                app:riv_corner_radius="5dp"
+                />
+
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:src="@drawable/stock_613666608"
+                app:riv_corner_radius="5dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/colorLightGray"
+            />
+
+
+        <TextView
+            android:id="@+id/tvMealName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/app_standard_padding"
+            android:text="Dinner"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/tvMealDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/app_standard_padding"
+            android:layout_marginLeft="@dimen/app_standard_padding"
+            android:layout_marginRight="@dimen/app_standard_padding"
+            android:maxLines="1"
+            android:text="Salad pasta pudding grape"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="12dp" />
+
+    </com.topcoder.vakidney.CustomView.SquareLinearLayout>
+
+</RelativeLayout>

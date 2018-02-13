@@ -1,0 +1,94 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorLightGray"
+    android:padding="30dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="com.topcoder.vakidney.MainFragments.HomeFragments.Home2Fragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/bg_white_rounded"
+        android:padding="20dp">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="170dp"
+            android:layout_height="85dp"
+            android:src="@drawable/stock_632439546"
+            app:riv_corner_radius="5dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="The Best for you Stamina"
+            android:textColor="@color/colorPitchBlack"
+            android:textSize="16dp"
+            android:layout_marginTop="@dimen/app_standard_padding"
+            android:gravity="center"
+            android:textStyle="bold"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/app_standard_padding"
+            android:text="Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Etiam pharetra, erat sed fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in orci enim."
+            android:textColor="@color/colorDarkGray"
+            android:textSize="13dp"
+            android:maxLines="2"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/bg_white_rounded"
+        android:padding="20dp">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="170dp"
+            android:layout_height="85dp"
+            android:src="@drawable/stock_613666608"
+            app:riv_corner_radius="5dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Avoid This Food"
+            android:textColor="@color/colorPitchBlack"
+            android:textSize="16dp"
+            android:layout_marginTop="@dimen/app_standard_padding"
+            android:gravity="center"
+            android:textStyle="bold"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/app_standard_padding"
+            android:text="Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Etiam pharetra, erat sed fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in orci enim."
+            android:textColor="@color/colorDarkGray"
+            android:textSize="13dp"
+            android:maxLines="2"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

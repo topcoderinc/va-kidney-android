@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/cardStandardPadding"
+        android:background="@color/colorPrimary"
+        >
+
+
+        <TextView
+            android:id="@+id/actionBarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:text="HOME"
+            android:textColor="@color/colorWhite"
+            android:textSize="16dp"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/menuIcon"
+            android:layout_width="23dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_height="25dp"
+            android:scaleType="fitXY"
+            android:tint="@color/colorWhite"
+            app:srcCompat="@drawable/ic_menu"
+            tools:ignore="VectorDrawableCompat" />
+
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/goalIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:tint="@color/colorWhite"
+            app:srcCompat="@drawable/ic_menu_goal"
+            tools:ignore="VectorDrawableCompat" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_above="@+id/bottomBar"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+
+
+
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:weightSum="5"
+        >
+
+        <LinearLayout
+            android:id="@+id/barLin1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            >
+
+            <LinearLayout
+                android:id="@+id/bar1"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorWhite"
+                />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/barImg1"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:srcCompat="@drawable/ic_bar_home"
+                />
+
+            <TextView
+                android:id="@+id/tvBar1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="4dp"
+                android:textColor="@color/colorWhite"
+                android:text="Home"
+                android:textSize="10dp"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/barLin2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            >
+
+            <LinearLayout
+                android:id="@+id/bar2"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorPrimary"
+                />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/barImg2"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:tint="@color/colorAccent"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:srcCompat="@drawable/ic_bar_chart"
+                />
+
+            <TextView
+                android:id="@+id/tvBar2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="4dp"
+                android:textColor="@color/colorAccent"
+                android:text="Chart"
+                android:textSize="10dp"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/barLin3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            >
+
+            <LinearLayout
+                android:id="@+id/bar3"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorPrimary"
+                />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/barImg3"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:tint="@color/colorAccent"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:srcCompat="@drawable/ic_bar_medication"
+                />
+
+            <TextView
+                android:id="@+id/tvBar3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="4dp"
+                android:textColor="@color/colorAccent"
+                android:text="Medication"
+                android:textSize="10dp"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/barLin4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            >
+
+            <LinearLayout
+                android:id="@+id/bar4"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorPrimary"
+                />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/barImg4"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:tint="@color/colorAccent"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:srcCompat="@drawable/ic_bar_food"
+                />
+
+            <TextView
+                android:id="@+id/tvBar4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="4dp"
+                android:textColor="@color/colorAccent"
+                android:text="Food"
+                android:textSize="10dp"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/barLin5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            >
+
+            <LinearLayout
+                android:id="@+id/bar5"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorPrimary"
+                />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/barImg5"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:tint="@color/colorAccent"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:srcCompat="@drawable/ic_bar_workout"
+                />
+
+            <TextView
+                android:id="@+id/tvBar5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="4dp"
+                android:textColor="@color/colorAccent"
+                android:text="Workout"
+                android:textSize="10dp"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

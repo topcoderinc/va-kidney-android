@@ -1,0 +1,18 @@
+[
+  {
+    "type": 1,
+    "name": "glasses"
+  },
+  {
+    "type": 2,
+    "name": "bowls"
+  },
+  {
+    "type": 3,
+    "name": "miles"
+  },
+  {
+    "type": 4,
+    "name": "lbs"
+  }
+]

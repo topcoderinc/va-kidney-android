@@ -1,0 +1,18 @@
+[
+  {
+    "type": 1,
+    "name": "Water Intake"
+  },
+  {
+    "type": 2,
+    "name": "Fruit/Veggies"
+  },
+  {
+    "type": 3,
+    "name": "Run"
+  },
+  {
+    "type": 4,
+    "name": "Weight Loss"
+  }
+]

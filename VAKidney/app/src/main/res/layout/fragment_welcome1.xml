@@ -1,0 +1,210 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_round_white"
+    android:gravity="center"
+    tools:context="com.topcoder.vakidney.Fragments.Welcome1Fragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/welcome1_title"
+            android:textColor="#666666"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="15dp"
+
+            >
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/image1"
+                android:layout_width="30dp"
+                android:layout_height="60dp"
+                android:tint="#2e7bca"
+                app:srcCompat="@drawable/ic_welcome1_bottle" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/image1"
+                android:gravity="left|center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/drink_water"
+                    android:textColor="#666666"
+                    android:textSize="13dp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="@string/desc"
+                    android:textColor="#666666"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#2e7bca"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="30dp"
+            />
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="15dp"
+
+            >
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/image2"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:layout_alignParentRight="true"
+                android:tint="#557630"
+                app:srcCompat="@drawable/ic_welcome1_fruits" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/image2"
+                android:gravity="right|center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_marginRight="15dp"
+                    android:text="@string/eat_vegetables_amp_fruits"
+                    android:textColor="#666666"
+                    android:textSize="13dp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:layout_marginRight="15dp"
+                    android:text="@string/desc"
+                    android:textColor="#666666"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#557630"
+            android:gravity="right"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="30dp"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="15dp"
+
+            >
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/image3"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:tint="#ff7f32"
+                app:srcCompat="@drawable/ic_welcome1_workout" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/image3"
+                android:gravity="left|center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/workout"
+                    android:textColor="#666666"
+                    android:textSize="13dp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="@string/desc"
+                    android:textColor="#666666"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#ff7f32"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

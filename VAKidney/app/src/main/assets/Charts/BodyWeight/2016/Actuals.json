@@ -1,0 +1,51 @@
+[
+  {
+    "month": "Jan",
+    "weight": 136
+  },
+  {
+    "month": "Feb",
+    "weight": 121
+  },
+  {
+    "month": "Mar",
+    "weight": 113
+  },
+  {
+    "month": "Apr",
+    "weight": 102
+  },
+  {
+    "month": "May",
+    "weight": 97
+  },
+  {
+    "month": "Jun",
+    "weight": 99
+  },
+  {
+    "month": "Jul",
+    "weight": 102
+  },
+  {
+    "month": "Aug",
+    "weight": 109
+  },
+  {
+    "month": "Sep",
+    "weight": 125
+  },
+  {
+    "month": "Oct",
+    "weight": 119
+  },
+  {
+    "month": "Nov",
+    "weight": 108
+  },
+  {
+    "month": "Dec",
+    "weight": 99
+  }
+
+]

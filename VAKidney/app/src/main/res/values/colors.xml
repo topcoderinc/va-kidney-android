@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#003f72</color>
+    <color name="colorPrimaryDark">#003f72</color>
+    <color name="colorAccent">#0083be</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorPitchBlack">#000000</color>
+    <color name="welcomeCircleIndicatorNormal">#8996a0</color>
+    <color name="colorLightGray">#e5e5e5</color>
+    <color name="colorDarkGray">#333333</color>
+    <color name="colorLightDarkGray">#666666</color>
+</resources>

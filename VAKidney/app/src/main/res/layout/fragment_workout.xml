@@ -1,0 +1,436 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/app_standard_padding"
+    android:background="@color/colorLightGray"
+    tools:context="com.topcoder.vakidney.MainFragments.WorkoutFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_white_rounded"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_margin="20dp"
+            >
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:srcCompat="@drawable/ic_data_sync"
+                android:tint="@color/colorDarkGray"
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/app_standard_padding"
+                android:orientation="vertical"
+                >
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Data Sync"
+                    android:textColor="@color/colorDarkGray"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Auto Synced 2 Hours Ago"
+                    android:textColor="@color/colorDarkGray"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/app_standard_padding"
+            android:background="@color/colorLightGray"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:weightSum="3"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sync Data"
+                android:layout_marginLeft="@dimen/app_standard_padding"
+                android:layout_marginRight="@dimen/app_standard_padding"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textColor="@color/colorAccent"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center" >
+
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="30dp"
+                    android:background="@color/colorLightGray"
+                    ></LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Manage Device"
+                android:layout_marginLeft="@dimen/app_standard_padding"
+                android:layout_marginRight="@dimen/app_standard_padding"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:textColor="@color/colorAccent"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/app_standard_padding"
+        android:weightSum="2"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginRight="5dp"
+            android:orientation="vertical"
+            android:background="@drawable/bg_white_rounded"
+            >
+
+
+            <com.topcoder.vakidney.CustomView.ArcProgress
+                android:id="@+id/arcRunning"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="@dimen/app_standard_padding"
+                app:arc_bottom_text="Run"
+                app:arc_bottom_text_size="15dp"
+                app:arc_finished_color="#ff7f32"
+                app:arc_progress="55"
+                app:arc_text_color="@color/colorDarkGray"
+                app:arc_unfinished_color="#e5e5e5"
+                app:icon_color="#ff7f32"
+                app:inside_drawable="@drawable/ic_running" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/tvRunning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="4.7/6.2"
+                    android:textColor="@color/colorDarkGray"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/app_standard_padding"
+                    android:gravity="center"
+                    android:text="mmol/L"
+                    android:textColor="@color/colorDarkGray"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/colorLightGray"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sync Now"
+                android:layout_margin="@dimen/app_standard_padding"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="13dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@drawable/bg_white_rounded"
+            >
+
+
+            <com.topcoder.vakidney.CustomView.ArcProgress
+                android:id="@+id/arcSteps"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="@dimen/app_standard_padding"
+                app:arc_bottom_text="Steps"
+                app:arc_bottom_text_size="13dp"
+                app:arc_finished_color="#f3cf45"
+                app:arc_progress="55"
+                app:arc_text_color="@color/colorDarkGray"
+                app:arc_unfinished_color="#e5e5e5"
+                app:icon_color="#f3cf45"
+                app:inside_drawable="@drawable/ic_steps" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/tvSteps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="1568/2400"
+                    android:textColor="@color/colorDarkGray"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/app_standard_padding"
+                    android:gravity="center"
+                    android:text="Steps"
+                    android:textColor="@color/colorDarkGray"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/colorLightGray"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sync Now"
+                android:layout_margin="@dimen/app_standard_padding"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="13dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/app_standard_padding"
+        android:weightSum="2"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginRight="5dp"
+            android:orientation="vertical"
+            android:background="@drawable/bg_white_rounded"
+            >
+
+
+            <com.topcoder.vakidney.CustomView.ArcProgress
+                android:id="@+id/arcJumping"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="@dimen/app_standard_padding"
+                app:arc_bottom_text="Jump Rope"
+                app:arc_bottom_text_size="10dp"
+                app:arc_finished_color="@color/colorAccent"
+                app:arc_progress="55"
+                app:arc_text_color="@color/colorDarkGray"
+                app:arc_unfinished_color="#e5e5e5"
+                app:icon_color="@color/colorAccent"
+                app:inside_drawable="@drawable/ic_jump_rope" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/tvJumping"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="45/80"
+                    android:textColor="@color/colorDarkGray"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/app_standard_padding"
+                    android:gravity="center"
+                    android:text="Jump"
+                    android:textColor="@color/colorDarkGray"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/colorLightGray"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sync Now"
+                android:layout_margin="@dimen/app_standard_padding"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="13dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@drawable/bg_white_rounded"
+            >
+
+
+            <com.topcoder.vakidney.CustomView.ArcProgress
+                android:id="@+id/arcSwimming"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="@dimen/app_standard_padding"
+                app:arc_bottom_text="Swimming"
+                app:arc_bottom_text_size="15dp"
+                app:arc_finished_color="#557630"
+                app:arc_progress="55"
+                app:arc_text_color="@color/colorDarkGray"
+                app:arc_unfinished_color="#e5e5e5"
+                app:icon_color="#557630"
+                app:inside_drawable="@drawable/ic_swimming" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/tvSwimming"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="1/3"
+                    android:textColor="@color/colorDarkGray"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/app_standard_padding"
+                    android:gravity="center"
+                    android:text="Laps"
+                    android:textColor="@color/colorDarkGray"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/colorLightGray"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sync Now"
+                android:layout_margin="@dimen/app_standard_padding"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="13dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

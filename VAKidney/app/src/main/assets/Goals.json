@@ -1,0 +1,42 @@
+[
+  {
+    "id": 4,
+    "title": 4,
+    "goal": 12,
+    "currentLevel": 5,
+    "icon": 4,
+    "unit": 4,
+    "addString": "Add Data",
+    "color": "f3cf45"
+  },
+  {
+    "id": 1,
+    "title": 1,
+    "goal": 8,
+    "currentLevel": 6,
+    "icon": 2,
+    "unit": 1,
+    "addString": "Sync Now",
+    "color": "bec292"
+  },
+  {
+    "id": 2,
+    "title": 2,
+    "goal": 3,
+    "currentLevel": 2,
+    "icon": 3,
+    "unit": 2,
+    "addString": "Add Water",
+    "color": "557630"
+  },
+  {
+    "id": 3,
+    "title": 3,
+    "goal": 6.2,
+    "currentLevel": 4.7,
+    "icon": 1,
+    "unit": 3,
+    "addString": "Add Veggies",
+    "color": "ff7f32"
+  }
+]

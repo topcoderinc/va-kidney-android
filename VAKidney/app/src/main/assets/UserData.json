@@ -1,0 +1,22 @@
+{
+  "username":"email@email.com",
+  "password":"demo",
+  "fullname":"John Smith",
+  "points":120,
+  "age":53,
+  "height":162,
+  "weight":195,
+  "dialysis":false,
+  "diseasecategory":"ESRD",
+  "setupgoals":true,
+  "avatar":true,
+  "biometric":true,
+  "runningcurrent":4.7,
+  "runninggoal":6.2,
+  "stepcurrent":1568,
+  "stepsgoal":2400,
+  "jumpcurrent":45,
+  "jumpgoal":80,
+  "swimmingcurrent":1,
+  "swimminggoal":3
+}

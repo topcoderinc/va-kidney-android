@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_login"
+    tools:context="com.topcoder.vakidney.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        >
+
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/image1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="15dp"
+            android:padding="3dp"
+            app:srcCompat="@drawable/ic_va_health_logo" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_login_field_normal"
+            >
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/emailicon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:srcCompat="@drawable/ic_email"
+                android:tint="#003f72"
+                />
+
+            <EditText
+                android:id="@+id/emailField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textCursorDrawable="@null"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/colorWhite"
+                android:hint="EMAIL"
+                android:textSize="14dp"
+                android:textColor="@color/colorWhite"
+                android:layout_toRightOf="@+id/emailicon"
+                android:background="@android:color/transparent"
+                />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/emailErrorTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ff7f32"
+            android:layout_marginTop="5dp"
+            android:textSize="12dp"
+            android:visibility="gone"
+            android:text="@string/error_email"
+            />
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_login_field_normal"
+            >
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/passwordIcon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:srcCompat="@drawable/ic_password"
+                android:tint="#003f72"
+                />
+
+            <EditText
+                android:id="@+id/passwordField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textCursorDrawable="@null"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/colorWhite"
+                android:hint="PASSWORD"
+                android:textSize="14dp"
+                android:textColor="@color/colorWhite"
+                android:layout_toRightOf="@+id/passwordIcon"
+                android:background="@android:color/transparent"
+                />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/passwordErrorTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ff7f32"
+            android:visibility="gone"
+            android:layout_marginTop="5dp"
+            android:textSize="12dp"
+            android:text="@string/error_password"
+            />
+
+
+        <TextView
+            android:id="@+id/forgotPasswordTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="15dp"
+            android:textSize="15dp"
+            android:gravity="center"
+            android:text="Forgot Password?"
+            />
+
+
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_login_btn"
+            android:elevation="5dp"
+            android:textSize="13dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="Login"
+            android:textColor="@color/colorWhite" />
+
+
+
+        <Button
+            android:id="@+id/btnSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_signup_btn"
+            android:elevation="5dp"
+            android:textAllCaps="false"
+            android:textSize="13dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="New User? Sign Up Now"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
+
+</RelativeLayout>
