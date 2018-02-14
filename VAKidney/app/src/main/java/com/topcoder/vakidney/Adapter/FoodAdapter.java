@@ -1,7 +1,6 @@
 package com.topcoder.vakidney.Adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +14,11 @@ import com.topcoder.vakidney.R;
 import java.util.ArrayList;
 
 /**
- * Created by abina on 2/7/2018.
+ * Created by Abinash Neupane on 2/7/2018.
  */
 
 /**
- * This adapter is used in FoodFragment. It is also used to populate griview with meals from meals.json file
+ * This adapter is used in FoodFragment. It is also used to populate gridview with meals from meals.json file
  */
 public class FoodAdapter extends BaseAdapter {
 

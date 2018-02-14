@@ -3,7 +3,8 @@ package com.topcoder.vakidney.Fragments;
 import android.support.v4.app.Fragment;
 
 /**
- * Created by abina on 2/2/2018.
+ * Created by Abinash Neupane on 2/2/2018.
+ *  This fragment is used as a base fragment for scaling purpose
  */
 
 public class WelcomeBaseFragment extends Fragment {

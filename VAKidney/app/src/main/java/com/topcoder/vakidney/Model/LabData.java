@@ -1,7 +1,8 @@
 package com.topcoder.vakidney.Model;
 
 /**
- * Created by abina on 2/8/2018.
+ * Created by Abinash Neupane on 2/8/2018.
+ * Labdata class is used to store the data of different lab attributes such as Blood Sugar, Body Weight etc
  */
 
 public class LabData {

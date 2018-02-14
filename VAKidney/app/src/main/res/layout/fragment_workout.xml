@@ -52,7 +52,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Auto Synced 2 Hours Ago"
+                    android:text="Auto synced 2 hours ago"
                     android:textColor="@color/colorDarkGray"
                     android:textSize="13dp" />
 
@@ -176,7 +176,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/app_standard_padding"
                     android:gravity="center"
-                    android:text="mmol/L"
+                    android:text="miles"
                     android:textColor="@color/colorDarkGray"
                     android:textSize="14dp" />
 
@@ -250,7 +250,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/app_standard_padding"
                     android:gravity="center"
-                    android:text="Steps"
+                    android:text="steps"
                     android:textColor="@color/colorDarkGray"
                     android:textSize="14dp" />
 
@@ -333,7 +333,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/app_standard_padding"
                     android:gravity="center"
-                    android:text="Jump"
+                    android:text="jump"
                     android:textColor="@color/colorDarkGray"
                     android:textSize="14dp" />
 
@@ -407,7 +407,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/app_standard_padding"
                     android:gravity="center"
-                    android:text="Laps"
+                    android:text="laps"
                     android:textColor="@color/colorDarkGray"
                     android:textSize="14dp" />
 

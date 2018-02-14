@@ -26,6 +26,9 @@
                 android:layout_weight="1"
                 android:src="@drawable/stock_632439546"
                 app:riv_corner_radius="5dp"
+                android:layout_marginLeft="@dimen/app_standard_padding"
+                android:layout_marginRight="2dp"
+                android:scaleType="centerCrop"
                 />
 
 
@@ -34,7 +37,10 @@
                 android:layout_height="45dp"
                 android:layout_weight="1"
                 android:src="@drawable/stock_613666608"
+                android:layout_marginRight="@dimen/app_standard_padding"
+                android:layout_marginLeft="2dp"
                 app:riv_corner_radius="5dp"
+                android:scaleType="centerCrop"
                 />
         </LinearLayout>
 
@@ -42,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="4dp"
             android:weightSum="2"
             >
 
@@ -52,6 +58,9 @@
                 android:layout_weight="1"
                 android:src="@drawable/stock_632439546"
                 app:riv_corner_radius="5dp"
+                android:layout_marginLeft="@dimen/app_standard_padding"
+                android:layout_marginRight="2dp"
+                android:scaleType="centerCrop"
                 />
 
 
@@ -61,6 +70,9 @@
                 android:layout_weight="1"
                 android:src="@drawable/stock_613666608"
                 app:riv_corner_radius="5dp"
+                android:scaleType="centerCrop"
+                android:layout_marginRight="@dimen/app_standard_padding"
+                android:layout_marginLeft="2dp"
                 />
         </LinearLayout>
 

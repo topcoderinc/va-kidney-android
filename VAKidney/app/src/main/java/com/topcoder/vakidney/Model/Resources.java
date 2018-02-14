@@ -1,7 +1,8 @@
 package com.topcoder.vakidney.Model;
 
 /**
- * Created by abina on 2/8/2018.
+ * Created by Abinash Neupane on 2/8/2018.
+ * It is used to store data for various Resource Articles used in Resources Fragments
  */
 
 public class Resources {

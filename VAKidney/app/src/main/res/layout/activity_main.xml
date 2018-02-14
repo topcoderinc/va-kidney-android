@@ -82,7 +82,7 @@
                         <LinearLayout
                             android:id="@+id/menuBar1"
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="0.5dp"
                             android:layout_marginTop="@dimen/app_standard_padding"
                             android:background="@color/colorLightDarkGray"
                             android:orientation="horizontal"></LinearLayout>
@@ -121,7 +121,7 @@
                         <LinearLayout
                             android:id="@+id/menuBar2"
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="0.5dp"
                             android:layout_marginTop="@dimen/app_standard_padding"
                             android:background="@color/colorLightDarkGray"
                             android:orientation="horizontal"></LinearLayout>
@@ -161,7 +161,7 @@
                         <LinearLayout
                             android:id="@+id/menuBar3"
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="0.5dp"
                             android:layout_marginTop="@dimen/app_standard_padding"
                             android:background="@color/colorLightDarkGray"
                             android:orientation="horizontal"/>
@@ -201,7 +201,7 @@
                         <LinearLayout
                             android:id="@+id/menuBar4"
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="0.5dp"
                             android:layout_marginTop="@dimen/app_standard_padding"
                             android:background="@color/colorLightDarkGray"
                             android:orientation="horizontal"/>
@@ -243,7 +243,7 @@
                     android:id="@+id/tvLogOut"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Log Out"
+                    android:text="Logout"
                     android:textSize="16dp"
                     android:layout_marginTop="@dimen/app_standard_padding"
                     android:textColor="@color/colorLightDarkGray" />

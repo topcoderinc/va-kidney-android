@@ -3,15 +3,10 @@ package com.topcoder.vakidney;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.SparseArray;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -24,8 +19,9 @@ import com.topcoder.vakidney.Fragments.WelcomeBaseFragment;
 import com.topcoder.vakidney.Util.DialogManager;
 import com.topcoder.vakidney.Util.LoginManager;
 
-import java.util.ArrayList;
-
+/**
+ * This is the welcome screen, where user are directed when they use the app for the first time. It contains terms and agreement which should be agreed by the user in order to use the app.
+ */
 public class WelcomeActivity extends AppCompatActivity {
 
     private RelativeLayout welcomeScreenBeginning;
@@ -152,7 +148,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     /**
      * Emulates the behaviour of sliding dot indicator when viewpager is slided
-     * @param index
+     * @param index required to specify the position of menu item in side menu
      */
     private void setIndicator(int index){
         switch (index){

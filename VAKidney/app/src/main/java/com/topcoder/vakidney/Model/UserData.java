@@ -1,7 +1,8 @@
 package com.topcoder.vakidney.Model;
 
 /**
- * Created by abina on 2/9/2018.
+ * Created by Abinash Neupane on 2/9/2018.
+ * It contains the overall data for a particular user using the app.
  */
 
 public class UserData {

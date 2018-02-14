@@ -2,7 +2,6 @@ package com.topcoder.vakidney.Adapter;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,22 +9,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.topcoder.vakidney.Model.MedicationResources;
-import com.topcoder.vakidney.ResourcesDetailActivity;
 import com.topcoder.vakidney.R;
+import com.topcoder.vakidney.ResourcesDetailActivity;
 
 import java.util.ArrayList;
 
 /**
- * Created by abina on 2/8/2018.
+ * Created by Abinash Neupane on 2/8/2018.
  */
 
 /**
- * Used to populate view with medicaion resources data read from MedicationResources.json file
+ * Used to populate view with medication resources data read from MedicationResources.json file
  */
 public class MedicationAdapter extends BaseAdapter {
 
-    private ArrayList<MedicationResources> medicationResourcesArrayList;
-    private Activity activity;
+    private final ArrayList<MedicationResources> medicationResourcesArrayList;
+    private final Activity activity;
 
     public MedicationAdapter(ArrayList<MedicationResources> medicationResourcesArrayList, Activity activity) {
         this.medicationResourcesArrayList = medicationResourcesArrayList;
@@ -68,7 +67,7 @@ public class MedicationAdapter extends BaseAdapter {
             TextView tvDesc = viewTitleDesc.findViewById(R.id.desc);
             LinearLayout divider = viewTitleDesc.findViewById(R.id.divider);
             tvTitle.setText(medicationTitleDesc.getTitle());
-            tvDesc.setText(medicationTitleDesc.getDesc());
+            tvDesc.setText(medicationTitleDesc.getDesc().replace("\n\n", ""));
 
             viewTitleDesc.setOnClickListener(new View.OnClickListener() {
                 @Override

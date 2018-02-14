@@ -7,7 +7,7 @@
     "icon": 4,
     "unit": 4,
     "addString": "Add Data",
-    "color": "f3cf45"
+    "color": 4
   },
   {
     "id": 1,
@@ -16,8 +16,8 @@
     "currentLevel": 6,
     "icon": 2,
     "unit": 1,
-    "addString": "Sync Now",
-    "color": "bec292"
+    "addString": "Add Water",
+    "color": 1
   },
   {
     "id": 2,
@@ -26,8 +26,8 @@
     "currentLevel": 2,
     "icon": 3,
     "unit": 2,
-    "addString": "Add Water",
-    "color": "557630"
+    "addString": "Add Fruits Or Veggies",
+    "color": 2
   },
   {
     "id": 3,
@@ -36,7 +36,7 @@
     "currentLevel": 4.7,
     "icon": 1,
     "unit": 3,
-    "addString": "Add Veggies",
-    "color": "ff7f32"
+    "addString": "Sync Now",
+    "color": 3
   }
 ]

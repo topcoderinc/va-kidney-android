@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by abina on 2/9/2018.
+ * Created by Abinash Neupane on 2/9/2018.
+ * This adapter is used to populate Viewpager with fragments
  */
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {

@@ -85,7 +85,7 @@
                     android:id="@+id/tvDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="@string/nutrition_detail"
                     android:textColor="#666666"
                     android:textSize="13dp" />

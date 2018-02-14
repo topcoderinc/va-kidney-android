@@ -3,10 +3,10 @@ package com.topcoder.vakidney.CustomView;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 /**
- * Created by abina on 12/27/2017.
+ * Created by Abinash Neupane on 12/27/2017.
+ * This class is an extension to LinearLayout which helps us to create a square view with linearlayout attributes
  */
 
 public class SquareLinearLayout extends LinearLayout {

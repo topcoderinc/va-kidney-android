@@ -14,6 +14,7 @@ import com.topcoder.vakidney.Util.JsondataUtil;
 
 /**
  * A simple {@link Fragment} subclass.
+ * This fragment shows the articles related to Nutrition that can be used by the patient using the app
  */
 public class NutritionFragment extends Fragment {
 

@@ -9,16 +9,21 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.topcoder.vakidney.Adapter.FoodAdapter;
+import com.topcoder.vakidney.Model.Meal;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.Util.JsondataUtil;
 
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
+ * This class is used to show all the meals that are added by the users in gridView
  */
 public class FoodFragment extends Fragment {
 
 
     private GridView gridView;
+    private ArrayList<Meal> mealArrayList;
     public FoodFragment() {
         // Required empty public constructor
     }
@@ -29,7 +34,13 @@ public class FoodFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_food, container, false);
         gridView=view.findViewById(R.id.gridView);
-        FoodAdapter foodAdapter=new FoodAdapter(JsondataUtil.getMeals(getActivity()), getActivity());
+        mealArrayList=JsondataUtil.getMeals(getActivity());
+        if(getActivity().getIntent().hasExtra("addmeal")){
+            Bundle bundle=getActivity().getIntent().getBundleExtra("meal");
+            Meal meal=Meal.getMealFromBundle(bundle);
+            mealArrayList.add(meal);
+        }
+        FoodAdapter foodAdapter=new FoodAdapter(mealArrayList, getActivity());
         gridView.setAdapter(foodAdapter);
         return view;
     }

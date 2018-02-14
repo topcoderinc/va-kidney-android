@@ -1,7 +1,8 @@
 package com.topcoder.vakidney.Model;
 
 /**
- * Created by abina on 2/7/2018.
+ * Created by Abinash Neupane on 2/7/2018.
+ * This model class is used to store chart data that can be used in three CHart Fragments
  */
 
 public class ChartData {

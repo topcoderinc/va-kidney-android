@@ -1,9 +1,7 @@
 package com.topcoder.vakidney.Util;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
-
 
 import com.topcoder.vakidney.Model.ChartData;
 import com.topcoder.vakidney.Model.Goal;
@@ -20,19 +18,19 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 /**
- * Created by abina on 1/24/2018.
+ * Created by Abinash Neupane on 1/24/2018.
+ * This method is used to perform various json related tasks
  */
 
 public class JsondataUtil {
 
     /**
      * Returns UserData object read from UserData.json file
-     * @param context
-     * @return
+     * @param context The context it was called from
+     * @return The Userdata object parsed from the specified json file is returned
      */
     public static UserData getUserData(Context context){
         try {
@@ -69,11 +67,11 @@ public class JsondataUtil {
 
     /**
      * Returns an array of units from minimum to maximum index
-     * @param context
-     * @param type
-     * @param max
-     * @param min
-     * @return
+     * @param context   The context it was called from
+     * @param type type of unit
+     * @param max minimum value for the array
+     * @param min maximum value for the array
+     * @return An Array of String with respective units ranging from min to max according to their type
      */
     public static String[] getUnitsArray(Context context, int type, int max, int min){
         String unit="";
@@ -93,7 +91,7 @@ public class JsondataUtil {
         String[] array=new String[max-min];
         int k=0;
         for(int i=min; i<max; i++){
-            array[k]=(i+1)+" "+unit;
+            array[k]=((i+1)*3)+" "+unit;
             k++;
         }
         return array;
@@ -101,8 +99,8 @@ public class JsondataUtil {
 
     /**
      * Returns an array of Resources object read from Resources.json file
-     * @param context
-     * @return
+     * @param context  The context it was called from
+     * @return An ArrayList of resources object is returned parsed from resources.json file
      */
     public static ArrayList<Resources> getResources(Context context) {
         ArrayList<Resources> resourcesArrayList = new ArrayList<>();
@@ -127,8 +125,8 @@ public class JsondataUtil {
 
     /**
      * Returns an array of Labdata object read from Labdata.json file
-     * @param context
-     * @return
+     * @param context  The context it was called from
+     * @return An ArrayList of LabData is returned by parsing LabData.json file
      */
     public static ArrayList<LabData> getLabData(Context context) {
         ArrayList<LabData> labDataArrayList = new ArrayList<>();
@@ -154,9 +152,9 @@ public class JsondataUtil {
 
     /**
      * Returns an array of MedicationResources object read from MedicationResources.json file
-     * @param context
-     * @param type
-     * @return
+     * @param context  The context it was called from
+     * @param type the type of medication article
+     * @return An ArrayList of MedicationResources is returned by parsing MedicationResources.json file
      */
     public static ArrayList<MedicationResources> getMedicationResources(Context context, int type) {
         ArrayList<MedicationResources> medicationResourcesArrayList = new ArrayList<>();
@@ -188,9 +186,9 @@ public class JsondataUtil {
 
     /**
      * Returns Title of Unit of a goal with given id
-     * @param context
-     * @param id
-     * @return
+     * @param context  The context it was called from
+     * @param id The id of a targeted goal
+     * @return It returns the Unit of a goal with given id
      */
     public static String getGoalUnitById(Context context, int id){
         try {
@@ -210,9 +208,9 @@ public class JsondataUtil {
 
     /**
      * Returns Title of a goal with given id
-     * @param context
-     * @param id
-     * @return
+     * @param context  The context it was called from
+     * @param id The id of targeted goal
+     * @return It returns the Title of goal with given id
      */
     public static String getGoalTitleById(Context context, int id){
         try {
@@ -230,12 +228,34 @@ public class JsondataUtil {
         return "";
     }
 
+    /**
+     *
+     * @param context  The context it was called from
+     * @param id The id of a targeted goal
+     * @return It returns the Color of a goal with given id
+     */
+    public static String getGoalColorById(Context context, int id){
+        try {
+            String jsonString = loadJSONFromAsset(context, "ColorCode.json");
+            JSONArray jsonArray = new JSONArray(jsonString);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                if(jsonObject.getInt("type")==id) {
+                    return jsonObject.getString("name");
+                }
+            }
+        } catch (JSONException e) {
+            Log.e("json Exception", e.getMessage() + "");
+        }
+        return "";
+    }
+
 
     /**
      * Returns Goal Object with given goal id
-     * @param context
-     * @param id
-     * @return
+     * @param context  The context it was called from
+     * @param id The id of a targeted goal
+     * @return It returns the Goal object with given id
      */
     public static Goal getGoalByID(Context context, int id){
         try {
@@ -251,7 +271,7 @@ public class JsondataUtil {
                     goal.setCurrentLevel(jsonObject.getDouble("currentLevel"));
                     goal.setUnit(jsonObject.getInt("unit"));
                     goal.setAddString(jsonObject.getString("addString"));
-                    goal.setColorCode(jsonObject.getString("color"));
+                    goal.setColorCode(getGoalColorById(context, jsonObject.getInt("color")));
                     int icon = jsonObject.getInt("icon");
                     switch (icon) {
                         case 1:
@@ -282,8 +302,8 @@ public class JsondataUtil {
 
     /**
      * Returns an array of goal objects read from Goals.json file
-     * @param context
-     * @return
+     * @param context  The context it was called from
+     * @return An ArrayList of Goal is returned by parsing Goals.json file
      */
     public static ArrayList<Goal> getGoals(Context context) {
         ArrayList<Goal> goals = new ArrayList<>();
@@ -299,7 +319,7 @@ public class JsondataUtil {
                 goal.setCurrentLevel(jsonObject.getDouble("currentLevel"));
                 goal.setUnit(jsonObject.getInt("unit"));
                 goal.setAddString(jsonObject.getString("addString"));
-                goal.setColorCode(jsonObject.getString("color"));
+                goal.setColorCode(getGoalColorById(context, jsonObject.getInt("color")));
                 int icon=jsonObject.getInt("icon");
                 switch (icon){
                     case 1:
@@ -330,9 +350,9 @@ public class JsondataUtil {
 
     /**
      * Returns Chart Data for given year which is read from Respective json file
-     * @param year
-     * @param context
-     * @return
+     * @param year The year of which the data is to be returned
+     * @param context  The context it was called from
+     * @return An ArrayList of ChartData is returned by parsing respective json file
      */
     public static ArrayList<ChartData> getPotassiumDataGoal(int year, Context context) {
         ArrayList<ChartData> chartDataArrayList = new ArrayList<>();
@@ -353,9 +373,9 @@ public class JsondataUtil {
 
     /**
      * Returns Chart Data for given year which is read from Respective json file
-     * @param year
-     * @param context
-     * @return
+     * @param year The year of which the data is to be returned
+     * @param context  The context it was called from
+     * @return An ArrayList of ChartData for Potassium is returned by parsing respective json file
      */
     public static ArrayList<ChartData> getPotassiumDataActual(int year, Context context) {
         ArrayList<ChartData> chartDataArrayList = new ArrayList<>();
@@ -376,9 +396,9 @@ public class JsondataUtil {
 
     /**
      * Returns Chart Data for given year which is read from Respective json file
-     * @param year
-     * @param context
-     * @return
+     * @param year The year of which the data is to be returned
+     * @param context  The context it was called from
+     * @return An ArrayList of ChartData is returned by parsing respective json file
      */
     public static ArrayList<ChartData> getBodyWeightDataGoal(int year, Context context) {
         ArrayList<ChartData> chartDataArrayList = new ArrayList<>();
@@ -399,9 +419,9 @@ public class JsondataUtil {
 
     /**
      * Returns Chart Data for given year which is read from Respective json file
-     * @param year
-     * @param context
-     * @return
+     * @param year The year of which the data is to be returned
+     * @param context  The context it was called from
+     * @return An ArrayList of ChartData is returned by parsing respective json file
      */
     public static ArrayList<ChartData> getBodyWeightDataActual(int year, Context context) {
         ArrayList<ChartData> chartDataArrayList = new ArrayList<>();
@@ -422,9 +442,9 @@ public class JsondataUtil {
 
     /**
      * Returns Chart Data for given year which is read from Respective json file
-     * @param year
-     * @param context
-     * @return
+     * @param year The year of which the data is to be returned
+     * @param context  The context it was called from
+     * @return An ArrayList of ChartData is returned by parsing respective json file
      */
     public static ArrayList<ChartData> getBloodSugarDataGoal(int year, Context context) {
         ArrayList<ChartData> chartDataArrayList = new ArrayList<>();
@@ -445,9 +465,9 @@ public class JsondataUtil {
 
     /**
      * Returns Chart Data for given year which is read from Respective json file
-     * @param year
-     * @param context
-     * @return
+     * @param year The year of which the data is to be returned
+     * @param context  The context it was called from
+     * @return  An ArrayList of ChartData is returned by parsing respective json file
      */
     public static ArrayList<ChartData> getBloodSugarDataActual(int year, Context context) {
         ArrayList<ChartData> chartDataArrayList = new ArrayList<>();
@@ -469,8 +489,8 @@ public class JsondataUtil {
 
     /**
      * Returns an array of Meals Object read from meals.json  File
-     * @param context
-     * @return
+     * @param context  The context it was called from
+     * @return  An ArrayList of Meal Object is returned by parsing Meals.json file
      */
     public static ArrayList<Meal> getMeals(Context context) {
         ArrayList<Meal> meals = new ArrayList<>();
@@ -494,9 +514,9 @@ public class JsondataUtil {
 
     /**
      * Reads string from json file
-     * @param context
-     * @param filename
-     * @return
+     * @param context  The context it was called from
+     * @param filename The name of json file
+     * @return It returns the string of a specified json file
      */
     public static String loadJSONFromAsset(Context context, String filename) {
         String json = null;

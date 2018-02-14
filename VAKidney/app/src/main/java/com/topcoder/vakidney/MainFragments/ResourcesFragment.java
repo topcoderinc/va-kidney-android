@@ -4,8 +4,6 @@ package com.topcoder.vakidney.MainFragments;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +13,9 @@ import com.topcoder.vakidney.Adapter.ViewPagerAdapter;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.ResourcesFragments.ResourceFragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * A simple {@link Fragment} subclass.
+ * It Displays different articles suitable for the patient using this app
  */
 public class ResourcesFragment extends Fragment {
 
@@ -48,7 +44,7 @@ public class ResourcesFragment extends Fragment {
 
     /**
      * Populates the ViewPager with respective fields
-     * @param viewPager
+     * @param viewPager Required to setup with fragments
      */
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
