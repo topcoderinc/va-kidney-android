@@ -8,78 +8,6 @@
     android:background="@color/colorLightGray"
     tools:context="com.topcoder.vakidney.MainFragments.ChartFragments.BloodSugarFragment">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:background="@drawable/bg_round_white">
-
-
-        <LinearLayout
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_left_half_dark"
-            />
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/lineChart"
-            android:layout_width="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_height="140dp" />
-
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp"
-            android:layout_alignParentRight="true"
-            android:gravity="center"
-            >
-            <LinearLayout
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:background="@drawable/ic_oval_green"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:text="Goals"
-                />
-
-            <LinearLayout
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/ic_oval_solid"
-               />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:text="Actuals"
-                />
-
-        </LinearLayout>
-
-
-    </RelativeLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:text="2016"
-        android:textSize="16dp"
-        android:textColor="@color/colorDarkGray"
-        />
-
-
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -135,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="Actuals"
+                android:text="Actual"
                 />
 
         </LinearLayout>
@@ -148,9 +76,84 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
+        android:layout_marginBottom="10dp"
         android:text="2017"
         android:textSize="16dp"
         android:textColor="@color/colorDarkGray"
         />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@drawable/bg_round_white">
+
+
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_left_half_dark"
+            />
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChart"
+            android:layout_width="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_height="140dp" />
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            >
+            <LinearLayout
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/ic_oval_green"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Goals"
+                />
+
+            <LinearLayout
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/ic_oval_solid"
+               />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Actual"
+                />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="2016"
+        android:textSize="16dp"
+        android:textColor="@color/colorDarkGray"
+        />
+
+
+
 
 </LinearLayout>

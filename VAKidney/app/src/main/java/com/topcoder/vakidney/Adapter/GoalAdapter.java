@@ -6,20 +6,19 @@ import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.topcoder.vakidney.AddNewGoalActivity;
-import com.topcoder.vakidney.AddNewMealActivity;
 import com.topcoder.vakidney.CustomView.ArcProgress;
 import com.topcoder.vakidney.Model.Goal;
-import com.topcoder.vakidney.Model.Meal;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.Util.JsondataUtil;
 
 import java.util.ArrayList;
 
 /**
- * Created by abina on 2/8/2018.
+ * Created by Abinash Neupane on 2/8/2018.
  */
 
 
@@ -29,8 +28,8 @@ import java.util.ArrayList;
 public class GoalAdapter extends BaseAdapter{
 
 
-    private ArrayList<Goal> goalArrayList;
-    private Activity activity;
+    private final ArrayList<Goal> goalArrayList;
+    private final Activity activity;
 
     public GoalAdapter(ArrayList<Goal> goalArrayList, Activity activity) {
         this.goalArrayList = goalArrayList;
@@ -66,6 +65,7 @@ public class GoalAdapter extends BaseAdapter{
         }else{
             view=activity.getLayoutInflater().inflate(R.layout.item_grid_goal, viewGroup, false);
             ArcProgress goalProgress=view.findViewById(R.id.goalProgress);
+            LinearLayout layout=view.findViewById(R.id.layout);
             TextView tvCurrentGoals=view.findViewById(R.id.tvCurrentGoals);
             TextView tvGoalUnit=view.findViewById(R.id.tvGoalUnit);
             TextView tvAddGoalString=view.findViewById(R.id.tvAddGoalString);
@@ -77,10 +77,14 @@ public class GoalAdapter extends BaseAdapter{
             goalProgress.setFinishedStrokeColor(Color.parseColor("#"+goal.getColorCode()));
             goalProgress.setProgress((int)goal.getCurrentLevel());
             goalProgress.setBottomText(JsondataUtil.getGoalTitleById(activity, goal.getTitle()));
-            tvCurrentGoals.setText(goal.getCurrentLevel()+"/"+goal.getGoal());
+            if ((goal.getCurrentLevel() == Math.floor(goal.getCurrentLevel())) && !Double.isInfinite(goal.getCurrentLevel())) {
+                tvCurrentGoals.setText((int)goal.getCurrentLevel()+"/"+(int)goal.getGoal());
+            }else{
+                tvCurrentGoals.setText(goal.getCurrentLevel()+"/"+goal.getGoal());
+            }
             tvGoalUnit.setText(JsondataUtil.getGoalUnitById(activity,goal.getUnit()));
             tvAddGoalString.setText(goal.getAddString());
-            view.setOnClickListener(new View.OnClickListener() {
+            layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     activity.finish();

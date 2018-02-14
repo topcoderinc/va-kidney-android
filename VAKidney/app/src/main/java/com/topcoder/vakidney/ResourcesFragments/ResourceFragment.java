@@ -14,6 +14,7 @@ import com.topcoder.vakidney.Util.JsondataUtil;
 
 /**
  * A simple {@link Fragment} subclass.
+ * It is used to show list of resource articles
  */
 public class ResourceFragment extends Fragment {
 

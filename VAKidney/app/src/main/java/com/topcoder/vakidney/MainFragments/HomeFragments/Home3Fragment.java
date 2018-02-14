@@ -8,14 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
-import com.topcoder.vakidney.Adapter.GoalAdapter;
 import com.topcoder.vakidney.Adapter.LabDataAdapter;
 import com.topcoder.vakidney.R;
-import com.topcoder.vakidney.Util.DialogManager;
 import com.topcoder.vakidney.Util.JsondataUtil;
 
 /**
  * A simple {@link Fragment} subclass.
+ * This fragemnt is first of three fragment used inside HomeFragment. It shows the labdata of the patient using this app
  */
 public class Home3Fragment extends Fragment {
 

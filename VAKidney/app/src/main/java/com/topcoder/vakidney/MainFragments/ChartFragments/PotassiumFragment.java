@@ -9,12 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.topcoder.vakidney.Model.ChartData;
 import com.topcoder.vakidney.R;
@@ -25,6 +27,7 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
+ * This fragment is used to show the charts of potassium using chart Data. This fragment uses LineChart for data representation
  */
 public class PotassiumFragment extends Fragment {
 
@@ -40,11 +43,11 @@ public class PotassiumFragment extends Fragment {
     private LineData lineData;
 
 
-    private List<Entry> entriesActual2016 = new ArrayList<Entry>();
-    private List<Entry> entriesGoals2016 = new ArrayList<Entry>();
+    private final List<Entry> entriesActual2016 = new ArrayList<>();
+    private final List<Entry> entriesGoals2016 = new ArrayList<>();
 
-    private List<Entry> entriesActual2017 = new ArrayList<Entry>();
-    private List<Entry> entriesGoals2017 = new ArrayList<Entry>();
+    private final List<Entry> entriesActual2017 = new ArrayList<>();
+    private final List<Entry> entriesGoals2017 = new ArrayList<>();
     public PotassiumFragment() {
         // Required empty public constructor
     }
@@ -89,8 +92,8 @@ public class PotassiumFragment extends Fragment {
             i++;
         }
 
-        LineDataSet dataSet = new LineDataSet(entries, "Actuals");
-        LineDataSet dataSet2 = new LineDataSet(entries2, "Goals");
+        LineDataSet dataSet = new LineDataSet(entries, "Actual");
+        LineDataSet dataSet2 = new LineDataSet(entries2, "Goal");
         dataSet.setColor(getContext().getColor(R.color.colorAccent));
         dataSet.setDrawCircles(false);
         dataSet.setLineWidth(3.0f);
@@ -137,9 +140,21 @@ public class PotassiumFragment extends Fragment {
         leftAxis.setGranularityEnabled(false);
         leftAxis.setTextColor(Color.WHITE);
         leftAxis.setTextSize(14.0f);
+        leftAxis.setValueFormatter(new MyValueFormatter());
 
         YAxis rightAxis = lineChart.getAxisRight();
         rightAxis.setEnabled(false);
+    }
+
+    private class MyValueFormatter implements IAxisValueFormatter {
+
+        public MyValueFormatter() {
+        }
+
+        @Override
+        public String getFormattedValue(float value, AxisBase axis) {
+            return String.format("%.1f", value)+" mEq/L";
+        }
     }
 
 }

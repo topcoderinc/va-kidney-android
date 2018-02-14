@@ -9,22 +9,29 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.DefaultValueFormatter;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.topcoder.vakidney.Model.ChartData;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.Util.JsondataUtil;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
+ * This fragment is used to show the charts of body weight using chart Data. This fragment uses LineChart for data representation
  */
 public class BodyWeightFragment extends Fragment {
 
@@ -42,11 +49,11 @@ public class BodyWeightFragment extends Fragment {
     private LineData lineData;
 
 
-    private List<Entry> entriesActual2016 = new ArrayList<Entry>();
-    private List<Entry> entriesGoals2016 = new ArrayList<Entry>();
+    private final List<Entry> entriesActual2016 = new ArrayList<>();
+    private final List<Entry> entriesGoals2016 = new ArrayList<>();
 
-    private List<Entry> entriesActual2017 = new ArrayList<Entry>();
-    private List<Entry> entriesGoals2017 = new ArrayList<Entry>();
+    private final List<Entry> entriesActual2017 = new ArrayList<>();
+    private final List<Entry> entriesGoals2017 = new ArrayList<>();
 
     public BodyWeightFragment() {
         // Required empty public constructor
@@ -142,9 +149,26 @@ public class BodyWeightFragment extends Fragment {
         leftAxis.setGranularityEnabled(false);
         leftAxis.setTextColor(Color.WHITE);
         leftAxis.setTextSize(14.0f);
+        leftAxis.setValueFormatter(new MyValueFormatter());
 
         YAxis rightAxis = lineChart.getAxisRight();
         rightAxis.setEnabled(false);
+
+
+
+    }
+
+    private class MyValueFormatter implements IAxisValueFormatter {
+
+
+        public MyValueFormatter() {
+        }
+
+
+        @Override
+        public String getFormattedValue(float value, AxisBase axis) {
+            return (int)value+" lbs";
+        }
     }
 
 }

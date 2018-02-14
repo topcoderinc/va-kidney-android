@@ -4,10 +4,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -20,7 +18,6 @@ import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.text.TextPaint;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -34,13 +31,15 @@ import java.text.DecimalFormat;
  */
 
 /**
- * Edited by Abinash Neupane for VA Kidney Project
+ * Edited by Abinash Neupanesh Neupane for VA Kidney Project
+ * This class is a View class which is used to show progress in arc with Image Inside it. Many variable inside this class are customizable
+ *
  */
 public class ArcProgress extends View {
     private Paint paint;
-    protected Paint textPaint;
+    private Paint textPaint;
 
-    private RectF rectF = new RectF();
+    private final RectF rectF = new RectF();
 
     private Drawable icon;
     private int iconColor;
@@ -67,9 +66,10 @@ public class ArcProgress extends View {
     private float arcBottomHeight;
 
 
-    private final int default_finished_color = Color.WHITE;
-    private final int default_unfinished_color = Color.rgb(72, 106, 176);
-    private final int default_text_color = Color.rgb(66, 145, 241);
+
+    private int default_finished_color = Color.WHITE;
+    private int default_unfinished_color = Color.rgb(72, 106, 176);
+    private int default_text_color = Color.rgb(66, 145, 241);
     private final float default_suffix_text_size;
     private final float default_suffix_padding;
     private final float default_bottom_text_size;
@@ -122,6 +122,18 @@ public class ArcProgress extends View {
         initPainters();
     }
 
+    public void setDefault_finished_color(int default_finished_color) {
+        this.default_finished_color = default_finished_color;
+    }
+
+    public void setDefault_unfinished_color(int default_unfinished_color) {
+        this.default_unfinished_color = default_unfinished_color;
+    }
+
+    public void setDefault_text_color(int default_text_color) {
+        this.default_text_color = default_text_color;
+    }
+
     public static float dp2px(Resources resources, float dp) {
         final float scale = resources.getDisplayMetrics().density;
         return  dp * scale + 0.5f;
@@ -151,7 +163,7 @@ public class ArcProgress extends View {
         Drawable drawable = a.getDrawable(R.styleable.ArcProgress_inside_drawable);
         icon=drawable;
         if(icon==null){
-            icon=getContext().getResources().getDrawable(R.drawable.ic_running);
+            icon=ContextCompat.getDrawable(getContext(), R.drawable.ic_running);
         }
 
     }
@@ -344,31 +356,20 @@ public class ArcProgress extends View {
         canvas.drawArc(rectF, startAngle, arcAngle, false, paint);
         paint.setColor(finishedStrokeColor);
         canvas.drawArc(rectF, finishedStartAngle, finishedSweepAngle, false, paint);
-
         Bitmap iconBmp=getBitmapFromVectorDrawable(icon);
-
         int left=(getWidth()/2)-((getWidth()/6));
         int top=(getHeight()/2)-getHeight()/6;
         int right=(getWidth()/2)+((getWidth()/6));
         int bottom=(getHeight()/2)+getHeight()/6;
-
-        Log.e("Coodrinates", left+", "+top+", "+right+", "+bottom);
-
         Rect rectSrc=new Rect(0, 0, iconBmp.getWidth(), iconBmp.getHeight());
         Rect rectDest=new Rect(left, top, right, bottom);
         paint.setColorFilter(new PorterDuffColorFilter(iconColor, PorterDuff.Mode.SRC_IN));
-        //canvas.drawBitmap(iconBmp, getWidth()/2f-iconBmp.getWidth()/2f, getHeight()/2f-iconBmp.getHeight()/2f, paint);
         canvas.drawBitmap(iconBmp, rectSrc, rectDest, paint);
-        Log.e("Icon Arc Progress", "DRawn");
-
-
-
         if(arcBottomHeight == 0) {
             float radius = getWidth() / 2f;
             float angle = (360 - arcAngle) / 2f;
             arcBottomHeight = radius * (float) (1 - Math.cos(angle / 180 * Math.PI));
         }
-
         if (!TextisEmpty(getBottomText())) {
             textPaint.setFakeBoldText(true);
             textPaint.setTextSize(bottomTextSize);

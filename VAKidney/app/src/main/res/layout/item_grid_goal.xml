@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.topcoder.vakidney.CustomView.SquareLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
     android:background="@drawable/bg_white_rounded"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:gravity="center"
+    android:orientation="vertical">
 
 
-
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <com.topcoder.vakidney.CustomView.ArcProgress
             android:id="@+id/goalProgress"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            app:arc_bottom_text="Steps"
             android:layout_marginTop="@dimen/app_standard_padding"
-            app:arc_bottom_text_size="13dp"
-            app:arc_text_color="@color/colorDarkGray"
+            app:arc_bottom_text="Steps"
+            app:arc_bottom_text_size="12dp"
             app:arc_finished_color="#f3cf45"
-            app:arc_unfinished_color="#e5e5e5"
-            app:arc_progress="55" />
+            app:arc_progress="55"
+            app:arc_text_color="@color/colorDarkGray"
+            app:arc_unfinished_color="#e5e5e5" />
 
 
         <LinearLayout
@@ -28,7 +33,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal">
-
 
 
             <TextView
@@ -53,24 +57,24 @@
 
 
         </LinearLayout>
+    </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="15dp"
-            android:background="@color/colorLightGray"
-            />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/colorLightGray" />
 
-        <TextView
-            android:id="@+id/tvAddGoalString"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sync Now"
-            android:textStyle="bold"
-            android:layout_margin="@dimen/app_standard_padding"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/colorAccent"
-            android:textSize="13dp" />
+    <TextView
+        android:id="@+id/tvAddGoalString"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/app_standard_padding"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Sync Now"
+        android:textColor="@color/colorAccent"
+        android:textSize="13dp"
+        android:textStyle="bold" />
 
 </com.topcoder.vakidney.CustomView.SquareLinearLayout>

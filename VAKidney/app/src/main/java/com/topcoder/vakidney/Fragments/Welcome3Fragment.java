@@ -1,8 +1,8 @@
 package com.topcoder.vakidney.Fragments;
 
 
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +11,7 @@ import com.topcoder.vakidney.R;
 
 /**
  * A simple {@link Fragment} subclass.
+ *  This fragment is used in Third screen of Welcome Activity. It Extends WelcomeBaseFragment for scaling
  */
 public class Welcome3Fragment extends WelcomeBaseFragment {
 

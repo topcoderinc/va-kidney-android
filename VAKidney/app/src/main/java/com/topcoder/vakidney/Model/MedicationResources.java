@@ -3,7 +3,8 @@ package com.topcoder.vakidney.Model;
 import java.util.ArrayList;
 
 /**
- * Created by abina on 2/8/2018.
+ * Created by Abinash Neupane on 2/8/2018.
+ * It is used to store data for various Resource Articles used in Medication Fragments
  */
 
 public class MedicationResources {

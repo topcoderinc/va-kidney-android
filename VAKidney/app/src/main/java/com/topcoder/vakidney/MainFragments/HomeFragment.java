@@ -3,9 +3,6 @@ package com.topcoder.vakidney.MainFragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,19 +10,14 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.topcoder.vakidney.Adapter.ViewPagerAdapter;
-import com.topcoder.vakidney.Fragments.Welcome1Fragment;
-import com.topcoder.vakidney.Fragments.Welcome2Fragment;
-import com.topcoder.vakidney.Fragments.Welcome3Fragment;
 import com.topcoder.vakidney.MainFragments.HomeFragments.Home1Fragment;
 import com.topcoder.vakidney.MainFragments.HomeFragments.Home2Fragment;
 import com.topcoder.vakidney.MainFragments.HomeFragments.Home3Fragment;
 import com.topcoder.vakidney.R;
-import com.topcoder.vakidney.WelcomeActivity;
-
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
+ * It consists of three fragments Home1Fragment, Home2Fragment and Home3Fragment which shows their respective data
  */
 public class HomeFragment extends Fragment {
 
@@ -51,6 +43,11 @@ public class HomeFragment extends Fragment {
 
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     /**
@@ -83,7 +80,7 @@ public class HomeFragment extends Fragment {
 
     /**
      * Initializes the view
-     * @param view
+     * @param view This View is required to find all views in this fragment/Activity
      */
     private void initView(View view) {
         indicator1=view.findViewById(R.id.indicator1);
@@ -115,7 +112,7 @@ public class HomeFragment extends Fragment {
 
     /**
      * Changes the position of mainindex and otherindex with
-     * @param index
+     * @param index required to specify the position of menu item in side menu
      */
     private void setIndicator(int index){
         switch (index){

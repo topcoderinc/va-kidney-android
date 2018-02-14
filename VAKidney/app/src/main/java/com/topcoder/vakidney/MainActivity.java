@@ -2,8 +2,6 @@ package com.topcoder.vakidney;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.support.v4.widget.ImageViewCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -12,12 +10,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.ImageViewCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.topcoder.vakidney.MainFragments.ChartFragment;
@@ -28,9 +27,11 @@ import com.topcoder.vakidney.MainFragments.MedicationFragment;
 import com.topcoder.vakidney.MainFragments.MyProfileFragment;
 import com.topcoder.vakidney.MainFragments.ResourcesFragment;
 import com.topcoder.vakidney.MainFragments.WorkoutFragment;
-import com.topcoder.vakidney.ResourcesFragments.ResourceFragment;
 import com.topcoder.vakidney.Util.LoginManager;
 
+/**
+ * This is the main Activity which consists of various fragments inside viewpager, side menu, bottom menu etc
+ */
 public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawer;
@@ -150,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Selects Side Menu and emulate side menu behaviour with given index
-     * @param index
+     * @param index required to specify the position of menu item in side menu
      */
     private void selectSideMenu(int index) {
         drawer.closeDrawers();
@@ -395,7 +396,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Emulates the sselecting behaviour for the menus at the bottom
-     * @param index
+     * @param index required to specify the position of menu item in side menu
      */
     private void selectBottomBar(int index) {
         selectSideMenu(0);
@@ -595,7 +596,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Returns require fragment for current TAG
-     * @return
+     * @return The fragment specified by the CURRENT_TAG is returned
      */
     private Fragment getHomeFragment() {
         switch (CURRENT_TAG) {

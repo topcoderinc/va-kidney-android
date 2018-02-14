@@ -26,36 +26,34 @@
             app:srcCompat="@drawable/ic_va_health_logo" />
 
         <RelativeLayout
+            android:id="@+id/emailLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="6dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/bg_login_field_normal"
-            >
+            android:padding="6dp">
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/emailicon"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                app:srcCompat="@drawable/ic_email"
                 android:tint="#003f72"
-                />
+                app:srcCompat="@drawable/ic_email" />
 
             <EditText
                 android:id="@+id/emailField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textCursorDrawable="@null"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:inputType="textEmailAddress"
-                android:textColorHint="@color/colorWhite"
-                android:hint="EMAIL"
-                android:textSize="14dp"
-                android:textColor="@color/colorWhite"
                 android:layout_toRightOf="@+id/emailicon"
                 android:background="@android:color/transparent"
-                />
+                android:hint="EMAIL"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                android:textCursorDrawable="@null"
+                android:textSize="14dp" />
 
         </RelativeLayout>
 
@@ -71,38 +69,35 @@
             />
 
 
-
         <RelativeLayout
+            android:id="@+id/passwordLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="6dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/bg_login_field_normal"
-            >
+            android:padding="6dp">
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/passwordIcon"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                app:srcCompat="@drawable/ic_password"
                 android:tint="#003f72"
-                />
+                app:srcCompat="@drawable/ic_password" />
 
             <EditText
                 android:id="@+id/passwordField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textCursorDrawable="@null"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:inputType="textEmailAddress"
-                android:textColorHint="@color/colorWhite"
-                android:hint="PASSWORD"
-                android:textSize="14dp"
-                android:textColor="@color/colorWhite"
                 android:layout_toRightOf="@+id/passwordIcon"
                 android:background="@android:color/transparent"
-                />
+                android:hint="PASSWORD"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                android:textCursorDrawable="@null"
+                android:textSize="14dp" />
 
         </RelativeLayout>
 
@@ -157,7 +152,7 @@
             android:textSize="13dp"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
-            android:text="New User? Sign Up Now"
+            android:text="New User ? Sign Up Now"
             android:textColor="@color/colorWhite" />
     </LinearLayout>
 

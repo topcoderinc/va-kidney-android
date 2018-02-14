@@ -7,7 +7,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.topcoder.vakidney.LoginActivity;
 import com.topcoder.vakidney.Model.LabData;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.Util.DialogManager;
@@ -15,7 +14,7 @@ import com.topcoder.vakidney.Util.DialogManager;
 import java.util.ArrayList;
 
 /**
- * Created by abina on 2/8/2018.
+ * Created by Abinash Neupane on 2/8/2018.
  */
 
 /**
@@ -23,8 +22,8 @@ import java.util.ArrayList;
  */
 public class LabDataAdapter extends BaseAdapter {
 
-    private ArrayList<LabData> labDataArrayList;
-    private Activity activity;
+    private final ArrayList<LabData> labDataArrayList;
+    private final Activity activity;
 
     public LabDataAdapter(ArrayList<LabData> labDataArrayList, Activity activity) {
         this.labDataArrayList = labDataArrayList;

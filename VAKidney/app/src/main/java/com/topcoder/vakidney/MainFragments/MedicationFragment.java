@@ -4,8 +4,6 @@ package com.topcoder.vakidney.MainFragments;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +14,9 @@ import com.topcoder.vakidney.MainFragments.MedicationFragments.DrugFragment;
 import com.topcoder.vakidney.MainFragments.MedicationFragments.NutritionFragment;
 import com.topcoder.vakidney.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * A simple {@link Fragment} subclass.
+ * This fragment consists of a viewpager which displays two fragments related to drugs and nutrition resource articles.
  */
 public class MedicationFragment extends Fragment {
 
@@ -48,7 +44,7 @@ public class MedicationFragment extends Fragment {
 
     /**
      * Populates the viewpager
-     * @param viewPager
+     * @param viewPager Required to Setup with fragments
      */
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());

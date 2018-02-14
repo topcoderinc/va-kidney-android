@@ -4,10 +4,13 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -17,14 +20,20 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.topcoder.vakidney.Model.Meal;
 import com.topcoder.vakidney.Util.DialogManager;
 import com.topcoder.vakidney.Util.ImagePicker;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ * This class is used to add a new meal
+ */
 public class AddNewMealActivity extends AppCompatActivity {
 
 
@@ -44,7 +53,7 @@ public class AddNewMealActivity extends AppCompatActivity {
     private String[] unitSpinerItems = {"Select", "Item 1", "Item 2", "Item 3"};
     private Button btnAddNewMeal;
     private TextView mealOrLiquidFieldErrorTv, amountFieldErrorTv, unitSpinnerTv;
-
+    private LinearLayout dateLayout, timeLayout;
     private RelativeLayout addedImageLayout;
 
 
@@ -56,19 +65,19 @@ public class AddNewMealActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
-                Intent intent = new Intent(AddNewMealActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_FOOD);
-                startActivity(intent);
+                NavigateHome(false);
             }
         });
         SetupSeekBar();
         SetupBotomMenu();
-        addedImageLayout=findViewById(R.id.addImageLayout);
+        addedImageLayout = findViewById(R.id.addImageLayout);
+        dateLayout = findViewById(R.id.dateLayout);
+        timeLayout = findViewById(R.id.timeLayout);
         mealOrLiquidFieldErrorTv = findViewById(R.id.mealOrliquidFieldErrorTv);
         amountFieldErrorTv = findViewById(R.id.amountFieldErrorTv);
         unitSpinnerTv = findViewById(R.id.unitSpinnerErroTv);
         btnAddNewMeal = findViewById(R.id.btnAddNewMeal);
+        btnAddNewMeal.setEnabled(false);
         addMealOrLiquidField = findViewById(R.id.mealOrliquidField);
         amountField = findViewById(R.id.amountField);
         unitSpinner = findViewById(R.id.unitSpinner);
@@ -84,24 +93,28 @@ public class AddNewMealActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (addMealOrLiquidField.getText().toString().isEmpty() || amountField.getText().toString().isEmpty() || unitSpinner.getSelectedItemPosition() == 0) {
                     mealOrLiquidFieldErrorTv.setVisibility(View.GONE);
+                    mealOrLiquidFieldErrorTv.setBackgroundResource(R.drawable.bg_round_white);
                     amountFieldErrorTv.setVisibility(View.GONE);
+                    amountFieldErrorTv.setBackgroundResource(R.drawable.bg_round_white);
                     unitSpinnerTv.setVisibility(View.GONE);
+                    unitSpinnerTv.setBackgroundResource(R.drawable.bg_round_white);
                     if (addMealOrLiquidField.getText().toString().isEmpty()) {
                         mealOrLiquidFieldErrorTv.setVisibility(View.VISIBLE);
+                        mealOrLiquidFieldErrorTv.setBackgroundResource(R.drawable.bg_round_white_error);
                     }
                     if (amountField.getText().toString().isEmpty()) {
                         amountFieldErrorTv.setVisibility(View.VISIBLE);
+                        amountField.setBackgroundResource(R.drawable.bg_round_white_error);
                     }
                     if (unitSpinner.getSelectedItemPosition() == 0) {
                         unitSpinnerTv.setVisibility(View.VISIBLE);
+                        unitSpinner.setBackgroundResource(R.drawable.bg_round_white_error);
                     }
                 } else {
                     DialogManager.showOkDialog(AddNewMealActivity.this, "New Meal Added", new DialogManager.OnYesClicked() {
                         @Override
                         public void YesClicked() {
-                            Intent intent = new Intent(AddNewMealActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                            NavigateHome(true);
                         }
                     });
                 }
@@ -128,7 +141,15 @@ public class AddNewMealActivity extends AppCompatActivity {
         tvChangeTime = findViewById(R.id.tvChangeTime);
         myCalendar = Calendar.getInstance();
         tvMealDate.setText(myCalendar.get(Calendar.DAY_OF_MONTH) + "/" + myCalendar.get(Calendar.MONTH) + "/" + myCalendar.get(Calendar.YEAR));
-        tvMealTime.setText(myCalendar.get(Calendar.HOUR_OF_DAY) + ":" + myCalendar.get(Calendar.MINUTE));
+
+        String input = myCalendar.get(Calendar.HOUR_OF_DAY) + ":" + myCalendar.get(Calendar.MINUTE);
+        DateFormat inputFormat = new SimpleDateFormat("HH:mm");
+        DateFormat outputFormat = new SimpleDateFormat("KK:mm a");
+        try {
+            tvMealTime.setText(outputFormat.format(inputFormat.parse(input)));
+        } catch (ParseException e) {
+            tvMealTime.setText(input);
+        }
         date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -138,11 +159,11 @@ public class AddNewMealActivity extends AppCompatActivity {
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                tvMealDate.setText(myCalendar.get(Calendar.DAY_OF_MONTH) + "/" + myCalendar.get(Calendar.MONTH) + "/" + myCalendar.get(Calendar.YEAR));
+                tvMealDate.setText(myCalendar.get(Calendar.MONTH) + "/" + myCalendar.get(Calendar.DAY_OF_MONTH) + 1 + "/" + myCalendar.get(Calendar.YEAR));
             }
 
         };
-        tvChangeDate.setOnClickListener(new View.OnClickListener() {
+        dateLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new DatePickerDialog(AddNewMealActivity.this, date, myCalendar
@@ -150,7 +171,7 @@ public class AddNewMealActivity extends AppCompatActivity {
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-        tvChangeTime.setOnClickListener(new View.OnClickListener() {
+        timeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Calendar mcurrentTime = Calendar.getInstance();
@@ -160,11 +181,89 @@ public class AddNewMealActivity extends AppCompatActivity {
                 mTimePicker = new TimePickerDialog(AddNewMealActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        tvMealTime.setText(selectedHour + ":" + selectedMinute);
+
+
+                        String input = selectedHour + ":" + selectedMinute;
+                        DateFormat inputFormat = new SimpleDateFormat("HH:mm");
+                        DateFormat outputFormat = new SimpleDateFormat("KK:mm a");
+                        try {
+                            tvMealTime.setText(outputFormat.format(inputFormat.parse(input)));
+                        } catch (ParseException e) {
+                            tvMealTime.setText(input);
+                        }
                     }
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
+            }
+        });
+
+        EnableDisableAddMealButton();
+
+    }
+
+    private void EnableDisableAddMealButton() {
+        addMealOrLiquidField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.toString().length() != 0) {
+                    if (!amountField.getText().toString().isEmpty()) {
+                        if (unitSpinner.getSelectedItemPosition() != 0) {
+                            btnAddNewMeal.setEnabled(true);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        amountField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.toString().length() != 0) {
+                    if (!addMealOrLiquidField.getText().toString().isEmpty()) {
+                        if (unitSpinner.getSelectedItemPosition() != 0) {
+                            btnAddNewMeal.setEnabled(true);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        unitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i != 0) {
+                    if (!addMealOrLiquidField.getText().toString().isEmpty()) {
+                        if (!amountField.getText().toString().isEmpty()) {
+                            btnAddNewMeal.setEnabled(true);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
     }
@@ -187,11 +286,19 @@ public class AddNewMealActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        NavigateHome(false);
+
+    }
+
+    private void NavigateHome(boolean save) {
         finish();
         Intent intent = new Intent(AddNewMealActivity.this, MainActivity.class);
+        if (save) {
+            intent.putExtra("addmeal", true);
+            intent.putExtra("meal", getCurrentMeal().getBundle());
+        }
         intent.putExtra("tag", MainActivity.TAG_FOOD);
         startActivity(intent);
-
     }
 
 
@@ -252,7 +359,7 @@ public class AddNewMealActivity extends AppCompatActivity {
     }
 
     /**
-     *Initialize Top Seekbar and Sets up listener
+     * Initialize Top Seekbar and Sets up listener
      */
     private void SetupSeekBar() {
         seekBtn1 = findViewById(R.id.seekBtn1);
@@ -386,5 +493,28 @@ public class AddNewMealActivity extends AppCompatActivity {
 
 
         }
+    }
+
+    private Meal getCurrentMeal() {
+        Meal meal = new Meal();
+        switch (currentSeekIndex) {
+            case 1:
+                meal.setName("Breakfast");
+                break;
+            case 2:
+                meal.setName("Lunch");
+                break;
+            case 3:
+                meal.setName("Dinner");
+                break;
+            case 4:
+                meal.setName("Snack");
+                break;
+            case 5:
+                meal.setName("Casual");
+                break;
+        }
+        meal.setDesc("Salad, pasta, pudding, grape");
+        return meal;
     }
 }

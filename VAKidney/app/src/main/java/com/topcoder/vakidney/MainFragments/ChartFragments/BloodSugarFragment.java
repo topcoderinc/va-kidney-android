@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -19,12 +18,12 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.topcoder.vakidney.Model.ChartData;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.Util.JsondataUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
+ * This fragment is used to show the charts of blood sugar using chart Data. This fragment uses LineChart for data representation
  */
 public class BloodSugarFragment extends Fragment {
 
@@ -42,11 +41,11 @@ public class BloodSugarFragment extends Fragment {
     private LineData lineData;
 
 
-    private List<Entry> entriesActual2016 = new ArrayList<Entry>();
-    private List<Entry> entriesGoals2016 = new ArrayList<Entry>();
+    private final List<Entry> entriesActual2016 = new ArrayList<>();
+    private final List<Entry> entriesGoals2016 = new ArrayList<>();
 
-    private List<Entry> entriesActual2017 = new ArrayList<Entry>();
-    private List<Entry> entriesGoals2017 = new ArrayList<Entry>();
+    private final List<Entry> entriesActual2017 = new ArrayList<>();
+    private final List<Entry> entriesGoals2017 = new ArrayList<>();
 
 
     public BloodSugarFragment() {
@@ -92,7 +91,7 @@ public class BloodSugarFragment extends Fragment {
             i++;
         }
 
-        LineDataSet dataSet = new LineDataSet(entries, "Actuals");
+        LineDataSet dataSet = new LineDataSet(entries, "Actual");
         LineDataSet dataSet2 = new LineDataSet(entries2, "Goals");
         dataSet.setColor(getContext().getColor(R.color.colorAccent));
         dataSet.setDrawCircles(false);

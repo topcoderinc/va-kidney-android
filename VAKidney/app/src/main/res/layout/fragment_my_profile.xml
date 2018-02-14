@@ -1,45 +1,55 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorLightGray"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.topcoder.vakidney.MainFragments.MyProfileFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/colorPrimary"
-        />
+
+        android:layout_height="100dp" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_bg"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#CC003f72"
+            ></LinearLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/photoAndBirthDayLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp"
-        >
+        android:layout_marginTop="45dp">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/profileImageView"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            app:riv_oval="true"
             android:layout_centerVertical="true"
-            app:riv_border_color="@color/colorWhite"
-            app:riv_border_width="1dp"
             android:scaleType="fitXY"
             android:src="@drawable/stock_613666608"
-            />
+            app:riv_border_color="@color/colorWhite"
+            app:riv_border_width="1dp"
+            app:riv_oval="true" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/app_standard_padding"
             android:layout_toRightOf="@+id/profileImageView"
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvName"
@@ -62,535 +72,517 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@+id/photoAndBirthDayLayout"
-        android:padding="@dimen/app_standard_padding"
-        >
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:layout_below="@+id/photoAndBirthDayLayout">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_white_rounded_small"
-            >
-            <LinearLayout
-                android:id="@+id/icon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_left_rounded_accent"
-                >
+            android:orientation="vertical"
+            android:padding="@dimen/app_standard_padding">
+
+            <RelativeLayout
+
+                android:id="@+id/profileFieldAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_white_rounded_small">
+
+                <LinearLayout
+                    android:id="@+id/icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_left_rounded_accent">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/app_standard_padding"
+                        android:tint="@color/colorWhite"
+                        app:srcCompat="@drawable/ic_age"
+
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/app_standard_padding"
+                    android:layout_toRightOf="@+id/icon"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Age"
+                        android:textColor="@color/colorDarkGray"
+                        android:textSize="11dp"/>
+
+
+                    <TextView
+                        android:id="@+id/tvAge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="53 Years"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
                 <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/app_standard_padding"
-                    app:srcCompat="@drawable/ic_age"
-                    android:tint="@color/colorWhite"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/app_standard_padding"
+                    android:tint="@color/colorLightDarkGray"
+                    app:srcCompat="@drawable/ic_keyboard_arrow_right" />
 
-                    />
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/profileFieldHeight"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/app_standard_padding"
-                android:layout_toRightOf="@+id/icon"
-                android:orientation="vertical"
-                >
-                <TextView
+                android:layout_marginTop="@dimen/app_standard_padding"
+                android:background="@drawable/bg_white_rounded_small">
+
+                <LinearLayout
+                    android:id="@+id/icon2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_left_rounded_accent">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/app_standard_padding"
+                        android:tint="@color/colorWhite"
+                        app:srcCompat="@drawable/ic_height"
+
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Age"
-                    android:textSize="11dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorDarkGray"
-                    />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/app_standard_padding"
+                    android:layout_toRightOf="@+id/icon2"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Height"
+                        android:textColor="@color/colorDarkGray"
+                        android:textSize="11dp" />
 
 
-                <TextView
-                    android:id="@+id/tvAge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="53 Years"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                app:srcCompat="@drawable/ic_keyboard_arrow_right"
-                android:tint="@color/colorLightDarkGray"
-                android:layout_marginRight="@dimen/app_standard_padding"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                />
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/app_standard_padding"
-            android:background="@drawable/bg_white_rounded_small"
-            >
-            <LinearLayout
-                android:id="@+id/icon2"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_left_rounded_accent"
-                >
+                    <TextView
+                        android:id="@+id/tvHeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="162 cm"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
                 <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/app_standard_padding"
-                    app:srcCompat="@drawable/ic_height"
-                    android:tint="@color/colorWhite"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/app_standard_padding"
+                    android:tint="@color/colorLightDarkGray"
+                    app:srcCompat="@drawable/ic_keyboard_arrow_right" />
 
-                    />
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/profileFieldWeight"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/app_standard_padding"
-                android:layout_toRightOf="@+id/icon2"
-                android:orientation="vertical"
-                >
+                android:layout_marginTop="@dimen/app_standard_padding"
+                android:background="@drawable/bg_white_rounded_small">
 
-                <TextView
+                <LinearLayout
+                    android:id="@+id/icon3"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_left_rounded_accent">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/app_standard_padding"
+                        android:tint="@color/colorWhite"
+                        app:srcCompat="@drawable/ic_weight"
+
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Height"
-                    android:textColor="@color/colorDarkGray"
-                    android:textSize="11dp"
-                    android:textStyle="bold" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/app_standard_padding"
+                    android:layout_toRightOf="@+id/icon3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Current Weight"
+                        android:textColor="@color/colorDarkGray"
+                        android:textSize="11dp" />
 
 
-                <TextView
-                    android:id="@+id/tvHeight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="162 cm"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                app:srcCompat="@drawable/ic_keyboard_arrow_right"
-                android:tint="@color/colorLightDarkGray"
-                android:layout_marginRight="@dimen/app_standard_padding"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                />
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/app_standard_padding"
-            android:background="@drawable/bg_white_rounded_small"
-            >
-            <LinearLayout
-                android:id="@+id/icon3"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_left_rounded_accent"
-                >
+                    <TextView
+                        android:id="@+id/tvWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="195 Pounds"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
                 <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/app_standard_padding"
-                    app:srcCompat="@drawable/ic_weight"
-                    android:tint="@color/colorWhite"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/app_standard_padding"
+                    android:tint="@color/colorLightDarkGray"
+                    app:srcCompat="@drawable/ic_keyboard_arrow_right" />
 
-                    />
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/profileFieldDialysis"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/app_standard_padding"
-                android:layout_toRightOf="@+id/icon3"
-                android:orientation="vertical"
-                >
+                android:layout_marginTop="@dimen/app_standard_padding"
+                android:background="@drawable/bg_white_rounded_small">
 
-                <TextView
+                <LinearLayout
+                    android:id="@+id/icon4"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_left_rounded_accent">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/app_standard_padding"
+                        android:tint="@color/colorWhite"
+                        app:srcCompat="@drawable/ic_questionmark"
+
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Current Weight"
-                    android:textColor="@color/colorDarkGray"
-                    android:textSize="11dp"
-                    android:textStyle="bold" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/app_standard_padding"
+                    android:layout_toRightOf="@+id/icon4"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Are you in Dialysis?"
+                        android:textColor="@color/colorDarkGray"
+                        android:textSize="11dp"/>
 
 
-                <TextView
-                    android:id="@+id/tvWeight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="195 Pounds"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                app:srcCompat="@drawable/ic_keyboard_arrow_right"
-                android:tint="@color/colorLightDarkGray"
-                android:layout_marginRight="@dimen/app_standard_padding"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                />
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/app_standard_padding"
-            android:background="@drawable/bg_white_rounded_small"
-            >
-            <LinearLayout
-                android:id="@+id/icon4"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_left_rounded_accent"
-                >
+                    <TextView
+                        android:id="@+id/tvDialysis"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NO"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
                 <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/app_standard_padding"
-                    app:srcCompat="@drawable/ic_questionmark"
-                    android:tint="@color/colorWhite"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/app_standard_padding"
+                    android:tint="@color/colorLightDarkGray"
+                    app:srcCompat="@drawable/ic_keyboard_arrow_right" />
 
-                    />
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/profileFieldDisease"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/app_standard_padding"
-                android:layout_toRightOf="@+id/icon4"
-                android:orientation="vertical"
-                >
+                android:layout_marginTop="@dimen/app_standard_padding"
+                android:background="@drawable/bg_white_rounded_small">
 
-                <TextView
+                <LinearLayout
+                    android:id="@+id/icon5"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_left_rounded_accent">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/app_standard_padding"
+                        android:tint="@color/colorWhite"
+                        app:srcCompat="@drawable/ic_questionmark"
+
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Are you in Dialysis?"
-                    android:textColor="@color/colorDarkGray"
-                    android:textSize="11dp"
-                    android:textStyle="bold" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/app_standard_padding"
+                    android:layout_toRightOf="@+id/icon5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Disease Category"
+                        android:textColor="@color/colorDarkGray"
+                        android:textSize="11dp"/>
 
 
-                <TextView
-                    android:id="@+id/tvDialysis"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="NO"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                app:srcCompat="@drawable/ic_keyboard_arrow_right"
-                android:tint="@color/colorLightDarkGray"
-                android:layout_marginRight="@dimen/app_standard_padding"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                />
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/app_standard_padding"
-            android:background="@drawable/bg_white_rounded_small"
-            >
-            <LinearLayout
-                android:id="@+id/icon5"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_left_rounded_accent"
-                >
+                    <TextView
+                        android:id="@+id/tvDiseaseCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ESRD"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
                 <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/app_standard_padding"
-                    app:srcCompat="@drawable/ic_questionmark"
-                    android:tint="@color/colorWhite"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/app_standard_padding"
+                    android:tint="@color/colorLightDarkGray"
+                    app:srcCompat="@drawable/ic_keyboard_arrow_right" />
 
-                    />
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/profileFieldGoals"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/app_standard_padding"
-                android:layout_toRightOf="@+id/icon5"
-                android:orientation="vertical"
-                >
+                android:layout_marginTop="@dimen/app_standard_padding"
+                android:background="@drawable/bg_white_rounded_small">
 
-                <TextView
+                <LinearLayout
+                    android:id="@+id/icon6"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_left_rounded_accent">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/app_standard_padding"
+                        android:tint="@color/colorWhite"
+                        app:srcCompat="@drawable/ic_goals"
+
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Disease Category"
-                    android:textColor="@color/colorDarkGray"
-                    android:textSize="11dp"
-                    android:textStyle="bold" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/app_standard_padding"
+                    android:layout_toRightOf="@+id/icon6"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Want To Setup Goals?"
+                        android:textColor="@color/colorDarkGray"
+                        android:textSize="11dp" />
 
 
-                <TextView
-                    android:id="@+id/tvDiseaseCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ESRD"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                app:srcCompat="@drawable/ic_keyboard_arrow_right"
-                android:tint="@color/colorLightDarkGray"
-                android:layout_marginRight="@dimen/app_standard_padding"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                />
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/app_standard_padding"
-            android:background="@drawable/bg_white_rounded_small"
-            >
-            <LinearLayout
-                android:id="@+id/icon6"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_left_rounded_accent"
-                >
+                    <TextView
+                        android:id="@+id/tvSetupGoals"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yes"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
                 <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/app_standard_padding"
-                    app:srcCompat="@drawable/ic_goals"
-                    android:tint="@color/colorWhite"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/app_standard_padding"
+                    android:tint="@color/colorLightDarkGray"
+                    app:srcCompat="@drawable/ic_keyboard_arrow_right" />
 
-                    />
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/profileFieldAvatar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/app_standard_padding"
-                android:layout_toRightOf="@+id/icon6"
-                android:orientation="vertical"
-                >
+                android:layout_marginTop="@dimen/app_standard_padding"
+                android:background="@drawable/bg_white_rounded_small">
 
-                <TextView
+                <LinearLayout
+                    android:id="@+id/icon7"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_left_rounded_accent">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/app_standard_padding"
+                        android:tint="@color/colorWhite"
+                        app:srcCompat="@drawable/ic_addavatar"
+
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Want To Setup Goals?"
-                    android:textColor="@color/colorDarkGray"
-                    android:textSize="11dp"
-                    android:textStyle="bold" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/app_standard_padding"
+                    android:layout_toRightOf="@+id/icon7"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Avatar"
+                        android:textColor="@color/colorDarkGray"
+                        android:textSize="11dp" />
 
 
-                <TextView
-                    android:id="@+id/tvSetupGoals"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Yes"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                app:srcCompat="@drawable/ic_keyboard_arrow_right"
-                android:tint="@color/colorLightDarkGray"
-                android:layout_marginRight="@dimen/app_standard_padding"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                />
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/app_standard_padding"
-            android:background="@drawable/bg_white_rounded_small"
-            >
-            <LinearLayout
-                android:id="@+id/icon7"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_left_rounded_accent"
-                >
+                    <TextView
+                        android:id="@+id/tvAvatar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yes"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
                 <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/app_standard_padding"
-                    app:srcCompat="@drawable/ic_addavatar"
-                    android:tint="@color/colorWhite"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/app_standard_padding"
+                    android:tint="@color/colorLightDarkGray"
+                    app:srcCompat="@drawable/ic_keyboard_arrow_right" />
 
-                    />
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/profileFieldBiometric"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/app_standard_padding"
-                android:layout_toRightOf="@+id/icon7"
-                android:orientation="vertical"
-                >
+                android:layout_marginTop="@dimen/app_standard_padding"
+                android:background="@drawable/bg_white_rounded_small">
 
-                <TextView
+                <LinearLayout
+                    android:id="@+id/icon8"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_left_rounded_accent">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/app_standard_padding"
+                        android:tint="@color/colorWhite"
+                        app:srcCompat="@drawable/ic_biometric"
+
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Avatar"
-                    android:textColor="@color/colorDarkGray"
-                    android:textSize="11dp"
-                    android:textStyle="bold" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/app_standard_padding"
+                    android:layout_toRightOf="@+id/icon8"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add Biometric Device"
+                        android:textColor="@color/colorDarkGray"
+                        android:textSize="11dp"/>
 
 
-                <TextView
-                    android:id="@+id/tvAvatar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Yes"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                app:srcCompat="@drawable/ic_keyboard_arrow_right"
-                android:tint="@color/colorLightDarkGray"
-                android:layout_marginRight="@dimen/app_standard_padding"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                />
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/app_standard_padding"
-            android:background="@drawable/bg_white_rounded_small"
-            >
-            <LinearLayout
-                android:id="@+id/icon8"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_left_rounded_accent"
-                >
+                    <TextView
+                        android:id="@+id/tvBiometricDevice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yes"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
                 <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/app_standard_padding"
-                    app:srcCompat="@drawable/ic_biometric"
-                    android:tint="@color/colorWhite"
-
-                    />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/app_standard_padding"
-                android:layout_toRightOf="@+id/icon8"
-                android:orientation="vertical"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Add Biometric Device"
-                    android:textColor="@color/colorDarkGray"
-                    android:textSize="11dp"
-                    android:textStyle="bold" />
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/app_standard_padding"
+                    android:tint="@color/colorLightDarkGray"
+                    app:srcCompat="@drawable/ic_keyboard_arrow_right" />
 
 
-                <TextView
-                    android:id="@+id/tvBiometricDevice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Yes"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                app:srcCompat="@drawable/ic_keyboard_arrow_right"
-                android:tint="@color/colorLightDarkGray"
-                android:layout_marginRight="@dimen/app_standard_padding"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                />
+            </RelativeLayout>
 
 
-        </RelativeLayout>
+        </LinearLayout>
 
-
-
-    </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

@@ -78,7 +78,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="@dimen/app_standard_padding"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -135,7 +134,7 @@
                 android:layout_height="100dp"
                 android:layout_marginTop="@dimen/app_standard_padding"
                 custom:inside_drawable="@drawable/ic_fruits_veggies"
-                custom:arc_bottom_text="Fruit/Veggies"
+                custom:arc_bottom_text="Fruits/Veggies"
                 custom:icon_color="@color/colorWhite"
                 custom:arc_unfinished_color="@color/colorWhite"
                 custom:arc_finished_color="#557630"

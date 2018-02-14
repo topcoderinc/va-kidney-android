@@ -15,6 +15,7 @@ import com.topcoder.vakidney.Util.JsondataUtil;
 
 /**
  * A simple {@link Fragment} subclass.
+ * It shows the current workout data of a current user
  */
 public class WorkoutFragment extends Fragment {
 
@@ -33,13 +34,18 @@ public class WorkoutFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view=inflater.inflate(R.layout.fragment_workout, container, false);
-        currentUserData = JsondataUtil.getUserData(getContext());
-        initView(view);
-        populateData();
 
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        currentUserData = JsondataUtil.getUserData(getContext());
+        initView(getView());
+        populateData();
+    }
 
     /**
      * Populates the fields with respective data
@@ -61,7 +67,7 @@ public class WorkoutFragment extends Fragment {
 
     /**
      * Initializes the view
-     * @param view
+     * @param view This View is required to find all views in this fragment/Activity
      */
     private void initView(View view) {
         tvRunning=view.findViewById(R.id.tvRunning);

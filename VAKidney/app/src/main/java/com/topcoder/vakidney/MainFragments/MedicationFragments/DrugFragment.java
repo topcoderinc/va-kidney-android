@@ -1,7 +1,6 @@
 package com.topcoder.vakidney.MainFragments.MedicationFragments;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,12 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.topcoder.vakidney.Adapter.MedicationAdapter;
-import com.topcoder.vakidney.ResourcesDetailActivity;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.Util.JsondataUtil;
 
 /**
  * A simple {@link Fragment} subclass.
+ * This fragment shows the articles related to Drugs that can be used by the patient using the app
  */
 public class DrugFragment extends Fragment {
 

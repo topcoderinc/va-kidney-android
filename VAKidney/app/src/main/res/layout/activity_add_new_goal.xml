@@ -106,7 +106,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
-                        android:text="LostWeight"
+                        android:text="Lost Weight"
                         android:textAllCaps="false"
                         android:textColor="@color/colorLightDarkGray"
                         android:textSize="12dp" />
@@ -269,8 +269,7 @@
                         android:id="@+id/rewardIcon"
                         android:layout_width="80dp"
                         android:layout_height="100dp"
-                        app:srcCompat="@drawable/ic_reward_50points"
-                        />
+                        app:srcCompat="@drawable/ic_reward" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -312,14 +311,14 @@
                     android:padding="@dimen/app_standard_padding"
                     android:background="@drawable/bg_white_rounded"
                     >
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Points Reward"
-                        android:textStyle="bold"
-                        android:textSize="16dp"
+                        android:text="Tips &amp; Suggestions"
                         android:textColor="@color/colorLightDarkGray"
-                        />
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -358,11 +357,11 @@
                         android:id="@+id/btnAddNewGoal"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:layout_weight="1"
                         android:layout_marginLeft="@dimen/standard_padding_half"
+                        android:layout_weight="1"
                         android:background="@drawable/bg_login_btn"
                         android:elevation="5dp"
-                        android:text="Add New Meal"
+                        android:text="Save My Goal"
                         android:textColor="@color/colorWhite"
                         android:textSize="13dp" />
 

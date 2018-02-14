@@ -14,7 +14,7 @@ import com.topcoder.vakidney.ResourcesDetailActivity;
 import java.util.ArrayList;
 
 /**
- * Created by abina on 2/8/2018.
+ * Created by Abinash Neupane on 2/8/2018.
  */
 
 /**
@@ -22,8 +22,8 @@ import java.util.ArrayList;
  */
 
 public class ResourcesAdapter extends BaseAdapter {
-    ArrayList<Resources> resourcesArrayList;
-    Activity activity;
+    private final ArrayList<Resources> resourcesArrayList;
+    private final Activity activity;
 
     public ResourcesAdapter(ArrayList<Resources> resourcesArrayList, Activity activity) {
         this.resourcesArrayList = resourcesArrayList;
@@ -52,7 +52,7 @@ public class ResourcesAdapter extends BaseAdapter {
         TextView tvDesc=view.findViewById(R.id.desc);
         final Resources resources=resourcesArrayList.get(i);
         tvTitle.setText(resources.getTitle());
-        tvDesc.setText(resources.getDesc());
+        tvDesc.setText(resources.getDesc().replace("\n\n", ""));
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

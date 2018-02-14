@@ -11,6 +11,7 @@ import com.topcoder.vakidney.R;
 
 /**
  * A simple {@link Fragment} subclass.
+ * This fragemnt is second of three fragment used inside HomeFragment. It shows two topics along with their image and description
  */
 public class Home2Fragment extends Fragment {
 
