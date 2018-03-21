@@ -1,18 +1,86 @@
 [
   {
     "name": "Dinner",
-    "desc": "Salad, pasta, pudding, grape"
+    "date": "2018-02-08T15:00:00Z",
+    "type": "dinner",
+    "desc": "Salad, pasta, pudding, grape",
+    "photoUrl": "https://media.istockphoto.com/photos/red-apple-picture-id495878092",
+    "mealDrugs": [
+      {
+        "name": "Meat",
+        "amount": 10,
+        "unit": "g",
+        "type": "meal"
+      },
+      {
+        "name": "Papaya",
+        "amount": 10,
+        "unit": "mg",
+        "type": "meal"
+      }
+    ]
   },
   {
     "name": "Lunch",
-    "desc": "Salad, pasta, pudding, grape"
+    "date": "2018-02-08T15:00:00Z",
+    "type": "lunch",
+    "desc": "Salad, pasta, pudding, grape",
+    "photoUrl": "https://media.istockphoto.com/photos/red-apple-picture-id495878092",
+    "mealDrugs": [
+      {
+        "name": "Shrimp",
+        "amount": 10,
+        "unit": "g",
+        "type": "meal"
+      },
+      {
+        "name": "Rice",
+        "amount": 10,
+        "unit": "mg",
+        "type": "meal"
+      }
+    ]
   },
   {
     "name": "Snack",
-    "desc": "Salad, pasta, pudding, grape"
+    "date": "2018-02-08T15:00:00Z",
+    "type": "snack",
+    "desc": "Salad, pasta, pudding, grape",
+    "photoUrl": "https://media.istockphoto.com/photos/red-apple-picture-id495878092",
+    "mealDrugs": [
+      {
+        "name": "Chicken",
+        "amount": 10,
+        "unit": "g",
+        "type": "meal"
+      },
+      {
+        "name": "Tea",
+        "amount": 10,
+        "unit": "mg",
+        "type": "meal"
+      }
+    ]
   },
   {
     "name": "Breakfast",
-    "desc": "Salad, pasta, pudding, grape"
+    "date": "2018-02-08T15:00:00Z",
+    "type": "breakfast",
+    "desc": "Salad, pasta, pudding, grape",
+    "photoUrl": "https://media.istockphoto.com/photos/red-apple-picture-id495878092",
+    "mealDrugs": [
+      {
+        "name": "Apple",
+        "amount": 10,
+        "unit": "g",
+        "type": "meal"
+      },
+      {
+        "name": "Milk",
+        "amount": 10,
+        "unit": "mg",
+        "type": "meal"
+      }
+    ]
   }
 ]

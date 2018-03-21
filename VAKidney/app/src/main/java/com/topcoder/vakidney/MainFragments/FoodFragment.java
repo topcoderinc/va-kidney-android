@@ -13,7 +13,7 @@ import com.topcoder.vakidney.Model.Meal;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.Util.JsondataUtil;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,7 +23,7 @@ public class FoodFragment extends Fragment {
 
 
     private GridView gridView;
-    private ArrayList<Meal> mealArrayList;
+    private List<Meal> mealArrayList;
     public FoodFragment() {
         // Required empty public constructor
     }
@@ -32,15 +32,14 @@ public class FoodFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_food, container, false);
-        gridView=view.findViewById(R.id.gridView);
-        mealArrayList=JsondataUtil.getMeals(getActivity());
+        View view = inflater.inflate(R.layout.fragment_food, container, false);
+        gridView = view.findViewById(R.id.gridView);
+        mealArrayList = Meal.listAll(Meal.class);
         if(getActivity().getIntent().hasExtra("addmeal")){
-            Bundle bundle=getActivity().getIntent().getBundleExtra("meal");
-            Meal meal=Meal.getMealFromBundle(bundle);
+            Meal meal = (Meal) getActivity().getIntent().getSerializableExtra("meal");
             mealArrayList.add(meal);
         }
-        FoodAdapter foodAdapter=new FoodAdapter(mealArrayList, getActivity());
+        FoodAdapter foodAdapter = new FoodAdapter(mealArrayList, getActivity());
         gridView.setAdapter(foodAdapter);
         return view;
     }

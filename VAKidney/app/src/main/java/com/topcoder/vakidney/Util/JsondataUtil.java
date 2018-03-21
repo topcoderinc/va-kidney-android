@@ -7,6 +7,7 @@ import com.topcoder.vakidney.Model.ChartData;
 import com.topcoder.vakidney.Model.Goal;
 import com.topcoder.vakidney.Model.LabData;
 import com.topcoder.vakidney.Model.Meal;
+import com.topcoder.vakidney.Model.MealDrug;
 import com.topcoder.vakidney.Model.MedicationResources;
 import com.topcoder.vakidney.Model.Resources;
 import com.topcoder.vakidney.Model.UserData;
@@ -19,6 +20,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Abinash Neupane on 1/24/2018.
@@ -35,8 +37,8 @@ public class JsondataUtil {
     public static UserData getUserData(Context context){
         try {
             String jsonString = loadJSONFromAsset(context, "UserData.json");
-            JSONObject jsonObject=new JSONObject(jsonString);
-            UserData userData=new UserData();
+            JSONObject jsonObject = new JSONObject(jsonString);
+            UserData userData= new UserData();
             userData.setUsername(jsonObject.getString("username"));
             userData.setPassword(jsonObject.getString("password"));
             userData.setFullname(jsonObject.getString("fullname"));
@@ -45,7 +47,7 @@ public class JsondataUtil {
             userData.setHeight(jsonObject.getInt("height"));
             userData.setWeight(jsonObject.getInt("weight"));
             userData.setDialysis(jsonObject.getBoolean("dialysis"));
-            userData.setDiseaseCategory(jsonObject.getString("diseasecategory"));
+            userData.setDiseaseCategory(jsonObject.getInt("diseasecategory"));
             userData.setSetupgoals(jsonObject.getBoolean("setupgoals"));
             userData.setAvatar(jsonObject.getBoolean("avatar"));
             userData.setBiometric(jsonObject.getBoolean("biometric"));
@@ -57,6 +59,7 @@ public class JsondataUtil {
             userData.setJumpgoal(jsonObject.getInt("jumpgoal"));
             userData.setSwimmingcurrent(jsonObject.getInt("swimmingcurrent"));
             userData.setSwimminggoal(jsonObject.getInt("swimminggoal"));
+
             return userData;
 
         } catch (JSONException e) {
@@ -501,7 +504,29 @@ public class JsondataUtil {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Meal meal = new Meal();
                 meal.setName(jsonObject.getString("name"));
+                meal.setPhotoUrl(jsonObject.getString("photoUrl"));
                 meal.setDesc(jsonObject.getString("desc"));
+                meal.setType(jsonObject.getString("type"));
+                meal.setDate(DateUtil.fromISO8601UTC(jsonObject.getString("date")));
+                meal.setMealId(System.currentTimeMillis());
+                meal.save();
+
+                JSONArray arrayMealDrugs = jsonObject.getJSONArray("mealDrugs");
+                for (int j = 0; j < arrayMealDrugs.length(); j++) {
+                    JSONObject objectMealDrugs = arrayMealDrugs.getJSONObject(j);
+                    MealDrug mealDrug = new MealDrug();
+                    mealDrug.setName(objectMealDrugs.getString("name"));
+                    mealDrug.setAmount(objectMealDrugs.getDouble("amount"));
+                    mealDrug.setUnit(objectMealDrugs.getString("unit"));
+                    mealDrug.setType(objectMealDrugs.getString("type").equals("meal") ?
+                            MealDrug.TYPE_MEAL : MealDrug.TYPE_DRUG);
+                    mealDrug.setMealId(meal.getMealId());
+                    if(mealDrug.getType() == MealDrug.TYPE_DRUG && !meal.isHasDrug()) {
+                        meal.setHasDrug(true);
+                        meal.save();
+                    }
+                    mealDrug.save();
+                }
                 meals.add(meal);
             }
         } catch (JSONException e) {

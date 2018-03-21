@@ -23,7 +23,6 @@ import com.topcoder.vakidney.Util.LoginManager;
  */
 public class LoginActivity extends AppCompatActivity {
 
-
     private String username;
     private String password;
     private UserData currentUser;
@@ -31,13 +30,14 @@ public class LoginActivity extends AppCompatActivity {
     private TextView tvEmailError, tvPasswordError, tvForgotPassword;
     private RelativeLayout emailLayout, passwordLayout;
     private Button btnLogin, btnRegister;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        currentUser= JsondataUtil.getUserData(getApplicationContext());
-        username=currentUser.getUsername();
-        password=currentUser.getPassword();
+        currentUser = JsondataUtil.getUserData(getApplicationContext());
+        username = currentUser.getUsername();
+        password = currentUser.getPassword();
         emailLayout=findViewById(R.id.emailLayout);
         passwordLayout=findViewById(R.id.passwordLayout);
         emailField=findViewById(R.id.emailField);
@@ -72,7 +72,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                     emailLayout.setBackgroundResource(R.drawable.bg_login_field_error);
                     passwordLayout.setBackgroundResource(R.drawable.bg_login_field_error);
                 }else if((emailField.getText().toString().equals(username)) && (passwordField.getText().toString().equals(password)) && isValidEmail(emailField.getText().toString())){
-                    LoginManager.setLoggedIn(getApplicationContext(), true);
+                    LoginManager.setLoggedIn(getApplicationContext(), true, currentUser);
                     NavigateHome();
                 }
             }

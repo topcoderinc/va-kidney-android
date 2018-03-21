@@ -168,47 +168,6 @@
                     </LinearLayout>
                 </LinearLayout>
 
-
-                <LinearLayout
-                    android:id="@+id/menu4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/app_standard_padding">
-
-                    <android.support.v7.widget.AppCompatImageView
-                        android:id="@+id/menuImage4"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:tint="@color/colorLightDarkGray"
-                        app:srcCompat="@drawable/ic_avatar" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/app_standard_padding"
-                        android:gravity="left|center_vertical"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/menuTitle4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Avatar"
-                            android:textColor="@color/colorLightDarkGray" />
-
-                        <LinearLayout
-                            android:id="@+id/menuBar4"
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:layout_marginTop="@dimen/app_standard_padding"
-                            android:background="@color/colorLightDarkGray"
-                            android:orientation="horizontal"/>
-                    </LinearLayout>
-                </LinearLayout>
-
-
             </LinearLayout>
 
             <LinearLayout

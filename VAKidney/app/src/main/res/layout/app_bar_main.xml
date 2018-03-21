@@ -60,8 +60,6 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
-
-
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
@@ -74,7 +72,7 @@
 
         <LinearLayout
             android:id="@+id/barLin1"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1"
@@ -115,7 +113,7 @@
 
         <LinearLayout
             android:id="@+id/barLin2"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1"
@@ -157,7 +155,7 @@
 
         <LinearLayout
             android:id="@+id/barLin3"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1"
@@ -191,15 +189,16 @@
                 android:gravity="center"
                 android:layout_marginBottom="4dp"
                 android:textColor="@color/colorAccent"
-                android:text="Medication"
-                android:textSize="10dp"
+                android:lines="1"
+                android:text="Recommendations"
+                android:textSize="9sp"
                 />
         </LinearLayout>
 
 
         <LinearLayout
             android:id="@+id/barLin4"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1"
@@ -233,7 +232,7 @@
                 android:gravity="center"
                 android:layout_marginBottom="4dp"
                 android:textColor="@color/colorAccent"
-                android:text="Food"
+                android:text="Food/Drug"
                 android:textSize="10dp"
                 />
         </LinearLayout>
@@ -241,7 +240,7 @@
 
         <LinearLayout
             android:id="@+id/barLin5"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1"
@@ -275,7 +274,7 @@
                 android:gravity="center"
                 android:layout_marginBottom="4dp"
                 android:textColor="@color/colorAccent"
-                android:text="Workout"
+                android:text="Activity"
                 android:textSize="10dp"
                 />
         </LinearLayout>
