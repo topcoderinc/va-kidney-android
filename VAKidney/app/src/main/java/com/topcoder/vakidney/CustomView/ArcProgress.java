@@ -374,7 +374,7 @@ public class ArcProgress extends View {
             textPaint.setFakeBoldText(true);
             textPaint.setTextSize(bottomTextSize);
             float bottomTextBaseline = getHeight() - arcBottomHeight - (textPaint.descent() + textPaint.ascent()) / 2;
-            canvas.drawText(getBottomText(), (getWidth() - textPaint.measureText(getBottomText())) / 2.0f, bottomTextBaseline+20.0f, textPaint);
+            canvas.drawText(getBottomText(), (getWidth() - textPaint.measureText(getBottomText())) / 2.0f, bottomTextBaseline+36.0f, textPaint);
         }
     }
 

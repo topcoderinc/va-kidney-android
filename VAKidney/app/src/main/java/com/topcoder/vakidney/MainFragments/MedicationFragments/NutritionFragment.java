@@ -30,8 +30,8 @@ public class NutritionFragment extends Fragment {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_nutrition, container, false);
         nutritionListView=view.findViewById(R.id.nutritionListView);
-        MedicationAdapter medicationAdapter=new MedicationAdapter(JsondataUtil.getMedicationResources(getActivity(), 1), getActivity());
-        nutritionListView.setAdapter(medicationAdapter);
+//        MedicationAdapter medicationAdapter=new MedicationAdapter(JsondataUtil.getMedicationResources(getActivity(), 1), getActivity());
+//        nutritionListView.setAdapter(medicationAdapter);
         return view;
     }
 

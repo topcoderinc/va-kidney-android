@@ -66,10 +66,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView actionBarTitle;
 
 
-    private LinearLayout menu1, menu2, menu3, menu4;
-    private AppCompatImageView menuImg1, menuImg2, menuImg3, menuImg4;
-    private TextView menuTv1, menuTv2, menuTv3, menuTv4;
-    private LinearLayout menuBar1, menuBar2, menuBar3, menuBar4;
+    private LinearLayout menu1, menu2, menu3;
+    private AppCompatImageView menuImg1, menuImg2, menuImg3;
+    private TextView menuTv1, menuTv2, menuTv3;
+    private LinearLayout menuBar1, menuBar2, menuBar3;
     private TextView tvSettings, tvReminders, tvLogOut;
 
 
@@ -84,22 +84,18 @@ public class MainActivity extends AppCompatActivity {
         menu1 = findViewById(R.id.menu1);
         menu2 = findViewById(R.id.menu2);
         menu3 = findViewById(R.id.menu3);
-        menu4 = findViewById(R.id.menu4);
 
         menuImg1 = findViewById(R.id.menuImage1);
         menuImg2 = findViewById(R.id.menuImage2);
         menuImg3 = findViewById(R.id.menuImage3);
-        menuImg4 = findViewById(R.id.menuImage4);
 
         menuTv1 = findViewById(R.id.menuTitle1);
         menuTv2 = findViewById(R.id.menuTitle2);
         menuTv3 = findViewById(R.id.menuTitle3);
-        menuTv4 = findViewById(R.id.menuTitle4);
 
         menuBar1 = findViewById(R.id.menuBar1);
         menuBar2 = findViewById(R.id.menuBar2);
         menuBar3 = findViewById(R.id.menuBar3);
-        menuBar4 = findViewById(R.id.menuBar4);
 
         menu1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,17 +126,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        menu4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                selectSideMenu(4);
-            }
-        });
-
         tvLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginManager.setLoggedIn(getApplicationContext(), false);
+                LoginManager.setLoggedIn(getApplicationContext(), false, null);
                 NavigateToLogin();
             }
         });
@@ -161,79 +150,64 @@ public class MainActivity extends AppCompatActivity {
                 ImageViewCompat.setImageTintList(menuImg1, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
                 ImageViewCompat.setImageTintList(menuImg2, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
                 ImageViewCompat.setImageTintList(menuImg3, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
-                ImageViewCompat.setImageTintList(menuImg4, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
 
                 menuTv1.setTextColor(getColor(R.color.colorLightDarkGray));
                 menuTv2.setTextColor(getColor(R.color.colorLightDarkGray));
                 menuTv3.setTextColor(getColor(R.color.colorLightDarkGray));
-                menuTv4.setTextColor(getColor(R.color.colorLightDarkGray));
 
                 menuBar1.setBackgroundColor(getColor(R.color.colorLightDarkGray));
                 menuBar2.setBackgroundColor(getColor(R.color.colorLightDarkGray));
                 menuBar3.setBackgroundColor(getColor(R.color.colorLightDarkGray));
-                menuBar4.setBackgroundColor(getColor(R.color.colorLightDarkGray));
                 break;
 
             case 1:
                 ImageViewCompat.setImageTintList(menuImg1, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorAccent)));
                 ImageViewCompat.setImageTintList(menuImg2, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
                 ImageViewCompat.setImageTintList(menuImg3, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
-                ImageViewCompat.setImageTintList(menuImg4, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
 
                 menuTv1.setTextColor(getColor(R.color.colorAccent));
                 menuTv2.setTextColor(getColor(R.color.colorLightDarkGray));
                 menuTv3.setTextColor(getColor(R.color.colorLightDarkGray));
-                menuTv4.setTextColor(getColor(R.color.colorLightDarkGray));
 
                 menuBar1.setBackgroundColor(getColor(R.color.colorAccent));
                 menuBar2.setBackgroundColor(getColor(R.color.colorLightDarkGray));
                 menuBar3.setBackgroundColor(getColor(R.color.colorLightDarkGray));
-                menuBar4.setBackgroundColor(getColor(R.color.colorLightDarkGray));
                 break;
             case 2:
                 ImageViewCompat.setImageTintList(menuImg2, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorAccent)));
                 ImageViewCompat.setImageTintList(menuImg1, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
                 ImageViewCompat.setImageTintList(menuImg3, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
-                ImageViewCompat.setImageTintList(menuImg4, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
 
                 menuTv2.setTextColor(getColor(R.color.colorAccent));
                 menuTv1.setTextColor(getColor(R.color.colorLightDarkGray));
                 menuTv3.setTextColor(getColor(R.color.colorLightDarkGray));
-                menuTv4.setTextColor(getColor(R.color.colorLightDarkGray));
 
                 menuBar2.setBackgroundColor(getColor(R.color.colorAccent));
                 menuBar1.setBackgroundColor(getColor(R.color.colorLightDarkGray));
                 menuBar3.setBackgroundColor(getColor(R.color.colorLightDarkGray));
-                menuBar4.setBackgroundColor(getColor(R.color.colorLightDarkGray));
                 break;
             case 3:
                 ImageViewCompat.setImageTintList(menuImg3, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorAccent)));
                 ImageViewCompat.setImageTintList(menuImg2, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
                 ImageViewCompat.setImageTintList(menuImg1, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
-                ImageViewCompat.setImageTintList(menuImg4, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
 
                 menuTv3.setTextColor(getColor(R.color.colorAccent));
                 menuTv2.setTextColor(getColor(R.color.colorLightDarkGray));
                 menuTv1.setTextColor(getColor(R.color.colorLightDarkGray));
-                menuTv4.setTextColor(getColor(R.color.colorLightDarkGray));
 
                 menuBar3.setBackgroundColor(getColor(R.color.colorAccent));
                 menuBar2.setBackgroundColor(getColor(R.color.colorLightDarkGray));
                 menuBar1.setBackgroundColor(getColor(R.color.colorLightDarkGray));
-                menuBar4.setBackgroundColor(getColor(R.color.colorLightDarkGray));
                 break;
             case 4:
-                ImageViewCompat.setImageTintList(menuImg4, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorAccent)));
                 ImageViewCompat.setImageTintList(menuImg2, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
                 ImageViewCompat.setImageTintList(menuImg3, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
                 ImageViewCompat.setImageTintList(menuImg1, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
 
-                menuTv4.setTextColor(getColor(R.color.colorAccent));
                 menuTv2.setTextColor(getColor(R.color.colorLightDarkGray));
                 menuTv3.setTextColor(getColor(R.color.colorLightDarkGray));
                 menuTv1.setTextColor(getColor(R.color.colorLightDarkGray));
 
-                menuBar4.setBackgroundColor(getColor(R.color.colorAccent));
                 menuBar2.setBackgroundColor(getColor(R.color.colorLightDarkGray));
                 menuBar3.setBackgroundColor(getColor(R.color.colorLightDarkGray));
                 menuBar1.setBackgroundColor(getColor(R.color.colorLightDarkGray));

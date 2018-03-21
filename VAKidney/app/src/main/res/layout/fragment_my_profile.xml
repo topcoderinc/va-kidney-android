@@ -457,68 +457,6 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/profileFieldAvatar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/app_standard_padding"
-                android:background="@drawable/bg_white_rounded_small">
-
-                <LinearLayout
-                    android:id="@+id/icon7"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/bg_left_rounded_accent">
-
-                    <android.support.v7.widget.AppCompatImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="@dimen/app_standard_padding"
-                        android:tint="@color/colorWhite"
-                        app:srcCompat="@drawable/ic_addavatar"
-
-                        />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/app_standard_padding"
-                    android:layout_toRightOf="@+id/icon7"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Avatar"
-                        android:textColor="@color/colorDarkGray"
-                        android:textSize="11dp" />
-
-
-                    <TextView
-                        android:id="@+id/tvAvatar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Yes"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="14dp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/app_standard_padding"
-                    android:tint="@color/colorLightDarkGray"
-                    app:srcCompat="@drawable/ic_keyboard_arrow_right" />
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
                 android:id="@+id/profileFieldBiometric"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

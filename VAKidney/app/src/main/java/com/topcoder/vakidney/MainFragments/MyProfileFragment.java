@@ -1,24 +1,34 @@
 package com.topcoder.vakidney.MainFragments;
 
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.fitness.FitnessOptions;
+import com.google.android.gms.fitness.data.DataType;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.topcoder.vakidney.Model.UserData;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.Util.DialogManager;
+import com.topcoder.vakidney.Util.GoogleFitUtil;
 import com.topcoder.vakidney.Util.ImagePicker;
-import com.topcoder.vakidney.Util.JsondataUtil;
+import com.topcoder.vakidney.constant.DiseaseCategory;
 
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
@@ -37,15 +47,16 @@ import static java.util.Calendar.YEAR;
  */
 public class MyProfileFragment extends Fragment {
 
-    private TextView tvName, tvBirthDate, tvAge, tvHeight, tvWeight, tvDialysis, tvDiseaseCategory, tvSetupGoals, tvAvatar, tvBiometricDevice;
+    public final static int GOOGLE_FIT_PERMISSIONS_REQUEST_CODE = 0x00000002;
+
+    private TextView tvName, tvBirthDate, tvAge, tvHeight, tvWeight, tvDialysis, tvDiseaseCategory, tvSetupGoals, tvBiometricDevice;
     private UserData currentUserData;
     private RoundedImageView profileImageView;
     private Bitmap profileBitmap = null;
-    private RelativeLayout profileFieldAge, profileFieldHeight, profileFieldWeight, profileFieldDialysis, profileFieldDisease, profileFieldGoal, profileFieldAvatar, profileFieldBiometric;
+    private RelativeLayout profileFieldAge, profileFieldHeight, profileFieldWeight, profileFieldDialysis, profileFieldDisease, profileFieldGoal, profileFieldBiometric;
 
     private Calendar myCalendar;
     private DatePickerDialog.OnDateSetListener date;
-
 
     private int birthYear = 1960, birthMonth = 1, birthDay = 1;
 
@@ -59,7 +70,7 @@ public class MyProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_profile, container, false);
-        currentUserData = JsondataUtil.getUserData(getContext());
+        currentUserData = UserData.get();
         initView(view);
         addFieldListeners();
         populateFields();
@@ -101,13 +112,94 @@ public class MyProfileFragment extends Fragment {
         profileFieldHeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogManager.showNumberPickerDialog(getActivity(), "Please select your height (In Cm)", new DialogManager.OnNumberPicked() {
-                    @Override
-                    public void NumberPicked(int number) {
-                        currentUserData.setHeight(number);
-                        populateFields();
-                    }
-                }, 100, 250, currentUserData.getHeight());
+
+                LinearLayout LL = new LinearLayout(MyProfileFragment.this.getActivity());
+                LL.setOrientation(LinearLayout.HORIZONTAL);
+
+                final NumberPicker aNumberPickerFeet = new NumberPicker(MyProfileFragment.this.getActivity());
+                aNumberPickerFeet.setMaxValue(8);
+                aNumberPickerFeet.setMinValue(1);
+
+                final NumberPicker aNumberPickerInch = new NumberPicker(MyProfileFragment.this.getActivity());
+                aNumberPickerInch.setMaxValue(12);
+                aNumberPickerInch.setMinValue(0);
+
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(50, 50);
+                params.gravity = Gravity.CENTER;
+                params.setMargins(
+                        0,
+                        (int) getActivity().getResources().getDimension(R.dimen.app_standard_padding),
+                        0,
+                        0);
+
+                LinearLayout.LayoutParams feetParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                feetParams.weight = 1;
+                feetParams.gravity = Gravity.CENTER;
+
+                LinearLayout.LayoutParams inchParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                inchParams.weight = 1;
+                inchParams.gravity = Gravity.CENTER;
+
+                LinearLayout llFeet = new LinearLayout(MyProfileFragment.this.getActivity());
+                llFeet.setOrientation(LinearLayout.VERTICAL);
+                llFeet.setGravity(Gravity.CENTER_HORIZONTAL);
+
+                TextView tvFeet = new TextView(MyProfileFragment.this.getActivity());
+                tvFeet.setText("Feet");
+                tvFeet.setGravity(Gravity.CENTER);
+                tvFeet.setLayoutParams(feetParams);
+
+                llFeet.addView(tvFeet);
+                llFeet.addView(aNumberPickerFeet);
+
+                LinearLayout llInch = new LinearLayout(MyProfileFragment.this.getActivity());
+                llInch.setOrientation(LinearLayout.VERTICAL);
+
+                TextView tvInch = new TextView(MyProfileFragment.this.getActivity());
+                tvInch.setLayoutParams(inchParams);
+                tvInch.setGravity(Gravity.CENTER);
+                tvInch.setText("Inch");
+
+                llInch.addView(tvInch);
+                llInch.addView(aNumberPickerInch);
+
+                LL.setLayoutParams(params);
+                LL.addView(llFeet, feetParams);
+                LL.addView(llInch, inchParams);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MyProfileFragment.this.getActivity());
+                alertDialogBuilder.setTitle("Please select your height");
+                alertDialogBuilder.setView(LL);
+                alertDialogBuilder
+                        .setCancelable(false)
+                        .setPositiveButton("Ok",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,
+                                                        int id) {
+                                        currentUserData.setHeightFeet(aNumberPickerFeet.getValue());
+                                        currentUserData.setHeightInch(aNumberPickerInch.getValue());
+                                        populateFields();
+                                        if (currentUserData.isBiometric()) {
+                                            GoogleFitUtil.insertHeight(
+                                                    getActivity(),
+                                                    aNumberPickerFeet.getValue(),
+                                                    aNumberPickerInch.getValue());
+                                        }
+                                    }
+                        })
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,
+                                                        int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
             }
         });
 
@@ -120,6 +212,9 @@ public class MyProfileFragment extends Fragment {
                     public void NumberPicked(int number) {
                         currentUserData.setWeight(number);
                         populateFields();
+                        if (currentUserData.isBiometric()) {
+                            GoogleFitUtil.insertWeight(getActivity(), number);
+                        }
                     }
                 }, 100, 400, currentUserData.getWeight());
             }
@@ -164,35 +259,13 @@ public class MyProfileFragment extends Fragment {
             }
         });
 
-        profileFieldAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogManager.showYesNoDialog(getActivity(), "Do you want to Setup Avatar?", "Yes", "No", new DialogManager.OnYesClicked() {
-                    @Override
-                    public void YesClicked() {
-                        currentUserData.setAvatar(true);
-                        populateFields();
-                    }
-                }, new DialogManager.OnNoClicked() {
-                    @Override
-                    public void NoClicked() {
-                        currentUserData.setAvatar(false);
-                        populateFields();
-                    }
-                });
-            }
-        });
-
-
-
         profileFieldBiometric.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DialogManager.showYesNoDialog(getActivity(), "Do you want to add biometric Device?", "Yes", "No", new DialogManager.OnYesClicked() {
                     @Override
                     public void YesClicked() {
-                        currentUserData.setBiometric(true);
-                        populateFields();
+                        initGoogleFit();
                     }
                 }, new DialogManager.OnNoClicked() {
                     @Override
@@ -207,13 +280,21 @@ public class MyProfileFragment extends Fragment {
         profileFieldDisease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogManager.showFieldDialog(getActivity(), "Enter Disease Category", new DialogManager.OnOkClicked() {
+
+                AlertDialog.Builder b = new AlertDialog.Builder(MyProfileFragment.this.getActivity());
+                b.setTitle("Select Category");
+                b.setItems(DiseaseCategory.LABELS, new DialogInterface.OnClickListener() {
+
                     @Override
-                    public void onclicked(String fieldString) {
-                        currentUserData.setDiseaseCategory(fieldString);
+                    public void onClick(DialogInterface dialog, int which) {
+                        currentUserData.setDiseaseCategory(which);
                         populateFields();
+                        dialog.dismiss();
                     }
-                }, currentUserData.getDiseaseCategory());
+
+                });
+
+                b.show();
             }
         });
     }
@@ -224,7 +305,9 @@ public class MyProfileFragment extends Fragment {
     private void populateFields() {
         tvName.setText(currentUserData.getFullname());
         tvAge.setText(currentUserData.getAge() + " years");
-        tvHeight.setText(currentUserData.getHeight() + " cm");
+        tvHeight.setText(
+                currentUserData.getHeightFeet() + " feet " +
+                currentUserData.getHeightInch() + " inch");
         tvWeight.setText(currentUserData.getWeight() + " pounds");
         tvBirthDate.setText(getFormattedDate(birthYear, birthMonth, birthDay));
         if (currentUserData.isDialysis()) {
@@ -232,22 +315,20 @@ public class MyProfileFragment extends Fragment {
         } else {
             tvDialysis.setText("No");
         }
-        tvDiseaseCategory.setText(currentUserData.getDiseaseCategory());
+        tvDiseaseCategory.setText(
+                DiseaseCategory.LABELS[currentUserData.getDiseaseCategory()]
+        );
         if (currentUserData.isSetupgoals()) {
             tvSetupGoals.setText("Yes");
         } else {
             tvSetupGoals.setText("No");
-        }
-        if (currentUserData.isAvatar()) {
-            tvAvatar.setText("Yes");
-        } else {
-            tvAvatar.setText("No");
         }
         if (currentUserData.isBiometric()) {
             tvBiometricDevice.setText("Yes");
         } else {
             tvBiometricDevice.setText("No");
         }
+        currentUserData.save();
     }
 
     /**
@@ -265,7 +346,6 @@ public class MyProfileFragment extends Fragment {
         tvDialysis = view.findViewById(R.id.tvDialysis);
         tvDiseaseCategory = view.findViewById(R.id.tvDiseaseCategory);
         tvSetupGoals = view.findViewById(R.id.tvSetupGoals);
-        tvAvatar = view.findViewById(R.id.tvAvatar);
         tvBiometricDevice = view.findViewById(R.id.tvBiometricDevice);
         profileFieldAge = view.findViewById(R.id.profileFieldAge);
         profileFieldHeight = view.findViewById(R.id.profileFieldHeight);
@@ -273,7 +353,6 @@ public class MyProfileFragment extends Fragment {
         profileFieldDialysis = view.findViewById(R.id.profileFieldDialysis);
         profileFieldDisease = view.findViewById(R.id.profileFieldDisease);
         profileFieldGoal = view.findViewById(R.id.profileFieldGoals);
-        profileFieldAvatar = view.findViewById(R.id.profileFieldAvatar);
         profileFieldBiometric = view.findViewById(R.id.profileFieldBiometric);
     }
 
@@ -286,6 +365,13 @@ public class MyProfileFragment extends Fragment {
                 profileImageView.setImageBitmap(profileBitmap);
                 // TODO use bitmap
                 break;
+            case GOOGLE_FIT_PERMISSIONS_REQUEST_CODE: {
+                if (resultCode == Activity.RESULT_OK) {
+                        currentUserData.setBiometric(true);
+                        populateFields();
+                }
+            }
+            break;
             default:
                 super.onActivityResult(requestCode, resultCode, data);
                 break;
@@ -311,7 +397,7 @@ public class MyProfileFragment extends Fragment {
             }
         }
         DateFormat dfEn = new SimpleDateFormat(
-                "dd MMM YYYY", Locale.ENGLISH);
+                "dd MMM yyyy", Locale.ENGLISH);
         return dfEn.format(calendar.getTime());
     }
 
@@ -330,6 +416,30 @@ public class MyProfileFragment extends Fragment {
         Calendar cal = Calendar.getInstance(Locale.US);
         cal.setTime(date);
         return cal;
+    }
+
+    private void initGoogleFit() {
+        FitnessOptions fitnessOptions = FitnessOptions.builder()
+                .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+                .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
+                .addDataType(DataType.AGGREGATE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+                .addDataType(DataType.AGGREGATE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
+                .addDataType(DataType.TYPE_WEIGHT, FitnessOptions.ACCESS_WRITE)
+                .addDataType(DataType.TYPE_WEIGHT, FitnessOptions.ACCESS_READ)
+                .addDataType(DataType.TYPE_HEIGHT, FitnessOptions.ACCESS_WRITE)
+                .addDataType(DataType.TYPE_HEIGHT, FitnessOptions.ACCESS_READ)
+                .build();
+
+        if (!GoogleSignIn.hasPermissions(GoogleSignIn.getLastSignedInAccount(this.getActivity()), fitnessOptions)) {
+            GoogleSignIn.requestPermissions(
+                    this,
+                    GOOGLE_FIT_PERMISSIONS_REQUEST_CODE,
+                    GoogleSignIn.getLastSignedInAccount(this.getActivity()),
+                    fitnessOptions);
+        } else {
+            currentUserData.setBiometric(true);
+            populateFields();
+        }
     }
 
 }

@@ -10,10 +10,10 @@ import android.widget.GridView;
 
 import com.topcoder.vakidney.Adapter.GoalAdapter;
 import com.topcoder.vakidney.Model.Goal;
+import com.topcoder.vakidney.Model.UserData;
 import com.topcoder.vakidney.R;
-import com.topcoder.vakidney.Util.JsondataUtil;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,17 +23,19 @@ public class GoalFragment extends Fragment {
 
 
     private GridView gridView;
-    ArrayList<Goal> goalArrayList;
+    private UserData mUserData;
+
+    private List<Goal> goalArrayList;
     public GoalFragment() {
         // Required empty public constructor
+        mUserData = UserData.get();
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_goal, container, false);
+        View view = inflater.inflate(R.layout.fragment_goal, container, false);
         return view;
     }
 
@@ -44,19 +46,20 @@ public class GoalFragment extends Fragment {
     }
 
     private void initAndPopulate(View view) {
-        gridView=view.findViewById(R.id.gridView);
-        goalArrayList= JsondataUtil.getGoals(getActivity());
+        gridView = view.findViewById(R.id.gridView);
+        goalArrayList = Goal.get(mUserData.getDiseaseCategory(), mUserData.isDialysis());
+
         if(getActivity().getIntent().hasExtra("addgoal")){
-            Bundle bundle=getActivity().getIntent().getBundleExtra("goal");
-            Goal goal=Goal.getGoalFromBundle(bundle);
+            Bundle bundle = getActivity().getIntent().getBundleExtra("goal");
+            Goal goal = Goal.getGoalFromBundle(bundle);
             goalArrayList.add(goal);
         }
 
         if(getActivity().getIntent().hasExtra("deletegoal")){
-            Bundle bundle=getActivity().getIntent().getBundleExtra("goal");
-            Goal goal=Goal.getGoalFromBundle(bundle);
+            Bundle bundle = getActivity().getIntent().getBundleExtra("goal");
+            Goal goal = Goal.getGoalFromBundle(bundle);
             for(Goal goal1:goalArrayList) {
-                if(goal1.getId()==goal.getId()){
+                if(goal1.getId() == goal.getId()){
                     goalArrayList.remove(goal1);
                     break;
                 }
@@ -77,7 +80,7 @@ public class GoalFragment extends Fragment {
         }
 
 
-        GoalAdapter goalAda=new GoalAdapter(goalArrayList, getActivity());
+        GoalAdapter goalAda = new GoalAdapter(goalArrayList, getActivity());
         gridView.setAdapter(goalAda);
     }
 

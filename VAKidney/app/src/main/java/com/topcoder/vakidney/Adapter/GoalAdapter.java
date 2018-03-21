@@ -14,8 +14,10 @@ import com.topcoder.vakidney.CustomView.ArcProgress;
 import com.topcoder.vakidney.Model.Goal;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.Util.JsondataUtil;
+import com.topcoder.vakidney.constant.GoalType;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Abinash Neupane on 2/8/2018.
@@ -28,10 +30,10 @@ import java.util.ArrayList;
 public class GoalAdapter extends BaseAdapter{
 
 
-    private final ArrayList<Goal> goalArrayList;
+    private final List<Goal> goalArrayList;
     private final Activity activity;
 
-    public GoalAdapter(ArrayList<Goal> goalArrayList, Activity activity) {
+    public GoalAdapter(List<Goal> goalArrayList, Activity activity) {
         this.goalArrayList = goalArrayList;
         this.activity = activity;
     }
@@ -54,7 +56,7 @@ public class GoalAdapter extends BaseAdapter{
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if(i==0){
-            view=activity.getLayoutInflater().inflate(R.layout.item_grid_goal_addnew, viewGroup, false);
+            view = activity.getLayoutInflater().inflate(R.layout.item_grid_goal_addnew, viewGroup, false);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -63,33 +65,34 @@ public class GoalAdapter extends BaseAdapter{
                 }
             });
         }else{
-            view=activity.getLayoutInflater().inflate(R.layout.item_grid_goal, viewGroup, false);
-            ArcProgress goalProgress=view.findViewById(R.id.goalProgress);
-            LinearLayout layout=view.findViewById(R.id.layout);
-            TextView tvCurrentGoals=view.findViewById(R.id.tvCurrentGoals);
-            TextView tvGoalUnit=view.findViewById(R.id.tvGoalUnit);
-            TextView tvAddGoalString=view.findViewById(R.id.tvAddGoalString);
-            final Goal goal=goalArrayList.get(i-1);
+            view = activity.getLayoutInflater().inflate(R.layout.item_grid_goal, viewGroup, false);
+            ArcProgress goalProgress = view.findViewById(R.id.goalProgress);
+            LinearLayout layout = view.findViewById(R.id.layout);
+            TextView tvCurrentGoals = view.findViewById(R.id.tvCurrentGoals);
+            TextView tvGoalUnit = view.findViewById(R.id.tvGoalUnit);
+            TextView tvAddGoalString = view.findViewById(R.id.tvAddGoalString);
+            final Goal goal = goalArrayList.get( i - 1 );
             goalProgress.setMax((int)goal.getGoal());
             goalProgress.setArcAngle(250.0f);
-            goalProgress.setIcon(goal.getIcon());
+            goalProgress.setIcon(GoalType.getIcon(goal.getType()));
             goalProgress.setIconColor(Color.parseColor("#"+goal.getColorCode()));
             goalProgress.setFinishedStrokeColor(Color.parseColor("#"+goal.getColorCode()));
             goalProgress.setProgress((int)goal.getCurrentLevel());
-            goalProgress.setBottomText(JsondataUtil.getGoalTitleById(activity, goal.getTitle()));
+            goalProgress.setBottomTextSize(30);
+            goalProgress.setBottomText(goal.getTitleStr());
             if ((goal.getCurrentLevel() == Math.floor(goal.getCurrentLevel())) && !Double.isInfinite(goal.getCurrentLevel())) {
                 tvCurrentGoals.setText((int)goal.getCurrentLevel()+"/"+(int)goal.getGoal());
             }else{
                 tvCurrentGoals.setText(goal.getCurrentLevel()+"/"+goal.getGoal());
             }
-            tvGoalUnit.setText(JsondataUtil.getGoalUnitById(activity,goal.getUnit()));
-            tvAddGoalString.setText(goal.getAddString());
+            tvGoalUnit.setText(goal.getUnitStr());
+            tvAddGoalString.setText(GoalType.getAddTitle(goal.getType()));
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     activity.finish();
                     Intent intent=new Intent(activity, AddNewGoalActivity.class);
-                    intent.putExtra("id", goal.getId());
+                    intent.putExtra("id", goal.getGoalId());
                     activity.startActivity(intent);
                 }
             });

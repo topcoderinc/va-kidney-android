@@ -1,11 +1,17 @@
 package com.topcoder.vakidney.Model;
 
+import com.orm.SugarRecord;
+
+import java.util.List;
+
 /**
  * Created by Abinash Neupane on 2/9/2018.
  * It contains the overall data for a particular user using the app.
  */
 
-public class UserData {
+public class UserData extends SugarRecord<UserData> {
+
+    private final static String TAG = "UserData";
 
     private String username;
     private String password;
@@ -13,9 +19,11 @@ public class UserData {
     private int points;
     private int age;
     private int height;
+    private int heightFeet;
+    private int heightInch;
     private int weight;
     private boolean dialysis;
-    private String diseaseCategory;
+    private int diseaseCategory;
     private boolean setupgoals;
     private boolean avatar;
     private boolean biometric;
@@ -27,6 +35,51 @@ public class UserData {
     private int jumpgoal;
     private int swimmingcurrent;
     private int swimminggoal;
+
+    private String tag;
+
+    public UserData() {}
+
+    public UserData(
+            String tag,
+            String username,
+            String password,
+            String fullname,
+            int points,
+            int age,
+            int height,
+            int heightFeet,
+            int heightInch,
+            int weight,
+            boolean dialysis,
+            int diseaseCategory,
+            boolean setupgoals,
+            boolean avatar,
+            boolean biometric,
+            double runningcurrent,
+            double runninggoal,
+            int stepcurrent,
+            int stepgoal) {
+        this.tag = tag;
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+        this.points = points;
+        this.age = age;
+        this.height = height;
+        this.heightFeet = heightFeet;
+        this.heightInch = heightInch;
+        this.weight = weight;
+        this.dialysis = dialysis;
+        this.diseaseCategory = diseaseCategory;
+        this.setupgoals = setupgoals;
+        this.avatar = avatar;
+        this.biometric = biometric;
+        this.runningcurrent = runningcurrent;
+        this.runninggoal = runninggoal;
+        this.stepcurrent = stepcurrent;
+        this.stepgoal = stepgoal;
+    }
 
     public String getUsername() {
         return username;
@@ -76,6 +129,22 @@ public class UserData {
         this.height = height;
     }
 
+    public int getHeightFeet() {
+        return heightFeet;
+    }
+
+    public void setHeightFeet(int heightFeet) {
+        this.heightFeet = heightFeet;
+    }
+
+    public int getHeightInch() {
+        return heightInch;
+    }
+
+    public void setHeightInch(int heightInch) {
+        this.heightInch = heightInch;
+    }
+
     public int getWeight() {
         return weight;
     }
@@ -92,11 +161,11 @@ public class UserData {
         this.dialysis = dialysis;
     }
 
-    public String getDiseaseCategory() {
+    public int getDiseaseCategory() {
         return diseaseCategory;
     }
 
-    public void setDiseaseCategory(String diseaseCategory) {
+    public void setDiseaseCategory(int diseaseCategory) {
         this.diseaseCategory = diseaseCategory;
     }
 
@@ -186,5 +255,17 @@ public class UserData {
 
     public void setSwimminggoal(int swimminggoal) {
         this.swimminggoal = swimminggoal;
+    }
+
+    @Override
+    public void save() {
+        this.tag = TAG;
+        super.save();
+    }
+
+    public static UserData get() {
+        List<UserData> userData = UserData.find(UserData.class, "tag = ?", TAG);
+        if (userData.size() > 0) return userData.get(0);
+        return null;
     }
 }

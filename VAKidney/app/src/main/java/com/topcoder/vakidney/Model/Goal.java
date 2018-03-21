@@ -2,23 +2,61 @@ package com.topcoder.vakidney.Model;
 
 import android.os.Bundle;
 
+import com.orm.SugarRecord;
+
+import java.util.List;
+
 /**
  * Created by Abinash Neupane on 2/8/2018.
  * This model class is used to store data of a particular goal. This model class is used in various fragments such as GoalFragment, HOme1Fragment and WorkoutFragment
  */
 
-public class Goal {
+public class Goal extends SugarRecord<Goal> {
+
+    public final static int TYPE_PILL = 0x00000001;
+    public final static int TYPE_FLUID = 0x00000002;
+    public final static int TYPE_PIECE = 0x00000003;
+    public final static int TYPE_ACTIVITY = 0x00000004;
+    public final static int TYPE_GENERAL = 0x00000005;
 
     private int id;
     private String colorCode;
     private int title;
+    private String titleStr;
     private double goal;
     private double currentLevel;
     private int unit;
+    private String unitStr;
     private String addString;
     private int icon;
+    private int type;
+    private boolean dialysisOnly;
+    private int minCategory;
 
-    public int getId() {
+    public Goal() {}
+
+    public Goal(
+            String title,
+            double goal,
+            double currentLevel,
+            String unit,
+            String addString,
+            int icon,
+            int type,
+            boolean dialysisOnly,
+            int minCategory) {
+        this.titleStr = title;
+        this.goal = goal;
+        this.currentLevel = currentLevel;
+        this.unitStr = unit;
+        this.addString = addString;
+        this.icon = icon;
+        this.type = type;
+        this.dialysisOnly = dialysisOnly;
+        this.minCategory = minCategory;
+    }
+
+    public int getGoalId() {
         return id;
     }
 
@@ -82,6 +120,46 @@ public class Goal {
         this.addString = addString;
     }
 
+    public String getTitleStr() {
+        return titleStr;
+    }
+
+    public void setTitleStr(String titleStr) {
+        this.titleStr = titleStr;
+    }
+
+    public String getUnitStr() {
+        return unitStr;
+    }
+
+    public void setUnitStr(String unitStr) {
+        this.unitStr = unitStr;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public boolean isDialysisOnly() {
+        return dialysisOnly;
+    }
+
+    public void setDialysisOnly(boolean dialysisOnly) {
+        this.dialysisOnly = dialysisOnly;
+    }
+
+    public int getMinCategory() {
+        return minCategory;
+    }
+
+    public void setMinCategory(int minCategory) {
+        this.minCategory = minCategory;
+    }
+
     public Bundle getBundle(){
         Bundle bundle=new Bundle();
         bundle.putInt("title", title);
@@ -106,5 +184,16 @@ public class Goal {
         goal.setAddString(bundle.getString("addString"));
         goal.setColorCode(bundle.getString("colorCode"));
         return goal;
+    }
+
+    public static List<Goal> get(int diseaseCategry, boolean dialysis) {
+        if (dialysis) {
+            return Goal.find(Goal.class, "min_category <= ?", String.valueOf(diseaseCategry));
+        }
+        else {
+            return Goal.find(Goal.class, "min_category <= ? and dialysis_only = ?",
+                    String.valueOf(diseaseCategry),
+                    "0");
+        }
     }
 }

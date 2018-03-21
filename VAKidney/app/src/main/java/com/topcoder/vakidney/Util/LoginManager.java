@@ -3,6 +3,10 @@ package com.topcoder.vakidney.Util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.topcoder.vakidney.Model.Meal;
+import com.topcoder.vakidney.Model.MealDrug;
+import com.topcoder.vakidney.Model.UserData;
+
 /**
  * Created by Abinash Neupane on 2/9/2018.
  * This class is used for managing login and task agreement
@@ -29,11 +33,25 @@ public class LoginManager {
      * @param context
      * @param isLoggedIn
      */
-    public static void setLoggedIn(Context context, boolean isLoggedIn){
-        SharedPreferences preferences=context.getSharedPreferences(PREF_LOGGING, 0);
-        SharedPreferences.Editor editor=preferences.edit();
+    public static void setLoggedIn(Context context, boolean isLoggedIn, UserData userData){
+        SharedPreferences preferences = context.getSharedPreferences(PREF_LOGGING, 0);
+        SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(IS_LOGGED_IN, isLoggedIn);
         editor.commit();
+        if(isLoggedIn) {
+            initializeData(context);
+            userData.save();
+        }
+        else {
+            UserData.deleteAll(UserData.class);
+            Meal.deleteAll(Meal.class);
+            MealDrug.deleteAll(MealDrug.class);
+        }
+    }
+
+    private static void initializeData(Context context) {
+        JsondataUtil.getMeals(context);
+        GoalGenerator.generateGoals();
     }
 
     /**

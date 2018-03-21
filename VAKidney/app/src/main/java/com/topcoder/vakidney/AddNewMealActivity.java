@@ -7,35 +7,52 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.topcoder.vakidney.Model.DrugInteraction;
 import com.topcoder.vakidney.Model.Meal;
-import com.topcoder.vakidney.Util.DialogManager;
+import com.topcoder.vakidney.Model.MealDrug;
 import com.topcoder.vakidney.Util.ImagePicker;
+import com.topcoder.vakidney.Util.ServiceCallUtil;
+import com.topcoder.vakidney.api.FDAServiceAPI;
+import com.topcoder.vakidney.api.RestClient;
+import com.topcoder.vakidney.popup.AddMealDrugPopup;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+import retrofit2.Call;
 
 /**
  * This class is used to add a new meal
  */
-public class AddNewMealActivity extends AppCompatActivity {
+public class AddNewMealActivity extends AppCompatActivity implements
+        View.OnClickListener,
+        AddMealDrugPopup.AddMealDrugPopupListener {
 
+    private final static Map<String, Integer> MEAL_TYPE_INDEX = new HashMap<>();
+    static {
+        MEAL_TYPE_INDEX.put(Meal.MEAL_TYPE_BREAKFAST, 1);
+        MEAL_TYPE_INDEX.put(Meal.MEAL_TYPE_LUNCH, 2);
+        MEAL_TYPE_INDEX.put(Meal.MEAL_TYPE_DINNER, 3);
+        MEAL_TYPE_INDEX.put(Meal.MEAL_TYPE_SNACK, 4);
+        MEAL_TYPE_INDEX.put(Meal.MEAL_TYPE_CUSTOM, 5);
+    }
 
     private LinearLayout bottomMenu1, bottomMenu2, bottomMenu3, bottomMenu4, bottomMenu5;
     private AppCompatImageView backBtn;
@@ -45,17 +62,16 @@ public class AddNewMealActivity extends AppCompatActivity {
     private TextView tvChangeDate, tvChangeTime;
     private Calendar myCalendar;
     private DatePickerDialog.OnDateSetListener date;
-    private EditText addMealOrLiquidField, amountField;
-    private Spinner unitSpinner;
     private LinearLayout addImageBtn;
     private RoundedImageView addedImage;
     private AppCompatImageView btnRemoveImage;
-    private String[] unitSpinerItems = {"Select", "Item 1", "Item 2", "Item 3"};
     private Button btnAddNewMeal;
-    private TextView mealOrLiquidFieldErrorTv, amountFieldErrorTv, unitSpinnerTv;
     private LinearLayout dateLayout, timeLayout;
     private RelativeLayout addedImageLayout;
 
+    private Meal mMeal;
+    private DrugInteraction mDrugInteraction;
+    private List<MealDrug> mAddedMealDrugs = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,57 +89,15 @@ public class AddNewMealActivity extends AppCompatActivity {
         addedImageLayout = findViewById(R.id.addImageLayout);
         dateLayout = findViewById(R.id.dateLayout);
         timeLayout = findViewById(R.id.timeLayout);
-        mealOrLiquidFieldErrorTv = findViewById(R.id.mealOrliquidFieldErrorTv);
-        amountFieldErrorTv = findViewById(R.id.amountFieldErrorTv);
-        unitSpinnerTv = findViewById(R.id.unitSpinnerErroTv);
         btnAddNewMeal = findViewById(R.id.btnAddNewMeal);
         btnAddNewMeal.setEnabled(false);
-        addMealOrLiquidField = findViewById(R.id.mealOrliquidField);
-        amountField = findViewById(R.id.amountField);
-        unitSpinner = findViewById(R.id.unitSpinner);
         addImageBtn = findViewById(R.id.addPhotoBtn);
         addedImage = findViewById(R.id.addedImage);
         btnRemoveImage = findViewById(R.id.removeImageBtn);
-        ArrayAdapter<String> gameKindArray = new ArrayAdapter<>(AddNewMealActivity.this, android.R.layout.simple_spinner_item, unitSpinerItems);
-        gameKindArray.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        unitSpinner.setAdapter(gameKindArray);
-        unitSpinner.setSelection(0);
-        btnAddNewMeal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (addMealOrLiquidField.getText().toString().isEmpty() || amountField.getText().toString().isEmpty() || unitSpinner.getSelectedItemPosition() == 0) {
-                    mealOrLiquidFieldErrorTv.setVisibility(View.GONE);
-                    mealOrLiquidFieldErrorTv.setBackgroundResource(R.drawable.bg_round_white);
-                    amountFieldErrorTv.setVisibility(View.GONE);
-                    amountFieldErrorTv.setBackgroundResource(R.drawable.bg_round_white);
-                    unitSpinnerTv.setVisibility(View.GONE);
-                    unitSpinnerTv.setBackgroundResource(R.drawable.bg_round_white);
-                    if (addMealOrLiquidField.getText().toString().isEmpty()) {
-                        mealOrLiquidFieldErrorTv.setVisibility(View.VISIBLE);
-                        mealOrLiquidFieldErrorTv.setBackgroundResource(R.drawable.bg_round_white_error);
-                    }
-                    if (amountField.getText().toString().isEmpty()) {
-                        amountFieldErrorTv.setVisibility(View.VISIBLE);
-                        amountField.setBackgroundResource(R.drawable.bg_round_white_error);
-                    }
-                    if (unitSpinner.getSelectedItemPosition() == 0) {
-                        unitSpinnerTv.setVisibility(View.VISIBLE);
-                        unitSpinner.setBackgroundResource(R.drawable.bg_round_white_error);
-                    }
-                } else {
-                    DialogManager.showOkDialog(AddNewMealActivity.this, "New Meal Added", new DialogManager.OnYesClicked() {
-                        @Override
-                        public void YesClicked() {
-                            NavigateHome(true);
-                        }
-                    });
-                }
-            }
-        });
+
         btnRemoveImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 addedImageLayout.setVisibility(View.INVISIBLE);
                 addedImage.setImageBitmap(null);
             }
@@ -140,7 +114,10 @@ public class AddNewMealActivity extends AppCompatActivity {
         tvChangeDate = findViewById(R.id.tvChangeDate);
         tvChangeTime = findViewById(R.id.tvChangeTime);
         myCalendar = Calendar.getInstance();
-        tvMealDate.setText(myCalendar.get(Calendar.DAY_OF_MONTH) + "/" + myCalendar.get(Calendar.MONTH) + "/" + myCalendar.get(Calendar.YEAR));
+        tvMealDate.setText(myCalendar.get(Calendar.MONTH) + 1
+                + "/" + myCalendar.get(Calendar.DAY_OF_MONTH)
+                + "/" + myCalendar.get(Calendar.YEAR));
+
 
         String input = myCalendar.get(Calendar.HOUR_OF_DAY) + ":" + myCalendar.get(Calendar.MINUTE);
         DateFormat inputFormat = new SimpleDateFormat("HH:mm");
@@ -159,7 +136,10 @@ public class AddNewMealActivity extends AppCompatActivity {
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                tvMealDate.setText(myCalendar.get(Calendar.MONTH) + "/" + myCalendar.get(Calendar.DAY_OF_MONTH) + 1 + "/" + myCalendar.get(Calendar.YEAR));
+                tvMealDate.setText(myCalendar.get(Calendar.MONTH) + 1
+                        + "/" + myCalendar.get(Calendar.DAY_OF_MONTH)
+                        + "/" + myCalendar.get(Calendar.YEAR));
+
             }
 
         };
@@ -171,7 +151,9 @@ public class AddNewMealActivity extends AppCompatActivity {
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+
         timeLayout.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 Calendar mcurrentTime = Calendar.getInstance();
@@ -181,7 +163,8 @@ public class AddNewMealActivity extends AppCompatActivity {
                 mTimePicker = new TimePickerDialog(AddNewMealActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-
+                        myCalendar.set(Calendar.HOUR_OF_DAY, selectedHour);
+                        myCalendar.set(Calendar.MINUTE, selectedMinute);
 
                         String input = selectedHour + ":" + selectedMinute;
                         DateFormat inputFormat = new SimpleDateFormat("HH:mm");
@@ -198,75 +181,80 @@ public class AddNewMealActivity extends AppCompatActivity {
             }
         });
 
-        EnableDisableAddMealButton();
+        btnAddNewMeal.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View view) {
+                String name = mMeal.getType().substring(0, 1).toUpperCase()
+                        + mMeal.getType().substring(1);
+                mMeal.setName(name);
+                mMeal.setDate(myCalendar.getTime());
+                for (MealDrug mealDrug : mAddedMealDrugs) {
+                    mealDrug.setMealId(mMeal.getMealId());
+                    mealDrug.save();
+                }
+                mMeal.save();
+
+                if (mMeal.isHasDrug()) {
+                    List<String> drugs = new ArrayList<>();
+                    for (MealDrug mealDrug: mMeal.getMealDrugs()) {
+                        if (mealDrug.getType() == MealDrug.TYPE_DRUG) drugs.add(mealDrug.getName());
+                    }
+                    String[] drugsStr = new String[drugs.size()];
+                    drugs.toArray(drugsStr);
+                    if (DrugInteraction.findByDrugs(drugsStr) == null) {
+
+                        mDrugInteraction = new DrugInteraction();
+                        mDrugInteraction.setDrugs(drugsStr);
+
+                        ServiceCallUtil.searchDrugInteraction(mDrugInteraction);
+
+                    }
+                }
+                NavigateHome(false);
+
+            }
+
+        });
+
+        TextView tvAddMeal = findViewById(R.id.tvAddMeal);
+        TextView tvAddDrug = findViewById(R.id.tvAddDrug);
+        tvAddMeal.setOnClickListener(this);
+        tvAddDrug.setOnClickListener(this);
+
+        if(getIntent().hasExtra("meal")) {
+            Meal meal = (Meal) getIntent().getSerializableExtra("meal");
+            initSavedMeal(meal);
+        }
+        else {
+            mMeal = new Meal();
+            mMeal.setMealId(System.currentTimeMillis());
+            mMeal.setType(Meal.MEAL_TYPE_BREAKFAST);
+        }
     }
 
-    private void EnableDisableAddMealButton() {
-        addMealOrLiquidField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    private void initSavedMeal(Meal meal) {
+        mMeal = Meal.find(Meal.class, "meal_id = ?", String.valueOf(meal.getMealId())).get(0);
 
-            }
+        currentSeekIndex = MEAL_TYPE_INDEX.get(meal.getType());
+        seekButton();
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.toString().length() != 0) {
-                    if (!amountField.getText().toString().isEmpty()) {
-                        if (unitSpinner.getSelectedItemPosition() != 0) {
-                            btnAddNewMeal.setEnabled(true);
-                        }
-                    }
-                }
-            }
+        for (int i = 0; i < mMeal.getMealDrugs().size(); i++) {
+            addMealDrug(mMeal.getMealDrugs().get(i));
+        }
 
-            @Override
-            public void afterTextChanged(Editable editable) {
+        myCalendar.setTime(meal.getDate());
 
-            }
-        });
+        String dateStr = new SimpleDateFormat("M/d/yyyy", Locale.US).format(meal.getDate());
+        String timeStr = new SimpleDateFormat("KK:mm a", Locale.US).format(meal.getDate());
 
-        amountField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        tvMealDate.setText(dateStr);
+        tvMealTime.setText(timeStr);
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.toString().length() != 0) {
-                    if (!addMealOrLiquidField.getText().toString().isEmpty()) {
-                        if (unitSpinner.getSelectedItemPosition() != 0) {
-                            btnAddNewMeal.setEnabled(true);
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-        unitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i != 0) {
-                    if (!addMealOrLiquidField.getText().toString().isEmpty()) {
-                        if (!amountField.getText().toString().isEmpty()) {
-                            btnAddNewMeal.setEnabled(true);
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+        btnAddNewMeal.setText("Save Meal");
+        btnAddNewMeal.setEnabled(true);
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -283,11 +271,9 @@ public class AddNewMealActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     public void onBackPressed() {
         NavigateHome(false);
-
     }
 
     private void NavigateHome(boolean save) {
@@ -295,7 +281,7 @@ public class AddNewMealActivity extends AppCompatActivity {
         Intent intent = new Intent(AddNewMealActivity.this, MainActivity.class);
         if (save) {
             intent.putExtra("addmeal", true);
-            intent.putExtra("meal", getCurrentMeal().getBundle());
+            intent.putExtra("meal", getCurrentMeal());
         }
         intent.putExtra("tag", MainActivity.TAG_FOOD);
         startActivity(intent);
@@ -371,6 +357,7 @@ public class AddNewMealActivity extends AppCompatActivity {
         seekBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mMeal.setType(Meal.MEAL_TYPE_BREAKFAST);
                 currentSeekIndex = 1;
                 seekButton();
             }
@@ -380,6 +367,7 @@ public class AddNewMealActivity extends AppCompatActivity {
         seekBtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mMeal.setType(Meal.MEAL_TYPE_LUNCH);
                 currentSeekIndex = 2;
                 seekButton();
             }
@@ -388,15 +376,16 @@ public class AddNewMealActivity extends AppCompatActivity {
         seekBtn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mMeal.setType(Meal.MEAL_TYPE_DINNER);
                 currentSeekIndex = 3;
                 seekButton();
             }
         });
 
-
         seekBtn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mMeal.setType(Meal.MEAL_TYPE_SNACK);
                 currentSeekIndex = 4;
                 seekButton();
             }
@@ -406,6 +395,7 @@ public class AddNewMealActivity extends AppCompatActivity {
         seekBtn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mMeal.setType(Meal.MEAL_TYPE_CUSTOM);
                 currentSeekIndex = 5;
                 seekButton();
             }
@@ -491,7 +481,6 @@ public class AddNewMealActivity extends AppCompatActivity {
                 seekBtn1.setTextColor(getColor(R.color.colorLightDarkGray));
                 break;
 
-
         }
     }
 
@@ -516,5 +505,56 @@ public class AddNewMealActivity extends AppCompatActivity {
         }
         meal.setDesc("Salad, pasta, pudding, grape");
         return meal;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tvAddMeal: {
+                AddMealDrugPopup popup = new AddMealDrugPopup(AddNewMealActivity.this, AddMealDrugPopup.POPUP_MODE_MEAL);
+                popup.setListener(AddNewMealActivity.this);
+                popup.showAt(view);
+            }
+            break;
+            case R.id.tvAddDrug: {
+                AddMealDrugPopup popup = new AddMealDrugPopup(AddNewMealActivity.this, AddMealDrugPopup.POPUP_MODE_DRUG);
+                popup.setListener(AddNewMealActivity.this);
+                popup.showAt(view);
+            }
+            break;
+        }
+    }
+
+    @Override
+    public void onAdded(MealDrug mealDrug) {
+        addMealDrug(mealDrug);
+        btnAddNewMeal.setEnabled(true);
+        if(mealDrug.getType() == MealDrug.TYPE_DRUG) {
+            mMeal.setHasDrug(true);
+        }
+
+        mAddedMealDrugs.add(mealDrug);
+    }
+
+    @Override
+    public void onCanceled() {
+
+    }
+
+    private void addMealDrug(MealDrug mealDrug) {
+        View view = LayoutInflater.from(this).inflate(R.layout.item_add_mealdrug, null);
+        TextView tvName = view.findViewById(R.id.tvName);
+        TextView tvAmount = view.findViewById(R.id.tvAmount);
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        layoutParams.setMargins(0, 0, 0, (int) getResources().getDimension(R.dimen.app_standard_padding));
+
+        LinearLayout layout = findViewById(R.id.llMealDrug);
+        layout.addView(view, layoutParams);
+
+        tvName.setText(mealDrug.getName());
+        tvAmount.setText(mealDrug.getAmount() + " " + mealDrug.getUnit());
     }
 }
