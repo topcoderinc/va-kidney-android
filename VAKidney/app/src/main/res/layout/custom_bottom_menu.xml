@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomBar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:orientation="horizontal"
+    android:weightSum="5">
+
+    <LinearLayout
+        android:id="@+id/barLin1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/bar1"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/barImg1"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:tint="@color/colorAccent"
+            app:srcCompat="@drawable/ic_bar_home" />
+
+        <TextView
+            android:id="@+id/tvBar1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:gravity="center"
+            android:text="Home"
+            android:textColor="@color/colorAccent"
+            android:textSize="10dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/barLin2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/bar2"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/barImg2"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:tint="@color/colorAccent"
+            app:srcCompat="@drawable/ic_bar_chart" />
+
+        <TextView
+            android:id="@+id/tvBar2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:gravity="center"
+            android:text="Chart"
+            android:textColor="@color/colorAccent"
+            android:textSize="10dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/barLin3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/bar3"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/barImg3"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:tint="@color/colorAccent"
+            app:srcCompat="@drawable/ic_bar_medication" />
+
+        <TextView
+            android:id="@+id/tvBar3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:gravity="center"
+            android:text="Recommendations"
+            android:textColor="@color/colorAccent"
+            android:textSize="10dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/barLin4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/bar4"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/barImg4"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:tint="@color/colorWhite"
+            app:srcCompat="@drawable/ic_bar_food" />
+
+        <TextView
+            android:id="@+id/tvBar4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:gravity="center"
+            android:text="Food/Drug Intake"
+            android:textColor="@color/colorWhite"
+            android:textSize="10dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/barLin5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/bar5"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/barImg5"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:tint="@color/colorAccent"
+            app:srcCompat="@drawable/ic_bar_workout" />
+
+        <TextView
+            android:id="@+id/tvBar5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:gravity="center"
+            android:text="Activity"
+            android:textColor="@color/colorAccent"
+            android:textSize="10dp" />
+    </LinearLayout>
+
+
+</LinearLayout>

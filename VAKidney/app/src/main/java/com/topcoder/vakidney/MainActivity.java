@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.topcoder.vakidney.MainFragments.ChartFragment;
+import com.topcoder.vakidney.MainFragments.ChartMenuFragment;
 import com.topcoder.vakidney.MainFragments.FoodFragment;
 import com.topcoder.vakidney.MainFragments.GoalFragment;
 import com.topcoder.vakidney.MainFragments.HomeFragment;
@@ -594,7 +595,7 @@ public class MainActivity extends AppCompatActivity {
             case TAG_CHART:
                 goalIcon.setVisibility(View.VISIBLE);
                 actionBarTitle.setText("History & Metrics");
-                return new ChartFragment();
+                return new ChartMenuFragment();
 
 
             case TAG_MEDICATION:

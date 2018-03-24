@@ -289,37 +289,38 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/app_standard_padding"
-                    android:orientation="vertical"/>
+                    android:orientation="vertical" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginTop="@dimen/app_standard_padding"
-                    android:gravity="center_horizontal">
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
                     <TextView
                         android:id="@+id/tvAddMeal"
-                        android:clickable="true"
-                        android:focusable="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Add Meal"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorPrimary"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:padding="@dimen/app_standard_padding"
-                        android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
+                        android:text="Add Meal"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+
                     <TextView
                         android:id="@+id/tvAddDrug"
-                        android:clickable="true"
-                        android:focusable="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:padding="@dimen/app_standard_padding"
+                        android:text="Add Drug"
                         android:textColor="@color/colorPrimary"
-                        android:text="Add Drug"/>
+                        android:textSize="14sp" />
                 </LinearLayout>
-
 
 
                 <LinearLayout
@@ -352,9 +353,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
-                        android:visibility="invisible"
                         android:layout_weight="1"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:visibility="invisible">
 
 
                         <com.makeramen.roundedimageview.RoundedImageView
@@ -385,9 +386,9 @@
                     android:layout_marginTop="@dimen/app_standard_padding"
                     android:background="@drawable/bg_login_btn"
                     android:elevation="5dp"
-                    android:textSize="13dp"
                     android:text="Add New Meal"
-                    android:textColor="@color/colorWhite" />
+                    android:textColor="@color/colorWhite"
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
@@ -514,7 +515,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:gravity="center"
-                android:text="Medication"
+                android:text="Recommendations"
                 android:textColor="@color/colorAccent"
                 android:textSize="10dp" />
         </LinearLayout>
@@ -552,7 +553,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:gravity="center"
-                android:text="Food"
+                android:text="Food/Drug Intake"
                 android:textColor="@color/colorWhite"
                 android:textSize="10dp" />
         </LinearLayout>
@@ -590,7 +591,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:gravity="center"
-                android:text="Workout"
+                android:text="Activity"
                 android:textColor="@color/colorAccent"
                 android:textSize="10dp" />
         </LinearLayout>

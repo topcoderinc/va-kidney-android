@@ -215,7 +215,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:gravity="center"
-                android:text="Medication"
+                android:text="Recommendations"
                 android:textColor="@color/colorAccent"
                 android:textSize="10dp" />
         </LinearLayout>
@@ -253,7 +253,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:gravity="center"
-                android:text="Food"
+                android:text="Food/Drug Intake"
                 android:textColor="@color/colorAccent"
                 android:textSize="10dp" />
         </LinearLayout>
@@ -291,7 +291,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:gravity="center"
-                android:text="Workout"
+                android:text="Activity"
                 android:textColor="@color/colorAccent"
                 android:textSize="10dp" />
         </LinearLayout>

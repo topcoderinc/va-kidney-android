@@ -30,6 +30,7 @@ public class AddMealDrugPopup extends BasePopup implements View.OnClickListener 
 
     private EditText addMealOrLiquidField, amountField;
     private TextView mealOrLiquidFieldErrorTv, amountFieldErrorTv, unitSpinnerTv;
+    private TextView titleTv;
     private Spinner unitSpinner;
     private final String[] unitSpinnerItems = {"g", "mg"};
     private Button btnAddNewMeal;
@@ -48,7 +49,11 @@ public class AddMealDrugPopup extends BasePopup implements View.OnClickListener 
         addMealOrLiquidField = getContentView().findViewById(R.id.mealOrliquidField);
         amountField = getContentView().findViewById(R.id.amountField);
         unitSpinner = getContentView().findViewById(R.id.unitSpinner);
+        titleTv = getContentView().findViewById(R.id.textTitle);
 
+        if (mMode == POPUP_MODE_DRUG) {
+           titleTv.setText("Drug/medications");
+        }
         btnAddNewMeal = getContentView().findViewById(R.id.btnAddNewMeal);
         btnAddNewMeal.setText(mMode == POPUP_MODE_DRUG ? "Add Drug" : "Add Meal");
         btnAddNewMeal.setEnabled(false);

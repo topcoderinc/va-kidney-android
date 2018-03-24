@@ -27,8 +27,6 @@ import java.util.List;
  */
 public class BloodSugarFragment extends Fragment {
 
-
-
     private ArrayList<ChartData> chartDataArrayListActual2016;
     private ArrayList<ChartData> chartDataArrayListGoals2016;
 
@@ -39,7 +37,6 @@ public class BloodSugarFragment extends Fragment {
     private LineChart lineChart2;
 
     private LineData lineData;
-
 
     private final List<Entry> entriesActual2016 = new ArrayList<>();
     private final List<Entry> entriesGoals2016 = new ArrayList<>();
@@ -82,12 +79,12 @@ public class BloodSugarFragment extends Fragment {
     private void PopulateData(LineChart lineChart, ArrayList<ChartData> chartDataArrayListActual2016, ArrayList<ChartData> chartDataArrayListGoals2016, List<Entry> entries, List<Entry> entries2) {
         int i=1;
         for(ChartData chartData : chartDataArrayListActual2016){
-            entries.add(new Entry(i, Float.parseFloat(chartData.getValue()+"f"), chartData.getMonth()));
+//            entries.add(new Entry(i, Float.parseFloat(chartData.getValue()+"f"), chartData.getMonth()));
             i++;
         }
         i=1;
         for(ChartData chartData : chartDataArrayListGoals2016){
-            entries2.add(new Entry(i, Float.parseFloat(chartData.getValue()+"f"), chartData.getMonth()));
+//            entries2.add(new Entry(i, Float.parseFloat(chartData.getValue()+"f"), chartData.getMonth()));
             i++;
         }
 

@@ -2,10 +2,9 @@ package com.topcoder.vakidney.Util;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.topcoder.vakidney.Model.DrugInteraction;
 import com.topcoder.vakidney.api.FDAServiceAPI;
-import com.topcoder.vakidney.api.RestClient;
+import com.topcoder.vakidney.api.FDARestClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +26,7 @@ public class ServiceCallUtil {
 
     public static void searchDrugInteraction(final DrugInteraction drugInteraction) {
 
-        FDAServiceAPI fdaServiceAPI = RestClient.getService(FDAServiceAPI.class);
+        FDAServiceAPI fdaServiceAPI = FDARestClient.getService(FDAServiceAPI.class);
         Call<String> result = fdaServiceAPI.searchDrugInteractions(
                 "patient.drug.medicinalproduct:\""
                         + drugInteraction.getQuery()

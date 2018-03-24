@@ -364,8 +364,8 @@ public class JsondataUtil {
             JSONArray jsonArray = new JSONArray(jsonString);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("potassiumlevel"));
-                chartDataArrayList.add(chartData);
+//                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("potassiumlevel"));
+//                chartDataArrayList.add(chartData);
             }
         } catch (JSONException e) {
             Log.e("json Exception", e.getMessage() + "");
@@ -387,8 +387,8 @@ public class JsondataUtil {
             JSONArray jsonArray = new JSONArray(jsonString);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("potassiumlevel"));
-                chartDataArrayList.add(chartData);
+//                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("potassiumlevel"));
+//                chartDataArrayList.add(chartData);
             }
         } catch (JSONException e) {
             Log.e("json Exception", e.getMessage() + "");
@@ -410,8 +410,8 @@ public class JsondataUtil {
             JSONArray jsonArray = new JSONArray(jsonString);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("weight"));
-                chartDataArrayList.add(chartData);
+//                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("weight"));
+//                chartDataArrayList.add(chartData);
             }
         } catch (JSONException e) {
             Log.e("json Exception", e.getMessage() + "");
@@ -433,8 +433,8 @@ public class JsondataUtil {
             JSONArray jsonArray = new JSONArray(jsonString);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("weight"));
-                chartDataArrayList.add(chartData);
+//                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("weight"));
+//                chartDataArrayList.add(chartData);
             }
         } catch (JSONException e) {
             Log.e("json Exception", e.getMessage() + "");
@@ -456,8 +456,8 @@ public class JsondataUtil {
             JSONArray jsonArray = new JSONArray(jsonString);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("bloodsugar"));
-                chartDataArrayList.add(chartData);
+//                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("bloodsugar"));
+//                chartDataArrayList.add(chartData);
             }
         } catch (JSONException e) {
             Log.e("json Exception", e.getMessage() + "");
@@ -479,8 +479,8 @@ public class JsondataUtil {
             JSONArray jsonArray = new JSONArray(jsonString);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("bloodsugar"));
-                chartDataArrayList.add(chartData);
+//                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("bloodsugar"));
+//                chartDataArrayList.add(chartData);
             }
         } catch (JSONException e) {
             Log.e("json Exception", e.getMessage() + "");

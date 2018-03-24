@@ -9,4 +9,8 @@
     <color name="colorLightGray">#e5e5e5</color>
     <color name="colorDarkGray">#333333</color>
     <color name="colorLightDarkGray">#666666</color>
+
+    <color name="background_darker_gray">#e0e0e0</color>
+    <color name="text_black">#333333</color>
+
 </resources>

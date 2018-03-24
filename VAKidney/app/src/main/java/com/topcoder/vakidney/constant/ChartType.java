@@ -12,6 +12,7 @@ import java.util.Map;
 public class ChartType {
 
     private final static Map<Integer, String> CHART_TITLE = new HashMap<>();
+    private final static Map<Integer, String> CHART_UNIT = new HashMap<>();
     private final static Map<Integer, List<Integer>> CHARTS_BY_CATEGORY = new HashMap<>();
 
     public final static int TYPE_E_GFR = 0x00000001;
@@ -39,19 +40,36 @@ public class ChartType {
         CHART_TITLE.put(TYPE_E_GFR, "eGFR");
         CHART_TITLE.put(TYPE_PHOSPHORUS, "Phosphorus");
         CHART_TITLE.put(TYPE_POTASSIUM, "Potassium");
-        CHART_TITLE.put(TYPE_CREATININE, "creatinine");
-        CHART_TITLE.put(TYPE_CO2, "Co2 (bicarb)");
-        CHART_TITLE.put(TYPE_SODIUM, "sodium");
-        CHART_TITLE.put(TYPE_BUN, "bun");
+        CHART_TITLE.put(TYPE_CREATININE, "Creatinine");
+        CHART_TITLE.put(TYPE_CO2, "Co2 (Bicarb)");
+        CHART_TITLE.put(TYPE_SODIUM, "Sodium");
+        CHART_TITLE.put(TYPE_BUN, "BUN");
         CHART_TITLE.put(TYPE_PTH, "PTH");
-        CHART_TITLE.put(TYPE_VITAMIN_D, "vitamin D");
-        CHART_TITLE.put(TYPE_IRON, "iron profile");
+        CHART_TITLE.put(TYPE_VITAMIN_D, "Vitamin D");
+        CHART_TITLE.put(TYPE_IRON, "Iron Profile");
         CHART_TITLE.put(TYPE_HGBA1C, "HgbA1C");
         CHART_TITLE.put(TYPE_HGB, "Hgb or Hct");
+
+        CHART_UNIT.put(TYPE_E_GFR, "mL/min/1.73 m2");
+        CHART_UNIT.put(TYPE_PHOSPHORUS, "mg/dL");
+        CHART_UNIT.put(TYPE_POTASSIUM, "mEq/L");
+        CHART_UNIT.put(TYPE_CREATININE, "mg/dL");
+        CHART_UNIT.put(TYPE_CO2, "mEq/L");
+        CHART_UNIT.put(TYPE_SODIUM, "mEq/L");
+        CHART_UNIT.put(TYPE_BUN, "mg/dL");
+        CHART_UNIT.put(TYPE_PTH, "pg/mL");
+        CHART_UNIT.put(TYPE_VITAMIN_D, "ng/mL");
+        CHART_UNIT.put(TYPE_IRON, "mcg/dL");
+        CHART_UNIT.put(TYPE_HGBA1C, "%");
+        CHART_UNIT.put(TYPE_HGB, "grams/dL");
 
         STAGE_1_CHARTS.add(TYPE_E_GFR);
         STAGE_1_CHARTS.add(TYPE_CREATININE);
         STAGE_1_CHARTS.add(TYPE_BUN);
+
+        STAGE_2_CHARTS.add(TYPE_E_GFR);
+        STAGE_2_CHARTS.add(TYPE_CREATININE);
+        STAGE_2_CHARTS.add(TYPE_BUN);
 
         STAGE_3A_CHARTS.add(TYPE_E_GFR);
         STAGE_3A_CHARTS.add(TYPE_POTASSIUM);
@@ -113,8 +131,16 @@ public class ChartType {
         CHARTS_BY_CATEGORY.put(DiseaseCategory.CATEGORY_STAGE_5, STAGE_5_CHARTS);
     }
 
-    public static List<Integer> getChartsByCategory(int category) {
-        return CHARTS_BY_CATEGORY.get(category);
+    public static List<Integer> getChartsByCategory(int category, boolean dialysis) {
+        if (dialysis) return STAGE_5D_CHARTS;
+        else return CHARTS_BY_CATEGORY.get(category);
     }
 
+    public static String getChartLabel(int chartType) {
+        return CHART_TITLE.get(chartType);
+    }
+
+    public static String getChartUnit(int chartType) {
+        return CHART_UNIT.get(chartType);
+    }
 }

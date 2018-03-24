@@ -121,7 +121,7 @@ public class MyProfileFragment extends Fragment {
                 aNumberPickerFeet.setMinValue(1);
 
                 final NumberPicker aNumberPickerInch = new NumberPicker(MyProfileFragment.this.getActivity());
-                aNumberPickerInch.setMaxValue(12);
+                aNumberPickerInch.setMaxValue(11);
                 aNumberPickerInch.setMinValue(0);
 
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(50, 50);

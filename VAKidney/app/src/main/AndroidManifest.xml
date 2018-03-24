@@ -32,6 +32,7 @@
         <activity android:name=".ResourcesDetailActivity" android:screenOrientation="portrait"/>
         <activity android:name=".AddNewMealActivity" android:screenOrientation="portrait"/>
         <activity android:name=".AddNewGoalActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ChartActivity" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -22,8 +22,6 @@ import com.topcoder.vakidney.Model.Meal;
 import com.topcoder.vakidney.Model.MealDrug;
 import com.topcoder.vakidney.Util.ImagePicker;
 import com.topcoder.vakidney.Util.ServiceCallUtil;
-import com.topcoder.vakidney.api.FDAServiceAPI;
-import com.topcoder.vakidney.api.RestClient;
 import com.topcoder.vakidney.popup.AddMealDrugPopup;
 
 import java.text.DateFormat;
@@ -35,8 +33,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import retrofit2.Call;
 
 /**
  * This class is used to add a new meal
