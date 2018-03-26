@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.Model;
+package com.topcoder.vakidney.model;
 
 import com.orm.SugarRecord;
 

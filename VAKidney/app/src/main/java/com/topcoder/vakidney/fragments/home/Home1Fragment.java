@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.MainFragments.home;
+package com.topcoder.vakidney.fragments.home;
 
 
 import android.graphics.Color;
@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.topcoder.vakidney.CustomView.ArcProgress;
-import com.topcoder.vakidney.Model.Goal;
-import com.topcoder.vakidney.Model.UserData;
+import com.topcoder.vakidney.customview.ArcProgress;
+import com.topcoder.vakidney.model.Goal;
+import com.topcoder.vakidney.model.UserData;
 import com.topcoder.vakidney.R;
-import com.topcoder.vakidney.Util.JsondataUtil;
+import com.topcoder.vakidney.util.JsondataUtil;
 
 import java.util.ArrayList;
 

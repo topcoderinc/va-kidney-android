@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.Adapter;
+package com.topcoder.vakidney.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,13 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.topcoder.vakidney.AddNewGoalActivity;
-import com.topcoder.vakidney.CustomView.ArcProgress;
-import com.topcoder.vakidney.Model.Goal;
+import com.topcoder.vakidney.customview.ArcProgress;
+import com.topcoder.vakidney.model.Goal;
 import com.topcoder.vakidney.R;
-import com.topcoder.vakidney.Util.JsondataUtil;
 import com.topcoder.vakidney.constant.GoalType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +23,7 @@ import java.util.List;
 
 
 /**
- * Goal Adapter s used to populate the corresponding view with goal data from Goals.json file
+ * Goal adapter s used to populate the corresponding view with goal data from Goals.json file
  */
 public class GoalAdapter extends BaseAdapter{
 

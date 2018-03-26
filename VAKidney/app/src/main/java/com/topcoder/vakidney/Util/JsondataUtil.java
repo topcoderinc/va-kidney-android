@@ -1,16 +1,16 @@
-package com.topcoder.vakidney.Util;
+package com.topcoder.vakidney.util;
 
 import android.content.Context;
 import android.util.Log;
 
-import com.topcoder.vakidney.Model.ChartData;
-import com.topcoder.vakidney.Model.Goal;
-import com.topcoder.vakidney.Model.LabData;
-import com.topcoder.vakidney.Model.Meal;
-import com.topcoder.vakidney.Model.MealDrug;
-import com.topcoder.vakidney.Model.MedicationResources;
-import com.topcoder.vakidney.Model.Resources;
-import com.topcoder.vakidney.Model.UserData;
+import com.topcoder.vakidney.model.ChartData;
+import com.topcoder.vakidney.model.Goal;
+import com.topcoder.vakidney.model.LabData;
+import com.topcoder.vakidney.model.Meal;
+import com.topcoder.vakidney.model.MealDrug;
+import com.topcoder.vakidney.model.MedicationResources;
+import com.topcoder.vakidney.model.Resources;
+import com.topcoder.vakidney.model.UserData;
 import com.topcoder.vakidney.R;
 
 import org.json.JSONArray;
@@ -20,7 +20,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Abinash Neupane on 1/24/2018.

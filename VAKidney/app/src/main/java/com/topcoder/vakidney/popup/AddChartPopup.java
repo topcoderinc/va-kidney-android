@@ -16,9 +16,9 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.topcoder.vakidney.Model.ChartData;
+import com.topcoder.vakidney.model.ChartData;
 import com.topcoder.vakidney.R;
-import com.topcoder.vakidney.Util.DialogManager;
+import com.topcoder.vakidney.util.DialogManager;
 import com.topcoder.vakidney.constant.ChartType;
 
 import java.text.SimpleDateFormat;

@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.Adapter;
+package com.topcoder.vakidney.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.Adapter;
+package com.topcoder.vakidney.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,8 +11,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.topcoder.vakidney.AddNewMealActivity;
-import com.topcoder.vakidney.Model.Meal;
-import com.topcoder.vakidney.Model.MealDrug;
+import com.topcoder.vakidney.model.Meal;
+import com.topcoder.vakidney.model.MealDrug;
 import com.topcoder.vakidney.R;
 
 import java.util.List;

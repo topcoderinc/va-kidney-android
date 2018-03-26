@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.MainFragments.home;
+package com.topcoder.vakidney.fragments.home;
 
 
 import android.os.Bundle;
@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
-import com.topcoder.vakidney.Adapter.LabDataAdapter;
+import com.topcoder.vakidney.adapter.LabDataAdapter;
 import com.topcoder.vakidney.R;
-import com.topcoder.vakidney.Util.JsondataUtil;
+import com.topcoder.vakidney.util.JsondataUtil;
 
 /**
  * A simple {@link Fragment} subclass.

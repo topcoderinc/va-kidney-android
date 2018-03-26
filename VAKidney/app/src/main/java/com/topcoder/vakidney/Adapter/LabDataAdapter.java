@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.Adapter;
+package com.topcoder.vakidney.adapter;
 
 import android.app.Activity;
 import android.view.View;
@@ -7,9 +7,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.topcoder.vakidney.Model.LabData;
+import com.topcoder.vakidney.model.LabData;
 import com.topcoder.vakidney.R;
-import com.topcoder.vakidney.Util.DialogManager;
+import com.topcoder.vakidney.util.DialogManager;
 
 import java.util.ArrayList;
 

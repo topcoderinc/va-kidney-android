@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.MainFragments.recommendations;
+package com.topcoder.vakidney.fragments.recommendations;
 
 
 import android.os.Bundle;
@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.topcoder.vakidney.Adapter.MedicationAdapter;
-import com.topcoder.vakidney.Model.DrugInteraction;
+import com.topcoder.vakidney.adapter.MedicationAdapter;
+import com.topcoder.vakidney.model.DrugInteraction;
 import com.topcoder.vakidney.R;
 
 import java.util.ArrayList;

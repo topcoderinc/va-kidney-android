@@ -7,7 +7,7 @@
     android:padding="30dp"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context="com.topcoder.vakidney.MainFragments.home.Home2Fragment">
+    tools:context="com.topcoder.vakidney.fragments.home.Home2Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"

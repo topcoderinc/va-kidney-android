@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.CustomView;
+package com.topcoder.vakidney.customview;
 
 import android.content.Context;
 import android.content.Intent;

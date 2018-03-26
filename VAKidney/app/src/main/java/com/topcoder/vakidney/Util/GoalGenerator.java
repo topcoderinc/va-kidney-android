@@ -1,6 +1,6 @@
-package com.topcoder.vakidney.Util;
+package com.topcoder.vakidney.util;
 
-import com.topcoder.vakidney.Model.Goal;
+import com.topcoder.vakidney.model.Goal;
 import com.topcoder.vakidney.constant.DiseaseCategory;
 
 

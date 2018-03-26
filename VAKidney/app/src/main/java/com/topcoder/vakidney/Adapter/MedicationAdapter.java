@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.Adapter;
+package com.topcoder.vakidney.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,10 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.topcoder.vakidney.Model.DrugInteraction;
+import com.topcoder.vakidney.model.DrugInteraction;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.ResourcesDetailActivity;
-import com.topcoder.vakidney.Util.TextUtil;
+import com.topcoder.vakidney.util.TextUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -15,9 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.topcoder.vakidney.Model.MealDrug;
+import com.topcoder.vakidney.model.MealDrug;
 import com.topcoder.vakidney.R;
-import com.topcoder.vakidney.Util.DialogManager;
+import com.topcoder.vakidney.util.DialogManager;
 
 /**
  * This popup shows add meal or drug in the Add New Meal Activity

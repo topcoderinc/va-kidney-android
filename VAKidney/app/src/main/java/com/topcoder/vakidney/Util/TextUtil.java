@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.Util;
+package com.topcoder.vakidney.util;
 
 /**
  * Created by afrisalyp on 25/03/2018.

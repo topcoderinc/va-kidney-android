@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.MainFragments.recommendations;
+package com.topcoder.vakidney.fragments.recommendations;
 
 
 import android.os.Bundle;
@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.topcoder.vakidney.Adapter.FoodRecommendationAdapter;
-import com.topcoder.vakidney.Model.FoodRecommendation;
+import com.topcoder.vakidney.adapter.FoodRecommendationAdapter;
+import com.topcoder.vakidney.model.FoodRecommendation;
 import com.topcoder.vakidney.R;
 
 import java.util.List;

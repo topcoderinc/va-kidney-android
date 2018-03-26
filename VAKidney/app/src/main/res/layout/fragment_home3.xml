@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorLightGray"
     android:padding="@dimen/app_standard_padding"
-    tools:context="com.topcoder.vakidney.MainFragments.FoodFragment">
+    tools:context="com.topcoder.vakidney.fragments.FoodFragment">
 
 
     <GridView

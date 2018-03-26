@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorLightGray"
-    tools:context="com.topcoder.vakidney.MainFragments.recommendations.NutritionFragment">
+    tools:context="com.topcoder.vakidney.fragments.recommendations.NutritionFragment">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"

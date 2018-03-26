@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.MainFragments;
+package com.topcoder.vakidney.fragments;
 
 
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.topcoder.vakidney.Adapter.ChartMenuAdapter;
-import com.topcoder.vakidney.Model.UserData;
+import com.topcoder.vakidney.adapter.ChartMenuAdapter;
+import com.topcoder.vakidney.model.UserData;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.constant.ChartType;
 

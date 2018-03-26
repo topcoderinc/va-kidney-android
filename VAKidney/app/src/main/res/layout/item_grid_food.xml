@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorLightGray">
 
-    <com.topcoder.vakidney.CustomView.SquareLinearLayout
+    <com.topcoder.vakidney.customview.SquareLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_white_rounded"
@@ -109,6 +109,6 @@
             android:textColor="@color/colorDarkGray"
             android:textSize="12dp" />
 
-    </com.topcoder.vakidney.CustomView.SquareLinearLayout>
+    </com.topcoder.vakidney.customview.SquareLinearLayout>
 
 </RelativeLayout>

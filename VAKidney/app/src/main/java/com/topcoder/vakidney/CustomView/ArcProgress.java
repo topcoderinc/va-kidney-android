@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.CustomView;
+package com.topcoder.vakidney.customview;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -19,7 +19,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import com.topcoder.vakidney.R;

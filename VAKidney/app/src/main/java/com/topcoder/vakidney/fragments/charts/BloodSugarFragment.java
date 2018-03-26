@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.MainFragments.charts;
+package com.topcoder.vakidney.fragments.charts;
 
 
 import android.graphics.Color;
@@ -15,9 +15,9 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.topcoder.vakidney.Model.ChartData;
+import com.topcoder.vakidney.model.ChartData;
 import com.topcoder.vakidney.R;
-import com.topcoder.vakidney.Util.JsondataUtil;
+import com.topcoder.vakidney.util.JsondataUtil;
 import java.util.ArrayList;
 import java.util.List;
 

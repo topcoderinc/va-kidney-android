@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.MainFragments.home;
+package com.topcoder.vakidney.fragments.home;
 
 
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.Adapter;
+package com.topcoder.vakidney.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,10 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.topcoder.vakidney.Model.FoodRecommendation;
+import com.topcoder.vakidney.model.FoodRecommendation;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.ResourcesDetailActivity;
-import com.topcoder.vakidney.Util.TextUtil;
+import com.topcoder.vakidney.util.TextUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;

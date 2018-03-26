@@ -1,10 +1,9 @@
 package com.topcoder.vakidney.constant;
 
-import com.topcoder.vakidney.Model.Goal;
+import com.topcoder.vakidney.model.Goal;
 import com.topcoder.vakidney.R;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

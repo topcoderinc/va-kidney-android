@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.Adapter;
+package com.topcoder.vakidney.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.topcoder.vakidney.Model.Resources;
+import com.topcoder.vakidney.model.Resources;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.ResourcesDetailActivity;
 

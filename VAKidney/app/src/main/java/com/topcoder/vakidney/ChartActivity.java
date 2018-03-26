@@ -14,7 +14,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.topcoder.vakidney.Model.ChartData;
+import com.topcoder.vakidney.model.ChartData;
 import com.topcoder.vakidney.constant.ChartType;
 import com.topcoder.vakidney.popup.AddChartPopup;
 

@@ -144,7 +144,7 @@
         android:layout_height="340dp" />
 
 
-    <com.topcoder.vakidney.CustomView.BottomMenu
+    <com.topcoder.vakidney.customview.BottomMenu
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

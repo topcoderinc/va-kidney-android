@@ -11,13 +11,13 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.topcoder.vakidney.Adapter.ViewPagerAdapter;
-import com.topcoder.vakidney.Fragments.Welcome1Fragment;
-import com.topcoder.vakidney.Fragments.Welcome2Fragment;
-import com.topcoder.vakidney.Fragments.Welcome3Fragment;
-import com.topcoder.vakidney.Fragments.WelcomeBaseFragment;
-import com.topcoder.vakidney.Util.DialogManager;
-import com.topcoder.vakidney.Util.LoginManager;
+import com.topcoder.vakidney.adapter.ViewPagerAdapter;
+import com.topcoder.vakidney.fragments.welcome.Welcome1Fragment;
+import com.topcoder.vakidney.fragments.welcome.Welcome2Fragment;
+import com.topcoder.vakidney.fragments.welcome.Welcome3Fragment;
+import com.topcoder.vakidney.fragments.welcome.WelcomeBaseFragment;
+import com.topcoder.vakidney.util.DialogManager;
+import com.topcoder.vakidney.util.LoginManager;
 
 /**
  * This is the welcome screen, where user are directed when they use the app for the first time. It contains terms and agreement which should be agreed by the user in order to use the app.

@@ -1,14 +1,14 @@
-package com.topcoder.vakidney.Util;
+package com.topcoder.vakidney.util;
 
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.topcoder.vakidney.BuildConfig;
-import com.topcoder.vakidney.Model.DrugInteraction;
-import com.topcoder.vakidney.Model.FoodRecommendation;
-import com.topcoder.vakidney.Model.Goal;
-import com.topcoder.vakidney.Model.UserData;
+import com.topcoder.vakidney.model.DrugInteraction;
+import com.topcoder.vakidney.model.FoodRecommendation;
+import com.topcoder.vakidney.model.Goal;
+import com.topcoder.vakidney.model.UserData;
 import com.topcoder.vakidney.api.FDAServiceAPI;
 import com.topcoder.vakidney.api.FDARestClient;
 import com.topcoder.vakidney.api.NDBRestClient;

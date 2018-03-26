@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.topcoder.vakidney.MainFragments.home.Home1Fragment">
+    tools:context="com.topcoder.vakidney.fragments.home.Home1Fragment">
 
 
     <LinearLayout
@@ -25,7 +25,7 @@
             android:orientation="vertical">
 
 
-            <com.topcoder.vakidney.CustomView.ArcProgress
+            <com.topcoder.vakidney.customview.ArcProgress
                 android:id="@+id/arcProgress1"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -82,7 +82,7 @@
             android:orientation="vertical">
 
 
-            <com.topcoder.vakidney.CustomView.ArcProgress
+            <com.topcoder.vakidney.customview.ArcProgress
                 android:id="@+id/arcProgress2"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -128,7 +128,7 @@
             </LinearLayout>
 
 
-            <com.topcoder.vakidney.CustomView.ArcProgress
+            <com.topcoder.vakidney.customview.ArcProgress
                 android:id="@+id/arcProgress3"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -185,7 +185,7 @@
             android:orientation="vertical">
 
 
-            <com.topcoder.vakidney.CustomView.ArcProgress
+            <com.topcoder.vakidney.customview.ArcProgress
                 android:id="@+id/arcProgress4"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
