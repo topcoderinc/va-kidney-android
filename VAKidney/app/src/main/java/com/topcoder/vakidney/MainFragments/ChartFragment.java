@@ -10,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.topcoder.vakidney.Adapter.ViewPagerAdapter;
-import com.topcoder.vakidney.MainFragments.ChartFragments.BloodSugarFragment;
-import com.topcoder.vakidney.MainFragments.ChartFragments.BodyWeightFragment;
-import com.topcoder.vakidney.MainFragments.ChartFragments.PotassiumFragment;
+import com.topcoder.vakidney.MainFragments.charts.BloodSugarFragment;
+import com.topcoder.vakidney.MainFragments.charts.BodyWeightFragment;
+import com.topcoder.vakidney.MainFragments.charts.PotassiumFragment;
 import com.topcoder.vakidney.R;
 
 /**

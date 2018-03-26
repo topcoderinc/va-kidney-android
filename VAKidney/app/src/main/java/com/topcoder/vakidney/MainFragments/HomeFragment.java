@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.topcoder.vakidney.Adapter.ViewPagerAdapter;
-import com.topcoder.vakidney.MainFragments.HomeFragments.Home1Fragment;
-import com.topcoder.vakidney.MainFragments.HomeFragments.Home2Fragment;
-import com.topcoder.vakidney.MainFragments.HomeFragments.Home3Fragment;
+import com.topcoder.vakidney.MainFragments.home.Home1Fragment;
+import com.topcoder.vakidney.MainFragments.home.Home2Fragment;
+import com.topcoder.vakidney.MainFragments.home.Home3Fragment;
 import com.topcoder.vakidney.R;
 
 /**

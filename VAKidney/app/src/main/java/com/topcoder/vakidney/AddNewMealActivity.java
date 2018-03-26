@@ -1,10 +1,17 @@
 package com.topcoder.vakidney;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
@@ -15,9 +22,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.topcoder.vakidney.Model.DrugInteraction;
+import com.topcoder.vakidney.Model.FoodRecommendation;
 import com.topcoder.vakidney.Model.Meal;
 import com.topcoder.vakidney.Model.MealDrug;
 import com.topcoder.vakidney.Util.ImagePicker;
@@ -40,6 +51,8 @@ import java.util.Map;
 public class AddNewMealActivity extends AppCompatActivity implements
         View.OnClickListener,
         AddMealDrugPopup.AddMealDrugPopupListener {
+
+    private final static int REQUEST_CODE_PICK_IMAGE = 1;
 
     private final static Map<String, Integer> MEAL_TYPE_INDEX = new HashMap<>();
     static {
@@ -91,6 +104,9 @@ public class AddNewMealActivity extends AppCompatActivity implements
         addedImage = findViewById(R.id.addedImage);
         btnRemoveImage = findViewById(R.id.removeImageBtn);
 
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+
         btnRemoveImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,8 +117,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
         addImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent chooseImageIntent = ImagePicker.getPickImageIntent(AddNewMealActivity.this);
-                startActivityForResult(chooseImageIntent, 1);
+                checkPermissionThenPickPhoto();
             }
         });
         tvMealDate = findViewById(R.id.tveMealDate);
@@ -116,8 +131,8 @@ public class AddNewMealActivity extends AppCompatActivity implements
 
 
         String input = myCalendar.get(Calendar.HOUR_OF_DAY) + ":" + myCalendar.get(Calendar.MINUTE);
-        DateFormat inputFormat = new SimpleDateFormat("HH:mm");
-        DateFormat outputFormat = new SimpleDateFormat("KK:mm a");
+        DateFormat inputFormat = new SimpleDateFormat("HH:mm", Locale.US);
+        DateFormat outputFormat = new SimpleDateFormat("KK:mm a", Locale.US);
         try {
             tvMealTime.setText(outputFormat.format(inputFormat.parse(input)));
         } catch (ParseException e) {
@@ -191,6 +206,14 @@ public class AddNewMealActivity extends AppCompatActivity implements
                 }
                 mMeal.save();
 
+                for (MealDrug mealDrug : mAddedMealDrugs) {
+                    if (mealDrug.getType() == MealDrug.TYPE_MEAL) {
+                        ServiceCallUtil.searchFoodRecommendation(
+                                AddNewMealActivity.this,
+                                mealDrug.getName());
+                    }
+                }
+
                 if (mMeal.isHasDrug()) {
                     List<String> drugs = new ArrayList<>();
                     for (MealDrug mealDrug: mMeal.getMealDrugs()) {
@@ -203,7 +226,9 @@ public class AddNewMealActivity extends AppCompatActivity implements
                         mDrugInteraction = new DrugInteraction();
                         mDrugInteraction.setDrugs(drugsStr);
 
-                        ServiceCallUtil.searchDrugInteraction(mDrugInteraction);
+                        ServiceCallUtil.searchDrugInteraction(
+                                AddNewMealActivity.this,
+                                mDrugInteraction);
 
                     }
                 }
@@ -249,17 +274,29 @@ public class AddNewMealActivity extends AppCompatActivity implements
 
         btnAddNewMeal.setText("Save Meal");
         btnAddNewMeal.setEnabled(true);
+
+        if (mMeal.getPhotoUrl() != null) {
+            addedImageLayout.setVisibility(View.VISIBLE);
+            Glide.with(this)
+                    .load(mMeal.getPhotoUrl())
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(addedImage);
+        }
+
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-            case 1:
-                Bitmap bitmap = ImagePicker.getImageFromResult(this, resultCode, data);
-                addedImage.setImageBitmap(bitmap);
+            case REQUEST_CODE_PICK_IMAGE:
                 addedImageLayout.setVisibility(View.VISIBLE);
-                // TODO use bitmap
+                String filePath = ImagePicker.getImagePathFromResult(this, resultCode, data);
+                Glide.with(this)
+                        .load(filePath)
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(addedImage);
+                mMeal.setPhotoUrl(filePath);
                 break;
             default:
                 super.onActivityResult(requestCode, resultCode, data);
@@ -432,7 +469,6 @@ public class AddNewMealActivity extends AppCompatActivity implements
                 seekBtn5.setTextColor(getColor(R.color.colorLightDarkGray));
                 break;
 
-
             case 3:
 
                 seekBtn3.setBackgroundResource(R.drawable.bg_seekbar_selected);
@@ -507,13 +543,21 @@ public class AddNewMealActivity extends AppCompatActivity implements
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tvAddMeal: {
-                AddMealDrugPopup popup = new AddMealDrugPopup(AddNewMealActivity.this, AddMealDrugPopup.POPUP_MODE_MEAL);
+                AddMealDrugPopup popup = new AddMealDrugPopup(
+                        AddNewMealActivity.this,
+                        AddMealDrugPopup.POPUP_MODE_MEAL,
+                        AddMealDrugPopup.POPUP_ACTION_ADD,
+                        null);
                 popup.setListener(AddNewMealActivity.this);
                 popup.showAt(view);
             }
             break;
             case R.id.tvAddDrug: {
-                AddMealDrugPopup popup = new AddMealDrugPopup(AddNewMealActivity.this, AddMealDrugPopup.POPUP_MODE_DRUG);
+                AddMealDrugPopup popup = new AddMealDrugPopup(
+                        AddNewMealActivity.this,
+                        AddMealDrugPopup.POPUP_MODE_DRUG,
+                        AddMealDrugPopup.POPUP_ACTION_ADD,
+                        null);
                 popup.setListener(AddNewMealActivity.this);
                 popup.showAt(view);
             }
@@ -537,8 +581,41 @@ public class AddNewMealActivity extends AppCompatActivity implements
 
     }
 
+    @Override
+    public void onDeleted(AddMealDrugPopup parent) {
+        LinearLayout layout = findViewById(R.id.llMealDrug);
+        layout.removeView(parent.getParent());
+    }
+
+    @Override
+    public void onEdited(AddMealDrugPopup parent, MealDrug mealDrug) {
+        View view = parent.getParent();
+        TextView tvName = view.findViewById(R.id.tvName);
+        TextView tvAmount = view.findViewById(R.id.tvAmount);
+
+        tvName.setText(mealDrug.getName());
+        tvAmount.setText(mealDrug.getAmount() + " " + mealDrug.getUnit());
+    }
+
     private void addMealDrug(MealDrug mealDrug) {
         View view = LayoutInflater.from(this).inflate(R.layout.item_add_mealdrug, null);
+        view.setClickable(true);
+        view.setFocusable(true);
+        view.setTag(mealDrug);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MealDrug editMealDrug = (MealDrug) view.getTag();
+                AddMealDrugPopup popup = new AddMealDrugPopup(
+                        AddNewMealActivity.this,
+                        editMealDrug.getType(),
+                        AddMealDrugPopup.POPUP_ACTION_EDIT,
+                        editMealDrug);
+                popup.setListener(AddNewMealActivity.this);
+                popup.showAt(view);
+            }
+        });
+
         TextView tvName = view.findViewById(R.id.tvName);
         TextView tvAmount = view.findViewById(R.id.tvAmount);
 
@@ -552,5 +629,56 @@ public class AddNewMealActivity extends AppCompatActivity implements
 
         tvName.setText(mealDrug.getName());
         tvAmount.setText(mealDrug.getAmount() + " " + mealDrug.getUnit());
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_PICK_IMAGE: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    pickPhotoProfile();
+                } else {
+                    Toast.makeText(this,
+                            "UserPermission is not set",
+                            Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    private void pickPhotoProfile() {
+        Intent chooseImageIntent = ImagePicker.getPickImageIntent(AddNewMealActivity.this);
+        startActivityForResult(chooseImageIntent, REQUEST_CODE_PICK_IMAGE);
+    }
+
+    private void checkPermissionThenPickPhoto() {
+        if (Build.VERSION.SDK_INT >= 23){
+            // Here, thisActivity is the current activity
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+                } else {
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            REQUEST_CODE_PICK_IMAGE);
+
+                    // MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE is an
+                    // app-defined int constant. The callback method gets the
+                    // result of the request.
+                }
+            }else{
+                pickPhotoProfile();
+            }
+        }else {
+            pickPhotoProfile();
+        }
     }
 }

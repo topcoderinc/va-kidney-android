@@ -1,89 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorLightGray"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/colorLightGray">
 
     <com.topcoder.vakidney.CustomView.SquareLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@drawable/bg_white_rounded"
-        >
+        android:orientation="vertical">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:layout_marginLeft="@dimen/app_standard_padding"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="@dimen/app_standard_padding"
+            android:scaleType="centerCrop"
+            android:src="@drawable/stock_632439546"
+            app:riv_corner_radius="5dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="@dimen/app_standard_padding"
-            android:weightSum="2"
-            >
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="2">
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_weight="1"
-                android:src="@drawable/stock_632439546"
-                app:riv_corner_radius="5dp"
                 android:layout_marginLeft="@dimen/app_standard_padding"
                 android:layout_marginRight="2dp"
+                android:layout_weight="1"
                 android:scaleType="centerCrop"
-                />
-
+                android:src="@drawable/stock_632439546"
+                app:riv_corner_radius="5dp" />
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_weight="1"
-                android:src="@drawable/stock_613666608"
-                android:layout_marginRight="@dimen/app_standard_padding"
                 android:layout_marginLeft="2dp"
-                app:riv_corner_radius="5dp"
+                android:layout_marginRight="@dimen/app_standard_padding"
+                android:layout_weight="1"
                 android:scaleType="centerCrop"
-                />
+                android:src="@drawable/stock_613666608"
+                app:riv_corner_radius="5dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="4dp"
-            android:weightSum="2"
-            >
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="2">
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_weight="1"
-                android:src="@drawable/stock_632439546"
-                app:riv_corner_radius="5dp"
                 android:layout_marginLeft="@dimen/app_standard_padding"
                 android:layout_marginRight="2dp"
+                android:layout_weight="1"
                 android:scaleType="centerCrop"
-                />
-
+                android:src="@drawable/stock_632439546"
+                app:riv_corner_radius="5dp" />
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_weight="1"
-                android:src="@drawable/stock_613666608"
-                app:riv_corner_radius="5dp"
-                android:scaleType="centerCrop"
-                android:layout_marginRight="@dimen/app_standard_padding"
                 android:layout_marginLeft="2dp"
-                />
+                android:layout_marginRight="@dimen/app_standard_padding"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/stock_613666608"
+                app:riv_corner_radius="5dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/colorLightGray"
-            />
-
+            android:layout_marginTop="5dp"
+            android:background="@color/colorLightGray" />
 
         <TextView
             android:id="@+id/tvMealName"
@@ -94,7 +96,6 @@
             android:textColor="@color/colorDarkGray"
             android:textSize="12dp"
             android:textStyle="bold" />
-
 
         <TextView
             android:id="@+id/tvMealDesc"

@@ -117,14 +117,32 @@
 
         </LinearLayout>
     </LinearLayout>
-    <Button
-        android:id="@+id/btnAddNewMeal"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
         android:layout_marginTop="@dimen/app_standard_padding"
-        android:background="@drawable/bg_login_btn"
-        android:elevation="5dp"
-        android:textSize="13dp"
-        android:text="Add Meal"
-        android:textColor="@color/colorWhite" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnDeleteMeal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:elevation="5dp"
+            android:textSize="13dp"
+            android:text="Delete"
+            android:visibility="gone"
+            android:background="@drawable/bg_red_btn"
+            android:layout_marginEnd="@dimen/app_standard_padding"
+            android:textColor="@color/colorWhite"/>
+        <Button
+            android:id="@+id/btnAddNewMeal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_login_btn"
+            android:elevation="5dp"
+            android:textSize="13dp"
+            android:text="Add Meal"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
 </LinearLayout>

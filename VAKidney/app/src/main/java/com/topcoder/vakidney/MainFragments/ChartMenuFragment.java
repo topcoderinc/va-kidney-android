@@ -8,11 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 
 import com.topcoder.vakidney.Adapter.ChartMenuAdapter;
-import com.topcoder.vakidney.Adapter.FoodAdapter;
-import com.topcoder.vakidney.Model.Meal;
 import com.topcoder.vakidney.Model.UserData;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.constant.ChartType;

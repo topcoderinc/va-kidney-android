@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.topcoder.vakidney.MainFragments.HomeFragments.Home1Fragment">
+    tools:context="com.topcoder.vakidney.MainFragments.home.Home1Fragment">
 
 
     <LinearLayout

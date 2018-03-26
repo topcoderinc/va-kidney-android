@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 public class ResourcesDetailActivity extends AppCompatActivity {
 
-
     private LinearLayout bottomMenu1, bottomMenu2, bottomMenu3, bottomMenu4, bottomMenu5;
 
     private AppCompatImageView backBtn;
@@ -46,7 +45,7 @@ public class ResourcesDetailActivity extends AppCompatActivity {
      */
     private void PopulateFields() {
         if(getIntent().hasExtra("actionbartitle")){
-            actionbartitle=getIntent().getStringExtra("actionbartitle");
+            actionbartitle = getIntent().getStringExtra("actionbartitle");
         }
         if (getIntent().hasExtra("title")) {
             title = getIntent().getStringExtra("title");

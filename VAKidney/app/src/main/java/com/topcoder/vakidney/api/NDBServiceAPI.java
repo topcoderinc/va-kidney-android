@@ -10,7 +10,10 @@ import retrofit2.http.Query;
 
 public interface NDBServiceAPI {
 
-    @GET("/drug/event.json")
-    Call<String> searchDrugInteractions(@Query("search") String query);
+    @GET("/ndb/search?format=json&sort=r&max=1&offset=0")
+    Call<String> searchFood(@Query("api_key") String apiKey, @Query("q") String query);
+
+    @GET("/ndb/reports?type=b&format=json")
+    Call<String> searchFoodNutrition(@Query("api_key") String apiKey, @Query("ndbno") String ndbno);
 
 }

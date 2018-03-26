@@ -50,7 +50,7 @@ public class LoginManager {
     }
 
     private static void initializeData(Context context) {
-        JsondataUtil.getMeals(context);
+//        JsondataUtil.getMeals(context);
         GoalGenerator.generateGoals();
     }
 

@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.topcoder.vakidney.Adapter.ViewPagerAdapter;
-import com.topcoder.vakidney.MainFragments.MedicationFragments.DrugFragment;
-import com.topcoder.vakidney.MainFragments.MedicationFragments.NutritionFragment;
+import com.topcoder.vakidney.MainFragments.recommendations.DrugFragment;
+import com.topcoder.vakidney.MainFragments.recommendations.NutritionFragment;
 import com.topcoder.vakidney.R;
 
 /**
@@ -20,14 +20,12 @@ import com.topcoder.vakidney.R;
  */
 public class MedicationFragment extends Fragment {
 
-
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
     public MedicationFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
