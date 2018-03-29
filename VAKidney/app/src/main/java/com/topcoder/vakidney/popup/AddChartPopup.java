@@ -27,7 +27,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * This popup shows add meal or drug in the Add New Meal Activity
+ * This popup shows add chart record data
  */
 
 public class AddChartPopup extends BasePopup implements
@@ -100,12 +100,15 @@ public class AddChartPopup extends BasePopup implements
         mTextDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
                         mContext,
                         AddChartPopup.this,
                         mCalendar.get(Calendar.YEAR),
                         mCalendar.get(Calendar.MONTH),
-                        mCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                        mCalendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                datePickerDialog.show();
+
             }
         });
 

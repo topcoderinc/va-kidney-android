@@ -149,6 +149,8 @@ public class ServiceCallUtil {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
 
+                if (!response.isSuccessful() || response.body() == null) return;
+
                 try {
                     JSONObject jsonObject = new JSONObject(response.body());
                     JSONArray results = jsonObject.getJSONArray("results");

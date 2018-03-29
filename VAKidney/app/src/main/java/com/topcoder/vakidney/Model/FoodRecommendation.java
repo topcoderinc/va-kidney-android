@@ -5,6 +5,11 @@ import com.orm.SugarRecord;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Created by Abinash Neupane on 2/7/2018.
+ * This model class is used to store Food Recommendation
+ */
+
 public class FoodRecommendation extends SugarRecord<FoodRecommendation>
     implements Serializable{
 

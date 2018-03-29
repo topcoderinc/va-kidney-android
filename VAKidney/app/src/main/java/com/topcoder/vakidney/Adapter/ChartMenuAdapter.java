@@ -15,6 +15,11 @@ import com.topcoder.vakidney.constant.ChartType;
 
 import java.util.List;
 
+
+/**
+ * This is adapter class to show the menu contains chart type.
+ */
+
 public class ChartMenuAdapter extends Adapter implements View.OnClickListener {
 
     private final Context mContext;

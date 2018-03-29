@@ -110,6 +110,9 @@ public class AddNewMealActivity extends AppCompatActivity implements
             public void onClick(View view) {
                 addedImageLayout.setVisibility(View.INVISIBLE);
                 addedImage.setImageBitmap(null);
+                if (mMeal != null && mMeal.getPhotoUrl() != null) {
+                    mMeal.setPhotoUrl(null);
+                }
             }
         });
         addImageBtn.setOnClickListener(new View.OnClickListener() {
@@ -186,6 +189,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
                     }
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
+                mTimePicker.updateTime(myCalendar.get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE));
                 mTimePicker.show();
             }
         });
@@ -244,6 +248,8 @@ public class AddNewMealActivity extends AppCompatActivity implements
         if(getIntent().hasExtra("meal")) {
             Meal meal = (Meal) getIntent().getSerializableExtra("meal");
             initSavedMeal(meal);
+            TextView textTitle = findViewById(R.id.actionBarTitle);
+            textTitle.setText("Edit Meal");
         }
         else {
             mMeal = new Meal();
@@ -286,6 +292,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_CANCELED) return;
         switch (requestCode) {
             case REQUEST_CODE_PICK_IMAGE:
                 addedImageLayout.setVisibility(View.VISIBLE);
@@ -580,9 +587,12 @@ public class AddNewMealActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onDeleted(AddMealDrugPopup parent) {
+    public void onDeleted(AddMealDrugPopup parent, MealDrug deleted) {
         LinearLayout layout = findViewById(R.id.llMealDrug);
         layout.removeView(parent.getParent());
+        if (mAddedMealDrugs != null && mAddedMealDrugs.contains(deleted)) {
+            mAddedMealDrugs.remove(deleted);
+        }
     }
 
     @Override

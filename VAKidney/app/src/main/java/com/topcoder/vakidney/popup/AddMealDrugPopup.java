@@ -94,29 +94,23 @@ public class AddMealDrugPopup extends BasePopup implements View.OnClickListener 
                         unitSpinner.setBackgroundResource(R.drawable.bg_round_white_error);
                     }
                 } else {
-                    String message = mMode == POPUP_MODE_DRUG ? "New Drug Saved" : "New Meal Saved";
-                    DialogManager.showOkDialog(context, message, new DialogManager.OnYesClicked() {
-                        @Override
-                        public void YesClicked() {
-                            if (mAction == POPUP_ACTION_ADD) {
-                                MealDrug mealDrug = new MealDrug();
-                                mealDrug.setAmount(Double.parseDouble(amountField.getText().toString()));
-                                mealDrug.setName(addMealOrLiquidField.getText().toString());
-                                mealDrug.setUnit(unitSpinnerItems[unitSpinner.getSelectedItemPosition()]);
-                                mealDrug.setType(mMode == POPUP_MODE_DRUG ? MealDrug.TYPE_DRUG : MealDrug.TYPE_MEAL);
-                                if (mListener != null) mListener.onAdded(mealDrug);
-                            }
-                            else if (mAction == POPUP_ACTION_EDIT) {
-                                mSavedMealDrug.setAmount(Double.parseDouble(amountField.getText().toString()));
-                                mSavedMealDrug.setName(addMealOrLiquidField.getText().toString());
-                                mSavedMealDrug.setUnit(unitSpinnerItems[unitSpinner.getSelectedItemPosition()]);
-                                mSavedMealDrug.setType(mMode == POPUP_MODE_DRUG ? MealDrug.TYPE_DRUG : MealDrug.TYPE_MEAL);
-                                mSavedMealDrug.save();
-                                if (mListener != null) mListener.onEdited(AddMealDrugPopup.this, mSavedMealDrug);
-                            }
-                            AddMealDrugPopup.this.dismiss();
-                        }
-                    });
+                    if (mAction == POPUP_ACTION_ADD) {
+                        MealDrug mealDrug = new MealDrug();
+                        mealDrug.setAmount(Double.parseDouble(amountField.getText().toString()));
+                        mealDrug.setName(addMealOrLiquidField.getText().toString());
+                        mealDrug.setUnit(unitSpinnerItems[unitSpinner.getSelectedItemPosition()]);
+                        mealDrug.setType(mMode == POPUP_MODE_DRUG ? MealDrug.TYPE_DRUG : MealDrug.TYPE_MEAL);
+                        if (mListener != null) mListener.onAdded(mealDrug);
+                    }
+                    else if (mAction == POPUP_ACTION_EDIT) {
+                        mSavedMealDrug.setAmount(Double.parseDouble(amountField.getText().toString()));
+                        mSavedMealDrug.setName(addMealOrLiquidField.getText().toString());
+                        mSavedMealDrug.setUnit(unitSpinnerItems[unitSpinner.getSelectedItemPosition()]);
+                        mSavedMealDrug.setType(mMode == POPUP_MODE_DRUG ? MealDrug.TYPE_DRUG : MealDrug.TYPE_MEAL);
+                        mSavedMealDrug.save();
+                        if (mListener != null) mListener.onEdited(AddMealDrugPopup.this, mSavedMealDrug);
+                    }
+                    AddMealDrugPopup.this.dismiss();
                 }
             }
         });
@@ -131,8 +125,12 @@ public class AddMealDrugPopup extends BasePopup implements View.OnClickListener 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mSavedMealDrug.delete();
-                if (mListener != null) mListener.onDeleted(AddMealDrugPopup.this);
+                try {
+                    mSavedMealDrug.delete();
+                }
+                catch (Exception e) {
+                }
+                if (mListener != null) mListener.onDeleted(AddMealDrugPopup.this, mSavedMealDrug);
                 AddMealDrugPopup.this.dismiss();
             }
         });
@@ -193,9 +191,7 @@ public class AddMealDrugPopup extends BasePopup implements View.OnClickListener 
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.toString().length() != 0) {
                     if (!amountField.getText().toString().isEmpty()) {
-                        if (unitSpinner.getSelectedItemPosition() != 0) {
-                            btnAddNewMeal.setEnabled(true);
-                        }
+                        btnAddNewMeal.setEnabled(true);
                     }
                 }
             }
@@ -249,7 +245,7 @@ public class AddMealDrugPopup extends BasePopup implements View.OnClickListener 
     public interface AddMealDrugPopupListener {
         void onAdded(MealDrug mealDrug);
         void onCanceled();
-        void onDeleted(AddMealDrugPopup parent);
+        void onDeleted(AddMealDrugPopup parent, MealDrug mealDrug);
         void onEdited(AddMealDrugPopup parent, MealDrug mealDrug);
     }
 

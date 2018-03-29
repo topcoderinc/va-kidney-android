@@ -18,6 +18,7 @@ public class UserData extends SugarRecord<UserData> {
     private String fullname;
     private int points;
     private int age;
+    private long birthday;
     private int height;
     private int heightFeet;
     private int heightInch;
@@ -47,6 +48,7 @@ public class UserData extends SugarRecord<UserData> {
             String fullname,
             int points,
             int age,
+            long birthday,
             int height,
             int heightFeet,
             int heightInch,
@@ -66,6 +68,7 @@ public class UserData extends SugarRecord<UserData> {
         this.fullname = fullname;
         this.points = points;
         this.age = age;
+        this.birthday = birthday;
         this.height = height;
         this.heightFeet = heightFeet;
         this.heightInch = heightInch;
@@ -255,6 +258,14 @@ public class UserData extends SugarRecord<UserData> {
 
     public void setSwimminggoal(int swimminggoal) {
         this.swimminggoal = swimminggoal;
+    }
+
+    public long getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(long birthday) {
+        this.birthday = birthday;
     }
 
     @Override

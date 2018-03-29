@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -68,6 +69,10 @@ public class MyProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_profile, container, false);
         currentUserData = UserData.get();
@@ -97,15 +102,17 @@ public class MyProfileFragment extends Fragment {
                 newCalendar.set(MONTH, monthOfYear);
                 newCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 currentUserData.setAge(Math.abs(getDiffYears(myCalendar.getTime(), newCalendar.getTime())));
+                currentUserData.setBirthday(newCalendar.getTimeInMillis());
                 populateFields();
             }
         };
         profileFieldAge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(getActivity(), date, myCalendar
-                        .get(YEAR), myCalendar.get(MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                DatePickerDialog pickerDialog = new DatePickerDialog(getActivity(), date, birthYear, birthMonth,
+                        birthDay);
+                pickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                pickerDialog.show();
             }
         });
 
@@ -119,10 +126,19 @@ public class MyProfileFragment extends Fragment {
                 final NumberPicker aNumberPickerFeet = new NumberPicker(MyProfileFragment.this.getActivity());
                 aNumberPickerFeet.setMaxValue(8);
                 aNumberPickerFeet.setMinValue(1);
+                if (currentUserData.getHeightFeet() > 0) {
+                    aNumberPickerFeet.setValue(currentUserData.getHeightFeet());
+                }
+                else {
+                    aNumberPickerFeet.setValue(5);
+                }
 
                 final NumberPicker aNumberPickerInch = new NumberPicker(MyProfileFragment.this.getActivity());
                 aNumberPickerInch.setMaxValue(11);
                 aNumberPickerInch.setMinValue(0);
+                if (currentUserData.getHeightInch() > 0) {
+                    aNumberPickerInch.setValue(currentUserData.getHeightInch());
+                }
 
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(50, 50);
                 params.gravity = Gravity.CENTER;
@@ -162,7 +178,7 @@ public class MyProfileFragment extends Fragment {
                 TextView tvInch = new TextView(MyProfileFragment.this.getActivity());
                 tvInch.setLayoutParams(inchParams);
                 tvInch.setGravity(Gravity.CENTER);
-                tvInch.setText("Inch");
+                tvInch.setText("Inch(es)");
 
                 llInch.addView(tvInch);
                 llInch.addView(aNumberPickerInch);
@@ -303,11 +319,17 @@ public class MyProfileFragment extends Fragment {
      * Populates respective Fields
      */
     private void populateFields() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(currentUserData.getBirthday());
+        birthYear = calendar.get(Calendar.YEAR);
+        birthMonth = calendar.get(Calendar.MONTH);
+        birthDay = calendar.get(Calendar.DAY_OF_MONTH);
+
         tvName.setText(currentUserData.getFullname());
         tvAge.setText(currentUserData.getAge() + " years");
         tvHeight.setText(
                 currentUserData.getHeightFeet() + " feet " +
-                currentUserData.getHeightInch() + " inch");
+                currentUserData.getHeightInch() + " inch(es)");
         tvWeight.setText(currentUserData.getWeight() + " pounds");
         tvBirthDate.setText(getFormattedDate(birthYear, birthMonth, birthDay));
         if (currentUserData.isDialysis()) {
@@ -381,7 +403,7 @@ public class MyProfileFragment extends Fragment {
     private String getFormattedDate(int year, int month, int day) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(YEAR, year);
-        calendar.set(MONTH, month - 1);
+        calendar.set(MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, day);
 
         DateFormatSymbols dfsFr = new DateFormatSymbols(Locale.FRENCH);

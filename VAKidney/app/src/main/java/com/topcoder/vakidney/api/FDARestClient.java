@@ -7,6 +7,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * Created by afrisalyp on 16/03/2018.
+ * This class implement rest client manager to access FDA API
  */
 
 public class FDARestClient {

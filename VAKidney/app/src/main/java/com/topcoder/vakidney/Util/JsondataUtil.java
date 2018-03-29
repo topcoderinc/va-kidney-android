@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Abinash Neupane on 1/24/2018.
@@ -42,6 +43,7 @@ public class JsondataUtil {
             userData.setPassword(jsonObject.getString("password"));
             userData.setFullname(jsonObject.getString("fullname"));
             userData.setAge(jsonObject.getInt("age"));
+            userData.setBirthday(new Date().getTime() - ((long) userData.getAge() * 1000 * 60 * 60 * 24 * 360));
             userData.setPoints(jsonObject.getInt("points"));
             userData.setHeight(jsonObject.getInt("height"));
             userData.setWeight(jsonObject.getInt("weight"));

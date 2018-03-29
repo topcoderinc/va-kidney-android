@@ -30,6 +30,7 @@ public class GoalType {
     }
 
     public static int getIcon(int type) {
+        if (!ICONS_MAP.containsKey(type)) return R.drawable.ic_bar_medication;
         return ICONS_MAP.get(type);
     }
 

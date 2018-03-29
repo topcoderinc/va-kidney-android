@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * This class is used to add a new meal
+ * This is activity class is used to show charts
  */
 public class ChartActivity extends AppCompatActivity implements
         View.OnClickListener,

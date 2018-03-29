@@ -11,6 +11,7 @@ import com.topcoder.vakidney.R;
 
 /**
  * Created by afrisalyp on 24/03/2018.
+ * This class implement custom view to show bottom menu
  */
 
 public class BottomMenu extends LinearLayout {

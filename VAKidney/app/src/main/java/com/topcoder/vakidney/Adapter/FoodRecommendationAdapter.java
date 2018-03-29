@@ -19,6 +19,10 @@ import org.json.JSONException;
 
 import java.util.List;
 
+/**
+ * This is adapter class to show food recommendation list.
+ */
+
 public class FoodRecommendationAdapter extends Adapter implements View.OnClickListener {
 
     private final Context mContext;
