@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.Model;
+package com.topcoder.vakidney.model;
 
 /**
  * Created by Abinash Neupane on 2/8/2018.

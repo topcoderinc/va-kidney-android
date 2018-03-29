@@ -9,7 +9,7 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:paddingTop="20dp"
-    tools:context="com.topcoder.vakidney.Fragments.Welcome1Fragment">
+    tools:context=".fragments.welcome.Welcome1Fragment">
 
 
 

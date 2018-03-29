@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.Model;
+package com.topcoder.vakidney.model;
 
 import com.orm.SugarRecord;
 
@@ -30,7 +30,14 @@ public class Meal extends SugarRecord<Meal> implements Serializable {
     public Meal() {
     }
 
-    public Meal(long mealId, String name, String photoUrl, String desc, Date date, String type, boolean hasDrug){
+    public Meal(
+            long mealId,
+            String name,
+            String photoUrl,
+            String desc,
+            Date date,
+            String type,
+            boolean hasDrug){
         this.mealId = mealId;
         this.name = name;
         this.photoUrl = photoUrl;

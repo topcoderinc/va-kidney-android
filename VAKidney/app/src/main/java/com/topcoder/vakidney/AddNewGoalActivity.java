@@ -14,9 +14,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.topcoder.vakidney.Model.Goal;
-import com.topcoder.vakidney.Util.DialogManager;
-import com.topcoder.vakidney.Util.JsondataUtil;
+import com.topcoder.vakidney.model.Goal;
+import com.topcoder.vakidney.util.DialogManager;
+import com.topcoder.vakidney.util.JsondataUtil;
 
 import java.text.NumberFormat;
 import java.text.ParseException;

@@ -3,18 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorLightGray"
-    android:padding="@dimen/app_standard_padding"
-    tools:context="com.topcoder.vakidney.MainFragments.FoodFragment">
-
+    android:paddingLeft="@dimen/app_standard_padding"
+    android:paddingRight="@dimen/app_standard_padding"
+    tools:context="com.topcoder.vakidney.fragments.FoodFragment">
 
     <GridView
+        android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:horizontalSpacing="@dimen/app_standard_padding"
+        android:paddingBottom="@dimen/app_standard_padding"
+        android:paddingTop="@dimen/app_standard_padding"
+        android:clipToPadding="false"
         android:numColumns="2"
         android:scrollbars="none"
-        android:horizontalSpacing="@dimen/app_standard_padding"
-        android:verticalSpacing="@dimen/app_standard_padding"
-        android:id="@+id/gridView"
-        ></GridView>
+        android:verticalSpacing="@dimen/app_standard_padding"/>
 
 </RelativeLayout>

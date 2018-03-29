@@ -1,16 +1,16 @@
-package com.topcoder.vakidney.Util;
+package com.topcoder.vakidney.util;
 
 import android.content.Context;
 import android.util.Log;
 
-import com.topcoder.vakidney.Model.ChartData;
-import com.topcoder.vakidney.Model.Goal;
-import com.topcoder.vakidney.Model.LabData;
-import com.topcoder.vakidney.Model.Meal;
-import com.topcoder.vakidney.Model.MealDrug;
-import com.topcoder.vakidney.Model.MedicationResources;
-import com.topcoder.vakidney.Model.Resources;
-import com.topcoder.vakidney.Model.UserData;
+import com.topcoder.vakidney.model.ChartData;
+import com.topcoder.vakidney.model.Goal;
+import com.topcoder.vakidney.model.LabData;
+import com.topcoder.vakidney.model.Meal;
+import com.topcoder.vakidney.model.MealDrug;
+import com.topcoder.vakidney.model.MedicationResources;
+import com.topcoder.vakidney.model.Resources;
+import com.topcoder.vakidney.model.UserData;
 import com.topcoder.vakidney.R;
 
 import org.json.JSONArray;
@@ -20,7 +20,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 /**
  * Created by Abinash Neupane on 1/24/2018.
@@ -43,6 +43,7 @@ public class JsondataUtil {
             userData.setPassword(jsonObject.getString("password"));
             userData.setFullname(jsonObject.getString("fullname"));
             userData.setAge(jsonObject.getInt("age"));
+            userData.setBirthday(new Date().getTime() - ((long) userData.getAge() * 1000 * 60 * 60 * 24 * 360));
             userData.setPoints(jsonObject.getInt("points"));
             userData.setHeight(jsonObject.getInt("height"));
             userData.setWeight(jsonObject.getInt("weight"));
@@ -364,8 +365,8 @@ public class JsondataUtil {
             JSONArray jsonArray = new JSONArray(jsonString);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("potassiumlevel"));
-                chartDataArrayList.add(chartData);
+//                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("potassiumlevel"));
+//                chartDataArrayList.add(chartData);
             }
         } catch (JSONException e) {
             Log.e("json Exception", e.getMessage() + "");
@@ -387,8 +388,8 @@ public class JsondataUtil {
             JSONArray jsonArray = new JSONArray(jsonString);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("potassiumlevel"));
-                chartDataArrayList.add(chartData);
+//                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("potassiumlevel"));
+//                chartDataArrayList.add(chartData);
             }
         } catch (JSONException e) {
             Log.e("json Exception", e.getMessage() + "");
@@ -410,8 +411,8 @@ public class JsondataUtil {
             JSONArray jsonArray = new JSONArray(jsonString);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("weight"));
-                chartDataArrayList.add(chartData);
+//                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("weight"));
+//                chartDataArrayList.add(chartData);
             }
         } catch (JSONException e) {
             Log.e("json Exception", e.getMessage() + "");
@@ -433,8 +434,8 @@ public class JsondataUtil {
             JSONArray jsonArray = new JSONArray(jsonString);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("weight"));
-                chartDataArrayList.add(chartData);
+//                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("weight"));
+//                chartDataArrayList.add(chartData);
             }
         } catch (JSONException e) {
             Log.e("json Exception", e.getMessage() + "");
@@ -456,8 +457,8 @@ public class JsondataUtil {
             JSONArray jsonArray = new JSONArray(jsonString);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("bloodsugar"));
-                chartDataArrayList.add(chartData);
+//                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("bloodsugar"));
+//                chartDataArrayList.add(chartData);
             }
         } catch (JSONException e) {
             Log.e("json Exception", e.getMessage() + "");
@@ -479,8 +480,8 @@ public class JsondataUtil {
             JSONArray jsonArray = new JSONArray(jsonString);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("bloodsugar"));
-                chartDataArrayList.add(chartData);
+//                ChartData chartData = new ChartData(jsonObject.getString("month"), jsonObject.getDouble("bloodsugar"));
+//                chartDataArrayList.add(chartData);
             }
         } catch (JSONException e) {
             Log.e("json Exception", e.getMessage() + "");

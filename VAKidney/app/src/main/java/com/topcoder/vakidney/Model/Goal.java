@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.Model;
+package com.topcoder.vakidney.model;
 
 import android.os.Bundle;
 
@@ -19,6 +19,10 @@ public class Goal extends SugarRecord<Goal> {
     public final static int TYPE_ACTIVITY = 0x00000004;
     public final static int TYPE_GENERAL = 0x00000005;
 
+    public final static int ACTION_REDUCE = 0x00000001;
+    public final static int ACTION_INTAKE = 0x00000002;
+    public final static int ACTION_ADJUST = 0x00000003;
+
     private int id;
     private String colorCode;
     private int title;
@@ -27,9 +31,11 @@ public class Goal extends SugarRecord<Goal> {
     private double currentLevel;
     private int unit;
     private String unitStr;
+    private String nutrient;
     private String addString;
     private int icon;
     private int type;
+    private int action;
     private boolean dialysisOnly;
     private int minCategory;
 
@@ -40,18 +46,22 @@ public class Goal extends SugarRecord<Goal> {
             double goal,
             double currentLevel,
             String unit,
+            String nutrient,
             String addString,
             int icon,
             int type,
+            int action,
             boolean dialysisOnly,
             int minCategory) {
         this.titleStr = title;
         this.goal = goal;
         this.currentLevel = currentLevel;
         this.unitStr = unit;
+        this.nutrient = nutrient;
         this.addString = addString;
         this.icon = icon;
         this.type = type;
+        this.action = action;
         this.dialysisOnly = dialysisOnly;
         this.minCategory = minCategory;
     }
@@ -158,6 +168,22 @@ public class Goal extends SugarRecord<Goal> {
 
     public void setMinCategory(int minCategory) {
         this.minCategory = minCategory;
+    }
+
+    public int getAction() {
+        return action;
+    }
+
+    public void setAction(int action) {
+        this.action = action;
+    }
+
+    public String getNutrient() {
+        return nutrient;
+    }
+
+    public void setNutrient(String nutrient) {
+        this.nutrient = nutrient;
     }
 
     public Bundle getBundle(){

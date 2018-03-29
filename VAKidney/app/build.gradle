@@ -1,6 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
+    final FDA_BASE_URL = "https://api.fda.gov/"
+    final NDB_BASE_URL = "https://api.nal.usda.gov/"
+    final FDA_API_KEY = "M19F7ValXdbz2jGtnLIEG77VgNyw4TQS4JXOY6hW"
+    final NDB_API_KEY = "RRsuimKHTOocPYhmzonbv03mIqN3CB7OGzaQtvlE"
+
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.topcoder.vakidney"
@@ -11,9 +16,20 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+            buildConfigField 'String', 'FDA_BASE_URL', "\"" + FDA_BASE_URL + "\""
+            buildConfigField 'String', 'NDB_BASE_URL', "\"" + NDB_BASE_URL + "\""
+            buildConfigField 'String', 'FDA_API_KEY', "\"" + FDA_API_KEY + "\""
+            buildConfigField 'String', 'NDB_API_KEY', "\"" + NDB_API_KEY + "\""
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'FDA_BASE_URL', "\"" + FDA_BASE_URL + "\""
+            buildConfigField 'String', 'NDB_BASE_URL', "\"" + NDB_BASE_URL + "\""
+            buildConfigField 'String', 'FDA_API_KEY', "\"" + FDA_API_KEY + "\""
+            buildConfigField 'String', 'NDB_API_KEY', "\"" + NDB_API_KEY + "\""
         }
     }
 }

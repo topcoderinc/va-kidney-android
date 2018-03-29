@@ -1,24 +1,24 @@
-package com.topcoder.vakidney.Adapter;
+package com.topcoder.vakidney.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.topcoder.vakidney.AddNewMealActivity;
-import com.topcoder.vakidney.Model.Meal;
-import com.topcoder.vakidney.Model.MealDrug;
+import com.topcoder.vakidney.model.Meal;
+import com.topcoder.vakidney.model.MealDrug;
 import com.topcoder.vakidney.R;
 
 import java.util.List;
 
 /**
  * Created by Abinash Neupane on 2/7/2018.
- */
-
-/**
  * This adapter is used in FoodFragment. It is also used to populate gridview with meals from meals.json file
  */
 public class FoodAdapter extends BaseAdapter {
@@ -73,8 +73,13 @@ public class FoodAdapter extends BaseAdapter {
             });
             TextView tvMealName = view.findViewById(R.id.tvMealName);
             TextView tvMealDesc = view.findViewById(R.id.tvMealDesc);
+            ImageView imageView = view.findViewById(R.id.image);
 
             tvMealName.setText(currentMeal.getName());
+            Glide.with(activity)
+                    .load(currentMeal.getPhotoUrl())
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(imageView);
 
             String desc = "";
             for (int j = 0; j < currentMeal.getMealDrugs().size(); j++) {

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorLightGray"
+    android:orientation="vertical"
+    android:padding="@dimen/app_standard_padding">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textColor="@color/colorLightDarkGray"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/dateText"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="5dp"
+            android:text="Mar 13, 2018"
+            android:gravity="center_vertical"
+            android:textColor="@color/text_black"
+            android:clickable="true"
+            android:focusable="true"
+            android:textSize="13sp"
+            android:paddingLeft="@dimen/app_standard_padding"
+            android:background="@drawable/bg_round_white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/app_standard_padding"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Amount"
+                android:textColor="@color/colorLightDarkGray"
+                android:textSize="12dp" />
+
+            <EditText
+                android:id="@+id/amountField"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_round_white"
+                android:inputType="numberDecimal"
+                android:paddingLeft="@dimen/app_standard_padding"
+                android:paddingRight="@dimen/app_standard_padding" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Unit"
+                android:textColor="@color/colorLightDarkGray"
+                android:textSize="12dp" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/unitSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_round_white"
+                android:spinnerMode="dialog" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/addBtn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/app_standard_padding"
+        android:background="@drawable/bg_login_btn"
+        android:elevation="5dp"
+        android:text="Add Record"
+        android:textColor="@color/colorWhite"
+        android:textSize="13dp" />
+</LinearLayout>

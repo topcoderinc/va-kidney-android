@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.Util;
+package com.topcoder.vakidney.util;
 
 /**
  * Created by Abinash Neupane on 2/7/2018.
@@ -57,6 +57,8 @@ public class ImagePicker {
             chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentList.toArray(new Parcelable[]{}));
         }
 
+        chooserIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
         return chooserIntent;
     }
 
@@ -97,6 +99,26 @@ public class ImagePicker {
         return bm;
     }
 
+    public static String getImagePathFromResult(Context context, int resultCode,
+                                            Intent imageReturnedIntent) {
+        Log.d(TAG, "getImageFromResult, resultCode: " + resultCode);
+        Uri selectedImage = null;
+        File imageFile = getTempFile(context);
+        if (resultCode == Activity.RESULT_OK) {
+            boolean isCamera = (imageReturnedIntent == null ||
+                    imageReturnedIntent.getData() == null  ||
+                    imageReturnedIntent.getData().toString().contains(imageFile.toString()));
+            if (isCamera) {     /** CAMERA **/
+                selectedImage = Uri.fromFile(imageFile);
+            } else {            /** ALBUM **/
+                selectedImage = imageReturnedIntent.getData();
+            }
+            Log.d(TAG, "selectedImage: " + selectedImage);
+
+        }
+        final String imageFilePath = MediaUtil.getPath(context, selectedImage);
+        return imageFilePath;
+    }
 
     private static File getTempFile(Context context) {
         File imageFile = new File(context.getExternalCacheDir(), TEMP_IMAGE_NAME);

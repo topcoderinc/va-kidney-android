@@ -1,11 +1,11 @@
-package com.topcoder.vakidney.Util;
+package com.topcoder.vakidney.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.topcoder.vakidney.Model.Meal;
-import com.topcoder.vakidney.Model.MealDrug;
-import com.topcoder.vakidney.Model.UserData;
+import com.topcoder.vakidney.model.Meal;
+import com.topcoder.vakidney.model.MealDrug;
+import com.topcoder.vakidney.model.UserData;
 
 /**
  * Created by Abinash Neupane on 2/9/2018.
@@ -50,7 +50,7 @@ public class LoginManager {
     }
 
     private static void initializeData(Context context) {
-        JsondataUtil.getMeals(context);
+//        JsondataUtil.getMeals(context);
         GoalGenerator.generateGoals();
     }
 

@@ -4,6 +4,8 @@
     package="com.topcoder.vakidney">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,10 +17,20 @@
         tools:replace="android:icon,android:label"
         android:theme="@style/AppTheme">
 
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+
         <meta-data android:name="DATABASE" android:value="va_data.db" />
-        <meta-data android:name="VERSION" android:value="1" />
+        <meta-data android:name="VERSION" android:value="2" />
         <meta-data android:name="QUERY_LOG" android:value="false" />
-        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.topcoder.vakidney.Model" />
+        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.topcoder.vakidney.model" />
 
         <activity android:name=".MainActivity" android:screenOrientation="portrait">
             <intent-filter>
@@ -32,6 +44,7 @@
         <activity android:name=".ResourcesDetailActivity" android:screenOrientation="portrait"/>
         <activity android:name=".AddNewMealActivity" android:screenOrientation="portrait"/>
         <activity android:name=".AddNewGoalActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ChartActivity" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

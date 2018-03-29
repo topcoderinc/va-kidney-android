@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.Util;
+package com.topcoder.vakidney.util;
 
 import android.content.Context;
 import android.os.Build;

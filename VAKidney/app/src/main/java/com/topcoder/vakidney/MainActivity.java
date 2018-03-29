@@ -19,15 +19,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.topcoder.vakidney.MainFragments.ChartFragment;
-import com.topcoder.vakidney.MainFragments.FoodFragment;
-import com.topcoder.vakidney.MainFragments.GoalFragment;
-import com.topcoder.vakidney.MainFragments.HomeFragment;
-import com.topcoder.vakidney.MainFragments.MedicationFragment;
-import com.topcoder.vakidney.MainFragments.MyProfileFragment;
-import com.topcoder.vakidney.MainFragments.ResourcesFragment;
-import com.topcoder.vakidney.MainFragments.WorkoutFragment;
-import com.topcoder.vakidney.Util.LoginManager;
+import com.topcoder.vakidney.fragments.ChartMenuFragment;
+import com.topcoder.vakidney.fragments.FoodFragment;
+import com.topcoder.vakidney.fragments.GoalFragment;
+import com.topcoder.vakidney.fragments.HomeFragment;
+import com.topcoder.vakidney.fragments.RecommendationsFragment;
+import com.topcoder.vakidney.fragments.MyProfileFragment;
+import com.topcoder.vakidney.fragments.ResourcesFragment;
+import com.topcoder.vakidney.fragments.WorkoutFragment;
+import com.topcoder.vakidney.util.LoginManager;
 
 /**
  * This is the main Activity which consists of various fragments inside viewpager, side menu, bottom menu etc
@@ -594,13 +594,13 @@ public class MainActivity extends AppCompatActivity {
             case TAG_CHART:
                 goalIcon.setVisibility(View.VISIBLE);
                 actionBarTitle.setText("History & Metrics");
-                return new ChartFragment();
+                return new ChartMenuFragment();
 
 
             case TAG_MEDICATION:
-                goalIcon.setVisibility(View.GONE);
-                actionBarTitle.setText("Nutrition & Drug Interactions");
-                return new MedicationFragment();
+                goalIcon.setVisibility(View.VISIBLE);
+                actionBarTitle.setText("Recommendations");
+                return new RecommendationsFragment();
 
 
             case TAG_FOOD:

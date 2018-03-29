@@ -1,10 +1,9 @@
 package com.topcoder.vakidney.constant;
 
-import com.topcoder.vakidney.Model.Goal;
+import com.topcoder.vakidney.model.Goal;
 import com.topcoder.vakidney.R;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,6 +30,7 @@ public class GoalType {
     }
 
     public static int getIcon(int type) {
+        if (!ICONS_MAP.containsKey(type)) return R.drawable.ic_bar_medication;
         return ICONS_MAP.get(type);
     }
 

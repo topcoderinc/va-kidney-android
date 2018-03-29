@@ -13,10 +13,10 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.topcoder.vakidney.Model.UserData;
-import com.topcoder.vakidney.Util.DialogManager;
-import com.topcoder.vakidney.Util.JsondataUtil;
-import com.topcoder.vakidney.Util.LoginManager;
+import com.topcoder.vakidney.model.UserData;
+import com.topcoder.vakidney.util.DialogManager;
+import com.topcoder.vakidney.util.JsondataUtil;
+import com.topcoder.vakidney.util.LoginManager;
 
 /**
  * This class is used to perform logging in task

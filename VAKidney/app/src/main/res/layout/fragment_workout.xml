@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/app_standard_padding"
     android:background="@color/colorLightGray"
-    tools:context="com.topcoder.vakidney.MainFragments.WorkoutFragment">
+    tools:context="com.topcoder.vakidney.fragments.WorkoutFragment">
 
 
     <LinearLayout
@@ -132,7 +132,7 @@
             >
 
 
-            <com.topcoder.vakidney.CustomView.ArcProgress
+            <com.topcoder.vakidney.customview.ArcProgress
                 android:id="@+id/arcRunning"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -210,7 +210,7 @@
             >
 
 
-            <com.topcoder.vakidney.CustomView.ArcProgress
+            <com.topcoder.vakidney.customview.ArcProgress
                 android:id="@+id/arcSteps"
                 android:layout_width="80dp"
                 android:layout_height="80dp"

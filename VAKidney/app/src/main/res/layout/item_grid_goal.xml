@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.topcoder.vakidney.CustomView.SquareLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.topcoder.vakidney.customview.SquareLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,7 +15,7 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <com.topcoder.vakidney.CustomView.ArcProgress
+        <com.topcoder.vakidney.customview.ArcProgress
             android:id="@+id/goalProgress"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -34,7 +34,6 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-
             <TextView
                 android:id="@+id/tvCurrentGoals"
                 android:layout_width="wrap_content"
@@ -49,7 +48,7 @@
                 android:id="@+id/tvGoalUnit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/app_standard_padding"
+                android:layout_marginLeft="4dp"
                 android:gravity="center"
                 android:text="Steps"
                 android:textColor="@color/colorDarkGray"
@@ -77,4 +76,4 @@
         android:textSize="13dp"
         android:textStyle="bold" />
 
-</com.topcoder.vakidney.CustomView.SquareLinearLayout>
+</com.topcoder.vakidney.customview.SquareLinearLayout>

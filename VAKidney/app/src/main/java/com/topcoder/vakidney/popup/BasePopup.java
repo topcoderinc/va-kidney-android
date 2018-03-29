@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.PopupWindow;
 
-import com.topcoder.vakidney.Util.ViewUtil;
+import com.topcoder.vakidney.util.ViewUtil;
 
 /**
  * This is the base popup class.

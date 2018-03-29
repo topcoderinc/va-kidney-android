@@ -1,4 +1,4 @@
-package com.topcoder.vakidney.Adapter;
+package com.topcoder.vakidney.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,9 +8,13 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.topcoder.vakidney.Model.DrugInteraction;
+import com.topcoder.vakidney.model.DrugInteraction;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.ResourcesDetailActivity;
+import com.topcoder.vakidney.util.TextUtil;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -87,7 +91,7 @@ public class MedicationAdapter extends BaseAdapter {
             TextView tvTitle = viewTitleDesc.findViewById(R.id.title);
             TextView tvDesc = viewTitleDesc.findViewById(R.id.desc);
             LinearLayout divider = viewTitleDesc.findViewById(R.id.divider);
-            tvTitle.setText(drugInteraction.getName());
+            tvTitle.setText(TextUtil.capitalizeFirstLetter(drugInteraction.getName()));
             tvDesc.setText(
                     "Report: #" + drugInteraction.getReportId() +
                     "\n" +
@@ -97,10 +101,47 @@ public class MedicationAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View view) {
                     activity.finish();
-                    Intent intent=new Intent(activity, ResourcesDetailActivity.class);
+                    Intent intent = new Intent(activity, ResourcesDetailActivity.class);
                     intent.putExtra("title", drugInteraction.getName());
-                    intent.putExtra("actionbartitle", "Nutrition Details");
-                    intent.putExtra("desc", drugInteraction.getReactionsArray());
+                    intent.putExtra("actionbartitle", "Drug Interaction Details");
+                    String descrtiption = "";
+                    descrtiption = "Report: #" + drugInteraction.getReportId() + "\n";
+                    descrtiption =
+                            descrtiption +
+                            "Date: " +
+                            new SimpleDateFormat(
+                                    "MMM dd yyyy",
+                                    Locale.US
+                            ).format(drugInteraction.getDate()) +
+                            "\n\n";
+
+                    try {
+                        JSONArray drugsArray = new JSONArray(drugInteraction.getDrugsArray());
+                        for (int i = 0; i < drugsArray.length(); i++) {
+                            descrtiption =
+                                    descrtiption +
+                                    drugsArray
+                                            .getJSONObject(i)
+                                            .getString("medicinalproduct") +
+                                    "\n";
+                        }
+                        descrtiption = descrtiption + "\n";
+
+                        JSONArray reactionsArray = new JSONArray(drugInteraction.getReactionsArray());
+                        for (int i = 0; i < reactionsArray.length(); i++) {
+                            descrtiption =
+                                    descrtiption +
+                                    reactionsArray
+                                            .getJSONObject(i)
+                                            .getString("reactionmeddrapt") +
+                                    "\n";
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    intent.putExtra("desc", descrtiption);
                     activity.startActivity(intent);
                 }
             });

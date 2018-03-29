@@ -1,11 +1,18 @@
-package com.topcoder.vakidney.Util;
+package com.topcoder.vakidney.util;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.topcoder.vakidney.Model.DrugInteraction;
+import com.topcoder.vakidney.BuildConfig;
+import com.topcoder.vakidney.model.DrugInteraction;
+import com.topcoder.vakidney.model.FoodRecommendation;
+import com.topcoder.vakidney.model.Goal;
+import com.topcoder.vakidney.model.UserData;
 import com.topcoder.vakidney.api.FDAServiceAPI;
-import com.topcoder.vakidney.api.RestClient;
+import com.topcoder.vakidney.api.FDARestClient;
+import com.topcoder.vakidney.api.NDBRestClient;
+import com.topcoder.vakidney.api.NDBServiceAPI;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,6 +20,7 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -25,9 +33,113 @@ import retrofit2.Response;
 
 public class ServiceCallUtil {
 
-    public static void searchDrugInteraction(final DrugInteraction drugInteraction) {
+    public static void searchFoodRecommendation(
+            final Context context,
+            final String name) {
+        if (FoodRecommendation.getByName(name.toLowerCase()).size() > 0) return;
 
-        FDAServiceAPI fdaServiceAPI = RestClient.getService(FDAServiceAPI.class);
+        final NDBServiceAPI ndbServiceAPI = NDBRestClient.getService(NDBServiceAPI.class);
+        Call<String> result = ndbServiceAPI.searchFood(BuildConfig.NDB_API_KEY, name);
+        Log.d("TOPCODER", "call searchFoodRecommendation ");
+        result.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+                JSONObject jsonObject = null;
+                try {
+                    Log.d("TOPCODER", "response.body() " + response.body());
+                    jsonObject = new JSONObject(response.body());
+                    JSONArray items = jsonObject.getJSONObject("list").getJSONArray("item");
+                    if (items.length() > 0) {
+                        final String ndbno = items.getJSONObject(0).getString("ndbno");
+                        Call<String> result2 = ndbServiceAPI.searchFoodNutrition(BuildConfig.NDB_API_KEY, ndbno);
+                        result2.enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
+
+                                try {
+                                    JSONArray nutrients = new JSONObject(response.body())
+                                            .getJSONObject("report")
+                                            .getJSONObject("food")
+                                            .getJSONArray("nutrients");
+
+                                    UserData userData = UserData.get();
+                                    List<Goal> goals = Goal.get(
+                                            userData.getDiseaseCategory(),
+                                            userData.isDialysis());
+
+                                    String description = "";
+                                    for (int i = 0; i < nutrients.length(); i++) {
+                                        String nutrientName = nutrients.getJSONObject(i)
+                                                .getString("name");
+                                        Log.d("TOPCODER", "resp " + nutrientName);
+
+                                        for (int j = 0; j < goals.size(); j++) {
+                                            if (goals.get(j).getAction() == Goal.ACTION_REDUCE) {
+                                                if (nutrientName
+                                                        .toLowerCase()
+                                                        .contains(goals
+                                                                .get(j)
+                                                                .getNutrient()
+                                                                .toLowerCase())) {
+                                                    description = description
+                                                            + "Contains "
+                                                            + goals.get(j).getNutrient()
+                                                            + "\n";
+                                                    goals.remove(j);
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    if (description.length() > 0) {
+                                        new FoodRecommendation(
+                                                name.toLowerCase(),
+                                                description,
+                                                ndbno,
+                                                0,
+                                                null,
+                                                FoodRecommendation.TYPE_UNSAFE,
+                                                nutrients.toString()
+                                        ).save();
+
+                                        Toast.makeText(
+                                                context.getApplicationContext(),
+                                                "New Food Recommendation Found",
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
+
+                            }
+                        });
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public static void searchDrugInteraction(
+            final Context context,
+            final DrugInteraction drugInteraction) {
+
+        FDAServiceAPI fdaServiceAPI = FDARestClient.getService(FDAServiceAPI.class);
         Call<String> result = fdaServiceAPI.searchDrugInteractions(
                 "patient.drug.medicinalproduct:\""
                         + drugInteraction.getQuery()
@@ -36,9 +148,8 @@ public class ServiceCallUtil {
         result.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.d("TOPCODER", "call " + call.request().url().toString());
-                Log.d("TOPCODER", "resp " + response.body());
-                Log.d("TOPCODER", "resp code " + response.code());
+
+                if (!response.isSuccessful() || response.body() == null) return;
 
                 try {
                     JSONObject jsonObject = new JSONObject(response.body());
@@ -49,10 +160,6 @@ public class ServiceCallUtil {
                         String reportDate = firstResult.getString("receivedate");
                         JSONArray drugs = firstResult.getJSONObject("patient").getJSONArray("drug");
                         JSONArray reactions = firstResult.getJSONObject("patient").getJSONArray("reaction");
-                        Log.d("TOPCODER", "reportId " + reportId);
-                        Log.d("TOPCODER", "reportDate " + reportDate);
-                        Log.d("TOPCODER", "drugs " + drugs.toString());
-                        Log.d("TOPCODER", "reactions " + reactions.toString());
                         drugInteraction.setDrugsArray(drugs.toString());
                         drugInteraction.setReportId(reportId);
                         drugInteraction.setReactionsArray(reactions.toString());
@@ -66,12 +173,15 @@ public class ServiceCallUtil {
                     e.printStackTrace();
                 }
                 drugInteraction.save();
+                Toast.makeText(
+                        context.getApplicationContext(),
+                        "New Drug Interaction Found",
+                        Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 Log.d("TOPCODER", "resp e " + t.getMessage());
-
             }
         });
 
