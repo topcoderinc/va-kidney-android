@@ -269,7 +269,6 @@ public class JsondataUtil {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 if(jsonObject.getInt("id")==id) {
                     Goal goal = new Goal();
-                    goal.setId(jsonObject.getInt("id"));
                     goal.setTitle(jsonObject.getInt("title"));
                     goal.setGoal(jsonObject.getDouble("goal"));
                     goal.setCurrentLevel(jsonObject.getDouble("currentLevel"));
@@ -317,7 +316,6 @@ public class JsondataUtil {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Goal goal = new Goal();
-                goal.setId(jsonObject.getInt("id"));
                 goal.setTitle(jsonObject.getInt("title"));
                 goal.setGoal(jsonObject.getDouble("goal"));
                 goal.setCurrentLevel(jsonObject.getDouble("currentLevel"));

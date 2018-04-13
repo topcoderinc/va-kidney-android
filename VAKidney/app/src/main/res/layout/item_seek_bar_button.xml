@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/button"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:text="Water Intake"
+    android:paddingRight="@dimen/app_standard_padding"
+    android:paddingLeft="@dimen/app_standard_padding"
+    android:textAllCaps="false"
+    android:background="@android:color/transparent"
+    android:textColor="@color/colorLightDarkGray"
+    android:textSize="12dp" />

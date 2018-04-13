@@ -58,7 +58,6 @@ public class GoalAdapter extends BaseAdapter{
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    activity.finish();
                     activity.startActivity(new Intent(activity, AddNewGoalActivity.class));
                 }
             });
@@ -88,9 +87,8 @@ public class GoalAdapter extends BaseAdapter{
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    activity.finish();
-                    Intent intent=new Intent(activity, AddNewGoalActivity.class);
-                    intent.putExtra("id", goal.getGoalId());
+                    Intent intent = new Intent(activity, AddNewGoalActivity.class);
+                    intent.putExtra("goal", goal);
                     activity.startActivity(intent);
                 }
             });

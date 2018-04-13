@@ -2,13 +2,13 @@ package com.topcoder.vakidney.fragments.recommendations;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.topcoder.vakidney.adapter.FoodRecommendationAdapter;
 import com.topcoder.vakidney.model.FoodRecommendation;
@@ -22,13 +22,11 @@ import java.util.List;
  */
 public class NutritionFragment extends Fragment {
 
-    private ListView nutritionListView;
-
     public NutritionFragment() {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_nutrition, container, false);
@@ -47,16 +45,20 @@ public class NutritionFragment extends Fragment {
                         LinearLayoutManager.VERTICAL,
                         false));
 
+        List<FoodRecommendation> foodRecommendations = FoodRecommendation.getGood();
+        FoodRecommendationAdapter adapter1 = new FoodRecommendationAdapter(
+                recyclerViewUnsafe,
+                foodRecommendations
+        );
+        recyclerViewSuggestion.setAdapter(adapter1);
+
         List<FoodRecommendation> foodUnsafeRecommendations = FoodRecommendation.getUnsafe();
-        FoodRecommendationAdapter adapter = new FoodRecommendationAdapter(
+        FoodRecommendationAdapter adapter2 = new FoodRecommendationAdapter(
                 recyclerViewUnsafe,
                 foodUnsafeRecommendations
         );
-        recyclerViewUnsafe.setAdapter(adapter);
+        recyclerViewUnsafe.setAdapter(adapter2);
 
-//        nutritionListView = view.findViewById(R.id.nutritionListView);
-//        MedicationAdapter medicationAdapter=new MedicationAdapter(JsondataUtil.getMedicationResources(getActivity(), 1), getActivity());
-//        nutritionListView.setAdapter(medicationAdapter);
         return view;
     }
 

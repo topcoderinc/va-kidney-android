@@ -1,5 +1,7 @@
 package com.topcoder.vakidney.constant;
 
+import com.topcoder.vakidney.model.Goal;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,30 +13,57 @@ import java.util.Map;
 
 public class ChartType {
 
-    private final static Map<Integer, String> CHART_TITLE = new HashMap<>();
-    private final static Map<Integer, String> CHART_UNIT = new HashMap<>();
-    private final static Map<Integer, List<Integer>> CHARTS_BY_CATEGORY = new HashMap<>();
+    public static class ChartThreshold {
+        float max;
+        float min;
 
-    public final static int TYPE_E_GFR = 0x00000001;
-    public final static int TYPE_PHOSPHORUS = 0x00000002;
-    public final static int TYPE_POTASSIUM = 0x00000003;
-    public final static int TYPE_CREATININE = 0x00000004;
-    public final static int TYPE_CO2 = 0x00000005;
-    public final static int TYPE_SODIUM = 0x00000006;
-    public final static int TYPE_BUN = 0x00000007;
-    public final static int TYPE_PTH = 0x00000008;
-    public final static int TYPE_VITAMIN_D = 0x00000009;
-    public final static int TYPE_IRON = 0x000000010;
-    public final static int TYPE_HGBA1C = 0x000000011;
-    public final static int TYPE_HGB = 0x000000012;
+        ChartThreshold(float min, float max) {
+            this.min = min;
+            this.max = max;
+        }
 
-    private final static List<Integer> STAGE_1_CHARTS = new ArrayList<>();
-    private final static List<Integer> STAGE_2_CHARTS = new ArrayList<>();
-    private final static List<Integer> STAGE_3A_CHARTS = new ArrayList<>();
-    private final static List<Integer> STAGE_3B_CHARTS = new ArrayList<>();
-    private final static List<Integer> STAGE_4_CHARTS = new ArrayList<>();
-    private final static List<Integer> STAGE_5_CHARTS = new ArrayList<>();
-    private final static List<Integer> STAGE_5D_CHARTS = new ArrayList<>();
+        public float getMax() {
+            return max;
+        }
+
+        public void setMax(float max) {
+            this.max = max;
+        }
+
+        public float getMin() {
+            return min;
+        }
+
+        public void setMin(float min) {
+            this.min = min;
+        }
+    }
+
+    private final static Map<Long, String> CHART_TITLE = new HashMap<>();
+    private final static Map<Long, String> CHART_UNIT = new HashMap<>();
+    private final static Map<Long, ChartThreshold> CHART_THRESHOLD = new HashMap<>();
+    private final static Map<Integer, List<Long>> CHARTS_BY_CATEGORY = new HashMap<>();
+
+    public final static long TYPE_E_GFR = 0x00000001;
+    public final static long TYPE_PHOSPHORUS = 0x00000002;
+    public final static long TYPE_POTASSIUM = 0x00000003;
+    public final static long TYPE_CREATININE = 0x00000004;
+    public final static long TYPE_CO2 = 0x00000005;
+    public final static long TYPE_SODIUM = 0x00000006;
+    public final static long TYPE_BUN = 0x00000007;
+    public final static long TYPE_PTH = 0x00000008;
+    public final static long TYPE_VITAMIN_D = 0x00000009;
+    public final static long TYPE_IRON = 0x000000010;
+    public final static long TYPE_HGBA1C = 0x000000011;
+    public final static long TYPE_HGB = 0x000000012;
+
+    private final static List<Long> STAGE_1_CHARTS = new ArrayList<>();
+    private final static List<Long> STAGE_2_CHARTS = new ArrayList<>();
+    private final static List<Long> STAGE_3A_CHARTS = new ArrayList<>();
+    private final static List<Long> STAGE_3B_CHARTS = new ArrayList<>();
+    private final static List<Long> STAGE_4_CHARTS = new ArrayList<>();
+    private final static List<Long> STAGE_5_CHARTS = new ArrayList<>();
+    private final static List<Long> STAGE_5D_CHARTS = new ArrayList<>();
 
     static {
         CHART_TITLE.put(TYPE_E_GFR, "eGFR");
@@ -49,6 +78,19 @@ public class ChartType {
         CHART_TITLE.put(TYPE_IRON, "Iron Profile");
         CHART_TITLE.put(TYPE_HGBA1C, "HgbA1C");
         CHART_TITLE.put(TYPE_HGB, "Hgb or Hct");
+
+        CHART_THRESHOLD.put(TYPE_E_GFR, new ChartThreshold(90, 120));
+        CHART_THRESHOLD.put(TYPE_PHOSPHORUS, new ChartThreshold(2.5f, 4.5f));
+        CHART_THRESHOLD.put(TYPE_POTASSIUM, new ChartThreshold(3.5f, 5));
+        CHART_THRESHOLD.put(TYPE_CREATININE, new ChartThreshold(0.6f, 1.2f));
+        CHART_THRESHOLD.put(TYPE_CO2, new ChartThreshold(23, 29));
+        CHART_THRESHOLD.put(TYPE_SODIUM, new ChartThreshold(135, 145));
+        CHART_THRESHOLD.put(TYPE_BUN, new ChartThreshold(5, 20));
+        CHART_THRESHOLD.put(TYPE_PTH, new ChartThreshold(10, 65));
+        CHART_THRESHOLD.put(TYPE_VITAMIN_D, new ChartThreshold(20, 50));
+        CHART_THRESHOLD.put(TYPE_IRON, new ChartThreshold(60, 170));
+        CHART_THRESHOLD.put(TYPE_HGBA1C, new ChartThreshold(4, 6.4f));
+        CHART_THRESHOLD.put(TYPE_HGB, new ChartThreshold(12, 17.5f));
 
         CHART_UNIT.put(TYPE_E_GFR, "mL/min/1.73 m2");
         CHART_UNIT.put(TYPE_PHOSPHORUS, "mg/dL");
@@ -131,16 +173,46 @@ public class ChartType {
         CHARTS_BY_CATEGORY.put(DiseaseCategory.CATEGORY_STAGE_5, STAGE_5_CHARTS);
     }
 
-    public static List<Integer> getChartsByCategory(int category, boolean dialysis) {
+    public static List<Long> getChartsByCategory(int category, boolean dialysis) {
         if (dialysis) return STAGE_5D_CHARTS;
         else return CHARTS_BY_CATEGORY.get(category);
     }
 
-    public static String getChartLabel(int chartType) {
+    public static String getChartLabel(long chartType) {
+        if (!CHART_TITLE.containsKey(chartType)) {
+            List<Goal> goals = Goal.find(Goal.class, "goal_id = ?", String.valueOf(chartType));
+            if (goals.size() > 0) {
+                return goals.get(0).getTitleStr();
+            }
+            return null;
+        }
         return CHART_TITLE.get(chartType);
     }
 
-    public static String getChartUnit(int chartType) {
+    public static String getChartUnit(long chartType) {
+        if (!CHART_UNIT.containsKey(chartType)) {
+            List<Goal> goals = Goal.find(Goal.class, "goal_id = ?", String.valueOf(chartType));
+            if (goals.size() > 0) {
+                return goals.get(0).getUnitStr();
+            }
+            return null;
+        }
         return CHART_UNIT.get(chartType);
+    }
+
+    public static ChartThreshold getChartThreshold(long chartType) {
+        if (!CHART_THRESHOLD.containsKey(chartType)) {
+            List<Goal> goals = Goal.find(Goal.class, "goal_id = ?", String.valueOf(chartType));
+            if (goals.size() > 0) {
+                if (goals.get(0).getAction() == Goal.ACTION_REDUCE) {
+                    return new ChartThreshold((float) goals.get(0).getGoalMin(), (float) goals.get(0).getGoal());
+                }
+                else {
+                    return new ChartThreshold((float) goals.get(0).getGoal(), (float) goals.get(0).getGoalMax());
+                }
+            }
+            return null;
+        }
+        return CHART_THRESHOLD.get(chartType);
     }
 }

@@ -221,17 +221,19 @@ public class AddNewMealActivity extends AppCompatActivity implements
                     for (MealDrug mealDrug: mMeal.getMealDrugs()) {
                         if (mealDrug.getType() == MealDrug.TYPE_DRUG) drugs.add(mealDrug.getName());
                     }
-                    String[] drugsStr = new String[drugs.size()];
-                    drugs.toArray(drugsStr);
-                    if (DrugInteraction.findByDrugs(drugsStr) == null) {
+                    if (drugs.size() > 0) {
+                        String[] drugsStr = new String[drugs.size()];
+                        drugs.toArray(drugsStr);
+                        if (DrugInteraction.findByDrugs(drugsStr) == null) {
 
-                        mDrugInteraction = new DrugInteraction();
-                        mDrugInteraction.setDrugs(drugsStr);
+                            mDrugInteraction = new DrugInteraction();
+                            mDrugInteraction.setDrugs(drugsStr);
 
-                        ServiceCallUtil.searchDrugInteraction(
-                                AddNewMealActivity.this,
-                                mDrugInteraction);
+                            ServiceCallUtil.searchDrugInteraction(
+                                    AddNewMealActivity.this,
+                                    mDrugInteraction);
 
+                        }
                     }
                 }
                 NavigateHome(false);

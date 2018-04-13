@@ -1,6 +1,5 @@
 package com.topcoder.vakidney.fragments;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -48,37 +47,6 @@ public class GoalFragment extends Fragment {
     private void initAndPopulate(View view) {
         gridView = view.findViewById(R.id.gridView);
         goalArrayList = Goal.get(mUserData.getDiseaseCategory(), mUserData.isDialysis());
-
-        if(getActivity().getIntent().hasExtra("addgoal")){
-            Bundle bundle = getActivity().getIntent().getBundleExtra("goal");
-            Goal goal = Goal.getGoalFromBundle(bundle);
-            goalArrayList.add(goal);
-        }
-
-        if(getActivity().getIntent().hasExtra("deletegoal")){
-            Bundle bundle = getActivity().getIntent().getBundleExtra("goal");
-            Goal goal = Goal.getGoalFromBundle(bundle);
-            for(Goal goal1:goalArrayList) {
-                if(goal1.getId() == goal.getId()){
-                    goalArrayList.remove(goal1);
-                    break;
-                }
-            }
-        }
-
-        if(getActivity().getIntent().hasExtra("editgoal")){
-            Bundle bundle=getActivity().getIntent().getBundleExtra("goal");
-            Goal goal=Goal.getGoalFromBundle(bundle);
-            for(Goal goal1:goalArrayList) {
-                if(goal1.getId()==goal.getId()){
-                    goalArrayList.remove(goal1);
-                    break;
-                }
-            }
-            goalArrayList.add(goal);
-
-        }
-
 
         GoalAdapter goalAda = new GoalAdapter(goalArrayList, getActivity());
         gridView.setAdapter(goalAda);

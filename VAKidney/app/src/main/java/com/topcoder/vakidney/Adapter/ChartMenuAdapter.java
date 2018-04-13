@@ -12,7 +12,10 @@ import android.widget.TextView;
 import com.topcoder.vakidney.ChartActivity;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.constant.ChartType;
+import com.topcoder.vakidney.model.Goal;
+import com.topcoder.vakidney.model.UserData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,12 +27,19 @@ public class ChartMenuAdapter extends Adapter implements View.OnClickListener {
 
     private final Context mContext;
     private final RecyclerView mRecycleView;
-    private final List<Integer> mChartTypes;
+    private final List<Long> mChartTypes;
+    private List<Goal> mGoals = new ArrayList<>();
+    private final UserData mUserData;
 
-    public ChartMenuAdapter(RecyclerView parent, List<Integer> chartTypes) {
+    public ChartMenuAdapter(RecyclerView parent, List<Long> chartTypes) {
         mRecycleView = parent;
         mChartTypes = chartTypes;
         mContext = parent.getContext();
+
+        mUserData = UserData.get();
+        if (mUserData != null) {
+            mGoals = Goal.get(mUserData.getDiseaseCategory(), mUserData.isDialysis());
+        }
     }
 
     @Override
@@ -42,7 +52,22 @@ public class ChartMenuAdapter extends Adapter implements View.OnClickListener {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         NoteViewHolder viewHolder = (NoteViewHolder) holder;
-        int chartType = mChartTypes.get(position);
+        long chartType =
+                position >= mGoals.size() ?
+                        mChartTypes.get(position - mGoals.size()) :
+                        mGoals.get(position).getGoalId();
+
+        if (position == 0) {
+            viewHolder.viewHeader.setVisibility(View.VISIBLE);
+            viewHolder.textHeader.setText("Major");
+        }
+        else if (position - mGoals.size() == 0) {
+            viewHolder.viewHeader.setVisibility(View.VISIBLE);
+            viewHolder.textHeader.setText("Other");
+        }
+        else {
+            viewHolder.viewHeader.setVisibility(View.GONE);
+        }
 
         viewHolder.itemView.setOnClickListener(this);
         viewHolder.itemView.setTag(chartType);
@@ -52,13 +77,13 @@ public class ChartMenuAdapter extends Adapter implements View.OnClickListener {
 
     @Override
     public int getItemCount() {
-        return mChartTypes.size();
+        return mGoals.size() + mChartTypes.size();
     }
 
     @Override
     public void onClick(View view) {
-        if(view.getTag() != null && view.getTag() instanceof Integer) {
-            Integer chartType = (Integer) view.getTag();
+        if(view.getTag() != null && view.getTag() instanceof Long) {
+            Long chartType = (Long) view.getTag();
             Intent intent = new Intent(mContext, ChartActivity.class);
             intent.putExtra("chartType", chartType);
             mContext.startActivity(intent);
@@ -68,10 +93,14 @@ public class ChartMenuAdapter extends Adapter implements View.OnClickListener {
     private class NoteViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textLabel;
+        private TextView textHeader;
+        private View viewHeader;
 
         private NoteViewHolder(View itemView) {
             super(itemView);
             textLabel = itemView.findViewById(R.id.text_label);
+            textHeader = itemView.findViewById(R.id.text_header);
+            viewHeader = itemView.findViewById(R.id.layout_header);
         }
 
     }

@@ -38,14 +38,14 @@ public class AddChartPopup extends BasePopup implements
     private Spinner unitSpinner;
     private Button btnAddChartData;
 
-    private int mChartType;
+    private long mChartType;
     private AddChartPopupListener mListener;
 
     private TextView mTextDate;
     private Calendar mCalendar;
     private SimpleDateFormat mDateFormat;
 
-    public AddChartPopup(final Activity context, int chartType) {
+    public AddChartPopup(final Activity context, long chartType) {
         super(context, R.layout.popup_add_chart);
 
         mChartType = chartType;

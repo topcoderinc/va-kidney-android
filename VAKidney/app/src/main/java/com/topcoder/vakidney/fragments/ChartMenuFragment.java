@@ -40,7 +40,7 @@ public class ChartMenuFragment extends Fragment {
                         LinearLayoutManager.VERTICAL,
                         false));
 
-        List<Integer> chartTypes = ChartType.getChartsByCategory(
+        List<Long> chartTypes = ChartType.getChartsByCategory(
                 userData.getDiseaseCategory(),
                 userData.isDialysis()
         );
