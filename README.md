@@ -9,7 +9,7 @@ Testing device: Android 8.0.0
 2. Open Android Studio and Import the project.
 3. Install Latest Android SDK Tools and Android SDK Platform API 27 from SDK Manager
 4. Create Android Emulator AVD from AVD Manager. Choose Android with Target Android 5.0 Lolipop or newer.
-   Make sure you choose Google APIs Target. I recommend using Target Android 7 (Google Play).
+   Make sure you choose Google APIs Target.
 5. Run the project.
 
 #### Google Fit Integration
@@ -80,3 +80,8 @@ https://github.com/topcoderinc/va-kidney-android/issues/13
 https://github.com/topcoderinc/va-kidney-android/issues/8
 Since the NDB API goes down.
 As confirmed in https://apps.topcoder.com/forums/?module=Thread&threadID=915143&start=0
+
+
+## Video Demo Challenge 2
+
+https://drive.google.com/file/d/1y8MxAK4QYvccHtGmki6vrkq32IofHXq0/view?usp=drivesdk
