@@ -63,7 +63,7 @@ public class ChartMenuAdapter extends Adapter implements View.OnClickListener {
         }
         else if (position - mGoals.size() == 0) {
             viewHolder.viewHeader.setVisibility(View.VISIBLE);
-            viewHolder.textHeader.setText("Other");
+            viewHolder.textHeader.setText("Other (Labs)");
         }
         else {
             viewHolder.viewHeader.setVisibility(View.GONE);

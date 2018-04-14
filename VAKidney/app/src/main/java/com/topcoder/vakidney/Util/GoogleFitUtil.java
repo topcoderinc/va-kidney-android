@@ -23,16 +23,24 @@ import com.topcoder.vakidney.model.UserData;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static com.github.mikephil.charting.charts.Chart.LOG_TAG;
 
 /**
  * Created by afrisalyp on 18/03/2018.
+ * This is util class to process query and insert to Google Fit.
  */
 
 public class GoogleFitUtil {
 
+    /**
+     * Insert weight data to Google Fit
+     * @param context The context it was called from
+     * @param weight weight value in lb / pound
+     * @return A task represent inserting process to Google Fit
+     */
     public static Task insertWeight(Context context, int weight) {
         // Set a start and end time for our data, using a start time of 1 hour before this moment.
         Calendar cal = Calendar.getInstance();
@@ -68,6 +76,13 @@ public class GoogleFitUtil {
         return response;
     }
 
+    /**
+     * Insert height data to Google Fit
+     * @param context The context it was called from
+     * @param feet height value in feet
+     * @param inch height value in inch
+     * @return A task represent inserting process to Google Fit
+     */
     public static Task insertHeight(Context context, int feet, int inch) {
         // Set a start and end time for our data, using a start time of 1 hour before this moment.
         Calendar cal = Calendar.getInstance();
@@ -144,6 +159,12 @@ public class GoogleFitUtil {
         }
     };
 
+    /**
+     * Get height data from Google Fit
+     * @param context The context it was called from
+     * @param successListener success event listener
+     * @param failureListener error listener
+     */
     public static void getHeight (
             Context context,
             OnSuccessListener<DataReadResponse> successListener,
@@ -174,6 +195,12 @@ public class GoogleFitUtil {
 
     }
 
+    /**
+     * Get weight data from Google Fit
+     * @param context The context it was called from
+     * @param successListener success event listener
+     * @param failureListener error listener
+     */
     public static void getWeight (
             Context context,
             OnSuccessListener<DataReadResponse> successListener,
@@ -204,6 +231,12 @@ public class GoogleFitUtil {
 
     }
 
+    /**
+     * Get daily activity distance data from Google Fit
+     * @param context The context it was called from
+     * @param successListener success event listener
+     * @param failureListener error listener
+     */
     public static void getDistance (
             Context context,
             OnSuccessListener<DataReadResponse> successListener,
@@ -234,6 +267,12 @@ public class GoogleFitUtil {
 
     }
 
+    /**
+     * Get daily activity step data from Google Fit
+     * @param context The context it was called from
+     * @param successListener success event listener
+     * @param failureListener error listener
+     */
     public static void getStep (
             Context context,
             OnSuccessListener<DataReadResponse> successListener,
@@ -264,24 +303,24 @@ public class GoogleFitUtil {
 
     }
 
-    public static void insertNutrients() {
+    /**
+     * Insert nutrients data to Google Fit
+     * @param name The name of food (Optionals)
+     * @param values values map
+     */
+    public static void insertNutrients(String name, Map<String, Float> values) {
         DataSource nutritionSource = new DataSource.Builder()
-        .build();
+            .setDataType(DataType.TYPE_NUTRITION)
+            .setType(DataSource.TYPE_RAW)
+            .build();
 
-        DataPoint banana = DataPoint.create(nutritionSource);
-        banana.setTimestamp(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
-        banana.getValue(Field.FIELD_FOOD_ITEM).setString("banana");
-        banana.getValue(Field.FIELD_MEAL_TYPE).setInt(Field.MEAL_TYPE_SNACK);
-        banana.getValue(Field.FIELD_NUTRIENTS).setKeyValue(Field.NUTRIENT_TOTAL_FAT, 0.4f);
-        banana.getValue(Field.FIELD_NUTRIENTS).setKeyValue(Field.NUTRIENT_SODIUM, 1f);
-        banana.getValue(Field.FIELD_NUTRIENTS).setKeyValue(Field.NUTRIENT_SATURATED_FAT, 0.1f);
-        banana.getValue(Field.FIELD_NUTRIENTS).setKeyValue(Field.NUTRIENT_PROTEIN, 1.3f);
-        banana.getValue(Field.FIELD_NUTRIENTS).setKeyValue(Field.NUTRIENT_TOTAL_CARBS, 27.0f);
-        banana.getValue(Field.FIELD_NUTRIENTS).setKeyValue(Field.NUTRIENT_CHOLESTEROL, 0.0f);
-        banana.getValue(Field.FIELD_NUTRIENTS).setKeyValue(Field.NUTRIENT_CALORIES, 105.0f);
-        banana.getValue(Field.FIELD_NUTRIENTS).setKeyValue(Field.NUTRIENT_SUGAR, 14.0f);
-        banana.getValue(Field.FIELD_NUTRIENTS).setKeyValue(Field.NUTRIENT_DIETARY_FIBER, 3.1f);
-        banana.getValue(Field.FIELD_NUTRIENTS).setKeyValue(Field.NUTRIENT_POTASSIUM, 422f);
+        DataPoint data = DataPoint.create(nutritionSource);
+        data.setTimestamp(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+
+        if (name != null) data.getValue(Field.FIELD_FOOD_ITEM).setString(name);
+        for (String key: values.keySet()) {
+            data.getValue(Field.FIELD_NUTRIENTS).setKeyValue(key, values.get(key));
+        }
 
     }
 

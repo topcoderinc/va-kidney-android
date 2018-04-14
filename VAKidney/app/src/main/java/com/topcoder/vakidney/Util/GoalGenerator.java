@@ -63,13 +63,14 @@ public class GoalGenerator {
         sGoalVitaminCIntake.setGoalMin(1);
         sGoalVitaminCIntake.setGoalStep(1.0);
         sGoalVitaminCIntake.setUnitStr("pills");
+        sGoalVitaminCIntake.setNutrient("Vitamin C");
         sGoalVitaminCIntake.setColorCode("557630");
         sGoalVitaminCIntake.setType(Goal.TYPE_PILL);
         sGoalVitaminCIntake.setAction(Goal.ACTION_INTAKE);
         sGoalVitaminCIntake.setMinCategory(DiseaseCategory.CATEGORY_STAGE_3A);
 
 
-        sGoalFluidIntake.setTitleStr("Fluid (Adjust)");
+        sGoalFluidIntake.setTitleStr("Fluid Intake");
         sGoalFluidIntake.setGoal(8);
         sGoalFluidIntake.setGoalMax(12);
         sGoalFluidIntake.setGoalMin(4);
@@ -80,18 +81,19 @@ public class GoalGenerator {
         sGoalFluidIntake.setAction(Goal.ACTION_ADJUST);
         sGoalFluidIntake.setMinCategory(DiseaseCategory.CATEGORY_STAGE_1);
 
-        sGoalProteinIntake.setTitleStr("Protein (Adjust)");
+        sGoalProteinIntake.setTitleStr("Protein Intake");
         sGoalProteinIntake.setGoal(50);
         sGoalProteinIntake.setGoalMax(100);
         sGoalProteinIntake.setGoalMin(10);
         sGoalProteinIntake.setGoalStep(10);
         sGoalProteinIntake.setUnitStr("g");
         sGoalProteinIntake.setColorCode("ff7f32");
+        sGoalProteinIntake.setNutrient("Protein");
         sGoalProteinIntake.setType(Goal.TYPE_GENERAL);
         sGoalProteinIntake.setAction(Goal.ACTION_ADJUST);
         sGoalProteinIntake.setMinCategory(DiseaseCategory.CATEGORY_STAGE_1);
 
-        sGoalMeatIntake.setTitleStr("Meat (Adjust)");
+        sGoalMeatIntake.setTitleStr("Meat Intake");
         sGoalMeatIntake.setGoal(1);
         sGoalMeatIntake.setGoalMax(5);
         sGoalMeatIntake.setGoalMin(1);
@@ -109,13 +111,14 @@ public class GoalGenerator {
         sGoalCalciumIntake.setGoalStep(500);
         sGoalCalciumIntake.setUnitStr("mg");
         sGoalCalciumIntake.setColorCode("ff7f32");
+        sGoalCalciumIntake.setNutrient("Calcium");
         sGoalCalciumIntake.setType(Goal.TYPE_GENERAL);
         sGoalCalciumIntake.setAction(Goal.ACTION_ADJUST);
         sGoalCalciumIntake.setMinCategory(DiseaseCategory.CATEGORY_STAGE_5);
         sGoalCalciumIntake.setDialysisOnly(true);
 
 
-        sGoalAlcoholIntake.setTitleStr("Alcohol (Reduce)");
+        sGoalAlcoholIntake.setTitleStr("Alcohol Intake");
         sGoalAlcoholIntake.setGoal(0);
         sGoalAlcoholIntake.setGoalMax(3);
         sGoalAlcoholIntake.setGoalMin(0);
@@ -127,7 +130,7 @@ public class GoalGenerator {
         sGoalAlcoholIntake.setAction(Goal.ACTION_REDUCE);
         sGoalAlcoholIntake.setMinCategory(DiseaseCategory.CATEGORY_STAGE_1);
 
-        sGoalSodiumIntake.setTitleStr("Sodium (Reduce)");
+        sGoalSodiumIntake.setTitleStr("Sodium Intake");
         sGoalSodiumIntake.setGoal(1500);
         sGoalSodiumIntake.setGoalMax(2000);
         sGoalSodiumIntake.setGoalMin(100);
@@ -139,7 +142,7 @@ public class GoalGenerator {
         sGoalSodiumIntake.setAction(Goal.ACTION_REDUCE);
         sGoalSodiumIntake.setMinCategory(DiseaseCategory.CATEGORY_STAGE_1);
 
-        sGoalPotasiumIntake.setTitleStr("Potassium");
+        sGoalPotasiumIntake.setTitleStr("Potassium Intake");
         sGoalPotasiumIntake.setGoal(2000);
         sGoalPotasiumIntake.setGoalMax(4000);
         sGoalPotasiumIntake.setGoalMin(1000);
@@ -151,7 +154,7 @@ public class GoalGenerator {
         sGoalPotasiumIntake.setAction(Goal.ACTION_REDUCE);
         sGoalPotasiumIntake.setMinCategory(DiseaseCategory.CATEGORY_STAGE_1);
 
-        sGoalPhosporusIntake.setTitleStr("Phosphorus");
+        sGoalPhosporusIntake.setTitleStr("Phosphorus Intake");
         sGoalPhosporusIntake.setGoal(500);
         sGoalPhosporusIntake.setGoalMax(1000);
         sGoalPhosporusIntake.setGoalMin(100);
