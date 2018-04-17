@@ -16,11 +16,11 @@ public class ChartData extends SugarRecord<ChartData> {
 
     private double value;
     private long date;
-    private int type;
+    private long type;
 
     public ChartData() {}
 
-    public ChartData(double value, int type, long date) {
+    public ChartData(double value, long type, long date) {
         this.value = value;
         this.type = type;
         this.date = date;
@@ -34,7 +34,7 @@ public class ChartData extends SugarRecord<ChartData> {
         this.value = value;
     }
 
-    public int getType() {
+    public long getType() {
         return type;
     }
 
@@ -65,7 +65,7 @@ public class ChartData extends SugarRecord<ChartData> {
         super.save();
     }
 
-    public static List<ChartData> getLastYear(int chartType) {
+    public static List<ChartData> getLastYear(long chartType) {
         long now = System.currentTimeMillis();
         long lastYear = now - DateUtils.YEAR_IN_MILLIS;
         Select.from(ChartData.class);

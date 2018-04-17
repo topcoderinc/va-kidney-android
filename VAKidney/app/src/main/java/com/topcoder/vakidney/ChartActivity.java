@@ -32,7 +32,8 @@ public class ChartActivity extends AppCompatActivity implements
         View.OnClickListener,
         AddChartPopup.AddChartPopupListener {
 
-    private int mChartType;
+    private final static long ONE_HOUR = 1000 * 60 * 60;
+    private long mChartType;
     private LineChart mLineChart;
     private List<ChartData> mChartData;
 
@@ -53,7 +54,7 @@ public class ChartActivity extends AppCompatActivity implements
         addBtn.setOnClickListener(this);
 
         if (getIntent().hasExtra("chartType")) {
-            mChartType = getIntent().getIntExtra("chartType", ChartType.TYPE_E_GFR);
+            mChartType = getIntent().getLongExtra("chartType", ChartType.TYPE_E_GFR);
         }
         else {
             mChartType = ChartType.TYPE_E_GFR;
@@ -85,11 +86,23 @@ public class ChartActivity extends AppCompatActivity implements
             LineChart lineChart,
             List<ChartData> chartDataArray) {
 
+        if (chartDataArray.size() == 1) {
+            ChartData fakeChartData = new ChartData(
+                    chartDataArray.get(0).getValue(),
+                    chartDataArray.get(0).getType(),
+                    chartDataArray.get(0).getDate() + ONE_HOUR
+            );
+            chartDataArray.add(fakeChartData);
+        }
+
         List<Entry> entries = new ArrayList<>();
 
         for(ChartData chartData : chartDataArray){
             entries.add(new Entry(chartData.getDate(), Float.parseFloat(chartData.getValue()+"f"), chartData));
         }
+
+        ChartData firstChartData = chartDataArray.get(0);
+        ChartData lastChartData = chartDataArray.get(chartDataArray.size() - 1);
 
         LineDataSet dataSet = new LineDataSet(entries, "Actual");
         dataSet.setColor(getColor(R.color.colorAccent));
@@ -97,8 +110,35 @@ public class ChartActivity extends AppCompatActivity implements
         dataSet.setLineWidth(3.0f);
         dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 
+        ChartType.ChartThreshold threshold = ChartType.getChartThreshold(mChartType);
+
+        // Build maximum goal chart
+        List<Entry> maxGoalEntries = new ArrayList<>();
+        maxGoalEntries.add(new Entry(firstChartData.getDate(), threshold.getMax()));
+        maxGoalEntries.add(new Entry(lastChartData.getDate(), threshold.getMax()));
+
+        LineDataSet maxGoalDataSet = new LineDataSet(maxGoalEntries, "Goal");
+        maxGoalDataSet.setColor(getColor(android.R.color.holo_red_dark));
+        maxGoalDataSet.setDrawCircles(false);
+        maxGoalDataSet.setLineWidth(1.0f);
+        maxGoalDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+
+        // Build minimum goal chart
+        List<Entry> minGoalEntries = new ArrayList<>();
+        minGoalEntries.add(new Entry(firstChartData.getDate(), threshold.getMin()));
+        minGoalEntries.add(new Entry(lastChartData.getDate(), threshold.getMin()));
+
+        LineDataSet minGoalDataSet = new LineDataSet(minGoalEntries, "Goal");
+        minGoalDataSet.setColor(getColor(android.R.color.holo_green_dark));
+        minGoalDataSet.setDrawCircles(false);
+        minGoalDataSet.setLineWidth(1.0f);
+        minGoalDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+
         LineData lineData;
-        lineData = new LineData(dataSet);
+        lineData = new LineData();
+        lineData.addDataSet(minGoalDataSet);
+        lineData.addDataSet(maxGoalDataSet);
+        lineData.addDataSet(dataSet);
 
         lineChart.setData(lineData);
         lineChart.invalidate();
@@ -126,7 +166,7 @@ public class ChartActivity extends AppCompatActivity implements
         YAxis leftAxis = lineChart.getAxisLeft();
         leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
         leftAxis.setGridColor(Color.RED);
-        leftAxis.setDrawGridLines(true);
+        leftAxis.setDrawGridLines(false);
         leftAxis.setInverted(false);
         leftAxis.setDrawAxisLine(false);
         leftAxis.setDrawLabels(true);

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.orm.SugarRecord;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  * This model class is used to store data of a particular goal. This model class is used in various fragments such as GoalFragment, HOme1Fragment and WorkoutFragment
  */
 
-public class Goal extends SugarRecord<Goal> {
+public class Goal extends SugarRecord<Goal> implements Serializable {
 
     public final static int TYPE_PILL = 0x00000001;
     public final static int TYPE_FLUID = 0x00000002;
@@ -23,11 +24,15 @@ public class Goal extends SugarRecord<Goal> {
     public final static int ACTION_INTAKE = 0x00000002;
     public final static int ACTION_ADJUST = 0x00000003;
 
+    private long goalId;
     private int id;
     private String colorCode;
     private int title;
     private String titleStr;
     private double goal;
+    private double goalMax;
+    private double goalMin;
+    private double goalStep;
     private double currentLevel;
     private int unit;
     private String unitStr;
@@ -37,13 +42,18 @@ public class Goal extends SugarRecord<Goal> {
     private int type;
     private int action;
     private boolean dialysisOnly;
+    private boolean hidden;
     private int minCategory;
 
     public Goal() {}
 
     public Goal(
+            long goalId,
             String title,
             double goal,
+            double goalMax,
+            double goalMin,
+            double goalStep,
             double currentLevel,
             String unit,
             String nutrient,
@@ -52,9 +62,14 @@ public class Goal extends SugarRecord<Goal> {
             int type,
             int action,
             boolean dialysisOnly,
+            boolean hidden,
             int minCategory) {
+        this.goalId = goalId;
         this.titleStr = title;
         this.goal = goal;
+        this.goalMax = goalMax;
+        this.goalMin = goalMin;
+        this.goalStep = goalStep;
         this.currentLevel = currentLevel;
         this.unitStr = unit;
         this.nutrient = nutrient;
@@ -63,15 +78,16 @@ public class Goal extends SugarRecord<Goal> {
         this.type = type;
         this.action = action;
         this.dialysisOnly = dialysisOnly;
+        this.hidden = hidden;
         this.minCategory = minCategory;
     }
 
-    public int getGoalId() {
-        return id;
+    public long getGoalId() {
+        return goalId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setGoalId(long id) {
+        this.goalId = id;
     }
 
     public int getIcon() {
@@ -186,33 +202,58 @@ public class Goal extends SugarRecord<Goal> {
         this.nutrient = nutrient;
     }
 
-    public Bundle getBundle(){
-        Bundle bundle=new Bundle();
-        bundle.putInt("title", title);
-        bundle.putInt("unit", unit);
-        bundle.putInt("id", id);
-        bundle.putInt("icon", icon);
-        bundle.putDouble("goal", goal);
-        bundle.putDouble("currentLevel", currentLevel);
-        bundle.putString("addString", addString);
-        bundle.putString("colorCode", colorCode);
-        return bundle;
+    public double getGoalMax() {
+        return goalMax;
     }
 
-    public static Goal getGoalFromBundle(Bundle bundle){
-        Goal goal=new Goal();
-        goal.setId(bundle.getInt("id"));
-        goal.setTitle(bundle.getInt("title"));
-        goal.setUnit(bundle.getInt("unit"));
-        goal.setIcon(bundle.getInt("icon"));
-        goal.setGoal(bundle.getDouble("goal"));
-        goal.setCurrentLevel(bundle.getDouble("currentLevel"));
-        goal.setAddString(bundle.getString("addString"));
-        goal.setColorCode(bundle.getString("colorCode"));
-        return goal;
+    public void setGoalMax(double goalMax) {
+        this.goalMax = goalMax;
+    }
+
+    public double getGoalMin() {
+        return goalMin;
+    }
+
+    public void setGoalMin(double goalMin) {
+        this.goalMin = goalMin;
+    }
+
+    public double getGoalStep() {
+        return goalStep;
+    }
+
+    public void setGoalStep(double goalStep) {
+        this.goalStep = goalStep;
+    }
+
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
+
+    @Override
+    public void save() {
+        if (this.goalId == 0) {
+            this.goalId = System.currentTimeMillis();
+        }
+        super.save();
     }
 
     public static List<Goal> get(int diseaseCategry, boolean dialysis) {
+        if (dialysis) {
+            return Goal.find(Goal.class, "min_category <= ? and hidden = 0", String.valueOf(diseaseCategry));
+        }
+        else {
+            return Goal.find(Goal.class, "min_category <= ? and dialysis_only = ? and hidden = 0",
+                    String.valueOf(diseaseCategry),
+                    "0");
+        }
+    }
+
+    public static List<Goal> getAll(int diseaseCategry, boolean dialysis) {
         if (dialysis) {
             return Goal.find(Goal.class, "min_category <= ?", String.valueOf(diseaseCategry));
         }

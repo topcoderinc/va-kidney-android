@@ -1,6 +1,7 @@
 package com.topcoder.vakidney.util;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -33,6 +34,8 @@ import retrofit2.Response;
 
 public class ServiceCallUtil {
 
+    private final static int REQUEST_LIMIT = 10;
+
     public static void searchFoodRecommendation(
             final Context context,
             final String name) {
@@ -43,9 +46,9 @@ public class ServiceCallUtil {
         Log.d("TOPCODER", "call searchFoodRecommendation ");
         result.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
 
-                JSONObject jsonObject = null;
+                JSONObject jsonObject;
                 try {
                     Log.d("TOPCODER", "response.body() " + response.body());
                     jsonObject = new JSONObject(response.body());
@@ -55,7 +58,7 @@ public class ServiceCallUtil {
                         Call<String> result2 = ndbServiceAPI.searchFoodNutrition(BuildConfig.NDB_API_KEY, ndbno);
                         result2.enqueue(new Callback<String>() {
                             @Override
-                            public void onResponse(Call<String> call, Response<String> response) {
+                            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
 
                                 try {
                                     JSONArray nutrients = new JSONObject(response.body())
@@ -64,11 +67,12 @@ public class ServiceCallUtil {
                                             .getJSONArray("nutrients");
 
                                     UserData userData = UserData.get();
+                                    if (userData == null) return;
                                     List<Goal> goals = Goal.get(
                                             userData.getDiseaseCategory(),
                                             userData.isDialysis());
 
-                                    String description = "";
+//                                    String description = "";
                                     for (int i = 0; i < nutrients.length(); i++) {
                                         String nutrientName = nutrients.getJSONObject(i)
                                                 .getString("name");
@@ -82,10 +86,20 @@ public class ServiceCallUtil {
                                                                 .get(j)
                                                                 .getNutrient()
                                                                 .toLowerCase())) {
-                                                    description = description
-                                                            + "Contains "
-                                                            + goals.get(j).getNutrient()
-                                                            + "\n";
+
+                                                    String nutrientId = nutrients.getJSONObject(i)
+                                                            .getString("nutrient_id");
+
+                                                    searchHighNutrientFood(
+                                                            context,
+                                                            nutrientId,
+                                                            name,
+                                                            nutrientName);
+
+//                                                    description = description
+//                                                            + "Contains "
+//                                                            + goals.get(j).getNutrient()
+//                                                            + "\n";
                                                     goals.remove(j);
                                                     break;
                                                 }
@@ -93,22 +107,22 @@ public class ServiceCallUtil {
                                         }
                                     }
 
-                                    if (description.length() > 0) {
-                                        new FoodRecommendation(
-                                                name.toLowerCase(),
-                                                description,
-                                                ndbno,
-                                                0,
-                                                null,
-                                                FoodRecommendation.TYPE_UNSAFE,
-                                                nutrients.toString()
-                                        ).save();
+//                                    if (description.length() > 0) {
+//                                        new FoodRecommendation(
+//                                                name.toLowerCase(),
+//                                                description,
+//                                                ndbno,
+//                                                0,
+//                                                null,
+//                                                FoodRecommendation.TYPE_UNSAFE,
+//                                                nutrients.toString()
+//                                        ).save();
 
                                         Toast.makeText(
                                                 context.getApplicationContext(),
                                                 "New Food Recommendation Found",
                                                 Toast.LENGTH_LONG).show();
-                                    }
+//                                    }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -116,7 +130,7 @@ public class ServiceCallUtil {
                             }
 
                             @Override
-                            public void onFailure(Call<String> call, Throwable t) {
+                            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
 
                             }
                         });
@@ -129,7 +143,117 @@ public class ServiceCallUtil {
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+
+            }
+        });
+    }
+
+    private static void searchHighNutrientFood(
+            final Context context,
+            final String nutrientId,
+            final String foodName,
+            final String nutrientName) {
+
+        final NDBServiceAPI ndbServiceAPI = NDBRestClient.getService(NDBServiceAPI.class);
+        Call<String> result = ndbServiceAPI.searchNutritionFoods(
+                BuildConfig.NDB_API_KEY,
+                nutrientId,
+                String.valueOf(REQUEST_LIMIT),
+                String.valueOf(0));
+        Log.d("TOPCODER", "call searchHighNutrientFood ");
+        result.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+
+                JSONObject jsonObject;
+                try {
+                    Log.d("TOPCODER", "response.body() " + response.body());
+                    jsonObject = new JSONObject(response.body()).getJSONObject("report");
+                    int total = jsonObject.getInt("total");
+                    JSONArray items = jsonObject.getJSONArray("foods");
+                    if (items.length() > 0) {
+                        String description = "";
+                        for (int i = 0; i < items.length(); i++) {
+                            String foodName = items.getJSONObject(i).getString("name");
+                            description = description + "- " + foodName + ".\n";
+                        }
+                        new FoodRecommendation(
+                                "Reduce " + foodName,
+                                description,
+                                "",
+                                0,
+                                null,
+                                FoodRecommendation.TYPE_UNSAFE,
+                                nutrientName
+                        ).save();
+                    }
+                    searchLowNutrientFood(
+                            context,
+                            nutrientId,
+                            foodName,
+                            nutrientName,
+                            total - REQUEST_LIMIT);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+
+            }
+        });
+    }
+
+    private static void searchLowNutrientFood(
+            final Context context,
+            final String nutrientId,
+            final String foodName,
+            final String nutrientName,
+            final int offset) {
+
+        final NDBServiceAPI ndbServiceAPI = NDBRestClient.getService(NDBServiceAPI.class);
+        Call<String> result = ndbServiceAPI.searchNutritionFoods(
+                BuildConfig.NDB_API_KEY,
+                nutrientId,
+                String.valueOf(REQUEST_LIMIT),
+                String.valueOf(offset));
+        Log.d("TOPCODER", "call searchLowNutrientFood ");
+        result.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+
+                JSONObject jsonObject;
+                try {
+                    Log.d("TOPCODER", "response.body() " + response.body());
+                    jsonObject = new JSONObject(response.body()).getJSONObject("report");
+                    JSONArray items = jsonObject.getJSONArray("foods");
+                    if (items.length() > 0) {
+                        String description = "";
+                        for (int i = 0; i < items.length(); i++) {
+                            String foodName = items.getJSONObject(i).getString("name");
+                            description = description + "- " + foodName + ".\n";
+                        }
+                        new FoodRecommendation(
+                                "Reduce " + foodName,
+                                description,
+                                "",
+                                0,
+                                null,
+                                FoodRecommendation.TYPE_GOOD,
+                                nutrientName
+                        ).save();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
 
             }
         });
@@ -147,7 +271,7 @@ public class ServiceCallUtil {
 
         result.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
 
                 if (!response.isSuccessful() || response.body() == null) return;
 
@@ -180,7 +304,7 @@ public class ServiceCallUtil {
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                 Log.d("TOPCODER", "resp e " + t.getMessage());
             }
         });

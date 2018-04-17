@@ -59,60 +59,15 @@
                 android:background="@color/colorLightGray"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/seekButtonRecycler"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
+                    android:divider="@null"
+                    android:orientation="horizontal"
                     android:layout_margin="@dimen/app_standard_padding"
                     android:background="@drawable/bg_seekbar_background"
-                    android:orientation="horizontal"
-                    android:weightSum="4">
-
-                    <Button
-                        android:id="@+id/seekBtn1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_seekbar_selected"
-                        android:text="Water Intake"
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="12dp" />
-
-                    <Button
-                        android:id="@+id/seekBtn2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:text="Food Intake"
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorLightDarkGray"
-                        android:textSize="12dp" />
-
-                    <Button
-                        android:id="@+id/seekBtn3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:text="WorkOut"
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorLightDarkGray"
-                        android:textSize="12dp" />
-
-                    <Button
-                        android:id="@+id/seekBtn4"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:text="Lost Weight"
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorLightDarkGray"
-                        android:textSize="12dp" />
-
-
-                </LinearLayout>
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

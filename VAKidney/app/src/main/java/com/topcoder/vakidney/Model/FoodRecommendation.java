@@ -109,4 +109,11 @@ public class FoodRecommendation extends SugarRecord<FoodRecommendation>
                 "type = ?",
                 String.valueOf(TYPE_UNSAFE));
     }
+
+    public static List<FoodRecommendation> getGood() {
+        return FoodRecommendation.find(
+                FoodRecommendation.class,
+                "type = ?",
+                String.valueOf(TYPE_GOOD));
+    }
 }

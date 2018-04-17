@@ -27,6 +27,7 @@ import com.topcoder.vakidney.fragments.RecommendationsFragment;
 import com.topcoder.vakidney.fragments.MyProfileFragment;
 import com.topcoder.vakidney.fragments.ResourcesFragment;
 import com.topcoder.vakidney.fragments.WorkoutFragment;
+import com.topcoder.vakidney.model.UserData;
 import com.topcoder.vakidney.util.LoginManager;
 
 /**
@@ -531,6 +532,7 @@ public class MainActivity extends AppCompatActivity {
 
             return;
         }
+
         Runnable mPendingRunnable = new Runnable() {
             @Override
             public void run() {
@@ -538,13 +540,15 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
                 fragmentTransaction.commitAllowingStateLoss();
+                if (UserData.get() != null && !UserData.get().isSetupgoals()) {
+                    goalIcon.setVisibility(View.GONE);
+                }
             }
         };
-        if (mPendingRunnable != null) {
-            mHandler.post(mPendingRunnable);
-        }
+        mHandler.post(mPendingRunnable);
         drawer.closeDrawers();
         invalidateOptionsMenu();
+
     }
 
 

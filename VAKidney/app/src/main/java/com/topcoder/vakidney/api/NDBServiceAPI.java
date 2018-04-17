@@ -12,9 +12,22 @@ import retrofit2.http.Query;
 public interface NDBServiceAPI {
 
     @GET("/ndb/search?format=json&sort=r&max=1&offset=0")
-    Call<String> searchFood(@Query("api_key") String apiKey, @Query("q") String query);
+    Call<String> searchFood(
+            @Query("api_key") String apiKey,
+            @Query("q") String query);
 
     @GET("/ndb/reports?type=b&format=json")
-    Call<String> searchFoodNutrition(@Query("api_key") String apiKey, @Query("ndbno") String ndbno);
+    Call<String> searchFoodNutrition(
+            @Query("api_key") String apiKey,
+            @Query("ndbno") String ndbno);
+
+    @GET("/ndb/nutrients/?format=json&sort=c")
+    Call<String> searchNutritionFoods(
+            @Query("api_key") String apiKey,
+            @Query("nutrients") String nutrientsId,
+            @Query("max") String limit,
+            @Query("offset") String offset
+
+    );
 
 }

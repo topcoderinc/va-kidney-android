@@ -16,15 +16,21 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.topcoder.vakidney.constant.Nutrients;
 import com.topcoder.vakidney.model.ChartData;
 import com.topcoder.vakidney.R;
+import com.topcoder.vakidney.model.Goal;
 import com.topcoder.vakidney.util.DialogManager;
 import com.topcoder.vakidney.constant.ChartType;
+import com.topcoder.vakidney.util.GoogleFitUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * This popup shows add chart record data
@@ -38,14 +44,14 @@ public class AddChartPopup extends BasePopup implements
     private Spinner unitSpinner;
     private Button btnAddChartData;
 
-    private int mChartType;
+    private long mChartType;
     private AddChartPopupListener mListener;
 
     private TextView mTextDate;
     private Calendar mCalendar;
     private SimpleDateFormat mDateFormat;
 
-    public AddChartPopup(final Activity context, int chartType) {
+    public AddChartPopup(final Activity context, long chartType) {
         super(context, R.layout.popup_add_chart);
 
         mChartType = chartType;
@@ -69,6 +75,29 @@ public class AddChartPopup extends BasePopup implements
                                     mCalendar.getTime().getTime()
                             );
                             data.save();
+
+                            List<Goal> goals = Goal.find(
+                                    Goal.class,
+                                    "goal_id = ?",
+                                    String.valueOf(mChartType));
+
+                            if (goals != null &&
+                                    goals.size() > 0 &&
+                                    goals.get(0).getNutrient() != null) {
+                                Goal goal = goals.get(0);
+                                String field = Nutrients.searchGoogleFitNutrientField(goal.getNutrient());
+                                float value = Nutrients.calculateNutrientGrams(
+                                        goal.getUnitStr(),
+                                        (float) data.getValue());
+                                if (field != null && value > 0) {
+                                    Map<String, Float> values = new HashMap<>();
+                                    values.put(
+                                            field,
+                                            value
+                                    );
+                                    GoogleFitUtil.insertNutrients(null, values);
+                                }
+                            }
 
                             if (mListener != null) mListener.onAdded(data);
                             AddChartPopup.this.dismiss();

@@ -22,7 +22,12 @@ import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.fitness.FitnessOptions;
+import com.google.android.gms.fitness.data.DataPoint;
 import com.google.android.gms.fitness.data.DataType;
+import com.google.android.gms.fitness.data.Field;
+import com.google.android.gms.fitness.data.Value;
+import com.google.android.gms.fitness.result.DataReadResponse;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.topcoder.vakidney.model.UserData;
 import com.topcoder.vakidney.R;
@@ -36,6 +41,7 @@ import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import static java.util.Calendar.DATE;
@@ -389,8 +395,20 @@ public class MyProfileFragment extends Fragment {
                 break;
             case GOOGLE_FIT_PERMISSIONS_REQUEST_CODE: {
                 if (resultCode == Activity.RESULT_OK) {
-                        currentUserData.setBiometric(true);
-                        populateFields();
+                    currentUserData.setBiometric(true);
+                    getWeigthFromGoogleFit();
+                    getHeightFromGoogleFit();
+                    GoogleFitUtil.getDistance(
+                            getActivity(),
+                            GoogleFitUtil.sDefaultGetDistanceSuccessListener,
+                            null
+                    );
+                    GoogleFitUtil.getStep(
+                            getActivity(),
+                            GoogleFitUtil.sDefaultGetStepSuccessListener,
+                            null
+                    );
+                    populateFields();
                 }
             }
             break;
@@ -446,8 +464,10 @@ public class MyProfileFragment extends Fragment {
                 .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
                 .addDataType(DataType.AGGREGATE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
                 .addDataType(DataType.AGGREGATE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
+                .addDataType(DataType.TYPE_NUTRITION, FitnessOptions.ACCESS_WRITE)
                 .addDataType(DataType.TYPE_WEIGHT, FitnessOptions.ACCESS_WRITE)
                 .addDataType(DataType.TYPE_WEIGHT, FitnessOptions.ACCESS_READ)
+                .addDataType(DataType.TYPE_NUTRITION, FitnessOptions.ACCESS_READ)
                 .addDataType(DataType.TYPE_HEIGHT, FitnessOptions.ACCESS_WRITE)
                 .addDataType(DataType.TYPE_HEIGHT, FitnessOptions.ACCESS_READ)
                 .build();
@@ -460,8 +480,73 @@ public class MyProfileFragment extends Fragment {
                     fitnessOptions);
         } else {
             currentUserData.setBiometric(true);
+            getWeigthFromGoogleFit();
+            getHeightFromGoogleFit();
+            GoogleFitUtil.getDistance(
+                    getActivity(),
+                    GoogleFitUtil.sDefaultGetDistanceSuccessListener,
+                    null
+            );
+            GoogleFitUtil.getStep(
+                    getActivity(),
+                    GoogleFitUtil.sDefaultGetStepSuccessListener,
+                    null
+            );
             populateFields();
         }
+    }
+
+    private void getWeigthFromGoogleFit() {
+        GoogleFitUtil.getWeight(
+                getActivity(),
+                new OnSuccessListener<DataReadResponse>() {
+                    @Override
+                    public void onSuccess(DataReadResponse dataReadResponse) {
+                        float weight = 0;
+                        List<DataPoint> dps = dataReadResponse
+                                .getDataSet(DataType.TYPE_WEIGHT)
+                                .getDataPoints();
+                        for (DataPoint dp : dps) {
+                            Value value = dp.getValue(Field.FIELD_WEIGHT);
+                            weight = value.asFloat() / 0.453592f;
+                        }
+                        if (weight != 0) {
+                            currentUserData.setWeight((int) weight);
+                            currentUserData.save();
+                            populateFields();
+                        }
+                    }
+                },
+                null
+        );
+    }
+
+    private void getHeightFromGoogleFit() {
+        GoogleFitUtil.getHeight(
+                getActivity(),
+                new OnSuccessListener<DataReadResponse>() {
+                    @Override
+                    public void onSuccess(DataReadResponse dataReadResponse) {
+                        float height = 0;
+                        List<DataPoint> dps = dataReadResponse
+                                .getDataSet(DataType.TYPE_HEIGHT)
+                                .getDataPoints();
+                        for (DataPoint dp : dps) {
+                            Value value = dp.getValue(Field.FIELD_HEIGHT);
+                            height = value.asFloat() * 3.28084f;
+                        }
+                        if (height != 0) {
+                            int feet = (int) height;
+                            int inches = (int) ((height - (float) feet) * 12);
+                            currentUserData.setHeightFeet(feet);
+                            currentUserData.setHeightInch(inches);
+                            currentUserData.save();
+                            populateFields();
+                        }
+                    }
+                },
+                null
+        );
     }
 
 }

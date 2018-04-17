@@ -70,30 +70,11 @@ public class FoodRecommendationAdapter extends Adapter implements View.OnClickLi
                     foodRecommendation.getType() == FoodRecommendation.TYPE_UNSAFE ?
                             "Unsafe Food" : "Food Recommendation"
             );
-            String description = "Per 100 g, contains:\n\n";
-
-            try {
-                JSONArray drugsArray = new JSONArray(foodRecommendation.getNutritionArray());
-                for (int i = 0; i < drugsArray.length(); i++) {
-                    description =
-                            description +
-                                    drugsArray
-                                            .getJSONObject(i)
-                                            .getString("name") +
-                                    "\t\t" +
-                                    drugsArray
-                                            .getJSONObject(i)
-                                            .getString("value") +
-                                    drugsArray
-                                            .getJSONObject(i)
-                                            .getString("unit") +
-                                    "\n";
-                }
-                description = description + "\n";
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            String description = foodRecommendation.getDesc();
+            description =
+                    description +
+                    "\nRelated nutrients: " +
+                    foodRecommendation.getNutritionArray();
             intent.putExtra("desc", description);
             mContext.startActivity(intent);
         }
