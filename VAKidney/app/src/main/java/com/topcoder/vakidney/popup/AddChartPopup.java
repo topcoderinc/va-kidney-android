@@ -76,6 +76,8 @@ public class AddChartPopup extends BasePopup implements
                             );
                             data.save();
 
+                            ChartType.setChartFilled(mContext, mChartType);
+
                             List<Goal> goals = Goal.find(
                                     Goal.class,
                                     "goal_id = ?",

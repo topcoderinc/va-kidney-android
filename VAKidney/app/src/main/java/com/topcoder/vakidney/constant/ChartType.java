@@ -1,5 +1,9 @@
 package com.topcoder.vakidney.constant;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import com.topcoder.vakidney.model.Goal;
 
 import java.util.ArrayList;
@@ -64,6 +68,8 @@ public class ChartType {
     private final static List<Long> STAGE_4_CHARTS = new ArrayList<>();
     private final static List<Long> STAGE_5_CHARTS = new ArrayList<>();
     private final static List<Long> STAGE_5D_CHARTS = new ArrayList<>();
+
+    private static SharedPreferences sPreferences;
 
     static {
         CHART_TITLE.put(TYPE_E_GFR, "eGFR");
@@ -215,4 +221,21 @@ public class ChartType {
         }
         return CHART_THRESHOLD.get(chartType);
     }
+
+    public static void setChartFilled(Context context, long chartType) {
+        if (sPreferences == null) {
+            sPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        }
+        SharedPreferences.Editor editor = sPreferences.edit();
+        editor.putBoolean("chart_" + chartType, true);
+        editor.apply();
+    }
+
+    public static boolean isChartFilled(Context context, long chartType) {
+        if (sPreferences == null) {
+            sPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        }
+        return sPreferences.getBoolean("chart_" + chartType, false);
+    }
+
 }

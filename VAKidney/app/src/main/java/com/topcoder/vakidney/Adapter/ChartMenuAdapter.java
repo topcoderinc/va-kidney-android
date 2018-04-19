@@ -2,6 +2,7 @@ package com.topcoder.vakidney.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
@@ -73,6 +74,13 @@ public class ChartMenuAdapter extends Adapter implements View.OnClickListener {
         viewHolder.itemView.setTag(chartType);
 
         viewHolder.textLabel.setText(ChartType.getChartLabel(chartType));
+
+        if (ChartType.isChartFilled(mContext, chartType)) {
+            viewHolder.textLabel.setTypeface(null, Typeface.BOLD);
+        }
+        else {
+            viewHolder.textLabel.setTypeface(null, Typeface.NORMAL);
+        }
     }
 
     @Override
