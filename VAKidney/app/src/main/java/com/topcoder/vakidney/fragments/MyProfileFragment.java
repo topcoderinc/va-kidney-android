@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -85,7 +86,17 @@ public class MyProfileFragment extends Fragment {
         initView(view);
         addFieldListeners();
         populateFields();
+
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (currentUserData != null && currentUserData.isBiometric()) {
+            getWeigthFromGoogleFit();
+            getHeightFromGoogleFit();
+        }
     }
 
     private void addFieldListeners() {
@@ -284,18 +295,7 @@ public class MyProfileFragment extends Fragment {
         profileFieldBiometric.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogManager.showYesNoDialog(getActivity(), "Do you want to add biometric Device?", "Yes", "No", new DialogManager.OnYesClicked() {
-                    @Override
-                    public void YesClicked() {
-                        initGoogleFit();
-                    }
-                }, new DialogManager.OnNoClicked() {
-                    @Override
-                    public void NoClicked() {
-                        currentUserData.setBiometric(false);
-                        populateFields();
-                    }
-                });
+                showBiometricPermissionDialog();
             }
         });
 
@@ -317,6 +317,29 @@ public class MyProfileFragment extends Fragment {
                 });
 
                 b.show();
+            }
+        });
+    }
+
+    /**
+     * Ask user to connect the app to Google Fit
+     */
+    private void showBiometricPermissionDialog() {
+        DialogManager.showYesNoDialog(
+                getActivity(),
+                "Do you want to add biometric Device?",
+                "Yes",
+                "No",
+                new DialogManager.OnYesClicked() {
+            @Override
+            public void YesClicked() {
+                initGoogleFit();
+            }
+        }, new DialogManager.OnNoClicked() {
+            @Override
+            public void NoClicked() {
+                currentUserData.setBiometric(false);
+                populateFields();
             }
         });
     }
