@@ -22,6 +22,8 @@ import java.util.List;
  */
 public class ChartMenuFragment extends Fragment {
 
+    private ChartMenuAdapter mAdapter;
+
     public ChartMenuFragment() {
         // Required empty public constructor
     }
@@ -45,10 +47,17 @@ public class ChartMenuFragment extends Fragment {
                 userData.isDialysis()
         );
 
-        ChartMenuAdapter adapter = new ChartMenuAdapter(recyclerView, chartTypes);
-        recyclerView.setAdapter(adapter);
+        mAdapter = new ChartMenuAdapter(recyclerView, chartTypes);
+        recyclerView.setAdapter(mAdapter);
 
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mAdapter != null) {
+            mAdapter.notifyDataSetChanged();
+        }
+    }
 }
