@@ -80,7 +80,7 @@ public class ChartType {
         CHART_TITLE.put(TYPE_SODIUM, "Sodium");
         CHART_TITLE.put(TYPE_BUN, "BUN");
         CHART_TITLE.put(TYPE_PTH, "PTH");
-        CHART_TITLE.put(TYPE_VITAMIN_D, "Vitamin D");
+        CHART_TITLE.put(TYPE_VITAMIN_D, "25-hydroxy Vitamin D");
         CHART_TITLE.put(TYPE_IRON, "Iron Profile");
         CHART_TITLE.put(TYPE_HGBA1C, "HgbA1C");
         CHART_TITLE.put(TYPE_HGB, "Hgb or Hct");
