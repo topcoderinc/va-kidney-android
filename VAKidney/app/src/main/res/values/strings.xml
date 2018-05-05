@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">VA Kidney</string>
-    <string name="logo_text">Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Etiam pharetra, erat sed fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in orci enim.</string>
+    <string name="logo_text">Are you ready to take charge of your health? Ready. Set Go!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -22,7 +22,7 @@ Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan i
 Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Etiam pharetra, erat sed fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in orci enim.</string>
     <string name="generic_error_field">*Please enter this field</string>
     <string name="feature_not_implemented">This feature is not yet implemented</string>
-    <string name="drink_water">DRINK WATER</string>
+    <string name="drink_water">Know Your Fluid Intake</string>
     <string name="desc">Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat</string>
     <string name="eat_vegetables_amp_fruits"><![CDATA[EAT VEGETABLES & FRUITS]]></string>
     <string name="workout">WORKOUT</string>
