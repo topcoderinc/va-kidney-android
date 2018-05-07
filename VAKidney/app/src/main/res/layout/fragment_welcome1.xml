@@ -61,11 +61,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="left"
-                    android:lines="2"
-                    android:maxLines="2"
-                    android:text="@string/desc"
+                    android:maxLines="7"
+                    android:text="Ask your doctor how much water you should be drinking each day. In general, drinking water is good, but if you have problems with your heart, swelling, or you are on dialysis, fluid is not always good. Follow your doctor’s advice on the amount of water to drink daily if limitation is required."
                     android:textColor="#666666"
-                    android:textSize="12dp" />
+                    android:textSize="10dp" />
             </LinearLayout>
 
 
@@ -78,7 +77,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="10dp"
             />
 
 
@@ -113,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:layout_marginRight="15dp"
-                    android:text="@string/eat_vegetables_amp_fruits"
+                    android:text="Eat Fruits and Vegetables"
                     android:textColor="#666666"
                     android:textSize="13dp" />
 
@@ -122,12 +121,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="right"
-                    android:lines="2"
-                    android:maxLines="2"
+                    android:maxLines="7"
                     android:layout_marginRight="15dp"
-                    android:text="@string/desc"
+                    android:text="Enjoy fruits and vegetables daily! Fill half your plate with fruits and veggies. Fresh fruits and vegetables are naturally low in sodium, but if you must limit potassium intake, check which fruits and vegetables you can have."
                     android:textColor="#666666"
-                    android:textSize="12dp" />
+                    android:textSize="10dp" />
             </LinearLayout>
 
 
@@ -141,7 +139,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="10dp"
             />
 
         <RelativeLayout
@@ -173,7 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/workout"
+                    android:text="Be Active Your Way, Every Day"
                     android:textColor="#666666"
                     android:textSize="13dp" />
 
@@ -182,11 +180,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="left"
-                    android:lines="2"
-                    android:maxLines="2"
-                    android:text="@string/desc"
+                    android:maxLines="7"
+                    android:text="Any type of physical activity is beneficial. Increasing exercise improves organ function, muscle strength, and daily quality of life. Choose activities that you enjoy doing daily. Enjoy the benefits of balancing your dietary intake with daily physical activity."
                     android:textColor="#666666"
-                    android:textSize="12dp" />
+                    android:textSize="10dp" />
             </LinearLayout>
 
 
@@ -199,7 +196,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="10dp"
             />
 
     </LinearLayout>

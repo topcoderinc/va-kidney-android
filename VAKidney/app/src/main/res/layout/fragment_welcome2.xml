@@ -40,10 +40,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:maxLines="4"
+            android:maxLines="6"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:text="@string/welcome2_desc"
+            android:text="It’s important to know your numbers, so you can set goals and achieve them. Check your weight daily. Record blood pressure measurements, and blood sugar if you have diabetes. Read and record your regular Lab Report results."
             android:textColor="#666666"
             android:textSize="13dp" />
 
@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/consistent_medication"
+            android:text="Take Your Medication as Prescribed"
             android:textColor="#666666"
             android:layout_marginTop="30dp"
             android:textSize="14dp"
@@ -73,10 +73,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:maxLines="4"
+            android:maxLines="6"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:text="@string/welcome2_desc"
+            android:text="Be safe! Know what medicine is taken with meals. Timing is very important. Don’t skip doses, and know how to contact your doctor or pharmacist. Repeat instructions back to the doctor or pharmacist so you both understand your medication plan."
             android:textColor="#666666"
             android:textSize="13dp" />
     </LinearLayout>
