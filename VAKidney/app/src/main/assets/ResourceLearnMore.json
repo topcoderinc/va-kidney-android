@@ -1,0 +1,107 @@
+[
+  {
+    "title": "VA e-Kidney Clinic",
+    "desc": "Visit this virtual clinic to get connected with many resources on diet, care plans, and medications. ",
+    "url": "https://www.va.gov/health/services/renal/"
+  },
+  {
+    "title": "NKDEP",
+    "desc": "Read these nutrition handouts and find out what's in what. ",
+    "url": "https://www.niddk.nih.gov/health-information/communication-programs/nkdep"
+  },
+  {
+    "title": "Let's get cooking!",
+    "desc": "These healthy cookbooks are for beginners or people on the move with limited time and space. ",
+    "url": "https://www.nutrition.va.gov/Recipes.asp "
+  },
+  {
+    "title": "Healthy Teaching Kitchen",
+    "desc": "Watch these quick videos on basic food preparation so you can make your food, your way.",
+    "url": "https://www.youtube.com/watch?v=jtjZOe0dvwA&list=PL3AQ_JVoBEywA0DxUr5WalEVr6iGcnjYf "
+  },
+  {
+    "title": "What is Chronic Kidney Disease",
+    "desc": "Do you have diabetes and CKD? These handouts review care guidelines from the NIDDK.",
+    "url": "https://www.niddk.nih.gov/health-information/kidney-disease/chronic-kidney-disease-ckd/what-is-chronic-kidney-disease"
+  },
+  {
+    "title": "Spice It Up!",
+    "desc": "Plan a zesty diet for CKD with these recipes!",
+    "url": "http://www.myspiceitup.ca/"
+  },
+  {
+    "title": "Are there medications for kidney disease?",
+    "desc": "Watch this video - a doctor discusses medications for CKD.",
+    "url": "https://www.youtube.com/watch?v=nppBNtDw5Pk"
+  },
+  {
+    "title": "Can CKD get better?",
+    "desc": "Watch this video - a doctor answers the question \"can CKD get better?\"",
+    "url": "https://www.youtube.com/watch?v=JVN2adU4vmc"
+  },
+  {
+    "title": "Eating right for CKD",
+    "desc": "Read this handout on CKD nutrition during predialysis stages",
+    "url": "https://www.niddk.nih.gov/health-information/professionals/-/media/Files/Health-Information/Communication-Programs/NKDEP/eating-right-508.pdf"
+  },
+  {
+    "title": "I feel fine why do I need to see a surgeon - approach #1",
+    "desc": "Watch part one of a two part video on why an AV fistula is placed before dialysis.",
+    "url": "https://www.youtube.com/watch?v=5BFbSKMMtT4"
+  },
+  {
+    "title": "I feel fine why do I need to see a surgeon - approach #2",
+    "desc": "Watch part two of a two part video on why an AV fistula is placed before dialysis",
+    "url": "https://www.youtube.com/watch?v=BzMNdm0nbDU"
+  },
+  {
+    "title": "Is kidney transplant an option?",
+    "desc": "Watch this video to learn about pro's and con's of transplant.",
+    "url": "https://www.youtube.com/watch?v=Q_RkDeMY0Pg"
+  },
+  {
+    "title": "keeping kidneys safe - how medication effects the kidneys",
+    "desc": "Watch this video to learn medications effect the kidneys. ",
+    "url": "https://www.youtube.com/watch?v=eWlx6C9Jv5g"
+  },
+  {
+    "title": "Phosphorus:tips for people with CKD",
+    "desc": "Read this to learn more about dietary phosphorus management",
+    "url": "https://www.niddk.nih.gov/health-information/professionals/-/media/Files/Health-Information/Communication-Programs/NKDEP/nutrition-phosphorus-508.pdf"
+  },
+  {
+    "title": "Potassium: tips for people with CKD",
+    "desc": "Read this if you have been advised to reduce dietary potassium.",
+    "url": "https://www.niddk.nih.gov/health-information/professionals/-/media/Files/Health-Information/Communication-Programs/NKDEP/nutrition-potassium-508.pdf"
+  },
+  {
+    "title": "Protein: tips for people with CKD",
+    "desc": "Read these tips on protein management if you have CKD but have not started dialysis.",
+    "url": "https://www.niddk.nih.gov/health-information/professionals/-/media/Files/Health-Information/Communication-Programs/NKDEP/nutrition-protein-508.pdf"
+  },
+  {
+    "title": "Sodium: tips for people with CKD",
+    "desc": "Read these tips on low sodium diet for people with CKD",
+    "url": "https://www.niddk.nih.gov/health-information/professionals/-/media/Files/Health-Information/Communication-Programs/NKDEP/nutrition-sodium-508.pdf"
+  },
+  {
+    "title": "What do the kidneys do? Version 1",
+    "desc": "Watch this video of a doctor explaining the role of kidneys in this silent disease",
+    "url": "https://www.youtube.com/watch?v=c4kifUnssfs"
+  },
+  {
+    "title": "What do the kidneys do? Version 2",
+    "desc": "Watch this video of a doctor explaining the role of kidneys and when dialysis or transplant is needed.",
+    "url": "https://www.youtube.com/watch?v=-BwNJKKTnOY"
+  },
+  {
+    "title": "Just enough: Food portion or serving?",
+    "desc": "Read this to learn about the difference between a portion and a serving of food and other labeling details",
+    "url": "https://www.niddk.nih.gov/health-information/weight-management/just-enough-food-portions"
+  },
+  {
+    "title": "Super Tracker",
+    "desc": "Links to the USDA Super Tracker site",
+    "url": "https://www.supertracker.usda.gov/"
+  }
+]

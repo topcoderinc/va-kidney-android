@@ -8,19 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.topcoder.vakidney.adapter.ResourcesAdapter;
 import com.topcoder.vakidney.R;
+import com.topcoder.vakidney.adapter.ResourcesAdapter;
 import com.topcoder.vakidney.util.JsondataUtil;
 
 /**
  * A simple {@link Fragment} subclass.
  * It is used to show list of resource articles
  */
-public class ResourceFragment extends Fragment {
+public class DoMoreFragment extends Fragment {
 
 
     ListView resourceListView;
-    public ResourceFragment() {
+    public DoMoreFragment() {
     }
 
 
@@ -29,7 +29,7 @@ public class ResourceFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_resource, container, false);
         resourceListView=view.findViewById(R.id.resourceListView);
-        ResourcesAdapter resourcesAdapter=new ResourcesAdapter(JsondataUtil.getResources(getActivity()), getActivity());
+        ResourcesAdapter resourcesAdapter=new ResourcesAdapter(JsondataUtil.getResourcesDoMore(getActivity()), getActivity());
         resourceListView.setAdapter(resourcesAdapter);
         return view;
     }

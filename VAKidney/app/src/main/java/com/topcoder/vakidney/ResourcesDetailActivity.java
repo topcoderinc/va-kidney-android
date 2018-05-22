@@ -14,7 +14,7 @@ public class ResourcesDetailActivity extends AppCompatActivity {
 
     private AppCompatImageView backBtn;
 
-    private String title, desc, actionbartitle;
+    private String title, desc, url, actionbartitle;
     private TextView tvTitle, tvDesc, tvActionBarTitle;
 
     @Override
@@ -53,11 +53,17 @@ public class ResourcesDetailActivity extends AppCompatActivity {
         if (getIntent().hasExtra("desc")) {
             desc = getIntent().getStringExtra("desc");
         }
+        if (getIntent().hasExtra("url")) {
+            url = getIntent().getStringExtra("url");
+        }
         if (title != null) {
             tvTitle.setText(title);
         }
         if (desc != null) {
             tvDesc.setText(desc);
+        }
+        if (url != null) {
+            tvDesc.setText(tvDesc.getText() + "\n\n" + url);
         }
         if(actionbartitle!=null){
             tvActionBarTitle.setText(actionbartitle);

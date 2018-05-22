@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 
 /**
- * Used to Populate view with resources data read from Resources.json file
+ * Used to Populate view with resources data read from ResourceReadMore.json file
  */
 
 public class ResourcesAdapter extends BaseAdapter {
@@ -59,6 +59,7 @@ public class ResourcesAdapter extends BaseAdapter {
                 activity.finish();
                 Intent intent=new Intent(activity, ResourcesDetailActivity.class);
                 intent.putExtra("title", resources.getTitle());
+                intent.putExtra("url", resources.getUrl());
                 intent.putExtra("actionbartitle", "Resource Details");
                 intent.putExtra("desc", resources.getDesc());
                 activity.startActivity(intent);

@@ -102,20 +102,73 @@ public class JsondataUtil {
     }
 
     /**
-     * Returns an array of Resources object read from Resources.json file
+     * Returns an array of Resources object read from ResourceReadMore.json file
      * @param context  The context it was called from
      * @return An ArrayList of resources object is returned parsed from resources.json file
      */
-    public static ArrayList<Resources> getResources(Context context) {
+    public static ArrayList<Resources> getResourcesReadMore(Context context) {
         ArrayList<Resources> resourcesArrayList = new ArrayList<>();
         try {
-            String jsonString = loadJSONFromAsset(context, "Resources.json");
+            String jsonString = loadJSONFromAsset(context, "ResourceReadMore.json");
             JSONArray jsonArray = new JSONArray(jsonString);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Resources resources=new Resources();
                 resources.setTitle(jsonObject.getString("title"));
                 resources.setDesc(jsonObject.getString("desc"));
+                resources.setUrl(jsonObject.getString("url"));
+                resourcesArrayList.add(resources);
+
+            }
+        } catch (JSONException e) {
+            Log.e("json Exception", e.getMessage() + "");
+        }
+
+        return resourcesArrayList;
+    }
+
+    /**
+     * Returns an array of Resources object read from ResourceDoMore.json file
+     * @param context  The context it was called from
+     * @return An ArrayList of resources object is returned parsed from resources.json file
+     */
+    public static ArrayList<Resources> getResourcesDoMore(Context context) {
+        ArrayList<Resources> resourcesArrayList = new ArrayList<>();
+        try {
+            String jsonString = loadJSONFromAsset(context, "ResourceDoMore.json");
+            JSONArray jsonArray = new JSONArray(jsonString);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Resources resources=new Resources();
+                resources.setTitle(jsonObject.getString("title"));
+                resources.setDesc(jsonObject.getString("desc"));
+                resources.setUrl(jsonObject.getString("url"));
+                resourcesArrayList.add(resources);
+
+            }
+        } catch (JSONException e) {
+            Log.e("json Exception", e.getMessage() + "");
+        }
+
+        return resourcesArrayList;
+    }
+
+    /**
+     * Returns an array of Resources object read from ResourceLearnMore.json file
+     * @param context  The context it was called from
+     * @return An ArrayList of resources object is returned parsed from resources.json file
+     */
+    public static ArrayList<Resources> getResourcesLearnMore(Context context) {
+        ArrayList<Resources> resourcesArrayList = new ArrayList<>();
+        try {
+            String jsonString = loadJSONFromAsset(context, "ResourceLearnMore.json");
+            JSONArray jsonArray = new JSONArray(jsonString);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Resources resources=new Resources();
+                resources.setTitle(jsonObject.getString("title"));
+                resources.setDesc(jsonObject.getString("desc"));
+                resources.setUrl(jsonObject.getString("url"));
                 resourcesArrayList.add(resources);
 
             }

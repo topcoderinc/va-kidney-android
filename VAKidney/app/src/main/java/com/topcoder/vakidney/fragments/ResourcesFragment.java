@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 
 import com.topcoder.vakidney.adapter.ViewPagerAdapter;
 import com.topcoder.vakidney.R;
-import com.topcoder.vakidney.fragments.resources.ResourceFragment;
+import com.topcoder.vakidney.fragments.resources.DoMoreFragment;
+import com.topcoder.vakidney.fragments.resources.LearnMoreFragment;
+import com.topcoder.vakidney.fragments.resources.ReadMoreFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,9 +50,9 @@ public class ResourcesFragment extends Fragment {
      */
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new ResourceFragment(), "Articles");
-        adapter.addFragment(new ResourceFragment(), "Tutorials");
-        adapter.addFragment(new ResourceFragment(), "Education");
+        adapter.addFragment(new ReadMoreFragment(), "Read More");
+        adapter.addFragment(new DoMoreFragment(), "Do More");
+        adapter.addFragment(new LearnMoreFragment(), "Learn More");
         viewPager.setAdapter(adapter);
     }
 
