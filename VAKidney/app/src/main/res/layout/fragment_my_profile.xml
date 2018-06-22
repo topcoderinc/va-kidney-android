@@ -535,14 +535,14 @@
             <RelativeLayout
                 android:id="@+id/profileFieldComorbidities"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_marginTop="@dimen/app_standard_padding"
                 android:background="@drawable/bg_white_rounded_small">
 
                 <LinearLayout
                     android:id="@+id/icon9"
                     android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/bg_left_rounded_accent">
 
                     <android.support.v7.widget.AppCompatImageView
