@@ -59,10 +59,13 @@ public abstract class BasePopup extends PopupWindow {
     }
 
     public abstract int getGravity();
+
     public abstract int getWidth();
+
     public abstract int getHeight();
 
     public abstract int getLocationX();
+
     public abstract int getLocationY();
 
 }

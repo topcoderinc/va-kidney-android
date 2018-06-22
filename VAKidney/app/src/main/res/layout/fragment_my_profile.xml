@@ -1,6 +1,8 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorLightGray"
@@ -32,16 +34,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="45dp">
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/profileImageView"
+        <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_centerVertical="true"
+            android:id="@+id/profileImageView"
             android:scaleType="fitXY"
-            android:src="@drawable/stock_613666608"
-            app:riv_border_color="@color/colorWhite"
-            app:riv_border_width="1dp"
-            app:riv_oval="true" />
+            />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -305,7 +304,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Are you in Dialysis?"
+                        android:text=" Are you Receiving Dialysis"
                         android:textColor="@color/colorDarkGray"
                         android:textSize="11dp"/>
 
@@ -346,7 +345,7 @@
                     android:background="@drawable/bg_left_rounded_accent">
 
                     <android.support.v7.widget.AppCompatImageView
-                        android:layout_width="match_parent"
+                        android:layout_width="17dp"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/app_standard_padding"
                         android:tint="@color/colorWhite"
@@ -367,7 +366,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Disease Category"
+                        android:text="Renal Disease Stage"
                         android:textColor="@color/colorDarkGray"
                         android:textSize="11dp"/>
 
@@ -404,55 +403,70 @@
                 <LinearLayout
                     android:id="@+id/icon6"
                     android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_height="match_parent"
                     android:background="@drawable/bg_left_rounded_accent">
 
                     <android.support.v7.widget.AppCompatImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="60dp"
                         android:layout_margin="@dimen/app_standard_padding"
                         android:tint="@color/colorWhite"
-                        app:srcCompat="@drawable/ic_goals"
-
-                        />
+                        app:srcCompat="@drawable/ic_goals" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/app_standard_padding"
                     android:layout_toRightOf="@+id/icon6"
-                    android:orientation="vertical">
+                    android:id="@+id/goalLayout"
+                    android:orientation="vertical"
+                    android:weightSum="1">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Want To Setup Goals?"
+                        android:layout_weight="0.3"
+                        android:padding="5dp"
+                        android:text="Goal Setup"
                         android:textColor="@color/colorDarkGray"
-                        android:textSize="11dp" />
+                        android:textSize="13dp" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/app_standard_padding"
+                    android:layout_toRightOf="@id/icon6"
+                    >
 
-                    <TextView
-                        android:id="@+id/tvSetupGoals"
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/btnGenerateGoals"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Yes"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="14dp"
-                        android:textStyle="bold" />
+                        android:layout_weight="0.5"
+                        android:textColor="@color/colorWhite"
+                        android:backgroundTint="@color/colorAccent"
+                        android:layout_marginRight="10dp"
+                        android:textStyle="bold"
+                        android:text="Generate Goals"
+                        android:textSize="12sp" />
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/btnResetGoals"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorWhite"
+                        android:backgroundTint="@color/colorRed"
+                        android:textStyle="bold"
+                        android:text="Reset All Goals"
+                        android:layout_marginRight="10dp"
+                        android:textSize="12sp"
+                        android:layout_weight="0.5"/>
                 </LinearLayout>
-
-                <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/app_standard_padding"
-                    android:tint="@color/colorLightDarkGray"
-                    app:srcCompat="@drawable/ic_keyboard_arrow_right" />
-
+                </LinearLayout>
 
             </RelativeLayout>
 
@@ -518,9 +532,69 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/profileFieldComorbidities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/app_standard_padding"
+                android:background="@drawable/bg_white_rounded_small">
 
+                <LinearLayout
+                    android:id="@+id/icon9"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_left_rounded_accent">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/app_standard_padding"
+                        android:tint="@color/colorWhite"
+                        app:srcCompat="@drawable/ic_questionmark"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/app_standard_padding"
+                    android:layout_toRightOf="@+id/icon9"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Comorbidities"
+                        android:textColor="@color/colorDarkGray"
+                        android:textSize="11dp"/>
+
+
+                    <TextView
+                        android:id="@+id/tvComorbidities"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NO"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/app_standard_padding"
+                    android:tint="@color/colorLightDarkGray"
+                    app:srcCompat="@drawable/ic_keyboard_arrow_right" />
+
+
+            </RelativeLayout>
         </LinearLayout>
 
     </ScrollView>
 
 </RelativeLayout>
+</layout>

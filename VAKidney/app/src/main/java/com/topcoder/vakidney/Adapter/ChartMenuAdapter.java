@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ public class ChartMenuAdapter extends Adapter implements View.OnClickListener {
 
         mUserData = UserData.get();
         if (mUserData != null) {
-            mGoals = Goal.get(mUserData.getDiseaseCategory(), mUserData.isDialysis());
+            mGoals = Goal.getWithoutComorbidities(mUserData.getDiseaseCategory(), mUserData.isDialysis());
         }
     }
 
@@ -61,12 +62,10 @@ public class ChartMenuAdapter extends Adapter implements View.OnClickListener {
         if (position == 0) {
             viewHolder.viewHeader.setVisibility(View.VISIBLE);
             viewHolder.textHeader.setText("Major");
-        }
-        else if (position - mGoals.size() == 0) {
+        } else if (position - mGoals.size() == 0) {
             viewHolder.viewHeader.setVisibility(View.VISIBLE);
             viewHolder.textHeader.setText("Other (Labs)");
-        }
-        else {
+        } else {
             viewHolder.viewHeader.setVisibility(View.GONE);
         }
 
@@ -77,8 +76,7 @@ public class ChartMenuAdapter extends Adapter implements View.OnClickListener {
 
         if (ChartType.isChartFilled(mContext, chartType)) {
             viewHolder.textLabel.setTypeface(null, Typeface.BOLD);
-        }
-        else {
+        } else {
             viewHolder.textLabel.setTypeface(null, Typeface.NORMAL);
         }
     }
@@ -90,10 +88,11 @@ public class ChartMenuAdapter extends Adapter implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if(view.getTag() != null && view.getTag() instanceof Long) {
+        if (view.getTag() != null && view.getTag() instanceof Long) {
             Long chartType = (Long) view.getTag();
             Intent intent = new Intent(mContext, ChartActivity.class);
             intent.putExtra("chartType", chartType);
+            Log.d("Chart type", chartType + "");
             mContext.startActivity(intent);
         }
     }

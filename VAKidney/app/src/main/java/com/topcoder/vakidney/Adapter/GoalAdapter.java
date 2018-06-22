@@ -3,6 +3,7 @@ package com.topcoder.vakidney.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -25,7 +26,7 @@ import java.util.List;
 /**
  * Goal adapter s used to populate the corresponding view with goal data from Goals.json file
  */
-public class GoalAdapter extends BaseAdapter{
+public class GoalAdapter extends BaseAdapter {
 
 
     private final List<Goal> goalArrayList;
@@ -38,7 +39,7 @@ public class GoalAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return goalArrayList.size()+1;
+        return goalArrayList.size() + 1;
     }
 
     @Override
@@ -53,7 +54,7 @@ public class GoalAdapter extends BaseAdapter{
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        if(i==0){
+        if (i == 0) {
             view = activity.getLayoutInflater().inflate(R.layout.item_grid_goal_addnew, viewGroup, false);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -61,30 +62,22 @@ public class GoalAdapter extends BaseAdapter{
                     activity.startActivity(new Intent(activity, AddNewGoalActivity.class));
                 }
             });
-        }else{
-            view = activity.getLayoutInflater().inflate(R.layout.item_grid_goal, viewGroup, false);
-            ArcProgress goalProgress = view.findViewById(R.id.goalProgress);
-            LinearLayout layout = view.findViewById(R.id.layout);
-            TextView tvCurrentGoals = view.findViewById(R.id.tvCurrentGoals);
-            TextView tvGoalUnit = view.findViewById(R.id.tvGoalUnit);
-            TextView tvAddGoalString = view.findViewById(R.id.tvAddGoalString);
-            final Goal goal = goalArrayList.get( i - 1 );
-            goalProgress.setMax((int)goal.getGoal());
-            goalProgress.setArcAngle(250.0f);
-            goalProgress.setIcon(GoalType.getIcon(goal.getType()));
-            goalProgress.setIconColor(Color.parseColor("#"+goal.getColorCode()));
-            goalProgress.setFinishedStrokeColor(Color.parseColor("#"+goal.getColorCode()));
-            goalProgress.setProgress((int)goal.getCurrentLevel());
-            goalProgress.setBottomTextSize(30);
-            goalProgress.setBottomText(goal.getTitleStr());
-            if ((goal.getCurrentLevel() == Math.floor(goal.getCurrentLevel())) && !Double.isInfinite(goal.getCurrentLevel())) {
-                tvCurrentGoals.setText((int)goal.getCurrentLevel()+"/"+(int)goal.getGoal());
-            }else{
-                tvCurrentGoals.setText(goal.getCurrentLevel()+"/"+goal.getGoal());
+        } else {
+            ViewHolder viewHolder = null;
+            if (view != null)
+                viewHolder = (ViewHolder) view.getTag();
+            if (viewHolder == null) {
+                viewHolder = new ViewHolder();
+                view = activity.getLayoutInflater().inflate(R.layout.item_grid_goal, viewGroup, false);
+                viewHolder.goalProgress = view.findViewById(R.id.goalProgress);
+                viewHolder.layout = view.findViewById(R.id.layout);
+                viewHolder.tvCurrentGoals = view.findViewById(R.id.tvCurrentGoals);
+                viewHolder.tvGoalUnit = view.findViewById(R.id.tvGoalUnit);
+                viewHolder.tvAddGoalString = view.findViewById(R.id.tvAddGoalString);
+                view.setTag(viewHolder);
             }
-            tvGoalUnit.setText(goal.getUnitStr());
-            tvAddGoalString.setText(GoalType.getAddTitle(goal.getType()));
-            layout.setOnClickListener(new View.OnClickListener() {
+            final Goal goal = goalArrayList.get(i - 1);
+            viewHolder.layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(activity, AddNewGoalActivity.class);
@@ -92,7 +85,35 @@ public class GoalAdapter extends BaseAdapter{
                     activity.startActivity(intent);
                 }
             });
+            viewHolder.setItem(goal);
         }
         return view;
+    }
+
+    static class ViewHolder {
+        ArcProgress goalProgress;
+        LinearLayout layout;
+        TextView tvCurrentGoals;
+        TextView tvGoalUnit;
+        TextView tvAddGoalString;
+
+        public void setItem(final Goal goal) {
+            goalProgress.setMax((int) goal.getGoalMax());
+            goalProgress.setArcAngle(240.0f);
+            goalProgress.setIcon(goal.getIcon());
+            goalProgress.setIconColor(Color.parseColor("#" + goal.getColorCode()));
+            goalProgress.setFinishedStrokeColor(Color.parseColor("#" + goal.getColorCode()));
+            goalProgress.setProgress((int) goal.getCurrentLevel());
+            goalProgress.setBottomText(goal.getTitleStr());
+            if ((goal.getCurrentLevel() == Math.floor(goal.getCurrentLevel())) && !Double.isInfinite(goal.getCurrentLevel())) {
+                tvCurrentGoals.setText((int) goal.getCurrentLevel() + "/" + (int) goal.getGoal());
+            } else {
+                tvCurrentGoals.setText(goal.getCurrentLevel() + "/" + goal.getGoal());
+            }
+            tvGoalUnit.setText(goal.getUnitStr());
+            tvAddGoalString.setText(String.format("Add %s", goal.getUnitStr()));
+
+        }
+
     }
 }

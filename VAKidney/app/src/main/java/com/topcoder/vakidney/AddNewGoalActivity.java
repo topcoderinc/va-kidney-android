@@ -1,6 +1,7 @@
 package com.topcoder.vakidney;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
@@ -15,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.topcoder.vakidney.adapter.GoalBarButtonAdapter;
+import com.topcoder.vakidney.constant.DiseaseCategory;
+import com.topcoder.vakidney.databinding.ActivityAddNewGoalBinding;
 import com.topcoder.vakidney.model.Goal;
 import com.topcoder.vakidney.model.UserData;
 import com.topcoder.vakidney.util.DialogManager;
@@ -30,14 +33,9 @@ import static android.view.View.GONE;
  * This class is used to add a new goal
  */
 public class AddNewGoalActivity extends AppCompatActivity
- implements GoalBarButtonAdapter.OnSeekBarButtonChangeListener {
+        implements GoalBarButtonAdapter.OnSeekBarButtonChangeListener {
 
-    private LinearLayout bottomMenu1, bottomMenu2, bottomMenu3, bottomMenu4, bottomMenu5;
-    private String[] frequencyString = {"Daily", "Weekly",  "Monthly"};
-    private AppCompatSpinner unitSpinner, frequencySpinner;
-
-    private Button btnDeleteGoal, btnAddGoal;
-    private TextView actionBarTitle;
+    private String[] frequencyString = {"Daily", "Weekly", "Monthly"};
 
     private enum Activity {EDIT, DELETE, ADD, NOTHING}
 
@@ -47,47 +45,59 @@ public class AddNewGoalActivity extends AppCompatActivity
     private Goal mGoal;
     private List<Goal> mGoals;
     private UserData mUserData;
-
     private GoalBarButtonAdapter mAdapter;
+
+    ActivityAddNewGoalBinding binder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_goal);
+        binder = DataBindingUtil.setContentView(this, R.layout.activity_add_new_goal);
 
         mUserData = UserData.get();
-        mGoals = Goal.getAll(mUserData.getDiseaseCategory(), mUserData.isDialysis());
+        mGoals = Goal.getAllWithoutComorbidities(mUserData.getDiseaseCategory(), mUserData.isDialysis());
 
-        RecyclerView recyclerView = findViewById(R.id.seekButtonRecycler);
+        //Add new goal was not implemented
+        if(mGoals.size()==0) {
+            Goal sGoalRun = new Goal();
+            sGoalRun.setTitleStr("Workout");
+            sGoalRun.setGoal(2.0);
+            sGoalRun.setGoalMax(8.0);
+            sGoalRun.setGoalMin(1.0);
+            sGoalRun.setGoalStep(1.0);
+            sGoalRun.setGoalId(1);
+            sGoalRun.setUnitStr("minutes");
+            sGoalRun.setColorCode("557630");
+            sGoalRun.setType(Goal.TYPE_ACTIVITY);
+            sGoalRun.setAction(Goal.ACTION_INTAKE);
+            sGoalRun.setMinCategory(DiseaseCategory.CATEGORY_STAGE_1);
+            sGoalRun.setIcon(R.drawable.ic_running);
+            mGoals.add(sGoalRun);
+        }
+
         mAdapter = new GoalBarButtonAdapter(this, mGoals);
         mAdapter.setOnSeekBarButtonChangeListener(this);
-        recyclerView.setAdapter(mAdapter);
+        binder.seekButtonRecycler.setAdapter(mAdapter);
 
-        AppCompatImageView backBtn = findViewById(R.id.backBtn);
-        actionBarTitle = findViewById(R.id.actionBarTitle);
-        btnDeleteGoal = findViewById(R.id.btnDeleteGoal);
-        btnAddGoal = findViewById(R.id.btnAddNewGoal);
-        unitSpinner = findViewById(R.id.unitSpinner);
-        frequencySpinner = findViewById(R.id.frequencySpinner);
-        backBtn.setOnClickListener(new View.OnClickListener() {
+        binder.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
 
-        unitSpinner.setOnTouchListener(new View.OnTouchListener() {
+        binder.unitSpinner.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                unitSpinner.setAlpha(1.0f);
+                binder.unitSpinner.setAlpha(1.0f);
                 return false;
             }
         });
 
-        frequencySpinner.setOnTouchListener(new View.OnTouchListener() {
+        binder.frequencySpinner.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                frequencySpinner.setAlpha(1.0f);
+                binder.frequencySpinner.setAlpha(1.0f);
                 return false;
             }
         });
@@ -105,27 +115,26 @@ public class AddNewGoalActivity extends AppCompatActivity
                 mAdapter.setSelectedGoal(mGoal);
                 int index = mGoals.indexOf(mGoal);
                 if (index > 0) {
-                    recyclerView.scrollToPosition(index);
+                    binder.seekButtonRecycler.scrollToPosition(index);
                 }
 
-                btnAddGoal.setText("SAVE MY GOAL");
-                actionBarTitle.setText("Edit Goal");
+                binder.btnAddNewGoal.setText("SAVE MY GOAL");
+                binder.actionBarTitle.setText("Edit Goal");
             }
         } else {
             mGoal = mGoals.get(0);
-            actionBarTitle.setText("Add New Goal");
-            btnDeleteGoal.setVisibility(GONE);
+            binder.actionBarTitle.setText("Add New Goal");
+            binder.btnDeleteGoal.setVisibility(GONE);
         }
 
-        btnAddGoal.setOnClickListener(new View.OnClickListener() {
+        binder.btnAddNewGoal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String message;
-                if (btnDeleteGoal.getVisibility() == GONE) {
+                if (binder.btnDeleteGoal.getVisibility() == GONE) {
                     if (mGoal.isHidden()) {
                         message = "A new goal has been created";
-                    }
-                    else {
+                    } else {
                         message = "Existing goal updated";
                     }
                 } else {
@@ -143,7 +152,7 @@ public class AddNewGoalActivity extends AppCompatActivity
             }
         });
 
-        btnDeleteGoal.setOnClickListener(new View.OnClickListener() {
+        binder.btnDeleteGoal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DialogManager.showYesNoDialog(
@@ -153,63 +162,27 @@ public class AddNewGoalActivity extends AppCompatActivity
                         "Cancel",
                         new DialogManager.OnYesClicked() {
 
-                    @Override
-                    public void YesClicked() {
-                        DialogManager.showOkDialog(
-                                AddNewGoalActivity.this,
-                                "Your goal has been deleted",
-                                new DialogManager.OnYesClicked() {
                             @Override
                             public void YesClicked() {
-                                mGoal.setHidden(true);
-                                mGoal.setCurrentLevel(0);
-                                mGoal.save();
-                                finish();
+                                DialogManager.showOkDialog(
+                                        AddNewGoalActivity.this,
+                                        "Your goal has been deleted",
+                                        new DialogManager.OnYesClicked() {
+                                            @Override
+                                            public void YesClicked() {
+                                                mGoal.setHidden(true);
+                                                mGoal.setCurrentLevel(0);
+                                                mGoal.save();
+                                                finish();
+                                            }
+                                        });
                             }
-                        });
-                    }
-                }, null);
+                        }, null);
             }
         });
         populateSpinner();
     }
 
-//    @Override
-//    public void onBackPressed() {
-//
-//        if (edited) {
-//            NavigateHome(Activity.EDIT);
-//        } else {
-//            NavigateHome(Activity.NOTHING);
-//        }
-//    }
-
-//    /**
-//     * Navigate to Home Screen
-//     */
-//    private void NavigateHome(Activity activity) {
-//        finish();
-//        Intent intent = new Intent(AddNewGoalActivity.this, MainActivity.class);
-//        if(activity==Activity.NOTHING) {
-//            intent.putExtra("tag", MainActivity.TAG_GOAL);
-//        }
-//        if(activity==Activity.ADD){
-//            intent.putExtra("tag", MainActivity.TAG_GOAL);
-//            intent.putExtra("addgoal", true);
-//            intent.putExtra("goal", getCurrentGoal().getBundle());
-//        }
-//        if(activity==Activity.DELETE){
-//            intent.putExtra("tag", MainActivity.TAG_GOAL);
-//            intent.putExtra("deletegoal", true);
-//            intent.putExtra("goal", getCurrentGoal().getBundle());
-//        }
-//        if(activity==Activity.EDIT){
-//            intent.putExtra("tag", MainActivity.TAG_GOAL);
-//            intent.putExtra("editgoal", true);
-//            intent.putExtra("goal", getCurrentGoal().getBundle());
-//        }
-//        startActivity(intent);
-//    }
 
     /**
      * Populate Frequency and Unit Spinner with respective data
@@ -221,7 +194,7 @@ public class AddNewGoalActivity extends AppCompatActivity
                 frequencyString);
         frequencySpinnerAdapter.setDropDownViewResource(
                 android.R.layout.simple_spinner_dropdown_item);
-        frequencySpinner.setAdapter(frequencySpinnerAdapter);
+        binder.frequencySpinner.setAdapter(frequencySpinnerAdapter);
 
         List<String> spinnerItemArray = new ArrayList<>();
         double value = mGoal.getGoalMin();
@@ -243,13 +216,13 @@ public class AddNewGoalActivity extends AppCompatActivity
                 spinnerItem
         );
         unitSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        unitSpinner.setAdapter(unitSpinnerAdapter);
-        unitSpinner.setSelection(selectedIndex);
+        binder.unitSpinner.setAdapter(unitSpinnerAdapter);
+        binder.unitSpinner.setSelection(selectedIndex);
 
-        unitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binder.unitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(mGoal != null){
+                if (mGoal != null) {
                     try {
                         Number num = NumberFormat.getInstance().parse(unitSpinnerAdapter.getItem(i));
                         mGoal.setGoal(num.doubleValue());
@@ -270,14 +243,9 @@ public class AddNewGoalActivity extends AppCompatActivity
      * Initialize view and sets up listener for bottom menu
      */
     private void SetupBotomMenu() {
-        bottomMenu1 = findViewById(R.id.barLin1);
-        bottomMenu2 = findViewById(R.id.barLin2);
-        bottomMenu3 = findViewById(R.id.barLin3);
-        bottomMenu4 = findViewById(R.id.barLin4);
-        bottomMenu5 = findViewById(R.id.barLin5);
 
 
-        bottomMenu1.setOnClickListener(new View.OnClickListener() {
+        binder.barLin1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AddNewGoalActivity.this, MainActivity.class);
@@ -286,7 +254,7 @@ public class AddNewGoalActivity extends AppCompatActivity
                 finish();
             }
         });
-        bottomMenu2.setOnClickListener(new View.OnClickListener() {
+        binder.barLin1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AddNewGoalActivity.this, MainActivity.class);
@@ -295,7 +263,7 @@ public class AddNewGoalActivity extends AppCompatActivity
                 finish();
             }
         });
-        bottomMenu3.setOnClickListener(new View.OnClickListener() {
+        binder.barLin1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AddNewGoalActivity.this, MainActivity.class);
@@ -304,7 +272,7 @@ public class AddNewGoalActivity extends AppCompatActivity
                 finish();
             }
         });
-        bottomMenu4.setOnClickListener(new View.OnClickListener() {
+        binder.barLin1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AddNewGoalActivity.this, MainActivity.class);
@@ -313,7 +281,7 @@ public class AddNewGoalActivity extends AppCompatActivity
                 finish();
             }
         });
-        bottomMenu5.setOnClickListener(new View.OnClickListener() {
+        binder.barLin1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AddNewGoalActivity.this, MainActivity.class);
@@ -330,190 +298,4 @@ public class AddNewGoalActivity extends AppCompatActivity
         populateSpinner();
     }
 
-
-//    /**
-//     * Initialize Top Seekbar and Sets up listener
-//     */
-//    private void SetupSeekBar() {
-//
-//        RecyclerView recyclerView = findViewById(R.id.seekButtonRecycler);
-//        mAdapter = new GoalBarButtonAdapter(this, mGoals);
-//        recyclerView.setAdapter(mAdapter);
-//
-//        Button button = (Button) getLayoutInflater().inflate(R.layout.item_seek_bar_button, null);
-//        button.setText("HAHAHA");
-//
-//        LinearLayout layout = findViewById(R.id.seekButtonLayout);
-//        layout.addView(button);
-//
-//        seekBtn1 = findViewById(R.id.seekBtn1);
-//        seekBtn2 = findViewById(R.id.seekBtn2);
-//        seekBtn3 = findViewById(R.id.seekBtn3);
-//        seekBtn4 = findViewById(R.id.seekBtn4);
-//
-//        seekBtn1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onGoalSelected(View view) {
-//                currentSeekIndex = 1;
-//                seekButton();
-//            }
-//        });
-//
-//
-//        seekBtn2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onGoalSelected(View view) {
-//                currentSeekIndex = 2;
-//                seekButton();
-//            }
-//        });
-//
-//        seekBtn3.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onGoalSelected(View view) {
-//                currentSeekIndex = 3;
-//                seekButton();
-//            }
-//        });
-//
-//
-//        seekBtn4.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onGoalSelected(View view) {
-//                currentSeekIndex = 4;
-//                seekButton();
-//            }
-//        });
-//
-//    }
-//
-//    /**
-//     * Method to emulate seek button transition
-//     */
-//    private void seekButton() {
-//        unitSpinner.setAlpha(0.0f);
-//        frequencySpinner.setAlpha(0.0f);
-//        if(mGoal!=null){
-//            mGoal.setTitle(currentSeekIndex);
-//            mGoal.setUnit(currentSeekIndex);
-//            mGoal.setColorCode(JsondataUtil.getGoalColorById(getApplicationContext(), currentSeekIndex));
-//            switch (currentSeekIndex) {
-//                case 1:
-//                    mGoal.setIcon(R.drawable.ic_running);
-//                    break;
-//                case 2:
-//                    mGoal.setIcon(R.drawable.ic_water_bottle);
-//                    break;
-//                case 3:
-//                    mGoal.setIcon(R.drawable.ic_fruits_veggies);
-//                    break;
-//                case 4:
-//                    mGoal.setIcon(R.drawable.ic_weight_loss);
-//                    break;
-//                default:
-//                    mGoal.setIcon(R.drawable.ic_running);
-//                    break;
-//            }
-//            try {
-//                Number num = NumberFormat.getInstance().parse(unitSpinnerAdapter.getItem(unitSpinner.getSelectedItemPosition()));
-//                mGoal.setGoal(num.doubleValue());
-//                mGoal.setCurrentLevel(num.doubleValue()/2);
-//            } catch (Exception e){
-//                Log.e("Exception", e.getMessage()+"");
-//            }
-//        }
-//        switch (currentSeekIndex) {
-//            case 1:
-//                seekBtn1.setBackgroundResource(R.drawable.bg_seekbar_selected);
-//                seekBtn2.setBackgroundColor(getColor(android.R.color.transparent));
-//                seekBtn3.setBackgroundColor(getColor(android.R.color.transparent));
-//                seekBtn4.setBackgroundColor(getColor(android.R.color.transparent));
-//
-//                seekBtn1.setTextColor(getColor(R.color.colorWhite));
-//                seekBtn2.setTextColor(getColor(R.color.colorLightDarkGray));
-//                seekBtn3.setTextColor(getColor(R.color.colorLightDarkGray));
-//                seekBtn4.setTextColor(getColor(R.color.colorLightDarkGray));
-//
-//                break;
-//
-//            case 2:
-//                seekBtn2.setBackgroundResource(R.drawable.bg_seekbar_selected);
-//                seekBtn1.setBackgroundColor(getColor(android.R.color.transparent));
-//                seekBtn3.setBackgroundColor(getColor(android.R.color.transparent));
-//                seekBtn4.setBackgroundColor(getColor(android.R.color.transparent));
-//
-//                seekBtn2.setTextColor(getColor(R.color.colorWhite));
-//                seekBtn1.setTextColor(getColor(R.color.colorLightDarkGray));
-//                seekBtn3.setTextColor(getColor(R.color.colorLightDarkGray));
-//                seekBtn4.setTextColor(getColor(R.color.colorLightDarkGray));
-//                break;
-//
-//
-//            case 3:
-//
-//                seekBtn3.setBackgroundResource(R.drawable.bg_seekbar_selected);
-//                seekBtn2.setBackgroundColor(getColor(android.R.color.transparent));
-//                seekBtn1.setBackgroundColor(getColor(android.R.color.transparent));
-//                seekBtn4.setBackgroundColor(getColor(android.R.color.transparent));
-//
-//                seekBtn3.setTextColor(getColor(R.color.colorWhite));
-//                seekBtn2.setTextColor(getColor(R.color.colorLightDarkGray));
-//                seekBtn1.setTextColor(getColor(R.color.colorLightDarkGray));
-//                seekBtn4.setTextColor(getColor(R.color.colorLightDarkGray));
-//                break;
-//
-//
-//            case 4:
-//                seekBtn4.setBackgroundResource(R.drawable.bg_seekbar_selected);
-//                seekBtn2.setBackgroundColor(getColor(android.R.color.transparent));
-//                seekBtn3.setBackgroundColor(getColor(android.R.color.transparent));
-//                seekBtn1.setBackgroundColor(getColor(android.R.color.transparent));
-//
-//                seekBtn4.setTextColor(getColor(R.color.colorWhite));
-//                seekBtn2.setTextColor(getColor(R.color.colorLightDarkGray));
-//                seekBtn3.setTextColor(getColor(R.color.colorLightDarkGray));
-//                seekBtn1.setTextColor(getColor(R.color.colorLightDarkGray));
-//                break;
-//
-//
-//        }
-//        populateSpinner();
-//    }
-
-//    private Goal getCurrentGoal() {
-//        if (mGoal != null) {
-//            return mGoal;
-//        } else {
-//            mGoal = JsondataUtil.getGoalByID(getApplicationContext(), 1);
-//            mGoal.setTitle(currentSeekIndex);
-//            mGoal.setUnit(currentSeekIndex);
-//            mGoal.setColorCode(JsondataUtil.getGoalColorById(getApplicationContext(), currentSeekIndex));
-//            switch (currentSeekIndex) {
-//                case 1:
-//                    mGoal.setIcon(R.drawable.ic_running);
-//                    break;
-//                case 2:
-//                    mGoal.setIcon(R.drawable.ic_water_bottle);
-//                    break;
-//                case 3:
-//                    mGoal.setIcon(R.drawable.ic_fruits_veggies);
-//                    break;
-//                case 4:
-//                    mGoal.setIcon(R.drawable.ic_weight_loss);
-//                    break;
-//                default:
-//                    mGoal.setIcon(R.drawable.ic_running);
-//                    break;
-//            }
-//            try {
-//                Number num = NumberFormat.getInstance().parse(unitSpinnerAdapter.getItem(unitSpinner.getSelectedItemPosition()));
-//                mGoal.setGoal(num.doubleValue());
-//                mGoal.setCurrentLevel(num.doubleValue()/2);
-//            } catch (Exception e){
-//                Log.e("Exception", e.getMessage()+"");
-//            }
-//            return mGoal;
-//
-//        }
-//    }
 }

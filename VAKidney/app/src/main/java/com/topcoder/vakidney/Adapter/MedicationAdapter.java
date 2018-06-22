@@ -1,16 +1,19 @@
 package com.topcoder.vakidney.adapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.Adapter;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.topcoder.vakidney.model.DrugInteraction;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.ResourcesDetailActivity;
+import com.topcoder.vakidney.model.DrugInteraction;
+import com.topcoder.vakidney.model.FoodRecommendation;
 import com.topcoder.vakidney.util.TextUtil;
 
 import org.json.JSONArray;
@@ -21,137 +24,116 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Created by Abinash Neupane on 2/8/2018.
+ * This is adapter class to show food recommendation list.
  */
 
-/**
- * Used to populate view with medication resources data read from MedicationResources.json file
- */
-public class MedicationAdapter extends BaseAdapter {
+public class MedicationAdapter extends Adapter {
 
-    private final List<DrugInteraction> drugInteractions;
-    private final List<DrugInteraction> drugConsumptions;
+    private final Context mContext;
+    private final RecyclerView mRecycleView;
+    private final List<DrugInteraction> mDrugInteractionList;
     private final Activity activity;
-    private final String[] sectionHeaders = new String[] {
-            "Drug Consumption",
-            "Drug Interaction Warning"
-    };
+    public static final int Medication = 0;
+    public static final int DrugInteractionWarning = 1;
+    private int mMode;
 
-    public MedicationAdapter(List<DrugInteraction> drugConsumptions,
-                             List<DrugInteraction> drugInteractions,
-                             Activity activity) {
-        this.drugConsumptions = drugConsumptions;
-        this.drugInteractions = drugInteractions;
+    public MedicationAdapter(RecyclerView parent, List<DrugInteraction> mDrugInteractionList, Activity activity, int mode) {
+        mRecycleView = parent;
+        this.mDrugInteractionList = mDrugInteractionList;
         this.activity = activity;
+        mContext = parent.getContext();
+        mMode = mode;
     }
 
     @Override
-    public int getCount() {
-        return 2;
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_medicationresource_titledesc, parent, false);
+        return new ViewHolder(v);
     }
 
     @Override
-    public Object getItem(int i) {
-        return null;
-    }
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        ViewHolder viewHolder = (ViewHolder) holder;
+        final DrugInteraction drugInteraction = mDrugInteractionList.get(position);
 
-    @Override
-    public long getItemId(int i) {
-        return i;
-    }
+        viewHolder.itemView.setTag(drugInteraction);
 
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        List<DrugInteraction> drugs = null;
+        viewHolder.textTitle.setText(TextUtil.capitalizeFirstLetter(drugInteraction.getName()));
+        viewHolder.textDesc.setText(
+                "Report: #" + drugInteraction.getReportId() +
+                        "\n" +
+                        "Date: " + new SimpleDateFormat("MMM dd yyyy", Locale.US).format(drugInteraction.getDate()));
+        viewHolder.textDesc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.finish();
+                Intent intent = new Intent(activity, ResourcesDetailActivity.class);
+                intent.putExtra("title", drugInteraction.getName());
+                intent.putExtra("actionbartitle", "Drug Interaction Details");
+                String descrtiption = "";
+                descrtiption = "Report: #" + drugInteraction.getReportId() + "\n";
+                descrtiption =
+                        descrtiption +
+                                "Date: " +
+                                new SimpleDateFormat(
+                                        "MMM dd yyyy",
+                                        Locale.US
+                                ).format(drugInteraction.getDate()) +
+                                "\n\n";
 
-        switch (i) {
-            case 0: {
-                drugs = drugConsumptions;
-                break;
-            }
-            case 1: {
-                drugs = drugInteractions;
-                break;
-            }
-        }
-        view = activity.getLayoutInflater().inflate(R.layout.item_medication_list, viewGroup, false);
-        LinearLayout mainView = view.findViewById(R.id.mainView);
-
-        View viewMainTitle = activity.getLayoutInflater().inflate(R.layout.item_medicationresource_maintitle, viewGroup, false);
-        TextView tvMainTitle = viewMainTitle.findViewById(R.id.mainTitle);
-        tvMainTitle.setText(sectionHeaders[i]);
-        mainView.addView(viewMainTitle);
-
-        for (int k = 0; k < drugs.size(); k++) {
-            final DrugInteraction drugInteraction = drugs.get(k);
-            View viewTitleDesc = activity.getLayoutInflater().inflate(
-                    R.layout.item_medicationresource_titledesc,
-                    viewGroup,
-                    false);
-            TextView tvTitle = viewTitleDesc.findViewById(R.id.title);
-            TextView tvDesc = viewTitleDesc.findViewById(R.id.desc);
-            LinearLayout divider = viewTitleDesc.findViewById(R.id.divider);
-            tvTitle.setText(TextUtil.capitalizeFirstLetter(drugInteraction.getName()));
-            tvDesc.setText(
-                    "Report: #" + drugInteraction.getReportId() +
-                    "\n" +
-                    "Date: " + new SimpleDateFormat("MMM dd yyyy", Locale.US).format(drugInteraction.getDate()));
-
-            viewTitleDesc.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    activity.finish();
-                    Intent intent = new Intent(activity, ResourcesDetailActivity.class);
-                    intent.putExtra("title", drugInteraction.getName());
-                    intent.putExtra("actionbartitle", "Drug Interaction Details");
-                    String descrtiption = "";
-                    descrtiption = "Report: #" + drugInteraction.getReportId() + "\n";
-                    descrtiption =
-                            descrtiption +
-                            "Date: " +
-                            new SimpleDateFormat(
-                                    "MMM dd yyyy",
-                                    Locale.US
-                            ).format(drugInteraction.getDate()) +
-                            "\n\n";
-
-                    try {
+                try {
+                    if (mMode == Medication) {
+                        descrtiption = descrtiption + "Medications:\n\n";
                         JSONArray drugsArray = new JSONArray(drugInteraction.getDrugsArray());
                         for (int i = 0; i < drugsArray.length(); i++) {
                             descrtiption =
                                     descrtiption +
-                                    drugsArray
-                                            .getJSONObject(i)
-                                            .getString("medicinalproduct") +
-                                    "\n";
+                                            drugsArray
+                                                    .getJSONObject(i)
+                                                    .getString("medicinalproduct") +
+                                            "\n";
                         }
                         descrtiption = descrtiption + "\n";
-
+                    }
+                    if (mMode == DrugInteractionWarning) {
+                        descrtiption = descrtiption + "Drug Interaction Warning:\n\n";
                         JSONArray reactionsArray = new JSONArray(drugInteraction.getReactionsArray());
                         for (int i = 0; i < reactionsArray.length(); i++) {
                             descrtiption =
                                     descrtiption +
-                                    reactionsArray
-                                            .getJSONObject(i)
-                                            .getString("reactionmeddrapt") +
-                                    "\n";
+                                            reactionsArray
+                                                    .getJSONObject(i)
+                                                    .getString("reactionmeddrapt") +
+                                            "\n";
                         }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
-
-                    intent.putExtra("desc", descrtiption);
-                    activity.startActivity(intent);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            });
-            if(k == drugInteractions.size() - 1){
-                divider.setVisibility(View.GONE);
-            }
-            mainView.addView(viewTitleDesc);
 
+                intent.putExtra("desc", descrtiption);
+                activity.startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return mDrugInteractionList.size();
+    }
+
+
+    private class ViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView textTitle;
+        private TextView textDesc;
+
+        private ViewHolder(View itemView) {
+            super(itemView);
+            textTitle = itemView.findViewById(R.id.title);
+            textDesc = itemView.findViewById(R.id.desc);
         }
-        return view;
     }
 
 }

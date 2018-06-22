@@ -1,10 +1,12 @@
 package com.topcoder.vakidney;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -15,6 +17,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
@@ -25,7 +29,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.makeramen.roundedimageview.RoundedImageView;
+import com.topcoder.vakidney.databinding.ActivityAddNewMealBinding;
+import com.topcoder.vakidney.databinding.ItemAddMealdrugBinding;
 import com.topcoder.vakidney.model.DrugInteraction;
 import com.topcoder.vakidney.model.Meal;
 import com.topcoder.vakidney.model.MealDrug;
@@ -53,39 +58,32 @@ public class AddNewMealActivity extends AppCompatActivity implements
     private final static int REQUEST_CODE_PICK_IMAGE = 1;
 
     private final static Map<String, Integer> MEAL_TYPE_INDEX = new HashMap<>();
+
     static {
         MEAL_TYPE_INDEX.put(Meal.MEAL_TYPE_BREAKFAST, 1);
         MEAL_TYPE_INDEX.put(Meal.MEAL_TYPE_LUNCH, 2);
         MEAL_TYPE_INDEX.put(Meal.MEAL_TYPE_DINNER, 3);
         MEAL_TYPE_INDEX.put(Meal.MEAL_TYPE_SNACK, 4);
-        MEAL_TYPE_INDEX.put(Meal.MEAL_TYPE_CUSTOM, 5);
+        MEAL_TYPE_INDEX.put(Meal.MEAL_TYPE_CASUAL, 5);
     }
 
-    private LinearLayout bottomMenu1, bottomMenu2, bottomMenu3, bottomMenu4, bottomMenu5;
-    private AppCompatImageView backBtn;
-    private Button seekBtn1, seekBtn2, seekBtn3, seekBtn4, seekBtn5;
+
     private int currentSeekIndex = 1;
-    private TextView tvMealDate, tvMealTime;
-    private TextView tvChangeDate, tvChangeTime;
     private Calendar myCalendar;
     private DatePickerDialog.OnDateSetListener date;
-    private LinearLayout addImageBtn;
-    private RoundedImageView addedImage;
-    private AppCompatImageView btnRemoveImage;
-    private Button btnAddNewMeal;
-    private LinearLayout dateLayout, timeLayout;
-    private RelativeLayout addedImageLayout;
-
     private Meal mMeal;
     private DrugInteraction mDrugInteraction;
     private List<MealDrug> mAddedMealDrugs = new ArrayList<>();
+    public static Activity activity;
+    ActivityAddNewMealBinding binder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_meal);
-        backBtn = findViewById(R.id.backBtn);
-        backBtn.setOnClickListener(new View.OnClickListener() {
+        binder = DataBindingUtil.setContentView(this, R.layout.activity_add_new_meal);
+        activity = this;
+
+        binder.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavigateHome(false);
@@ -93,40 +91,31 @@ public class AddNewMealActivity extends AppCompatActivity implements
         });
         SetupSeekBar();
         SetupBotomMenu();
-        addedImageLayout = findViewById(R.id.addImageLayout);
-        dateLayout = findViewById(R.id.dateLayout);
-        timeLayout = findViewById(R.id.timeLayout);
-        btnAddNewMeal = findViewById(R.id.btnAddNewMeal);
-        btnAddNewMeal.setEnabled(false);
-        addImageBtn = findViewById(R.id.addPhotoBtn);
-        addedImage = findViewById(R.id.addedImage);
-        btnRemoveImage = findViewById(R.id.removeImageBtn);
+
+        binder.btnAddNewMeal.setEnabled(false);
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
-        btnRemoveImage.setOnClickListener(new View.OnClickListener() {
+        binder.removeImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addedImageLayout.setVisibility(View.INVISIBLE);
-                addedImage.setImageBitmap(null);
+                binder.addImageLayout.setVisibility(View.INVISIBLE);
+                binder.addedImage.setImageBitmap(null);
                 if (mMeal != null && mMeal.getPhotoUrl() != null) {
                     mMeal.setPhotoUrl(null);
                 }
             }
         });
-        addImageBtn.setOnClickListener(new View.OnClickListener() {
+        binder.addPhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 checkPermissionThenPickPhoto();
             }
         });
-        tvMealDate = findViewById(R.id.tveMealDate);
-        tvMealTime = findViewById(R.id.tvMealTime);
-        tvChangeDate = findViewById(R.id.tvChangeDate);
-        tvChangeTime = findViewById(R.id.tvChangeTime);
+
         myCalendar = Calendar.getInstance();
-        tvMealDate.setText(myCalendar.get(Calendar.MONTH) + 1
+        binder.tveMealDate.setText(myCalendar.get(Calendar.MONTH) + 1
                 + "/" + myCalendar.get(Calendar.DAY_OF_MONTH)
                 + "/" + myCalendar.get(Calendar.YEAR));
 
@@ -135,9 +124,9 @@ public class AddNewMealActivity extends AppCompatActivity implements
         DateFormat inputFormat = new SimpleDateFormat("HH:mm", Locale.US);
         DateFormat outputFormat = new SimpleDateFormat("KK:mm a", Locale.US);
         try {
-            tvMealTime.setText(outputFormat.format(inputFormat.parse(input)));
+            binder.tvMealTime.setText(outputFormat.format(inputFormat.parse(input)));
         } catch (ParseException e) {
-            tvMealTime.setText(input);
+            binder.tvMealTime.setText(input);
         }
         date = new DatePickerDialog.OnDateSetListener() {
 
@@ -148,23 +137,25 @@ public class AddNewMealActivity extends AppCompatActivity implements
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                tvMealDate.setText(myCalendar.get(Calendar.MONTH) + 1
+                binder.tveMealDate.setText(myCalendar.get(Calendar.MONTH) + 1
                         + "/" + myCalendar.get(Calendar.DAY_OF_MONTH)
                         + "/" + myCalendar.get(Calendar.YEAR));
 
             }
 
         };
-        dateLayout.setOnClickListener(new View.OnClickListener() {
+        binder.dateLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(AddNewMealActivity.this, date, myCalendar
+               DatePickerDialog datePickerDialog=new DatePickerDialog(AddNewMealActivity.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+               datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+               datePickerDialog.show();
             }
         });
 
-        timeLayout.setOnClickListener(new View.OnClickListener() {
+        binder.timeLayout.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -182,9 +173,9 @@ public class AddNewMealActivity extends AppCompatActivity implements
                         DateFormat inputFormat = new SimpleDateFormat("HH:mm");
                         DateFormat outputFormat = new SimpleDateFormat("KK:mm a");
                         try {
-                            tvMealTime.setText(outputFormat.format(inputFormat.parse(input)));
+                            binder.tvMealTime.setText(outputFormat.format(inputFormat.parse(input)));
                         } catch (ParseException e) {
-                            tvMealTime.setText(input);
+                            binder.tvMealTime.setText(input);
                         }
                     }
                 }, hour, minute, true);//Yes 24 hour time
@@ -194,7 +185,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
             }
         });
 
-        btnAddNewMeal.setOnClickListener(new View.OnClickListener() {
+        binder.btnAddNewMeal.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -218,7 +209,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
 
                 if (mMeal.isHasDrug()) {
                     List<String> drugs = new ArrayList<>();
-                    for (MealDrug mealDrug: mMeal.getMealDrugs()) {
+                    for (MealDrug mealDrug : mMeal.getMealDrugs()) {
                         if (mealDrug.getType() == MealDrug.TYPE_DRUG) drugs.add(mealDrug.getName());
                     }
                     if (drugs.size() > 0) {
@@ -242,18 +233,15 @@ public class AddNewMealActivity extends AppCompatActivity implements
 
         });
 
-        TextView tvAddMeal = findViewById(R.id.tvAddMeal);
-        TextView tvAddDrug = findViewById(R.id.tvAddDrug);
-        tvAddMeal.setOnClickListener(this);
-        tvAddDrug.setOnClickListener(this);
 
-        if(getIntent().hasExtra("meal")) {
+        binder.tvAddMeal.setOnClickListener(this);
+        binder.tvAddDrug.setOnClickListener(this);
+
+        if (getIntent().hasExtra("meal")) {
             Meal meal = (Meal) getIntent().getSerializableExtra("meal");
             initSavedMeal(meal);
-            TextView textTitle = findViewById(R.id.actionBarTitle);
-            textTitle.setText("Edit Meal");
-        }
-        else {
+            binder.actionBarTitle.setText("Edit Meal");
+        } else {
             mMeal = new Meal();
             mMeal.setMealId(System.currentTimeMillis());
             mMeal.setType(Meal.MEAL_TYPE_BREAKFAST);
@@ -275,18 +263,18 @@ public class AddNewMealActivity extends AppCompatActivity implements
         String dateStr = new SimpleDateFormat("M/d/yyyy", Locale.US).format(meal.getDate());
         String timeStr = new SimpleDateFormat("KK:mm a", Locale.US).format(meal.getDate());
 
-        tvMealDate.setText(dateStr);
-        tvMealTime.setText(timeStr);
+        binder.tveMealDate.setText(dateStr);
+        binder.tvMealTime.setText(timeStr);
 
-        btnAddNewMeal.setText("Save Meal");
-        btnAddNewMeal.setEnabled(true);
+        binder.btnAddNewMeal.setText("Save Meal");
+        binder.btnAddNewMeal.setEnabled(true);
 
         if (mMeal.getPhotoUrl() != null) {
-            addedImageLayout.setVisibility(View.VISIBLE);
+            binder.addImageLayout.setVisibility(View.VISIBLE);
             Glide.with(this)
                     .load(mMeal.getPhotoUrl())
                     .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(addedImage);
+                    .into(binder.addedImage);
         }
 
     }
@@ -297,12 +285,12 @@ public class AddNewMealActivity extends AppCompatActivity implements
         if (resultCode == RESULT_CANCELED) return;
         switch (requestCode) {
             case REQUEST_CODE_PICK_IMAGE:
-                addedImageLayout.setVisibility(View.VISIBLE);
+                binder.addImageLayout.setVisibility(View.VISIBLE);
                 String filePath = ImagePicker.getImagePathFromResult(this, resultCode, data);
                 Glide.with(this)
                         .load(filePath)
                         .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(addedImage);
+                        .into(binder.addedImage);
                 mMeal.setPhotoUrl(filePath);
                 break;
             default:
@@ -332,12 +320,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
      * Initialize view and sets up listener for bottom menu
      */
     private void SetupBotomMenu() {
-        bottomMenu1 = findViewById(R.id.barLin1);
-        bottomMenu2 = findViewById(R.id.barLin2);
-        bottomMenu3 = findViewById(R.id.barLin3);
-        bottomMenu4 = findViewById(R.id.barLin4);
-        bottomMenu5 = findViewById(R.id.barLin5);
-        bottomMenu1.setOnClickListener(new View.OnClickListener() {
+        binder.barLin1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AddNewMealActivity.this, MainActivity.class);
@@ -346,7 +329,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
                 finish();
             }
         });
-        bottomMenu2.setOnClickListener(new View.OnClickListener() {
+        binder.barLin2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AddNewMealActivity.this, MainActivity.class);
@@ -355,7 +338,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
                 finish();
             }
         });
-        bottomMenu3.setOnClickListener(new View.OnClickListener() {
+        binder.barLin3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AddNewMealActivity.this, MainActivity.class);
@@ -364,7 +347,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
                 finish();
             }
         });
-        bottomMenu4.setOnClickListener(new View.OnClickListener() {
+        binder.barLin4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AddNewMealActivity.this, MainActivity.class);
@@ -373,7 +356,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
                 finish();
             }
         });
-        bottomMenu5.setOnClickListener(new View.OnClickListener() {
+        binder.barLin5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AddNewMealActivity.this, MainActivity.class);
@@ -388,13 +371,8 @@ public class AddNewMealActivity extends AppCompatActivity implements
      * Initialize Top Seekbar and Sets up listener
      */
     private void SetupSeekBar() {
-        seekBtn1 = findViewById(R.id.seekBtn1);
-        seekBtn2 = findViewById(R.id.seekBtn2);
-        seekBtn3 = findViewById(R.id.seekBtn3);
-        seekBtn4 = findViewById(R.id.seekBtn4);
-        seekBtn5 = findViewById(R.id.seekBtn5);
 
-        seekBtn1.setOnClickListener(new View.OnClickListener() {
+        binder.seekBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mMeal.setType(Meal.MEAL_TYPE_BREAKFAST);
@@ -404,7 +382,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
         });
 
 
-        seekBtn2.setOnClickListener(new View.OnClickListener() {
+        binder.seekBtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mMeal.setType(Meal.MEAL_TYPE_LUNCH);
@@ -413,7 +391,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
             }
         });
 
-        seekBtn3.setOnClickListener(new View.OnClickListener() {
+        binder.seekBtn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mMeal.setType(Meal.MEAL_TYPE_DINNER);
@@ -422,7 +400,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
             }
         });
 
-        seekBtn4.setOnClickListener(new View.OnClickListener() {
+        binder.seekBtn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mMeal.setType(Meal.MEAL_TYPE_SNACK);
@@ -432,10 +410,10 @@ public class AddNewMealActivity extends AppCompatActivity implements
         });
 
 
-        seekBtn5.setOnClickListener(new View.OnClickListener() {
+        binder.seekBtn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mMeal.setType(Meal.MEAL_TYPE_CUSTOM);
+                mMeal.setType(Meal.MEAL_TYPE_CASUAL);
                 currentSeekIndex = 5;
                 seekButton();
             }
@@ -448,76 +426,76 @@ public class AddNewMealActivity extends AppCompatActivity implements
     private void seekButton() {
         switch (currentSeekIndex) {
             case 1:
-                seekBtn1.setBackgroundResource(R.drawable.bg_seekbar_selected);
-                seekBtn2.setBackgroundColor(getColor(android.R.color.transparent));
-                seekBtn3.setBackgroundColor(getColor(android.R.color.transparent));
-                seekBtn4.setBackgroundColor(getColor(android.R.color.transparent));
-                seekBtn5.setBackgroundColor(getColor(android.R.color.transparent));
+                binder.seekBtn1.setBackgroundResource(R.drawable.bg_seekbar_selected);
+                binder.seekBtn2.setBackgroundColor(getColor(android.R.color.transparent));
+                binder.seekBtn3.setBackgroundColor(getColor(android.R.color.transparent));
+                binder.seekBtn4.setBackgroundColor(getColor(android.R.color.transparent));
+                binder.seekBtn5.setBackgroundColor(getColor(android.R.color.transparent));
 
-                seekBtn1.setTextColor(getColor(R.color.colorWhite));
-                seekBtn2.setTextColor(getColor(R.color.colorLightDarkGray));
-                seekBtn3.setTextColor(getColor(R.color.colorLightDarkGray));
-                seekBtn4.setTextColor(getColor(R.color.colorLightDarkGray));
-                seekBtn5.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.seekBtn1.setTextColor(getColor(R.color.colorWhite));
+                binder.seekBtn2.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.seekBtn3.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.seekBtn4.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.seekBtn5.setTextColor(getColor(R.color.colorLightDarkGray));
 
                 break;
 
             case 2:
-                seekBtn2.setBackgroundResource(R.drawable.bg_seekbar_selected);
-                seekBtn1.setBackgroundColor(getColor(android.R.color.transparent));
-                seekBtn3.setBackgroundColor(getColor(android.R.color.transparent));
-                seekBtn4.setBackgroundColor(getColor(android.R.color.transparent));
-                seekBtn5.setBackgroundColor(getColor(android.R.color.transparent));
+                binder.seekBtn2.setBackgroundResource(R.drawable.bg_seekbar_selected);
+                binder.seekBtn1.setBackgroundColor(getColor(android.R.color.transparent));
+                binder.seekBtn3.setBackgroundColor(getColor(android.R.color.transparent));
+                binder.seekBtn4.setBackgroundColor(getColor(android.R.color.transparent));
+                binder.seekBtn5.setBackgroundColor(getColor(android.R.color.transparent));
 
-                seekBtn2.setTextColor(getColor(R.color.colorWhite));
-                seekBtn1.setTextColor(getColor(R.color.colorLightDarkGray));
-                seekBtn3.setTextColor(getColor(R.color.colorLightDarkGray));
-                seekBtn4.setTextColor(getColor(R.color.colorLightDarkGray));
-                seekBtn5.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.seekBtn2.setTextColor(getColor(R.color.colorWhite));
+                binder.seekBtn1.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.seekBtn3.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.seekBtn4.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.seekBtn5.setTextColor(getColor(R.color.colorLightDarkGray));
                 break;
 
             case 3:
 
-                seekBtn3.setBackgroundResource(R.drawable.bg_seekbar_selected);
-                seekBtn2.setBackgroundColor(getColor(android.R.color.transparent));
-                seekBtn1.setBackgroundColor(getColor(android.R.color.transparent));
-                seekBtn4.setBackgroundColor(getColor(android.R.color.transparent));
-                seekBtn5.setBackgroundColor(getColor(android.R.color.transparent));
+                binder.seekBtn3.setBackgroundResource(R.drawable.bg_seekbar_selected);
+                binder.seekBtn2.setBackgroundColor(getColor(android.R.color.transparent));
+                binder.seekBtn1.setBackgroundColor(getColor(android.R.color.transparent));
+                binder.seekBtn4.setBackgroundColor(getColor(android.R.color.transparent));
+                binder.seekBtn5.setBackgroundColor(getColor(android.R.color.transparent));
 
-                seekBtn3.setTextColor(getColor(R.color.colorWhite));
-                seekBtn2.setTextColor(getColor(R.color.colorLightDarkGray));
-                seekBtn1.setTextColor(getColor(R.color.colorLightDarkGray));
-                seekBtn4.setTextColor(getColor(R.color.colorLightDarkGray));
-                seekBtn5.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.seekBtn3.setTextColor(getColor(R.color.colorWhite));
+                binder.seekBtn2.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.seekBtn1.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.seekBtn4.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.seekBtn5.setTextColor(getColor(R.color.colorLightDarkGray));
                 break;
 
 
             case 4:
-                seekBtn4.setBackgroundResource(R.drawable.bg_seekbar_selected);
-                seekBtn2.setBackgroundColor(getColor(android.R.color.transparent));
-                seekBtn3.setBackgroundColor(getColor(android.R.color.transparent));
-                seekBtn1.setBackgroundColor(getColor(android.R.color.transparent));
-                seekBtn5.setBackgroundColor(getColor(android.R.color.transparent));
+                binder.seekBtn4.setBackgroundResource(R.drawable.bg_seekbar_selected);
+                binder.seekBtn2.setBackgroundColor(getColor(android.R.color.transparent));
+                binder.seekBtn3.setBackgroundColor(getColor(android.R.color.transparent));
+                binder.seekBtn1.setBackgroundColor(getColor(android.R.color.transparent));
+                binder.seekBtn5.setBackgroundColor(getColor(android.R.color.transparent));
 
-                seekBtn4.setTextColor(getColor(R.color.colorWhite));
-                seekBtn2.setTextColor(getColor(R.color.colorLightDarkGray));
-                seekBtn3.setTextColor(getColor(R.color.colorLightDarkGray));
-                seekBtn1.setTextColor(getColor(R.color.colorLightDarkGray));
-                seekBtn5.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.seekBtn4.setTextColor(getColor(R.color.colorWhite));
+                binder.seekBtn2.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.seekBtn3.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.seekBtn1.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.seekBtn5.setTextColor(getColor(R.color.colorLightDarkGray));
                 break;
 
             case 5:
-                seekBtn5.setBackgroundResource(R.drawable.bg_seekbar_selected);
-                seekBtn2.setBackgroundColor(getColor(android.R.color.transparent));
-                seekBtn3.setBackgroundColor(getColor(android.R.color.transparent));
-                seekBtn4.setBackgroundColor(getColor(android.R.color.transparent));
-                seekBtn1.setBackgroundColor(getColor(android.R.color.transparent));
+                binder.seekBtn5.setBackgroundResource(R.drawable.bg_seekbar_selected);
+                binder.seekBtn2.setBackgroundColor(getColor(android.R.color.transparent));
+                binder.seekBtn3.setBackgroundColor(getColor(android.R.color.transparent));
+                binder.seekBtn4.setBackgroundColor(getColor(android.R.color.transparent));
+                binder.seekBtn1.setBackgroundColor(getColor(android.R.color.transparent));
 
-                seekBtn5.setTextColor(getColor(R.color.colorWhite));
-                seekBtn2.setTextColor(getColor(R.color.colorLightDarkGray));
-                seekBtn3.setTextColor(getColor(R.color.colorLightDarkGray));
-                seekBtn4.setTextColor(getColor(R.color.colorLightDarkGray));
-                seekBtn1.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.seekBtn5.setTextColor(getColor(R.color.colorWhite));
+                binder.seekBtn2.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.seekBtn3.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.seekBtn4.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.seekBtn1.setTextColor(getColor(R.color.colorLightDarkGray));
                 break;
 
         }
@@ -527,19 +505,19 @@ public class AddNewMealActivity extends AppCompatActivity implements
         Meal meal = new Meal();
         switch (currentSeekIndex) {
             case 1:
-                meal.setName("Breakfast");
+                meal.setName(Meal.MEAL_TYPE_BREAKFAST);
                 break;
             case 2:
-                meal.setName("Lunch");
+                meal.setName(Meal.MEAL_TYPE_LUNCH);
                 break;
             case 3:
-                meal.setName("Dinner");
+                meal.setName(Meal.MEAL_TYPE_DINNER);
                 break;
             case 4:
-                meal.setName("Snack");
+                meal.setName(Meal.MEAL_TYPE_SNACK);
                 break;
             case 5:
-                meal.setName("Casual");
+                meal.setName(Meal.MEAL_TYPE_CASUAL);
                 break;
         }
         meal.setDesc("Salad, pasta, pudding, grape");
@@ -554,9 +532,12 @@ public class AddNewMealActivity extends AppCompatActivity implements
                         AddNewMealActivity.this,
                         AddMealDrugPopup.POPUP_MODE_MEAL,
                         AddMealDrugPopup.POPUP_ACTION_ADD,
-                        null);
+                        null, null);
                 popup.setListener(AddNewMealActivity.this);
-                popup.showAt(view);
+                popup.show();
+                Window window = popup.getWindow();
+                window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
             }
             break;
             case R.id.tvAddDrug: {
@@ -564,9 +545,12 @@ public class AddNewMealActivity extends AppCompatActivity implements
                         AddNewMealActivity.this,
                         AddMealDrugPopup.POPUP_MODE_DRUG,
                         AddMealDrugPopup.POPUP_ACTION_ADD,
-                        null);
+                        null, null);
                 popup.setListener(AddNewMealActivity.this);
-                popup.showAt(view);
+                popup.show();
+                Window window = popup.getWindow();
+                window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
             }
             break;
         }
@@ -575,8 +559,8 @@ public class AddNewMealActivity extends AppCompatActivity implements
     @Override
     public void onAdded(MealDrug mealDrug) {
         addMealDrug(mealDrug);
-        btnAddNewMeal.setEnabled(true);
-        if(mealDrug.getType() == MealDrug.TYPE_DRUG) {
+        binder.btnAddNewMeal.setEnabled(true);
+        if (mealDrug.getType() == MealDrug.TYPE_DRUG) {
             mMeal.setHasDrug(true);
         }
 
@@ -589,30 +573,31 @@ public class AddNewMealActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onDeleted(AddMealDrugPopup parent, MealDrug deleted) {
-        LinearLayout layout = findViewById(R.id.llMealDrug);
-        layout.removeView(parent.getParent());
+    public void onDeleted(View parent, MealDrug deleted) {
+        binder.llMealDrug.removeView(parent);
         if (mAddedMealDrugs != null && mAddedMealDrugs.contains(deleted)) {
             mAddedMealDrugs.remove(deleted);
         }
+
     }
 
     @Override
-    public void onEdited(AddMealDrugPopup parent, MealDrug mealDrug) {
-        View view = parent.getParent();
-        TextView tvName = view.findViewById(R.id.tvName);
-        TextView tvAmount = view.findViewById(R.id.tvAmount);
+    public void onEdited(View parent, MealDrug mealDrug) {
+
+        TextView tvName = parent.findViewById(R.id.tvName);
+        TextView tvAmount = parent.findViewById(R.id.tvAmount);
 
         tvName.setText(mealDrug.getName());
         tvAmount.setText(mealDrug.getAmount() + " " + mealDrug.getUnit());
     }
 
     private void addMealDrug(MealDrug mealDrug) {
-        View view = LayoutInflater.from(this).inflate(R.layout.item_add_mealdrug, null);
-        view.setClickable(true);
-        view.setFocusable(true);
-        view.setTag(mealDrug);
-        view.setOnClickListener(new View.OnClickListener() {
+        final ItemAddMealdrugBinding itemAddMealdrugBinding=ItemAddMealdrugBinding.bind(
+                LayoutInflater.from(this).inflate(R.layout.item_add_mealdrug, null));
+        itemAddMealdrugBinding.getRoot().setClickable(true);
+        itemAddMealdrugBinding.getRoot().setFocusable(true);
+        itemAddMealdrugBinding.getRoot().setTag(mealDrug);
+        itemAddMealdrugBinding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MealDrug editMealDrug = (MealDrug) view.getTag();
@@ -620,25 +605,26 @@ public class AddNewMealActivity extends AppCompatActivity implements
                         AddNewMealActivity.this,
                         editMealDrug.getType(),
                         AddMealDrugPopup.POPUP_ACTION_EDIT,
-                        editMealDrug);
+                        editMealDrug, view);
                 popup.setListener(AddNewMealActivity.this);
-                popup.showAt(view);
+                popup.show();
+                Window window = popup.getWindow();
+                window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
             }
         });
 
-        TextView tvName = view.findViewById(R.id.tvName);
-        TextView tvAmount = view.findViewById(R.id.tvAmount);
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         layoutParams.setMargins(0, 0, 0, (int) getResources().getDimension(R.dimen.app_standard_padding));
 
-        LinearLayout layout = findViewById(R.id.llMealDrug);
-        layout.addView(view, layoutParams);
+        binder.llMealDrug.addView(itemAddMealdrugBinding.getRoot(), layoutParams);
 
-        tvName.setText(mealDrug.getName());
-        tvAmount.setText(mealDrug.getAmount() + " " + mealDrug.getUnit());
+        itemAddMealdrugBinding.tvName.setText(mealDrug.getName());
+        itemAddMealdrugBinding.tvAmount.setText(mealDrug.getAmount() + " " + mealDrug.getUnit());
     }
 
     @Override
@@ -666,7 +652,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
     }
 
     private void checkPermissionThenPickPhoto() {
-        if (Build.VERSION.SDK_INT >= 23){
+        if (Build.VERSION.SDK_INT >= 23) {
             // Here, thisActivity is the current activity
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -684,10 +670,10 @@ public class AddNewMealActivity extends AppCompatActivity implements
                     // app-defined int constant. The callback method gets the
                     // result of the request.
                 }
-            }else{
+            } else {
                 pickPhotoProfile();
             }
-        }else {
+        } else {
             pickPhotoProfile();
         }
     }

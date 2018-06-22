@@ -1,5 +1,6 @@
 package com.topcoder.vakidney;
 
+import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.topcoder.vakidney.databinding.ActivityChartBinding;
 import com.topcoder.vakidney.model.ChartData;
 import com.topcoder.vakidney.constant.ChartType;
 import com.topcoder.vakidney.popup.AddChartPopup;
@@ -34,52 +36,44 @@ public class ChartActivity extends AppCompatActivity implements
 
     private final static long ONE_HOUR = 1000 * 60 * 60;
     private long mChartType;
-    private LineChart mLineChart;
     private List<ChartData> mChartData;
 
-    private TextView mTextStartDate;
-    private TextView mTextEndDate;
+
     private DateFormat mDateFormat;
+    ActivityChartBinding binder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chart);
+        binder = DataBindingUtil.setContentView(this, R.layout.activity_chart);
 
-        AppCompatImageView backBtn;
-        AppCompatImageView addBtn;
-        backBtn = findViewById(R.id.backBtn);
-        addBtn = findViewById(R.id.addBtn);
-        backBtn.setOnClickListener(this);
-        addBtn.setOnClickListener(this);
+
+        binder.backBtn.setOnClickListener(this);
+        binder.addBtn.setOnClickListener(this);
 
         if (getIntent().hasExtra("chartType")) {
             mChartType = getIntent().getLongExtra("chartType", ChartType.TYPE_E_GFR);
-        }
-        else {
+        } else {
             mChartType = ChartType.TYPE_E_GFR;
         }
-
-        TextView titleText = findViewById(R.id.actionBarTitle);
-        TextView unitText = findViewById(R.id.textUnit);
-        titleText.setText(ChartType.getChartLabel(mChartType));
-        unitText.setText(ChartType.getChartUnit(mChartType));
+        if (mChartType == ChartType.TYPE_BODYWEIGHT)
+            binder.tvHeading.setVisibility(View.VISIBLE);
+        binder.actionBarTitle.setText(ChartType.getChartLabel(mChartType));
+        binder.textUnit.setText(ChartType.getChartUnit(mChartType));
 
         mDateFormat = new SimpleDateFormat("MMM dd", Locale.US);
-        mTextStartDate = findViewById(R.id.dateStart);
-        mTextEndDate = findViewById(R.id.dateEnd);
 
-        mLineChart = findViewById(R.id.chart);
         mChartData = ChartData.getLastYear(mChartType);
         if (mChartData != null && mChartData.size() > 0) {
-            populateData(mLineChart, mChartData);
+            populateData(binder.chart, mChartData);
         }
     }
 
 
     /**
      * Used to populate and modify the chartView with corresponding data
-     * @param lineChart is just a chratView
+     *
+     * @param lineChart      is just a chratView
      * @param chartDataArray chart data
      */
     private void populateData(
@@ -97,8 +91,8 @@ public class ChartActivity extends AppCompatActivity implements
 
         List<Entry> entries = new ArrayList<>();
 
-        for(ChartData chartData : chartDataArray){
-            entries.add(new Entry(chartData.getDate(), Float.parseFloat(chartData.getValue()+"f"), chartData));
+        for (ChartData chartData : chartDataArray) {
+            entries.add(new Entry(chartData.getDate(), Float.parseFloat(chartData.getValue() + "f"), chartData));
         }
 
         ChartData firstChartData = chartDataArray.get(0);
@@ -179,10 +173,10 @@ public class ChartActivity extends AppCompatActivity implements
 
         String startDate = mDateFormat.format(new Date(chartDataArray.get(0).getDate()));
         String endDate = mDateFormat.format(new Date(chartDataArray.get(chartDataArray.size() - 1).getDate()));
-        mTextStartDate.setText(startDate);
-        mTextEndDate.setText(endDate);
-        mTextStartDate.setVisibility(View.VISIBLE);
-        mTextEndDate.setVisibility(View.VISIBLE);
+        binder.dateStart.setText(startDate);
+        binder.dateEnd.setText(endDate);
+        binder.dateStart.setVisibility(View.VISIBLE);
+        binder.dateEnd.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -205,7 +199,7 @@ public class ChartActivity extends AppCompatActivity implements
     @Override
     public void onAdded(ChartData chartData) {
         mChartData = ChartData.getLastYear(mChartType);
-        populateData(mLineChart, mChartData);
+        populateData(binder.chart, mChartData);
     }
 
     @Override

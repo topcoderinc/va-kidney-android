@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:background="@drawable/bg_ripple_white"
     android:clickable="true"
@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/text_black"
             android:text="Major"/>
@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center_vertical"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textColor="@color/text_black"
         android:text="Creatinine"/>
     <View
@@ -45,3 +45,4 @@
         android:layout_height="1dp"
         android:background="@color/colorLightGray"/>
 </LinearLayout>
+</layout>

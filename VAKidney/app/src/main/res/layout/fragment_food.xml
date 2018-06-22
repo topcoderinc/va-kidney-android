@@ -1,5 +1,7 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    >
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorLightGray"
@@ -7,16 +9,17 @@
     android:paddingRight="@dimen/app_standard_padding"
     tools:context="com.topcoder.vakidney.fragments.FoodFragment">
 
-    <GridView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:numColumns="2"
         android:scrollbars="none"
         android:horizontalSpacing="@dimen/app_standard_padding"
         android:verticalSpacing="@dimen/app_standard_padding"
-        android:id="@+id/gridView"
+        android:id="@+id/recyclerView"
         android:clipToPadding="false"
         android:paddingTop="@dimen/app_standard_padding"
         android:paddingBottom="@dimen/app_standard_padding" />
 
 </RelativeLayout>
+</layout>

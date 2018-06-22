@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 public class FoodRecommendation extends SugarRecord<FoodRecommendation>
-    implements Serializable{
+        implements Serializable {
 
     public static final int TYPE_UNSAFE = 0x00000001;
     public static final int TYPE_GOOD = 0x00000002;
@@ -24,7 +24,8 @@ public class FoodRecommendation extends SugarRecord<FoodRecommendation>
     private int type;
     private String nutritionArray;
 
-    public FoodRecommendation() {}
+    public FoodRecommendation() {
+    }
 
     public FoodRecommendation(
             String name,

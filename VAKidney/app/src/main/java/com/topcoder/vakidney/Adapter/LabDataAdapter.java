@@ -45,61 +45,82 @@ public class LabDataAdapter extends BaseAdapter {
         return i;
     }
 
+    static class ViewHolder {
+        TextView tvName;
+        TextView tvCurrentValue;
+        TextView tvUnit;
+        TextView tvAddData;
+        TextView tvSuggestion;
+        ImageView imgStanding;
+        ImageView imgTrend;
+    }
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view=activity.getLayoutInflater().inflate(R.layout.item_grid_labdata, viewGroup, false);
-        TextView tvName=view.findViewById(R.id.tvName);
-        TextView tvCurrentValue=view.findViewById(R.id.tvCurrentvalue);
-        TextView tvUnit=view.findViewById(R.id.tvUnit);
-        TextView tvSuggestion=view.findViewById(R.id.tvSuggestion);
-        TextView tvAddData=view.findViewById(R.id.tvData);
-        ImageView imgStanding=view.findViewById(R.id.imgStanding);
-        ImageView imgTrend=view.findViewById(R.id.imgTrend);
+        ViewHolder viewHolder;
+        if (view == null) {
+            viewHolder = new ViewHolder();
+            view = activity.getLayoutInflater().inflate(R.layout.item_grid_labdata, viewGroup, false);
+            viewHolder.tvName = view.findViewById(R.id.tvName);
 
-        tvSuggestion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogManager.showOkDialog(activity, activity.getString(R.string.feature_not_implemented), null);
-            }
-        });
+            viewHolder.tvCurrentValue = view.findViewById(R.id.tvCurrentvalue);
 
+            viewHolder.tvUnit = view.findViewById(R.id.tvUnit);
 
-        tvAddData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogManager.showOkDialog(activity, activity.getString(R.string.feature_not_implemented), null);
-            }
-        });
+            viewHolder.tvSuggestion = view.findViewById(R.id.tvSuggestion);
 
+            viewHolder.tvAddData = view.findViewById(R.id.tvData);
 
-        LabData labData=labDataArrayList.get(i);
-        tvName.setText(labData.getName());
-        tvCurrentValue.setText(labData.getCurrentValue());
-        tvUnit.setText(labData.getUnit());
+            viewHolder.imgStanding = view.findViewById(R.id.imgStanding);
 
-        switch (labData.getStanding()){
+            viewHolder.imgTrend = view.findViewById(R.id.imgTrend);
+
+            viewHolder.tvSuggestion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DialogManager.showOkDialog(activity, activity.getString(R.string.feature_not_implemented), null);
+                }
+            });
+
+            viewHolder.tvAddData.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DialogManager.showOkDialog(activity, activity.getString(R.string.feature_not_implemented), null);
+                }
+            });
+            view.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) view.getTag();
+        }
+
+        LabData labData = labDataArrayList.get(i);
+        viewHolder.tvName.setText(labData.getName());
+        viewHolder.tvCurrentValue.setText(labData.getCurrentValue());
+        viewHolder.tvUnit.setText(labData.getUnit());
+
+        switch (labData.getStanding()) {
             case 0:
-                imgStanding.setImageResource(R.drawable.ic_bad);
+                viewHolder.imgStanding.setImageResource(R.drawable.ic_bad);
                 break;
             case 1:
-                imgStanding.setImageResource(R.drawable.ic_normal);
+                viewHolder.imgStanding.setImageResource(R.drawable.ic_normal);
                 break;
             case 2:
-                imgStanding.setImageResource(R.drawable.ic_good);
+                viewHolder.imgStanding.setImageResource(R.drawable.ic_good);
                 break;
         }
 
-        switch (labData.getTrend()){
+        switch (labData.getTrend()) {
             case 0:
-                imgTrend.setVisibility(View.VISIBLE);
-                imgTrend.setImageResource(R.drawable.ic_arrow_down);
+                viewHolder.imgTrend.setVisibility(View.VISIBLE);
+                viewHolder.imgTrend.setImageResource(R.drawable.ic_arrow_down);
                 break;
             case 1:
-                imgTrend.setVisibility(View.GONE);
+                viewHolder.imgTrend.setVisibility(View.GONE);
                 break;
             case 2:
-                imgTrend.setVisibility(View.VISIBLE);
-                imgTrend.setImageResource(R.drawable.ic_arrow_up);
+                viewHolder.imgTrend.setVisibility(View.VISIBLE);
+                viewHolder.imgTrend.setImageResource(R.drawable.ic_arrow_up);
                 break;
         }
         return view;

@@ -24,11 +24,12 @@ public class Nutrients {
 
     /**
      * Find Google Fit Nutrient Field key based on nutrient string.
+     *
      * @param nutrient nutrient string.
      * @return String Google Fit Nutrient Field key.
      */
     public static String searchGoogleFitNutrientField(String nutrient) {
-        for (String key: GOOGLE_FIT_NUTRIENT_KEY.keySet()) {
+        for (String key : GOOGLE_FIT_NUTRIENT_KEY.keySet()) {
             if (nutrient.toLowerCase().contains(key)) {
                 return GOOGLE_FIT_NUTRIENT_KEY.get(key);
             }
@@ -38,18 +39,17 @@ public class Nutrients {
 
     /**
      * Convert nutrient weight to grams
-     * @param unit unit of the nutrients. (g, mg or pills).
+     *
+     * @param unit  unit of the nutrients. (g, mg or pills).
      * @param value value of nutrient
      * @return float grams of nutrient.
      */
     public static float calculateNutrientGrams(String unit, float value) {
         if (unit.compareToIgnoreCase("g") == 0) {
             return value;
-        }
-        else if (unit.compareToIgnoreCase("mg") == 0) {
+        } else if (unit.compareToIgnoreCase("mg") == 0) {
             return value / 1000;
-        }
-        else if (unit.compareToIgnoreCase("pills") == 0) {
+        } else if (unit.compareToIgnoreCase("pills") == 0) {
             return value * 0.5f;
         }
         return value;

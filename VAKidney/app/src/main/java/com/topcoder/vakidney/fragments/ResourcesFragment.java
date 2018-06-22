@@ -1,6 +1,7 @@
 package com.topcoder.vakidney.fragments;
 
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.topcoder.vakidney.adapter.ViewPagerAdapter;
 import com.topcoder.vakidney.R;
+import com.topcoder.vakidney.databinding.FragmentResourceBinding;
+import com.topcoder.vakidney.databinding.FragmentResourcesBinding;
 import com.topcoder.vakidney.fragments.resources.DoMoreFragment;
 import com.topcoder.vakidney.fragments.resources.LearnMoreFragment;
 import com.topcoder.vakidney.fragments.resources.ReadMoreFragment;
@@ -22,9 +25,8 @@ import com.topcoder.vakidney.fragments.resources.ReadMoreFragment;
 public class ResourcesFragment extends Fragment {
 
 
+    FragmentResourcesBinding binder;
 
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
     public ResourcesFragment() {
         // Required empty public constructor
     }
@@ -34,18 +36,19 @@ public class ResourcesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_resources, container, false);
+        binder = DataBindingUtil.inflate(inflater, R.layout.fragment_resources, container, false);
+        final View view = binder.getRoot();
 
-        viewPager = view.findViewById(R.id.viewpager);
-        viewPager.setOffscreenPageLimit(5);
-        setupViewPager(viewPager);
-        tabLayout = view.findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
+        binder.viewpager.setOffscreenPageLimit(5);
+        setupViewPager(binder.viewpager);
+
+        binder.tabs.setupWithViewPager(binder.viewpager);
         return view;
     }
 
     /**
      * Populates the ViewPager with respective fields
+     *
      * @param viewPager Required to setup with fragments
      */
     private void setupViewPager(ViewPager viewPager) {

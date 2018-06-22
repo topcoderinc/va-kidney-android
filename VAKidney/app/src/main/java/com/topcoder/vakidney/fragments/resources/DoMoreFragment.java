@@ -1,6 +1,7 @@
 package com.topcoder.vakidney.fragments.resources;
 
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.ListView;
 
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.adapter.ResourcesAdapter;
+import com.topcoder.vakidney.databinding.FragmentResourceBinding;
 import com.topcoder.vakidney.util.JsondataUtil;
 
 /**
@@ -18,8 +20,8 @@ import com.topcoder.vakidney.util.JsondataUtil;
  */
 public class DoMoreFragment extends Fragment {
 
+    FragmentResourceBinding binder;
 
-    ListView resourceListView;
     public DoMoreFragment() {
     }
 
@@ -27,10 +29,10 @@ public class DoMoreFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_resource, container, false);
-        resourceListView=view.findViewById(R.id.resourceListView);
-        ResourcesAdapter resourcesAdapter=new ResourcesAdapter(JsondataUtil.getResourcesDoMore(getActivity()), getActivity());
-        resourceListView.setAdapter(resourcesAdapter);
+        binder = DataBindingUtil.inflate(inflater, R.layout.fragment_resource, container, false);
+        final View view = binder.getRoot();
+        ResourcesAdapter resourcesAdapter = new ResourcesAdapter(JsondataUtil.getResourcesDoMore(getActivity()), getActivity());
+        binder.resourceListView.setAdapter(resourcesAdapter);
         return view;
     }
 

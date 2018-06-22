@@ -14,23 +14,24 @@ import java.util.List;
 
 public class ChartData extends SugarRecord<ChartData> {
 
-    private double value;
+    private String value;
     private long date;
     private long type;
 
-    public ChartData() {}
+    public ChartData() {
+    }
 
-    public ChartData(double value, long type, long date) {
+    public ChartData(String value, long type, long date) {
         this.value = value;
         this.type = type;
         this.date = date;
     }
 
-    public double getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(double value) {
+    public void setValue(String value) {
         this.value = value;
     }
 
@@ -75,5 +76,12 @@ public class ChartData extends SugarRecord<ChartData> {
                 "Select * from CHART_DATA where type = ? AND date > ? ORDER BY date ASC",
                 String.valueOf(chartType),
                 String.valueOf(lastYear));
+    }
+
+    public static List<ChartData> getChartData(long chartType) {
+        return ChartData.findWithQuery(
+                ChartData.class,
+                "Select * from CHART_DATA where type = ?  ORDER BY date DESC",
+                String.valueOf(chartType));
     }
 }

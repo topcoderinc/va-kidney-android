@@ -3,6 +3,7 @@ package com.topcoder.vakidney.model;
 import com.orm.SugarRecord;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -13,11 +14,17 @@ import java.util.List;
 
 public class Meal extends SugarRecord<Meal> implements Serializable {
 
-    public final static String MEAL_TYPE_BREAKFAST = "breakfast";
-    public final static String MEAL_TYPE_LUNCH = "lunch";
-    public final static String MEAL_TYPE_DINNER = "dinner";
-    public final static String MEAL_TYPE_SNACK = "snack";
-    public final static String MEAL_TYPE_CUSTOM = "custom";
+    public final static String MEAL_TYPE_BREAKFAST = "Breakfast";
+    public final static String MEAL_TYPE_LUNCH = "Lunch";
+    public final static String MEAL_TYPE_DINNER = "Dinner";
+    public final static String MEAL_TYPE_SNACK = "Snack";
+    public final static String MEAL_TYPE_CASUAL = "Casual";
+
+    public final static int MEAL_BREAKFAST = 0;
+    public final static int MEAL_LUNCH = 1;
+    public final static int MEAL_DINNER = 2;
+    public final static int MEAL_SNACK = 3;
+    public final static int MEAL_CASUAL = 4;
 
     long mealId;
     String name;
@@ -37,7 +44,7 @@ public class Meal extends SugarRecord<Meal> implements Serializable {
             String desc,
             Date date,
             String type,
-            boolean hasDrug){
+            boolean hasDrug) {
         this.mealId = mealId;
         this.name = name;
         this.photoUrl = photoUrl;
@@ -71,8 +78,20 @@ public class Meal extends SugarRecord<Meal> implements Serializable {
         this.desc = desc;
     }
 
-    public List <MealDrug> getMealDrugs() {
+    public List<MealDrug> getMealDrugs() {
         return MealDrug.find(MealDrug.class, "meal_id = ?", String.valueOf(this.getMealId()));
+    }
+
+    public static List<Meal> getMealUsingFilter(Date date, String type) {
+        if (type.length()==0) {
+            return Meal.find(Meal.class, "date >= ?  and date <= ?", String.valueOf(getStartOfDay(date))
+                    , String.valueOf(getEndOfDay(date)));
+        }
+        if (date == null) {
+            return Meal.find(Meal.class, "type IN ("+type+")");
+        }
+        return Meal.find(Meal.class, "date >= ?  and date <= ? and type IN ("+type+" )", String.valueOf(getStartOfDay(date))
+                , String.valueOf(getEndOfDay(date)));
     }
 
     public String getType() {
@@ -128,4 +147,46 @@ public class Meal extends SugarRecord<Meal> implements Serializable {
 //        meal.setType(bundle.getString("type"));
 //        return meal;
 //    }
+    private static long getStartOfDay(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DATE);
+        calendar.set(year, month, day);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        System.out.println(calendar.getTimeInMillis());
+        return calendar.getTimeInMillis();
+    }
+
+    private static long getEndOfDay(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DATE);
+        calendar.set(year, month, day);
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 999);
+        System.out.println(calendar.getTimeInMillis());
+        return calendar.getTimeInMillis();
+    }
+    static String makePlaceholders(int len) {
+        if (len < 1) {
+            // It will lead to an invalid query anyway ..
+            throw new RuntimeException("No placeholders");
+        } else {
+            StringBuilder sb = new StringBuilder(len * 2 - 1);
+            sb.append("?");
+            for (int i = 1; i < len; i++) {
+                sb.append(",?");
+            }
+            return sb.toString();
+        }
+    }
 }

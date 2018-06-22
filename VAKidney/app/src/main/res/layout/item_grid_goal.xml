@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.topcoder.vakidney.customview.SquareLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:layout_margin="5dp"
     android:background="@drawable/bg_white_rounded"
     android:gravity="center"
     android:orientation="vertical">
-
-
     <LinearLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
@@ -17,15 +17,16 @@
 
         <com.topcoder.vakidney.customview.ArcProgress
             android:id="@+id/goalProgress"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginTop="@dimen/app_standard_padding"
             app:arc_bottom_text="Steps"
             app:arc_bottom_text_size="12dp"
             app:arc_finished_color="#f3cf45"
-            app:arc_progress="55"
+            app:arc_progress="0"
             app:arc_text_color="@color/colorDarkGray"
-            app:arc_unfinished_color="#e5e5e5" />
+            app:arc_unfinished_color="#e5e5e5"
+            />
 
 
         <LinearLayout
@@ -69,11 +70,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/app_standard_padding"
-        android:layout_weight="1"
         android:gravity="center"
         android:text="Sync Now"
         android:textColor="@color/colorAccent"
         android:textSize="13dp"
         android:textStyle="bold" />
 
-</com.topcoder.vakidney.customview.SquareLinearLayout>
+</LinearLayout>

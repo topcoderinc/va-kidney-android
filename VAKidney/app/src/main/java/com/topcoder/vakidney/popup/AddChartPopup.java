@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.graphics.Point;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.Display;
 import android.view.Gravity;
@@ -70,7 +71,7 @@ public class AddChartPopup extends BasePopup implements
                         @Override
                         public void YesClicked() {
                             ChartData data = new ChartData(
-                                    Double.parseDouble(amountField.getText().toString()),
+                                    amountField.getText().toString(),
                                     mChartType,
                                     mCalendar.getTime().getTime()
                             );
@@ -84,21 +85,29 @@ public class AddChartPopup extends BasePopup implements
                                     String.valueOf(mChartType));
 
                             if (goals != null &&
-                                    goals.size() > 0 &&
-                                    goals.get(0).getNutrient() != null) {
+                                    goals.size() > 0) {
                                 Goal goal = goals.get(0);
-                                String field = Nutrients.searchGoogleFitNutrientField(goal.getNutrient());
-                                float value = Nutrients.calculateNutrientGrams(
-                                        goal.getUnitStr(),
-                                        (float) data.getValue());
-                                if (field != null && value > 0) {
-                                    Map<String, Float> values = new HashMap<>();
-                                    values.put(
-                                            field,
-                                            value
-                                    );
-                                    GoogleFitUtil.insertNutrients(null, values);
+                                if(mChartType==ChartType.TYPE_BLOODPRESSURE)
+                                    goal.setCurrentLevel(10); //Current level for comorbiditites dummy value if enough
+                                else
+                                    goal.setCurrentLevel(Double.parseDouble(data.getValue()));
+                                goal.save();
+                                if (goal.getNutrient() != null) {
+
+                                    String field = Nutrients.searchGoogleFitNutrientField(goal.getNutrient());
+                                    float value = Nutrients.calculateNutrientGrams(
+                                            goal.getUnitStr(),
+                                            Float.parseFloat(data.getValue()));
+                                    if (field != null && value > 0) {
+                                        Map<String, Float> values = new HashMap<>();
+                                        values.put(
+                                                field,
+                                                value
+                                        );
+                                        GoogleFitUtil.insertNutrients(null, values);
+                                    }
                                 }
+
                             }
 
                             if (mListener != null) mListener.onAdded(data);
@@ -142,7 +151,10 @@ public class AddChartPopup extends BasePopup implements
 
             }
         });
-
+        if(mChartType==ChartType.TYPE_BLOODPRESSURE){
+            amountField.setHint("Systolic/Diastolic");
+            amountField.setInputType(InputType.TYPE_CLASS_TEXT);
+        }
         enableDisableAddMealButton();
     }
 
@@ -193,7 +205,11 @@ public class AddChartPopup extends BasePopup implements
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.toString().length() != 0) {
+                String amount = charSequence.toString();
+                if (amount.length() == 0 || ((mChartType == ChartType.TYPE_BLOODPRESSURE) && !amount.matches("[0-9][0-9]*\\/[0-9][0-9]*")) ||
+                        ((mChartType != ChartType.TYPE_BLOODPRESSURE) && !amount.matches("-?\\d+(\\.\\d+)?"))) {
+                    btnAddChartData.setEnabled(false);
+                } else {
                     btnAddChartData.setEnabled(true);
                 }
             }
@@ -215,6 +231,7 @@ public class AddChartPopup extends BasePopup implements
 
     public interface AddChartPopupListener {
         void onAdded(ChartData chartData);
+
         void onCanceled();
     }
 
