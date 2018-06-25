@@ -19,7 +19,8 @@ public class DrugInteraction extends SugarRecord<DrugInteraction> implements Ser
     String drugsArray;
     String reactionsArray;
 
-    public DrugInteraction() {}
+    public DrugInteraction() {
+    }
 
     public DrugInteraction(
             String name,

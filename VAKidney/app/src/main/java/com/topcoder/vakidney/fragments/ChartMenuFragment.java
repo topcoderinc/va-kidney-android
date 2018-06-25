@@ -1,6 +1,7 @@
 package com.topcoder.vakidney.fragments;
 
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.topcoder.vakidney.adapter.ChartMenuAdapter;
+import com.topcoder.vakidney.databinding.FragmentChartMenuBinding;
 import com.topcoder.vakidney.model.UserData;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.constant.ChartType;
@@ -23,6 +25,7 @@ import java.util.List;
 public class ChartMenuFragment extends Fragment {
 
     private ChartMenuAdapter mAdapter;
+    private FragmentChartMenuBinding binder;
 
     public ChartMenuFragment() {
         // Required empty public constructor
@@ -31,12 +34,13 @@ public class ChartMenuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_chart_menu, container, false);
+        binder = DataBindingUtil.inflate(inflater, R.layout.fragment_chart_menu, container, false);
+        final View view = binder.getRoot();
+
 
         UserData userData = UserData.get();
 
-        RecyclerView recyclerView = view.findViewById(R.id.rv_chart_menu);
-        recyclerView.setLayoutManager(
+        binder.rvChartMenu.setLayoutManager(
                 new LinearLayoutManager(
                         getActivity(),
                         LinearLayoutManager.VERTICAL,
@@ -47,8 +51,8 @@ public class ChartMenuFragment extends Fragment {
                 userData.isDialysis()
         );
 
-        mAdapter = new ChartMenuAdapter(recyclerView, chartTypes);
-        recyclerView.setAdapter(mAdapter);
+        mAdapter = new ChartMenuAdapter(binder.rvChartMenu, chartTypes);
+        binder.rvChartMenu.setAdapter(mAdapter);
 
         return view;
     }

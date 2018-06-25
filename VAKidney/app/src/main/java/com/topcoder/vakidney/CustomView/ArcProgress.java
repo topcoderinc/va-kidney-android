@@ -32,7 +32,6 @@ import java.text.DecimalFormat;
 /**
  * Edited by Abinash Neupanesh Neupane for VA Kidney Project
  * This class is a View class which is used to show progress in arc with Image Inside it. Many variable inside this class are customizable
- *
  */
 public class ArcProgress extends View {
     private Paint paint;
@@ -65,7 +64,6 @@ public class ArcProgress extends View {
     private float arcBottomHeight;
 
 
-
     private int default_finished_color = Color.WHITE;
     private int default_unfinished_color = Color.rgb(72, 106, 176);
     private int default_text_color = Color.rgb(66, 145, 241);
@@ -75,7 +73,7 @@ public class ArcProgress extends View {
     private final float default_stroke_width;
     private final String default_suffix_text;
     private final int default_max = 100;
-    private final float default_arc_angle = 250.0f;
+    private final float default_arc_angle = 240.0f;
     private float default_text_size;
     private final int min_size;
 
@@ -111,7 +109,7 @@ public class ArcProgress extends View {
         default_suffix_text_size = sp2px(getResources(), 15);
         default_suffix_padding = dp2px(getResources(), 4);
         default_suffix_text = "%";
-        default_bottom_text_size = sp2px(getResources(), 13);
+        default_bottom_text_size = sp2px(getResources(), 12);
         default_stroke_width = dp2px(getResources(), 4);
 
         TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.ArcProgress, defStyleAttr, 0);
@@ -135,10 +133,10 @@ public class ArcProgress extends View {
 
     public static float dp2px(Resources resources, float dp) {
         final float scale = resources.getDisplayMetrics().density;
-        return  dp * scale + 0.5f;
+        return dp * scale + 0.5f;
     }
 
-    public static float sp2px(Resources resources, float sp){
+    public static float sp2px(Resources resources, float sp) {
         final float scale = resources.getDisplayMetrics().scaledDensity;
         return sp * scale;
     }
@@ -160,17 +158,17 @@ public class ArcProgress extends View {
         iconColor = attributes.getColor(R.styleable.ArcProgress_icon_color, finishedStrokeColor);
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ArcProgress);
         Drawable drawable = a.getDrawable(R.styleable.ArcProgress_inside_drawable);
-        icon=drawable;
-        if(icon==null){
-            icon=ContextCompat.getDrawable(getContext(), R.drawable.ic_running);
+        icon = drawable;
+        if (icon == null) {
+            icon = ContextCompat.getDrawable(getContext(), R.drawable.ic_running);
         }
 
     }
 
     private boolean TextisEmpty(String string) {
-        if(string!=null) {
+        if (string != null) {
             return string.isEmpty();
-        }else{
+        } else {
             return false;
         }
     }
@@ -192,7 +190,7 @@ public class ArcProgress extends View {
 
     public void setIcon(int icon) {
 
-        this.icon = ContextCompat.getDrawable(getContext(),icon);
+        this.icon = ContextCompat.getDrawable(getContext(), icon);
     }
 
     @Override
@@ -350,21 +348,21 @@ public class ArcProgress extends View {
         float startAngle = 270 - arcAngle / 2f;
         float finishedSweepAngle = progress / (float) getMax() * arcAngle;
         float finishedStartAngle = startAngle;
-        if(progress == 0) finishedStartAngle = 0.01f;
+        if (progress == 0) finishedStartAngle = 0.01f;
         paint.setColor(unfinishedStrokeColor);
         canvas.drawArc(rectF, startAngle, arcAngle, false, paint);
         paint.setColor(finishedStrokeColor);
         canvas.drawArc(rectF, finishedStartAngle, finishedSweepAngle, false, paint);
-        Bitmap iconBmp=getBitmapFromVectorDrawable(icon);
-        int left=(getWidth()/2)-((getWidth()/6));
-        int top=(getHeight()/2)-getHeight()/6;
-        int right=(getWidth()/2)+((getWidth()/6));
-        int bottom=(getHeight()/2)+getHeight()/6;
-        Rect rectSrc=new Rect(0, 0, iconBmp.getWidth(), iconBmp.getHeight());
-        Rect rectDest=new Rect(left, top, right, bottom);
+        Bitmap iconBmp = getBitmapFromVectorDrawable(icon);
+        int left = (getWidth() / 2) - ((getWidth() / 6));
+        int top = (getHeight() / 2) - getHeight() / 6;
+        int right = (getWidth() / 2) + ((getWidth() / 6));
+        int bottom = (getHeight() / 2) + getHeight() / 6;
+        Rect rectSrc = new Rect(0, 0, iconBmp.getWidth(), iconBmp.getHeight());
+        Rect rectDest = new Rect(left, top, right, bottom);
         paint.setColorFilter(new PorterDuffColorFilter(iconColor, PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(iconBmp, rectSrc, rectDest, paint);
-        if(arcBottomHeight == 0) {
+        if (arcBottomHeight == 0) {
             float radius = getWidth() / 2f;
             float angle = (360 - arcAngle) / 2f;
             arcBottomHeight = radius * (float) (1 - Math.cos(angle / 180 * Math.PI));
@@ -373,7 +371,7 @@ public class ArcProgress extends View {
             textPaint.setFakeBoldText(true);
             textPaint.setTextSize(bottomTextSize);
             float bottomTextBaseline = getHeight() - arcBottomHeight - (textPaint.descent() + textPaint.ascent()) / 2;
-            canvas.drawText(getBottomText(), (getWidth() - textPaint.measureText(getBottomText())) / 2.0f, bottomTextBaseline+36.0f, textPaint);
+            canvas.drawText(getBottomText(), (getWidth() - textPaint.measureText(getBottomText())) / 2.0f, bottomTextBaseline + 36.0f, textPaint);
         }
     }
 
@@ -383,8 +381,8 @@ public class ArcProgress extends View {
             drawable = (DrawableCompat.wrap(drawable)).mutate();
         }
 
-        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
-                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(100,
+                100, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
@@ -414,7 +412,7 @@ public class ArcProgress extends View {
 
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
-        if(state instanceof Bundle) {
+        if (state instanceof Bundle) {
             final Bundle bundle = (Bundle) state;
             strokeWidth = bundle.getFloat(INSTANCE_STROKE_WIDTH);
             suffixTextSize = bundle.getFloat(INSTANCE_SUFFIX_TEXT_SIZE);

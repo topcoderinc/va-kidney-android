@@ -2,16 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
     android:background="@color/colorLightGray">
 
-    <com.topcoder.vakidney.customview.SquareLinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_white_rounded"
         android:orientation="vertical">
 
-        <com.makeramen.roundedimageview.RoundedImageView
+        <ImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="96dp"
@@ -19,8 +20,8 @@
             android:layout_marginRight="2dp"
             android:layout_marginTop="@dimen/app_standard_padding"
             android:scaleType="centerCrop"
-            android:src="@drawable/stock_632439546"
-            app:riv_corner_radius="5dp" />
+            android:src="@drawable/profile_bg"
+            android:background="@drawable/bg_white_rounded" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,25 +31,25 @@
             android:visibility="gone"
             android:weightSum="2">
 
-            <com.makeramen.roundedimageview.RoundedImageView
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="@dimen/app_standard_padding"
                 android:layout_marginRight="2dp"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@drawable/stock_632439546"
-                app:riv_corner_radius="5dp" />
+                android:src="@drawable/profile_bg"
+                android:background="@drawable/bg_white_rounded" />
 
-            <com.makeramen.roundedimageview.RoundedImageView
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="@dimen/app_standard_padding"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@drawable/stock_613666608"
-                app:riv_corner_radius="5dp" />
+                android:src="@drawable/profile_bg"
+                android:background="@drawable/bg_white_rounded" />
         </LinearLayout>
 
         <LinearLayout
@@ -59,25 +60,25 @@
             android:visibility="gone"
             android:weightSum="2">
 
-            <com.makeramen.roundedimageview.RoundedImageView
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="@dimen/app_standard_padding"
                 android:layout_marginRight="2dp"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@drawable/stock_632439546"
-                app:riv_corner_radius="5dp" />
+                android:src="@drawable/profile_bg"
+                android:background="@drawable/bg_white_rounded" />
 
-            <com.makeramen.roundedimageview.RoundedImageView
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="@dimen/app_standard_padding"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@drawable/stock_613666608"
-                app:riv_corner_radius="5dp" />
+                android:src="@drawable/profile_bg"
+                android:background="@drawable/bg_white_rounded" />
         </LinearLayout>
 
         <LinearLayout
@@ -109,6 +110,6 @@
             android:textColor="@color/colorDarkGray"
             android:textSize="12dp" />
 
-    </com.topcoder.vakidney.customview.SquareLinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

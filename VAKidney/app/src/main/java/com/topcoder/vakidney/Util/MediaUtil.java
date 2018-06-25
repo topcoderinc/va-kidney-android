@@ -28,7 +28,7 @@ public class MediaUtil {
      * represents a local file.
      *
      * @param context The context.
-     * @param uri The Uri to query.
+     * @param uri     The Uri to query.
      * @author paulburke
      */
     @SuppressLint("NewApi")
@@ -60,7 +60,7 @@ public class MediaUtil {
                 return getDataColumn(context, contentUri, null, null);
             }
             //google drive
-            else if(isGoogleDriveDocument(uri)){
+            else if (isGoogleDriveDocument(uri)) {
             }
             // MediaProvider
             else if (isMediaDocument(uri)) {
@@ -78,7 +78,7 @@ public class MediaUtil {
                 }
 
                 final String selection = "_id=?";
-                final String[] selectionArgs = new String[] {
+                final String[] selectionArgs = new String[]{
                         split[1]
                 };
 
@@ -115,8 +115,8 @@ public class MediaUtil {
     public static boolean isGoogleDriveDocument(Uri uri) {
         boolean result = false;
 
-        if(uri.toString().contains("com.google.android.apps.docs.storage")){
-            result= true;
+        if (uri.toString().contains("com.google.android.apps.docs.storage")) {
+            result = true;
         }
         return result;
     }
@@ -151,9 +151,9 @@ public class MediaUtil {
      * Get the value of the data column for this Uri. This is useful for
      * MediaStore Uris, and other file-based ContentProviders.
      *
-     * @param context The context.
-     * @param uri The Uri to query.
-     * @param selection (Optional) Filter used in the query.
+     * @param context       The context.
+     * @param uri           The Uri to query.
+     * @param selection     (Optional) Filter used in the query.
      * @param selectionArgs (Optional) Selection arguments used in the query.
      * @return The value of the _data column, which is typically a file path.
      * @author paulburke

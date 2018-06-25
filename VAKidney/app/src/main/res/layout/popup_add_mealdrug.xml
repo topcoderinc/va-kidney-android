@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -14,16 +14,23 @@
         android:layout_marginTop="@dimen/app_standard_padding"
         android:text="Meal or Liquid Item"
         android:textColor="@color/colorLightDarkGray"
-        android:textSize="12dp" />
+        android:textSize="12dp"
+        />
 
-    <EditText
+    <AutoCompleteTextView
+        android:completionThreshold="3"
         android:id="@+id/mealOrliquidField"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:background="@drawable/bg_round_white"
         android:paddingLeft="@dimen/app_standard_padding"
-        android:paddingRight="@dimen/app_standard_padding" />
+        android:paddingRight="@dimen/app_standard_padding"
+        android:textSize="20sp"
+        android:spinnerMode="dialog"
+        android:dropDownVerticalOffset="5dp"
+        android:dropDownHeight="wrap_content"
+        android:dropDownWidth="wrap_content"/>
 
 
     <TextView
@@ -145,4 +152,4 @@
             android:text="Add Meal"
             android:textColor="@color/colorWhite" />
     </LinearLayout>
-</LinearLayout>
+</LinearLayout></layout>

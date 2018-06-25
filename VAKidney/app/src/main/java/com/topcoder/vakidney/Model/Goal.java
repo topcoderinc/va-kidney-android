@@ -3,6 +3,8 @@ package com.topcoder.vakidney.model;
 import android.os.Bundle;
 
 import com.orm.SugarRecord;
+import com.topcoder.vakidney.R;
+import com.topcoder.vakidney.constant.Comorbidities;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,7 +14,7 @@ import java.util.List;
  * This model class is used to store data of a particular goal. This model class is used in various fragments such as GoalFragment, HOme1Fragment and WorkoutFragment
  */
 
-public class Goal extends SugarRecord<Goal> implements Serializable {
+public class Goal extends SugarRecord implements Serializable {
 
     public final static int TYPE_PILL = 0x00000001;
     public final static int TYPE_FLUID = 0x00000002;
@@ -25,7 +27,6 @@ public class Goal extends SugarRecord<Goal> implements Serializable {
     public final static int ACTION_ADJUST = 0x00000003;
 
     private long goalId;
-    private int id;
     private String colorCode;
     private int title;
     private String titleStr;
@@ -45,7 +46,8 @@ public class Goal extends SugarRecord<Goal> implements Serializable {
     private boolean hidden;
     private int minCategory;
 
-    public Goal() {}
+    public Goal() {
+    }
 
     public Goal(
             long goalId,
@@ -243,24 +245,64 @@ public class Goal extends SugarRecord<Goal> implements Serializable {
     }
 
     public static List<Goal> get(int diseaseCategry, boolean dialysis) {
+
         if (dialysis) {
-            return Goal.find(Goal.class, "min_category <= ? and hidden = 0", String.valueOf(diseaseCategry));
-        }
-        else {
+            return Goal.find(Goal.class, "min_category <= ? and hidden = 0 ", String.valueOf(diseaseCategry));
+        } else {
             return Goal.find(Goal.class, "min_category <= ? and dialysis_only = ? and hidden = 0",
                     String.valueOf(diseaseCategry),
                     "0");
         }
     }
 
+    public static List<Goal> getWithoutComorbidities(int diseaseCategry, boolean dialysis) {
+
+        if (dialysis) {
+            return Goal.find(Goal.class, "min_category <= ? and hidden = 0 and title_str NOT IN (?,?,?)" +
+                            "and order by title_str DESC",
+                    String.valueOf(diseaseCategry),
+                    Comorbidities.ComorbiditiesGoals[0], Comorbidities.ComorbiditiesGoals[1], Comorbidities.ComorbiditiesGoals[2]
+            );
+        } else {
+            return Goal.find(Goal.class, "min_category <= ? and dialysis_only = ? and hidden = 0  and title_str NOT IN (?,?,?)"
+                    +" order by title_str DESC",
+                    String.valueOf(diseaseCategry),
+                    "0",
+                    Comorbidities.ComorbiditiesGoals[0], Comorbidities.ComorbiditiesGoals[1], Comorbidities.ComorbiditiesGoals[2]
+            );
+        }
+    }
+
+    public static List<Goal> getAllWithoutComorbidities(int diseaseCategry, boolean dialysis) {
+
+        if (dialysis) {
+            return Goal.find(Goal.class, "min_category <= ?  and title_str NOT IN (?,?,?)",
+                    String.valueOf(diseaseCategry),
+                    Comorbidities.ComorbiditiesGoals[0], Comorbidities.ComorbiditiesGoals[1], Comorbidities.ComorbiditiesGoals[2]
+            );
+        } else {
+            return Goal.find(Goal.class, "min_category <= ? and dialysis_only = ?  and title_str NOT IN (?,?,?)",
+                    String.valueOf(diseaseCategry),
+                    "0",
+                    Comorbidities.ComorbiditiesGoals[0], Comorbidities.ComorbiditiesGoals[1], Comorbidities.ComorbiditiesGoals[2]
+            );
+        }
+    }
+
     public static List<Goal> getAll(int diseaseCategry, boolean dialysis) {
         if (dialysis) {
             return Goal.find(Goal.class, "min_category <= ?", String.valueOf(diseaseCategry));
-        }
-        else {
+        } else {
             return Goal.find(Goal.class, "min_category <= ? and dialysis_only = ?",
                     String.valueOf(diseaseCategry),
                     "0");
         }
     }
+
+    public static List<Goal> getByTitleStr(String goalTitleStr) {
+        return Goal.find(Goal.class, "title_str = ?",
+                goalTitleStr);
+    }
+
+
 }

@@ -2,12 +2,15 @@ package com.topcoder.vakidney.customview;
 
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+
 import com.topcoder.vakidney.MainActivity;
 import com.topcoder.vakidney.R;
+import com.topcoder.vakidney.databinding.AppBottomBarBinding;
 
 /**
  * Created by afrisalyp on 24/03/2018.
@@ -17,40 +20,37 @@ import com.topcoder.vakidney.R;
 public class BottomMenu extends LinearLayout {
 
     private final Context mContext;
-
+    private final AppBottomBarBinding binding;
     public BottomMenu(Context context) {
         super(context);
         mContext = context;
+        LayoutInflater inflater = (LayoutInflater) mContext
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        binding = DataBindingUtil.inflate(inflater,R.layout.app_bottom_bar, this, true);
         initViews();
     }
 
     public BottomMenu(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
+        LayoutInflater inflater = (LayoutInflater) mContext
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        binding = DataBindingUtil.inflate(inflater,R.layout.app_bottom_bar, this, true);
         initViews();
     }
 
     public BottomMenu(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
+        LayoutInflater inflater = (LayoutInflater) mContext
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        binding = DataBindingUtil.inflate(inflater,R.layout.app_bottom_bar, this, true);
         initViews();
     }
 
     private void initViews() {
 
-        LayoutInflater inflater = (LayoutInflater) mContext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.custom_bottom_menu, this, true);
-
-        LinearLayout bottomMenu1, bottomMenu2, bottomMenu3, bottomMenu4, bottomMenu5;
-
-        bottomMenu1 = findViewById(R.id.barLin1);
-        bottomMenu2 = findViewById(R.id.barLin2);
-        bottomMenu3 = findViewById(R.id.barLin3);
-        bottomMenu4 = findViewById(R.id.barLin4);
-        bottomMenu5 = findViewById(R.id.barLin5);
-
-        bottomMenu1.setOnClickListener(new View.OnClickListener() {
+        binding.barLin1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, MainActivity.class);
@@ -60,7 +60,7 @@ public class BottomMenu extends LinearLayout {
                 mContext.startActivity(intent);
             }
         });
-        bottomMenu2.setOnClickListener(new View.OnClickListener() {
+        binding.barLin2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, MainActivity.class);
@@ -70,7 +70,7 @@ public class BottomMenu extends LinearLayout {
                 mContext.startActivity(intent);
             }
         });
-        bottomMenu3.setOnClickListener(new View.OnClickListener() {
+        binding.barLin3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, MainActivity.class);
@@ -80,7 +80,7 @@ public class BottomMenu extends LinearLayout {
                 mContext.startActivity(intent);
             }
         });
-        bottomMenu4.setOnClickListener(new View.OnClickListener() {
+        binding.barLin4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, MainActivity.class);
@@ -90,7 +90,7 @@ public class BottomMenu extends LinearLayout {
                 mContext.startActivity(intent);
             }
         });
-        bottomMenu5.setOnClickListener(new View.OnClickListener() {
+        binding.barLin5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, MainActivity.class);

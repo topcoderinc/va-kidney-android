@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_login"
     tools:context="com.topcoder.vakidney.LoginActivity">
 
@@ -53,7 +54,7 @@
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"
                 android:textCursorDrawable="@null"
-                android:textSize="14dp" />
+                android:textSize="18sp" />
 
         </RelativeLayout>
 
@@ -63,7 +64,7 @@
             android:layout_height="wrap_content"
             android:textColor="#ff7f32"
             android:layout_marginTop="5dp"
-            android:textSize="12dp"
+            android:textSize="15dp"
             android:visibility="gone"
             android:text="@string/error_email"
             />
@@ -97,7 +98,7 @@
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"
                 android:textCursorDrawable="@null"
-                android:textSize="14dp" />
+                android:textSize="18sp" />
 
         </RelativeLayout>
 
@@ -108,7 +109,7 @@
             android:textColor="#ff7f32"
             android:visibility="gone"
             android:layout_marginTop="5dp"
-            android:textSize="12dp"
+            android:textSize="15dp"
             android:text="@string/error_password"
             />
 
@@ -133,7 +134,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/bg_login_btn"
             android:elevation="5dp"
-            android:textSize="13dp"
+            android:textSize="15dp"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
             android:text="Login"
@@ -157,3 +158,4 @@
     </LinearLayout>
 
 </RelativeLayout>
+</layout>

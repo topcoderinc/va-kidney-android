@@ -17,6 +17,7 @@ import java.util.Map;
 
 public class ChartType {
 
+
     public static class ChartThreshold {
         float max;
         float min;
@@ -48,18 +49,21 @@ public class ChartType {
     private final static Map<Long, ChartThreshold> CHART_THRESHOLD = new HashMap<>();
     private final static Map<Integer, List<Long>> CHARTS_BY_CATEGORY = new HashMap<>();
 
-    public final static long TYPE_E_GFR = 0x00000001;
-    public final static long TYPE_PHOSPHORUS = 0x00000002;
-    public final static long TYPE_POTASSIUM = 0x00000003;
-    public final static long TYPE_CREATININE = 0x00000004;
-    public final static long TYPE_CO2 = 0x00000005;
-    public final static long TYPE_SODIUM = 0x00000006;
-    public final static long TYPE_BUN = 0x00000007;
-    public final static long TYPE_PTH = 0x00000008;
-    public final static long TYPE_VITAMIN_D = 0x00000009;
-    public final static long TYPE_IRON = 0x000000010;
-    public final static long TYPE_HGBA1C = 0x000000011;
-    public final static long TYPE_HGB = 0x000000012;
+    public final static long TYPE_E_GFR = 0x000001001;
+    public final static long TYPE_PHOSPHORUS = 0x000001002;
+    public final static long TYPE_POTASSIUM = 0x000001003;
+    public final static long TYPE_CREATININE = 0x000001004;
+    public final static long TYPE_CO2 = 0x000001005;
+    public final static long TYPE_SODIUM = 0x000001006;
+    public final static long TYPE_BUN = 0x000001007;
+    public final static long TYPE_PTH = 0x000001008;
+    public final static long TYPE_VITAMIN_D = 0x000001009;
+    public final static long TYPE_IRON = 0x0000001010;
+    public final static long TYPE_HGBA1C = 0x0000010011;
+    public final static long TYPE_HGB = 0x0000001012;
+    public static final long TYPE_BODYWEIGHT = 103;
+    public static final long TYPE_BLOODPRESSURE = 104;
+    public static final long TYPE_BLOODGLUCOSE = 105;
 
     private final static List<Long> STAGE_1_CHARTS = new ArrayList<>();
     private final static List<Long> STAGE_2_CHARTS = new ArrayList<>();
@@ -84,7 +88,6 @@ public class ChartType {
         CHART_TITLE.put(TYPE_IRON, "Iron Profile");
         CHART_TITLE.put(TYPE_HGBA1C, "HgbA1C");
         CHART_TITLE.put(TYPE_HGB, "Hgb or Hct");
-
         CHART_THRESHOLD.put(TYPE_E_GFR, new ChartThreshold(90, 120));
         CHART_THRESHOLD.put(TYPE_PHOSPHORUS, new ChartThreshold(2.5f, 4.5f));
         CHART_THRESHOLD.put(TYPE_POTASSIUM, new ChartThreshold(3.5f, 5));
@@ -97,7 +100,6 @@ public class ChartType {
         CHART_THRESHOLD.put(TYPE_IRON, new ChartThreshold(60, 170));
         CHART_THRESHOLD.put(TYPE_HGBA1C, new ChartThreshold(4, 6.4f));
         CHART_THRESHOLD.put(TYPE_HGB, new ChartThreshold(12, 17.5f));
-
         CHART_UNIT.put(TYPE_E_GFR, "mL/min/1.73 m2");
         CHART_UNIT.put(TYPE_PHOSPHORUS, "mg/dL");
         CHART_UNIT.put(TYPE_POTASSIUM, "mEq/L");
@@ -212,8 +214,7 @@ public class ChartType {
             if (goals.size() > 0) {
                 if (goals.get(0).getAction() == Goal.ACTION_REDUCE) {
                     return new ChartThreshold((float) goals.get(0).getGoalMin(), (float) goals.get(0).getGoal());
-                }
-                else {
+                } else {
                     return new ChartThreshold((float) goals.get(0).getGoal(), (float) goals.get(0).getGoalMax());
                 }
             }

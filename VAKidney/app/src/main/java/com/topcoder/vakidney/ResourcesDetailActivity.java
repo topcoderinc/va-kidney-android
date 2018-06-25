@@ -1,6 +1,8 @@
 package com.topcoder.vakidney;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
@@ -8,29 +10,29 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.topcoder.vakidney.databinding.ActivityResourcesDetailBinding;
+
 public class ResourcesDetailActivity extends AppCompatActivity {
 
-    private LinearLayout bottomMenu1, bottomMenu2, bottomMenu3, bottomMenu4, bottomMenu5;
-
-    private AppCompatImageView backBtn;
 
     private String title, desc, url, actionbartitle;
-    private TextView tvTitle, tvDesc, tvActionBarTitle;
+    ActivityResourcesDetailBinding binder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_resources_detail);
-        initView();
+
+        binder = DataBindingUtil.setContentView(this, R.layout.activity_resources_detail);
+
         PopulateFields();
-        backBtn.setOnClickListener(new View.OnClickListener() {
+        binder.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
                 Intent intent = new Intent(ResourcesDetailActivity.this, MainActivity.class);
-                if(actionbartitle.equalsIgnoreCase("Resource Details")) {
+                if (actionbartitle.equalsIgnoreCase("Resource Details")) {
                     intent.putExtra("tag", MainActivity.TAG_RESOURCES);
-                }else{
+                } else {
                     intent.putExtra("tag", MainActivity.TAG_MEDICATION);
                 }
                 startActivity(intent);
@@ -41,10 +43,9 @@ public class ResourcesDetailActivity extends AppCompatActivity {
 
     /**
      * Populates the Fields
-     *
      */
     private void PopulateFields() {
-        if(getIntent().hasExtra("actionbartitle")){
+        if (getIntent().hasExtra("actionbartitle")) {
             actionbartitle = getIntent().getStringExtra("actionbartitle");
         }
         if (getIntent().hasExtra("title")) {
@@ -57,39 +58,25 @@ public class ResourcesDetailActivity extends AppCompatActivity {
             url = getIntent().getStringExtra("url");
         }
         if (title != null) {
-            tvTitle.setText(title);
+            binder.tvTitle.setText(title);
         }
         if (desc != null) {
-            tvDesc.setText(desc);
+            binder.tvDesc.setText(desc);
         }
         if (url != null) {
-            tvDesc.setText(tvDesc.getText() + "\n\n" + url);
+            binder.tvDesc.setText(binder.tvDesc.getText() + "\n\n" + url);
         }
-        if(actionbartitle!=null){
-            tvActionBarTitle.setText(actionbartitle);
+        if (actionbartitle != null) {
+            binder.actionBarTitle.setText(actionbartitle);
         }
     }
 
-    /**
-     * Initializes the view
-     */
-    private void initView() {
-        backBtn = findViewById(R.id.backBtn);
-        tvTitle = findViewById(R.id.tvTitle);
-        tvDesc = findViewById(R.id.tvDesc);
-        tvActionBarTitle=findViewById(R.id.actionBarTitle);
-    }
 
     /**
      * Initialize view and sets up listener for bottom menu
      */
     private void initBottomBar() {
-        bottomMenu1 = findViewById(R.id.barLin1);
-        bottomMenu2 = findViewById(R.id.barLin2);
-        bottomMenu3 = findViewById(R.id.barLin3);
-        bottomMenu4 = findViewById(R.id.barLin4);
-        bottomMenu5 = findViewById(R.id.barLin5);
-        bottomMenu1.setOnClickListener(new View.OnClickListener() {
+        binder.barLin1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ResourcesDetailActivity.this, MainActivity.class);
@@ -98,7 +85,7 @@ public class ResourcesDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
-        bottomMenu2.setOnClickListener(new View.OnClickListener() {
+        binder.barLin2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ResourcesDetailActivity.this, MainActivity.class);
@@ -107,7 +94,7 @@ public class ResourcesDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
-        bottomMenu3.setOnClickListener(new View.OnClickListener() {
+        binder.barLin3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ResourcesDetailActivity.this, MainActivity.class);
@@ -116,7 +103,7 @@ public class ResourcesDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
-        bottomMenu4.setOnClickListener(new View.OnClickListener() {
+        binder.barLin4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ResourcesDetailActivity.this, MainActivity.class);
@@ -125,7 +112,7 @@ public class ResourcesDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
-        bottomMenu5.setOnClickListener(new View.OnClickListener() {
+        binder.barLin5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ResourcesDetailActivity.this, MainActivity.class);
@@ -140,9 +127,9 @@ public class ResourcesDetailActivity extends AppCompatActivity {
     public void onBackPressed() {
         finish();
         Intent intent = new Intent(ResourcesDetailActivity.this, MainActivity.class);
-        if(actionbartitle.equalsIgnoreCase("Resource Details")) {
+        if (actionbartitle.equalsIgnoreCase("Resource Details")) {
             intent.putExtra("tag", MainActivity.TAG_RESOURCES);
-        }else{
+        } else {
             intent.putExtra("tag", MainActivity.TAG_MEDICATION);
         }
         startActivity(intent);

@@ -13,11 +13,11 @@ public class MedicationResources {
     private ArrayList<MedicationTitleDesc> medicationTitleDescs;
 
     public MedicationResources() {
-        medicationTitleDescs=new ArrayList<>();
+        medicationTitleDescs = new ArrayList<>();
     }
 
-    public void addMedicationTitleDesc(String title, String desc){
-        MedicationTitleDesc medicationTitleDesc=new MedicationTitleDesc();
+    public void addMedicationTitleDesc(String title, String desc) {
+        MedicationTitleDesc medicationTitleDesc = new MedicationTitleDesc();
         medicationTitleDesc.setTitle(title);
         medicationTitleDesc.setDesc(desc);
         medicationTitleDescs.add(medicationTitleDesc);
@@ -39,7 +39,7 @@ public class MedicationResources {
         this.medicationTitleDescs = medicationTitleDescs;
     }
 
-    public class MedicationTitleDesc{
+    public class MedicationTitleDesc {
         private String title;
         private String desc;
 

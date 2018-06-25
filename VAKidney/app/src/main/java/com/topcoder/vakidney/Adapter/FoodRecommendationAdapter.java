@@ -61,7 +61,7 @@ public class FoodRecommendationAdapter extends Adapter implements View.OnClickLi
 
     @Override
     public void onClick(View view) {
-        if(view.getTag() != null && view.getTag() instanceof FoodRecommendation) {
+        if (view.getTag() != null && view.getTag() instanceof FoodRecommendation) {
             FoodRecommendation foodRecommendation = (FoodRecommendation) view.getTag();
             Intent intent = new Intent(mContext, ResourcesDetailActivity.class);
             intent.putExtra("title", TextUtil.capitalizeFirstLetter(foodRecommendation.getName()));
@@ -73,8 +73,8 @@ public class FoodRecommendationAdapter extends Adapter implements View.OnClickLi
             String description = foodRecommendation.getDesc();
             description =
                     description +
-                    "\nRelated nutrients: " +
-                    foodRecommendation.getNutritionArray();
+                            "\nRelated nutrients: " +
+                            foodRecommendation.getNutritionArray();
             intent.putExtra("desc", description);
             mContext.startActivity(intent);
         }

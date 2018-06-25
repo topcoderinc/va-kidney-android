@@ -1,152 +1,158 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/app_standard_padding"
     android:background="@color/colorLightGray"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/app_standard_padding"
     tools:context="com.topcoder.vakidney.fragments.WorkoutFragment">
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@drawable/bg_white_rounded"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
         >
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center"
+            android:layout_height="wrap_content"
             android:layout_margin="20dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
             >
 
             <android.support.v7.widget.AppCompatImageView
-                android:layout_width="40dp"
                 android:layout_height="40dp"
-                app:srcCompat="@drawable/ic_data_sync"
+                android:layout_width="40dp"
                 android:tint="@color/colorDarkGray"
+                app:srcCompat="@drawable/ic_data_sync"
                 />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/app_standard_padding"
+                android:layout_width="wrap_content"
                 android:orientation="vertical"
                 >
 
                 <TextView
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
                     android:text="Data Sync"
                     android:textColor="@color/colorDarkGray"
                     android:textSize="17dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 <TextView
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
                     android:text="Auto synced 2 hours ago"
                     android:textColor="@color/colorDarkGray"
-                    android:textSize="13dp" />
+                    android:textSize="13dp"/>
 
             </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:background="@color/colorLightGray"
             android:layout_height="1dp"
             android:layout_marginBottom="@dimen/app_standard_padding"
-            android:background="@color/colorLightGray"
+            android:layout_width="match_parent"
             />
 
         <LinearLayout
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             android:orientation="horizontal"
             android:paddingBottom="5dp"
             >
 
             <TextView
-                android:id="@+id/llSyncData"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_width="0dp"
+                android:gravity="center"
+                android:id="@+id/llSyncData"
                 android:layout_height="wrap_content"
-                android:text="Sync Data"
+                android:layout_marginBottom="3dp"
                 android:layout_marginLeft="@dimen/app_standard_padding"
                 android:layout_marginRight="@dimen/app_standard_padding"
                 android:layout_marginTop="3dp"
-                android:layout_marginBottom="3dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:layout_width="0dp"
+                android:text="Sync Data"
                 android:textColor="@color/colorAccent"
                 android:textSize="13dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <View
-                android:layout_width="1dp"
-                android:layout_height="30dp"
                 android:background="@color/colorLightGray"
+                android:layout_height="30dp"
+                android:layout_width="1dp"
                 />
 
             <TextView
-                android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Manage Device"
+                android:layout_marginBottom="3dp"
                 android:layout_marginLeft="@dimen/app_standard_padding"
                 android:layout_marginRight="@dimen/app_standard_padding"
                 android:layout_marginTop="3dp"
-                android:layout_marginBottom="3dp"
-                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:text="Manage Device"
                 android:textColor="@color/colorAccent"
                 android:textSize="13dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
 
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="@dimen/app_standard_padding"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
         android:weightSum="2"
         >
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_marginRight="5dp"
-            android:orientation="vertical"
             android:background="@drawable/bg_white_rounded"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
             >
-
 
             <com.topcoder.vakidney.customview.ArcProgress
                 android:id="@+id/arcRunning"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_marginTop="@dimen/app_standard_padding"
-                app:arc_bottom_text="Distance"
-                app:arc_bottom_text_size="12dp"
+                android:layout_marginTop="5dp"
                 app:arc_finished_color="#ff7f32"
                 app:arc_progress="55"
                 app:arc_text_color="@color/colorDarkGray"
                 app:arc_unfinished_color="#e5e5e5"
                 app:icon_color="#ff7f32"
+                app:arc_bottom_text=""
                 app:inside_drawable="@drawable/ic_running" />
-
-
+            <TextView
+                android:id="@+id/arcBottomText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Distance"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12dp"
+                android:textStyle="bold" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -177,23 +183,23 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:background="@color/colorLightGray"
                 android:layout_height="1dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/colorLightGray"
+                android:layout_width="match_parent"
                 android:orientation="horizontal"
                 />
 
             <TextView
                 android:id="@+id/llSyncDistance"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sync Now"
+                android:layout_width="160dp"
+                android:layout_height="21dp"
                 android:layout_margin="@dimen/app_standard_padding"
                 android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
                 android:gravity="center"
+                android:text="Sync Now"
                 android:textColor="@color/colorAccent"
                 android:textSize="13dp" />
         </LinearLayout>
@@ -201,29 +207,36 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
-            android:gravity="center"
-            android:orientation="vertical"
+            android:layout_weight="1"
             android:background="@drawable/bg_white_rounded"
-            >
+            android:gravity="center"
+            android:orientation="vertical">
 
 
             <com.topcoder.vakidney.customview.ArcProgress
                 android:id="@+id/arcSteps"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_marginTop="@dimen/app_standard_padding"
-                app:arc_bottom_text="Steps"
-                app:arc_bottom_text_size="12dp"
+                android:layout_marginTop="5dp"
                 app:arc_finished_color="#f3cf45"
+                app:arc_bottom_text=""
                 app:arc_progress="55"
                 app:arc_text_color="@color/colorDarkGray"
                 app:arc_unfinished_color="#e5e5e5"
                 app:icon_color="#f3cf45"
                 app:inside_drawable="@drawable/ic_steps" />
 
+            <TextView
+                android:id="@+id/arcBottomText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Steps"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="12dp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -259,22 +272,22 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="5dp"
                 android:background="@color/colorLightGray"
-                android:orientation="horizontal"
-                />
+                android:orientation="horizontal" />
 
             <TextView
                 android:id="@+id/llSyncStep"
-                android:clickable="true"
-                android:focusable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sync Now"
                 android:layout_margin="@dimen/app_standard_padding"
                 android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
                 android:gravity="center"
+                android:text="Sync Now"
                 android:textColor="@color/colorAccent"
                 android:textSize="13dp" />
         </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
+</layout>

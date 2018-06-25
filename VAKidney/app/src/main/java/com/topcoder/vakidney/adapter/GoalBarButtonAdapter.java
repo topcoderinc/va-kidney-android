@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 public class GoalBarButtonAdapter extends RecyclerView.Adapter
-    implements View.OnClickListener {
+        implements View.OnClickListener {
 
     private Context mContext;
     private List<Goal> mGoals;
@@ -55,8 +55,7 @@ public class GoalBarButtonAdapter extends RecyclerView.Adapter
         if (goal == mSelectedGoal) {
             button.setBackgroundResource(R.drawable.bg_seekbar_selected);
             button.setTextColor(mContext.getColor(R.color.colorWhite));
-        }
-        else {
+        } else {
             button.setBackgroundResource(android.R.color.transparent);
             button.setTextColor(mContext.getColor(R.color.colorLightDarkGray));
         }

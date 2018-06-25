@@ -1,6 +1,7 @@
 package com.topcoder.vakidney.fragments.home;
 
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.GridView;
 
 import com.topcoder.vakidney.adapter.LabDataAdapter;
 import com.topcoder.vakidney.R;
+import com.topcoder.vakidney.databinding.FragmentHome3Binding;
 import com.topcoder.vakidney.util.JsondataUtil;
 
 /**
@@ -18,9 +20,8 @@ import com.topcoder.vakidney.util.JsondataUtil;
  */
 public class Home3Fragment extends Fragment {
 
+    FragmentHome3Binding binder;
 
-
-    private GridView gridView;
     public Home3Fragment() {
     }
 
@@ -29,10 +30,10 @@ public class Home3Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_home3, container, false);
-        gridView=view.findViewById(R.id.gridView);
-        LabDataAdapter goal=new LabDataAdapter(JsondataUtil.getLabData(getActivity()), getActivity());
-        gridView.setAdapter(goal);
+        binder = DataBindingUtil.inflate(inflater, R.layout.fragment_home3, container, false);
+        final View view = binder.getRoot();
+        LabDataAdapter goal = new LabDataAdapter(JsondataUtil.getLabData(getActivity()), getActivity());
+        binder.gridView.setAdapter(goal);
         return view;
     }
 
