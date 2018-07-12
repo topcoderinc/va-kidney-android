@@ -1,13 +1,14 @@
 package com.topcoder.vakidney.fragments;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 
 import com.topcoder.vakidney.adapter.GoalAdapter;
+import com.topcoder.vakidney.databinding.FragmentGoalBinding;
 import com.topcoder.vakidney.model.Goal;
 import com.topcoder.vakidney.model.UserData;
 import com.topcoder.vakidney.R;
@@ -21,10 +22,11 @@ import java.util.List;
 public class GoalFragment extends Fragment {
 
 
-    private GridView gridView;
     private UserData mUserData;
 
     private List<Goal> goalArrayList;
+    private FragmentGoalBinding binder;
+
     public GoalFragment() {
         // Required empty public constructor
         mUserData = UserData.get();
@@ -34,22 +36,22 @@ public class GoalFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_goal, container, false);
+        binder = DataBindingUtil.inflate(inflater, R.layout.fragment_goal, container, false);
+        final View view = binder.getRoot();
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        initAndPopulate(getView());
+        populate();
     }
 
-    private void initAndPopulate(View view) {
-        gridView = view.findViewById(R.id.gridView);
-        goalArrayList = Goal.get(mUserData.getDiseaseCategory(), mUserData.isDialysis());
-
-        GoalAdapter goalAda = new GoalAdapter(goalArrayList, getActivity());
-        gridView.setAdapter(goalAda);
+    private void populate() {
+        goalArrayList = Goal.getWithoutComorbidities(mUserData.getDiseaseCategory(), mUserData.isDialysis());
+        GoalAdapter goalAdapter = new GoalAdapter(goalArrayList, getActivity());
+        binder.gridView.setAdapter(goalAdapter);
     }
+
 
 }

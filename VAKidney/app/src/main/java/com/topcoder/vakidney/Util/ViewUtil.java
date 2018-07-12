@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
@@ -23,7 +24,7 @@ public class ViewUtil {
     public static void dimBehind(PopupWindow popupWindow) {
         View container;
         if (popupWindow.getBackground() == null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 container = (View) popupWindow.getContentView().getParent();
             } else {
                 container = popupWindow.getContentView();
@@ -44,8 +45,13 @@ public class ViewUtil {
     }
 
     public static boolean isEmailValid(String emailStr) {
-        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
         return matcher.find();
+    }
+
+    public static int dpToPx(int dp, Context context) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
     private static class CustomSpannable extends ClickableSpan {

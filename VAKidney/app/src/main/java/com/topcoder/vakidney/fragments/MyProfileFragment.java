@@ -6,21 +6,32 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
+import android.text.method.DigitsKeyListener;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.fitness.FitnessOptions;
 import com.google.android.gms.fitness.data.DataPoint;
@@ -29,14 +40,24 @@ import com.google.android.gms.fitness.data.Field;
 import com.google.android.gms.fitness.data.Value;
 import com.google.android.gms.fitness.result.DataReadResponse;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.makeramen.roundedimageview.RoundedImageView;
+
+import com.topcoder.vakidney.constant.Comorbidities;
+import com.topcoder.vakidney.databinding.DialogComorbidities1Binding;
+import com.topcoder.vakidney.databinding.FragmentMyProfileBinding;
+import com.topcoder.vakidney.model.Goal;
 import com.topcoder.vakidney.model.UserData;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.util.DialogManager;
+import com.topcoder.vakidney.util.GoalGenerator;
 import com.topcoder.vakidney.util.GoogleFitUtil;
 import com.topcoder.vakidney.util.ImagePicker;
 import com.topcoder.vakidney.constant.DiseaseCategory;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
@@ -56,17 +77,18 @@ import static java.util.Calendar.YEAR;
 public class MyProfileFragment extends Fragment {
 
     public final static int GOOGLE_FIT_PERMISSIONS_REQUEST_CODE = 0x00000002;
+    private static final String TAG = "MyProfileFragment";
+    private static final String PROFILE_IMAGE_PATH = "/profile_image.png";
 
-    private TextView tvName, tvBirthDate, tvAge, tvHeight, tvWeight, tvDialysis, tvDiseaseCategory, tvSetupGoals, tvBiometricDevice;
     private UserData currentUserData;
-    private RoundedImageView profileImageView;
     private Bitmap profileBitmap = null;
-    private RelativeLayout profileFieldAge, profileFieldHeight, profileFieldWeight, profileFieldDialysis, profileFieldDisease, profileFieldGoal, profileFieldBiometric;
 
     private Calendar myCalendar;
     private DatePickerDialog.OnDateSetListener date;
+    boolean[] checkedItems;
 
     private int birthYear = 1960, birthMonth = 1, birthDay = 1;
+    private FragmentMyProfileBinding binder;
 
     public MyProfileFragment() {
         // Required empty public constructor
@@ -79,11 +101,16 @@ public class MyProfileFragment extends Fragment {
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
-
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_my_profile, container, false);
+        binder = DataBindingUtil.inflate(inflater, R.layout.fragment_my_profile, container, false);
+        final View view = binder.getRoot();
+
+
         currentUserData = UserData.get();
-        initView(view);
+        checkedItems = new boolean[]{currentUserData.isComorbiditiesHypertension(),
+                currentUserData.isComorbiditiesDiabetesmellitus(),
+                currentUserData.isComorbiditiesCongestiveheartfailure()};
+
         addFieldListeners();
         populateFields();
 
@@ -100,7 +127,7 @@ public class MyProfileFragment extends Fragment {
     }
 
     private void addFieldListeners() {
-        profileImageView.setOnClickListener(new View.OnClickListener() {
+        binder.profileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent chooseImageIntent = ImagePicker.getPickImageIntent(getActivity());
@@ -112,7 +139,7 @@ public class MyProfileFragment extends Fragment {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 birthYear = year;
-                birthMonth = monthOfYear+1;
+                birthMonth = monthOfYear + 1;
                 birthDay = dayOfMonth;
                 Calendar newCalendar = Calendar.getInstance();
                 newCalendar.set(YEAR, year);
@@ -123,7 +150,7 @@ public class MyProfileFragment extends Fragment {
                 populateFields();
             }
         };
-        profileFieldAge.setOnClickListener(new View.OnClickListener() {
+        binder.profileFieldAge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog pickerDialog = new DatePickerDialog(getActivity(), date, birthYear, birthMonth,
@@ -133,7 +160,7 @@ public class MyProfileFragment extends Fragment {
             }
         });
 
-        profileFieldHeight.setOnClickListener(new View.OnClickListener() {
+        binder.profileFieldHeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -145,8 +172,7 @@ public class MyProfileFragment extends Fragment {
                 aNumberPickerFeet.setMinValue(1);
                 if (currentUserData.getHeightFeet() > 0) {
                     aNumberPickerFeet.setValue(currentUserData.getHeightFeet());
-                }
-                else {
+                } else {
                     aNumberPickerFeet.setValue(5);
                 }
 
@@ -223,7 +249,7 @@ public class MyProfileFragment extends Fragment {
                                                     aNumberPickerInch.getValue());
                                         }
                                     }
-                        })
+                                })
                         .setNegativeButton("Cancel",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,
@@ -237,23 +263,53 @@ public class MyProfileFragment extends Fragment {
         });
 
 
-        profileFieldWeight.setOnClickListener(new View.OnClickListener() {
+        binder.profileFieldWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogManager.showNumberPickerDialog(getActivity(), "Please select your current weight (Pounds)", new DialogManager.OnNumberPicked() {
-                    @Override
-                    public void NumberPicked(int number) {
-                        currentUserData.setWeight(number);
-                        populateFields();
-                        if (currentUserData.isBiometric()) {
-                            GoogleFitUtil.insertWeight(getActivity(), number);
-                        }
+                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                final EditText edittext = new EditText(getContext());
+                edittext.setInputType(InputType.TYPE_CLASS_NUMBER);
+                edittext.setKeyListener(DigitsKeyListener.getInstance(true, false));
+                edittext.setText(currentUserData.getWeight() + "");
+                alert.setTitle("Enter Your Weight");
+
+                alert.setView(edittext);
+
+                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
                     }
-                }, 100, 400, currentUserData.getWeight());
+                });
+
+                alert.setNegativeButton("Cancel", null);
+
+                final AlertDialog dialog = alert.create();
+                dialog.show();
+
+                //Overriding the handler immediately after show is probably a better approach than OnShowListener as described below
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String weight = edittext.getText().toString();
+                        if(weight.length()>3) {
+                            Drawable errorImage=getResources().getDrawable(R.drawable.bg_login_field_error);
+                            errorImage.setTint(Color.RED);
+                            edittext.setError("Enter Weight between 0-999",errorImage);
+                            return;
+                        }
+                        currentUserData.setWeight(Integer.parseInt(weight));
+                        populateFields();
+
+                        if (currentUserData.isBiometric()) {
+                            GoogleFitUtil.insertWeight(getActivity(), Integer.parseInt(weight));
+                        }
+                        dialog.dismiss();
+                    }
+                });
             }
         });
 
-        profileFieldDialysis.setOnClickListener(new View.OnClickListener() {
+        binder.profileFieldDialysis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DialogManager.showYesNoDialog(getActivity(), "Are You In Dialysis?", "Yes", "No", new DialogManager.OnYesClicked() {
@@ -273,33 +329,14 @@ public class MyProfileFragment extends Fragment {
         });
 
 
-        profileFieldGoal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogManager.showYesNoDialog(getActivity(), "Do you want to setup Goals?", "Yes", "No", new DialogManager.OnYesClicked() {
-                    @Override
-                    public void YesClicked() {
-                        currentUserData.setSetupgoals(true);
-                        populateFields();
-                    }
-                }, new DialogManager.OnNoClicked() {
-                    @Override
-                    public void NoClicked() {
-                        currentUserData.setSetupgoals(false);
-                        populateFields();
-                    }
-                });
-            }
-        });
-
-        profileFieldBiometric.setOnClickListener(new View.OnClickListener() {
+        binder.profileFieldBiometric.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showBiometricPermissionDialog();
             }
         });
 
-        profileFieldDisease.setOnClickListener(new View.OnClickListener() {
+        binder.profileFieldDisease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -319,7 +356,53 @@ public class MyProfileFragment extends Fragment {
                 b.show();
             }
         });
+        binder.profileFieldComorbidities.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayComorbiditiesDialog();
+            }
+        });
+
+        binder.btnResetGoals
+                .setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            final List<Goal> goals = Goal.getAllWithoutComorbidities(currentUserData.getDiseaseCategory(),
+                                    currentUserData.isDialysis());
+                            if (goals.size() > 0) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                builder.setMessage("Are you sure to reset all goals?")
+                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                GoalGenerator.removeGoals();
+                                                Toast.makeText(getActivity(), "Goals have been reset",
+                                                        Toast.LENGTH_SHORT).show();
+                                            }
+                                        })
+                                        .setNegativeButton("No", null);
+                                final AlertDialog alertDialog = builder.create();
+                                alertDialog.show();
+                            } else {
+                                Toast.makeText(getActivity(), "No goals to reset", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                );
+        binder.btnGenerateGoals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final List<Goal> goals = Goal.getAllWithoutComorbidities(currentUserData.getDiseaseCategory(), currentUserData.isDialysis());
+                if (goals.size() > 0) {
+                    Toast.makeText(getActivity(), "Goals have been already generated", Toast.LENGTH_SHORT).show();
+                } else {
+                    GoalGenerator.generateGoals();
+                    Toast.makeText(getActivity(), "Goals have been generated", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
+
 
     /**
      * Ask user to connect the app to Google Fit
@@ -331,80 +414,77 @@ public class MyProfileFragment extends Fragment {
                 "Yes",
                 "No",
                 new DialogManager.OnYesClicked() {
-            @Override
-            public void YesClicked() {
-                initGoogleFit();
-            }
-        }, new DialogManager.OnNoClicked() {
-            @Override
-            public void NoClicked() {
-                currentUserData.setBiometric(false);
-                populateFields();
-            }
-        });
+                    @Override
+                    public void YesClicked() {
+                        initGoogleFit();
+                    }
+                }, new DialogManager.OnNoClicked() {
+                    @Override
+                    public void NoClicked() {
+                        currentUserData.setBiometric(false);
+                        populateFields();
+                    }
+                });
     }
 
     /**
      * Populates respective Fields
      */
     private void populateFields() {
+        profileBitmap = getProfileImage();
+        if (profileBitmap != null) {
+            Glide.with(getContext()).load(profileBitmap).apply(RequestOptions.circleCropTransform()).into(binder.profileImageView);
+        } else {
+            Glide.with(getContext()).load(R.drawable.profile_bg).apply(RequestOptions.circleCropTransform()).into(binder.profileImageView);
+        }
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(currentUserData.getBirthday());
         birthYear = calendar.get(Calendar.YEAR);
         birthMonth = calendar.get(Calendar.MONTH);
         birthDay = calendar.get(Calendar.DAY_OF_MONTH);
 
-        tvName.setText(currentUserData.getFullname());
-        tvAge.setText(currentUserData.getAge() + " years");
-        tvHeight.setText(
+        binder.tvName.setText(currentUserData.getFullname());
+        binder.tvAge.setText(currentUserData.getAge() + " years");
+        binder.tvHeight.setText(
                 currentUserData.getHeightFeet() + " feet " +
-                currentUserData.getHeightInch() + " inch(es)");
-        tvWeight.setText(currentUserData.getWeight() + " pounds");
-        tvBirthDate.setText(getFormattedDate(birthYear, birthMonth, birthDay));
+                        currentUserData.getHeightInch() + " inch(es)");
+        binder.tvWeight.setText(currentUserData.getWeight() + " pounds");
+        binder.tvBirthDate.setText(getFormattedDate(birthYear, birthMonth, birthDay));
         if (currentUserData.isDialysis()) {
-            tvDialysis.setText("Yes");
+            binder.tvDialysis.setText("Yes");
         } else {
-            tvDialysis.setText("No");
+            binder.tvDialysis.setText("No");
         }
-        tvDiseaseCategory.setText(
+        binder.tvDiseaseCategory.setText(
                 DiseaseCategory.LABELS[currentUserData.getDiseaseCategory()]
         );
-        if (currentUserData.isSetupgoals()) {
-            tvSetupGoals.setText("Yes");
-        } else {
-            tvSetupGoals.setText("No");
-        }
         if (currentUserData.isBiometric()) {
-            tvBiometricDevice.setText("Yes");
+            binder.tvBiometricDevice.setText("Yes");
         } else {
-            tvBiometricDevice.setText("No");
+            binder.tvBiometricDevice.setText("No");
         }
+        populateComorbiditesFields();
         currentUserData.save();
     }
 
-    /**
-     * Initializes The View
-     *
-     * @param view This View is required to find all views in this fragment/Activity
-     */
-    private void initView(View view) {
-        profileImageView = view.findViewById(R.id.profileImageView);
-        tvName = view.findViewById(R.id.tvName);
-        tvBirthDate = view.findViewById(R.id.tvBirthDate);
-        tvAge = view.findViewById(R.id.tvAge);
-        tvHeight = view.findViewById(R.id.tvHeight);
-        tvWeight = view.findViewById(R.id.tvWeight);
-        tvDialysis = view.findViewById(R.id.tvDialysis);
-        tvDiseaseCategory = view.findViewById(R.id.tvDiseaseCategory);
-        tvSetupGoals = view.findViewById(R.id.tvSetupGoals);
-        tvBiometricDevice = view.findViewById(R.id.tvBiometricDevice);
-        profileFieldAge = view.findViewById(R.id.profileFieldAge);
-        profileFieldHeight = view.findViewById(R.id.profileFieldHeight);
-        profileFieldWeight = view.findViewById(R.id.profileFieldWeight);
-        profileFieldDialysis = view.findViewById(R.id.profileFieldDialysis);
-        profileFieldDisease = view.findViewById(R.id.profileFieldDisease);
-        profileFieldGoal = view.findViewById(R.id.profileFieldGoals);
-        profileFieldBiometric = view.findViewById(R.id.profileFieldBiometric);
+    private void populateComorbiditesFields() {
+        StringBuilder comorbities = new StringBuilder();
+        if (currentUserData.isComorbiditiesHypertension()) {
+            comorbities.append(Comorbidities.ComorbiditiesLabels[Comorbidities.Comorbidities_Hypertension]);
+        }
+        if (currentUserData.isComorbiditiesDiabetesmellitus()) {
+            if (!comorbities.toString().isEmpty())
+                comorbities.append(",\n");
+            comorbities.append(Comorbidities.ComorbiditiesLabels[Comorbidities.Comorbidities_Diabetesmellitus]);
+        }
+        if (currentUserData.isComorbiditiesCongestiveheartfailure()) {
+            if (!comorbities.toString().isEmpty())
+                comorbities.append(",\n");
+            comorbities.append(Comorbidities.ComorbiditiesLabels[Comorbidities.Comorbidities_Congestiveheartfailure]);
+        }
+        binder.tvComorbidities.setText(comorbities.toString());
+        if (comorbities.toString().isEmpty())
+            binder.tvComorbidities.setText("No");
     }
 
 
@@ -413,9 +493,13 @@ public class MyProfileFragment extends Fragment {
         switch (requestCode) {
             case 1:
                 profileBitmap = ImagePicker.getImageFromResult(getActivity(), resultCode, data);
-                profileImageView.setImageBitmap(profileBitmap);
+                if (profileBitmap != null) {
+                    storeImage(profileBitmap);
+                    Glide.with(getContext()).load(profileBitmap).apply(RequestOptions.circleCropTransform()).into(binder.profileImageView);
+                }
                 // TODO use bitmap
                 break;
+
             case GOOGLE_FIT_PERMISSIONS_REQUEST_CODE: {
                 if (resultCode == Activity.RESULT_OK) {
                     currentUserData.setBiometric(true);
@@ -572,4 +656,66 @@ public class MyProfileFragment extends Fragment {
         );
     }
 
+    private void displayComorbiditiesDialog() {
+        final BottomSheetDialog dialog = new BottomSheetDialog(getActivity());
+        View sheetView = getActivity().getLayoutInflater().inflate(R.layout.dialog_comorbidities1, null);
+        final DialogComorbidities1Binding binding=DialogComorbidities1Binding.bind(sheetView);
+        dialog.setContentView(sheetView);
+        //Check the fields
+        binding.checkboxHypertension.setChecked(currentUserData.isComorbiditiesHypertension());
+        binding.checkboxDiabetesMellitus.setChecked(currentUserData.isComorbiditiesDiabetesmellitus());
+        binding.checkboxCongestiveheartfailure.setChecked(currentUserData.isComorbiditiesCongestiveheartfailure());
+        //Create On click listeners
+        binding.tvDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkedItems[0]=binding.checkboxHypertension.isChecked();
+                        checkedItems[1]=binding.checkboxDiabetesMellitus.isChecked();
+                                checkedItems[2]=binding.checkboxCongestiveheartfailure.isChecked();
+                currentUserData.setComorbiditiesHypertension(checkedItems[0]);
+                currentUserData.setComorbiditiesDiabetesmellitus(checkedItems[1]);
+                currentUserData.setComorbiditiesCongestiveheartfailure(checkedItems[2]);
+                GoalGenerator.addOrRemoveComorbidities(checkedItems);
+                populateFields();
+                dialog.dismiss();
+            }
+        });
+        binding.tvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+   }
+
+    private void storeImage(Bitmap image) {
+        File pictureFile = new File(getActivity().getFilesDir() + PROFILE_IMAGE_PATH);
+        if (pictureFile == null) {
+            Log.d(TAG, "Error creating media file, check storage permissions: ");// e.getMessage());
+            return;
+        }
+        try {
+            FileOutputStream fos = new FileOutputStream(pictureFile);
+            image.compress(Bitmap.CompressFormat.PNG, 90, fos);
+            fos.close();
+        } catch (FileNotFoundException e) {
+            Log.d(TAG, "File not found: " + e.getMessage());
+        } catch (IOException e) {
+            Log.d(TAG, "Error accessing file: " + e.getMessage());
+        }
+    }
+
+    private Bitmap getProfileImage() {
+        Bitmap bitmap = null;
+        File f = new File(getActivity().getFilesDir() + PROFILE_IMAGE_PATH);
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        try {
+            bitmap = BitmapFactory.decodeStream(new FileInputStream(f), null, options);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
 }

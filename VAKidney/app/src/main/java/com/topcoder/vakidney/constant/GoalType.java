@@ -14,6 +14,7 @@ public class GoalType {
 
     private final static Map<Integer, Integer> ICONS_MAP = new HashMap<>();
     private final static Map<Integer, String> ADD_TITLE_MAP = new HashMap<>();
+
     static {
         ICONS_MAP.put(Goal.TYPE_ACTIVITY, R.drawable.ic_running);
         ICONS_MAP.put(Goal.TYPE_PILL, R.drawable.ic_bar_medication);

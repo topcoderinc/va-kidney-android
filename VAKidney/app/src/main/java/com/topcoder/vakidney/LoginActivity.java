@@ -1,6 +1,8 @@
 package com.topcoder.vakidney;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -13,6 +15,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.topcoder.vakidney.databinding.ActivityLoginBinding;
 import com.topcoder.vakidney.model.UserData;
 import com.topcoder.vakidney.util.DialogManager;
 import com.topcoder.vakidney.util.JsondataUtil;
@@ -26,93 +29,82 @@ public class LoginActivity extends AppCompatActivity {
     private String username;
     private String password;
     private UserData currentUser;
-    private EditText emailField, passwordField;
-    private TextView tvEmailError, tvPasswordError, tvForgotPassword;
-    private RelativeLayout emailLayout, passwordLayout;
-    private Button btnLogin, btnRegister;
+
+    ActivityLoginBinding binder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        binder = DataBindingUtil.setContentView(this, R.layout.activity_login);
         currentUser = JsondataUtil.getUserData(getApplicationContext());
         username = currentUser.getUsername();
         password = currentUser.getPassword();
-        emailLayout=findViewById(R.id.emailLayout);
-        passwordLayout=findViewById(R.id.passwordLayout);
-        emailField=findViewById(R.id.emailField);
-        passwordField=findViewById(R.id.passwordField);
-        tvEmailError=findViewById(R.id.emailErrorTv);
-        tvPasswordError=findViewById(R.id.passwordErrorTv);
-        tvForgotPassword=findViewById(R.id.forgotPasswordTv);
-        btnLogin=findViewById(R.id.btnLogin);
-        btnLogin.setEnabled(false);
-        btnRegister =findViewById(R.id.btnSignUp);
-        emailField.clearFocus();
+        binder.btnLogin.setEnabled(false);
+        binder.emailField.clearFocus();
 
         EnableDisableLogin();
 
-        emailField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        binder.emailField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                if(b) {
-                    tvEmailError.setVisibility(View.GONE);
-                    emailLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
+                if (b) {
+                    binder.emailErrorTv.setVisibility(View.GONE);
+                    binder.emailLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
                 }
             }
         });
 
-        passwordField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        binder.passwordField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                if(b) {
-                    tvPasswordError.setVisibility(View.GONE);
-                    passwordLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
+                if (b) {
+                    binder.passwordErrorTv.setVisibility(View.GONE);
+                    binder.passwordLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
                 }
             }
         });
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        binder.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(emailField.getText().toString().isEmpty()){
-                    tvEmailError.setVisibility(View.VISIBLE);
-                    tvPasswordError.setVisibility(View.GONE);
-                    tvEmailError.setText(R.string.error_empty_email);
-                    emailLayout.setBackgroundResource(R.drawable.bg_login_field_error);
-                    passwordLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
-                }else if(passwordField.getText().toString().isEmpty()){
-                    tvPasswordError.setVisibility(View.VISIBLE);
-                    tvEmailError.setVisibility(View.GONE);
-                    tvPasswordError.setText(R.string.error_empty_password);
-                    emailLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
-                    passwordLayout.setBackgroundResource(R.drawable.bg_login_field_error);
-                }else if(!isValidEmail(emailField.getText().toString())){
-                    tvEmailError.setVisibility(View.VISIBLE);
-                    tvPasswordError.setVisibility(View.GONE);
-                    tvEmailError.setText(R.string.validate_email);
-                    emailLayout.setBackgroundResource(R.drawable.bg_login_field_error);
-                    passwordLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
-                }else if((!emailField.getText().toString().equals(username)) || (!passwordField.getText().toString().equals(password))){
-                    tvEmailError.setVisibility(View.VISIBLE);
-                    tvEmailError.setText(R.string.error_email);
-                    tvPasswordError.setVisibility(View.VISIBLE);
-                    tvPasswordError.setText(R.string.error_password);
-                    emailLayout.setBackgroundResource(R.drawable.bg_login_field_error);
-                    passwordLayout.setBackgroundResource(R.drawable.bg_login_field_error);
-                }else if((emailField.getText().toString().equals(username)) && (passwordField.getText().toString().equals(password)) && isValidEmail(emailField.getText().toString())){
+                if (binder.emailField.getText().toString().isEmpty()) {
+                    binder.emailErrorTv.setVisibility(View.VISIBLE);
+                    binder.passwordErrorTv.setVisibility(View.GONE);
+                    binder.emailErrorTv.setText(R.string.error_empty_email);
+                    binder.emailLayout.setBackgroundResource(R.drawable.bg_login_field_error);
+                    binder.passwordLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
+                } else if (binder.passwordField.getText().toString().isEmpty()) {
+                    binder.passwordErrorTv.setVisibility(View.VISIBLE);
+                    binder.emailErrorTv.setVisibility(View.GONE);
+                    binder.passwordErrorTv.setText(R.string.error_empty_password);
+                    binder.emailLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
+                    binder.passwordLayout.setBackgroundResource(R.drawable.bg_login_field_error);
+                } else if (!isValidEmail(binder.emailField.getText().toString())) {
+                    binder.emailErrorTv.setVisibility(View.VISIBLE);
+                    binder.passwordErrorTv.setVisibility(View.GONE);
+                    binder.emailErrorTv.setText(R.string.validate_email);
+                    binder.emailLayout.setBackgroundResource(R.drawable.bg_login_field_error);
+                    binder.passwordLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
+                } else if ((!binder.emailField.getText().toString().equals(username)) || (!binder.passwordField.getText().toString().equals(password))) {
+                    binder.emailErrorTv.setVisibility(View.VISIBLE);
+                    binder.emailErrorTv.setText(R.string.error_email);
+                    binder.passwordErrorTv.setVisibility(View.VISIBLE);
+                    binder.passwordErrorTv.setText(R.string.error_password);
+                    binder.emailLayout.setBackgroundResource(R.drawable.bg_login_field_error);
+                    binder.passwordLayout.setBackgroundResource(R.drawable.bg_login_field_error);
+                } else if ((binder.emailField.getText().toString().equals(username)) && (binder.passwordField.getText().toString().equals(password)) && isValidEmail(binder.emailField.getText().toString())) {
                     LoginManager.setLoggedIn(getApplicationContext(), true, currentUser);
                     NavigateHome();
                 }
             }
         });
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        binder.btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DialogManager.showOkDialog(LoginActivity.this, getString(R.string.feature_not_implemented), null);
             }
         });
-        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+        binder.forgotPasswordTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DialogManager.showOkDialog(LoginActivity.this, getString(R.string.feature_not_implemented), null);
@@ -122,6 +114,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * Checks if email is valid or not
+     *
      * @param target Email String
      * @return bollean value: true if email is valid, false if email is invalid
      */
@@ -133,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
      * Performs disable or enabled login button behaviour
      */
     private void EnableDisableLogin() {
-        emailField.addTextChangedListener(new TextWatcher() {
+        binder.emailField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -141,9 +134,9 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(charSequence.toString().length()!=0){
-                    if(!passwordField.getText().toString().isEmpty()){
-                        btnLogin.setEnabled(true);
+                if (charSequence.toString().length() != 0) {
+                    if (!binder.passwordField.getText().toString().isEmpty()) {
+                        binder.btnLogin.setEnabled(true);
                     }
                 }
             }
@@ -154,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        passwordField.addTextChangedListener(new TextWatcher() {
+        binder.passwordField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -162,9 +155,9 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(charSequence.toString().length()!=0){
-                    if(!emailField.getText().toString().isEmpty()){
-                        btnLogin.setEnabled(true);
+                if (charSequence.toString().length() != 0) {
+                    if (!binder.emailField.getText().toString().isEmpty()) {
+                        binder.btnLogin.setEnabled(true);
                     }
                 }
             }

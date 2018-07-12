@@ -18,5 +18,8 @@
   "jumpcurrent":45,
   "jumpgoal":80,
   "swimmingcurrent":1,
-  "swimminggoal":3
+  "swimminggoal":3,
+  "comorbiditiescongestiveheartfailure":false,
+  "comorbiditiesdiabetesmellitus":false,
+  "comorbiditiesHypertension":false
 }

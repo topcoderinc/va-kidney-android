@@ -1,6 +1,7 @@
 package com.topcoder.vakidney.fragments;
 
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -19,7 +20,7 @@ import com.google.android.gms.fitness.data.Value;
 import com.google.android.gms.fitness.result.DataReadResponse;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.topcoder.vakidney.customview.ArcProgress;
+import com.topcoder.vakidney.databinding.FragmentWorkoutBinding;
 import com.topcoder.vakidney.model.UserData;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.util.GoogleFitUtil;
@@ -33,10 +34,9 @@ import java.util.Locale;
  */
 public class WorkoutFragment extends Fragment implements View.OnClickListener {
 
-    private TextView tvRunning, tvSteps;
-    private ArcProgress arcRunning, arcSteps;
-    private UserData currentUserData;
 
+    private UserData currentUserData;
+    private FragmentWorkoutBinding binder;
     private final static String TAG = "WorkoutFragment";
 
     public WorkoutFragment() {
@@ -49,8 +49,8 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_workout, container, false);
-
+        binder = DataBindingUtil.inflate(inflater, R.layout.fragment_workout, container, false);
+        final View view = binder.getRoot();
         View syncData = view.findViewById(R.id.llSyncData);
         View syncDistance = view.findViewById(R.id.llSyncDistance);
         View syncSteps = view.findViewById(R.id.llSyncStep);
@@ -65,8 +65,6 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-
-        initView(getView());
         populateData();
     }
 
@@ -82,27 +80,17 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
                 Locale.US,
                 "%.02f",
                 currentUserData.getRunninggoal());
-        tvRunning.setText(
+        binder.tvRunning.setText(
                 distanceStr +
-                "/" +
-                distanceGoalStr);
-        tvSteps.setText(currentUserData.getStepcurrent()+"/"+currentUserData.getStepgoal());
-        arcRunning.setMax((int) currentUserData.getRunninggoal());
-        arcRunning.setProgress((float) currentUserData.getRunningcurrent());
-        arcSteps.setMax(currentUserData.getStepgoal());
-        arcSteps.setProgress(currentUserData.getStepcurrent());
+                        "/" +
+                        distanceGoalStr);
+        binder.tvSteps.setText(currentUserData.getStepcurrent() + "/" + currentUserData.getStepgoal());
+        binder.arcRunning.setMax((int) currentUserData.getRunninggoal());
+        binder.arcRunning.setProgress((float) currentUserData.getRunningcurrent());
+        binder.arcSteps.setMax(currentUserData.getStepgoal());
+        binder.arcSteps.setProgress(currentUserData.getStepcurrent());
     }
 
-    /**
-     * Initializes the view
-     * @param view This View is required to find all views in this fragment/Activity
-     */
-    private void initView(View view) {
-        tvRunning = view.findViewById(R.id.tvRunning);
-        tvSteps = view.findViewById(R.id.tvSteps);
-        arcRunning = view.findViewById(R.id.arcRunning);
-        arcSteps = view.findViewById(R.id.arcSteps);
-    }
 
     @Override
     public void onClick(View view) {
@@ -132,8 +120,7 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
                                     currentUserData.setRunningcurrent(distance * 0.000621);
                                     populateData();
                                     currentUserData.save();
-                                }
-                                catch (Exception e) {
+                                } catch (Exception e) {
                                     Log.e(TAG, e.getMessage());
                                 }
 
@@ -166,8 +153,7 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
                                     currentUserData.setStepcurrent(steps);
                                     populateData();
                                     currentUserData.save();
-                                }
-                                catch (Exception e) {
+                                } catch (Exception e) {
                                 }
                             }
                         },

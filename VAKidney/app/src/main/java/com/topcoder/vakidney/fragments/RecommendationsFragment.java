@@ -1,6 +1,7 @@
 package com.topcoder.vakidney.fragments;
 
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.topcoder.vakidney.adapter.ViewPagerAdapter;
+import com.topcoder.vakidney.databinding.FragmentBloodSugarBinding;
+import com.topcoder.vakidney.databinding.FragmentMedicationBinding;
 import com.topcoder.vakidney.fragments.recommendations.DrugFragment;
 import com.topcoder.vakidney.fragments.recommendations.NutritionFragment;
 import com.topcoder.vakidney.R;
@@ -20,8 +23,8 @@ import com.topcoder.vakidney.R;
  */
 public class RecommendationsFragment extends Fragment {
 
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
+
+    FragmentMedicationBinding binder;
 
     public RecommendationsFragment() {
         // Required empty public constructor
@@ -31,17 +34,19 @@ public class RecommendationsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_medication, container, false);
-        viewPager = view.findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
+        binder = DataBindingUtil.inflate(inflater, R.layout.fragment_medication, container, false);
+        final View view = binder.getRoot();
 
-        tabLayout = view.findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
+        setupViewPager(binder.viewpager);
+
+
+        binder.tabs.setupWithViewPager(binder.viewpager);
         return view;
     }
 
     /**
      * Populates the viewpager
+     *
      * @param viewPager Required to Setup with fragments
      */
     private void setupViewPager(ViewPager viewPager) {

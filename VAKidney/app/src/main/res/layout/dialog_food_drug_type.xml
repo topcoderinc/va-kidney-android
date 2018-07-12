@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:background="@color/background_darker_gray"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:background="@android:color/white"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"
+                android:textColor="@color/text_black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/select_filter_type"
+                android:textColor="@color/text_black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/done"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="18sp"
+                android:text="@string/done"
+                android:textColor="@color/text_black"/>
+
+        </LinearLayout>
+
+        <android.support.v4.widget.Space
+            android:layout_height="1px"
+            android:layout_width="match_parent"/>
+
+
+        <LinearLayout
+            android:background="@android:color/white"
+            android:id="@+id/foodGroup"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:buttonTint="@color/colorPrimary"
+                android:id="@+id/mealBreakfast"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/comorbidities_item_padding"
+                android:layout_marginTop="@dimen/comorbidities_item_padding"
+                android:layout_width="match_parent"
+                android:text="@string/meal_type_breakfast"
+                android:textSize="20sp"
+                android:textColor="@color/colorLightDarkGray"/>
+
+            <View
+                android:background="@color/background_darker_gray"
+                android:layout_height="1px"
+                android:layout_width="match_parent"/>
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:buttonTint="@color/colorPrimary"
+                android:id="@+id/mealLunch"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/comorbidities_item_padding"
+                android:layout_marginTop="@dimen/comorbidities_item_padding"
+                android:layout_width="match_parent"
+                android:text="@string/meal_type_lunch"
+                android:textSize="20sp"
+
+                android:textColor="@color/colorLightDarkGray"/>
+
+            <View
+                android:background="@color/background_darker_gray"
+                android:layout_height="1px"
+                android:layout_width="match_parent"/>
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:buttonTint="@color/colorPrimary"
+                android:id="@+id/mealDinner"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/comorbidities_item_padding"
+                android:layout_marginTop="@dimen/comorbidities_item_padding"
+                android:layout_width="match_parent"
+                android:text="@string/meal_type_dinner"
+                android:textSize="20sp"
+
+                android:textColor="@color/colorLightDarkGray"/>
+
+            <View
+                android:background="@color/background_darker_gray"
+                android:layout_height="1px"
+                android:layout_width="match_parent"/>
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:buttonTint="@color/colorPrimary"
+                android:id="@+id/mealSnack"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/comorbidities_item_padding"
+                android:layout_marginTop="@dimen/comorbidities_item_padding"
+                android:layout_width="match_parent"
+                android:textSize="20sp"
+
+                android:text="@string/meal_type_snacks"
+                android:textColor="@color/colorLightDarkGray"/>
+
+            <View
+                android:background="@color/background_darker_gray"
+                android:layout_height="1px"
+                android:layout_width="match_parent"/>
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:buttonTint="@color/colorPrimary"
+                android:id="@+id/mealCasual"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/comorbidities_item_padding"
+                android:layout_marginTop="@dimen/comorbidities_item_padding"
+                android:layout_width="match_parent"
+                android:textSize="20sp"
+
+                android:text="@string/meal_type_casual"
+                android:textColor="@color/colorLightDarkGray"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

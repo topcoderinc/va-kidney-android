@@ -6,12 +6,12 @@ import retrofit2.http.Query;
 
 /**
  * Created by afrisalyp on 16/03/2018.
- *  * This class implements NDB API used by this app
+ * * This class implements NDB API used by this app
  */
 
 public interface NDBServiceAPI {
 
-    @GET("/ndb/search?format=json&sort=r&max=1&offset=0")
+    @GET("/ndb/search?format=json&sort=r&offset=0")
     Call<String> searchFood(
             @Query("api_key") String apiKey,
             @Query("q") String query);

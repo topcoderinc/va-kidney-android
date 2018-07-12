@@ -2,23 +2,19 @@ package com.topcoder.vakidney;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.ImageViewCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatImageView;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
+import com.topcoder.vakidney.databinding.ActivityMainBinding;
 import com.topcoder.vakidney.fragments.ChartMenuFragment;
 import com.topcoder.vakidney.fragments.FoodFragment;
 import com.topcoder.vakidney.fragments.GoalFragment;
@@ -34,8 +30,7 @@ import com.topcoder.vakidney.util.LoginManager;
  * This is the main Activity which consists of various fragments inside viewpager, side menu, bottom menu etc
  */
 public class MainActivity extends AppCompatActivity {
-    private NavigationView navigationView;
-    private DrawerLayout drawer;
+
     public static int navItemIndex = 0;
 
     /**
@@ -54,51 +49,15 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean shouldLoadHomeFragOnBackPress = true;
     private Handler mHandler;
-    private ImageView menuIcon;
-    private ImageView goalIcon;
 
-    /**
-     * Bottom Menu Setup
-     */
-    private LinearLayout bottomMenu1, bottomMenu2, bottomMenu3, bottomMenu4, bottomMenu5;
-    private LinearLayout barIndicator1, barIndicator2, barIndicator3, barIndicator4, barIndicator5;
-    private AppCompatImageView barImage1, barImage2, barImage3, barImage4, barImage5;
-    private TextView barTitle1, barTitle2, barTitle3, barTitle4, barTitle5;
-    private TextView actionBarTitle;
-
-
-    private LinearLayout menu1, menu2, menu3;
-    private AppCompatImageView menuImg1, menuImg2, menuImg3;
-    private TextView menuTv1, menuTv2, menuTv3;
-    private LinearLayout menuBar1, menuBar2, menuBar3;
-    private TextView tvSettings, tvReminders, tvLogOut;
-
+    ActivityMainBinding binder;
 
     /**
      * Initialize Side Menu View and Sets UP Listeners
      */
     private void initSideMenu() {
-        tvSettings = findViewById(R.id.tvSettings);
-        tvReminders = findViewById(R.id.tvReminders);
-        tvLogOut = findViewById(R.id.tvLogOut);
 
-        menu1 = findViewById(R.id.menu1);
-        menu2 = findViewById(R.id.menu2);
-        menu3 = findViewById(R.id.menu3);
-
-        menuImg1 = findViewById(R.id.menuImage1);
-        menuImg2 = findViewById(R.id.menuImage2);
-        menuImg3 = findViewById(R.id.menuImage3);
-
-        menuTv1 = findViewById(R.id.menuTitle1);
-        menuTv2 = findViewById(R.id.menuTitle2);
-        menuTv3 = findViewById(R.id.menuTitle3);
-
-        menuBar1 = findViewById(R.id.menuBar1);
-        menuBar2 = findViewById(R.id.menuBar2);
-        menuBar3 = findViewById(R.id.menuBar3);
-
-        menu1.setOnClickListener(new View.OnClickListener() {
+        binder.menu1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 navItemIndex = 0;
@@ -109,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        menu2.setOnClickListener(new View.OnClickListener() {
+        binder.menu2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 navItemIndex = 0;
@@ -120,14 +79,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        menu3.setOnClickListener(new View.OnClickListener() {
+        binder.menu3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selectSideMenu(3);
             }
         });
 
-        tvLogOut.setOnClickListener(new View.OnClickListener() {
+        binder.tvLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LoginManager.setLoggedIn(getApplicationContext(), false, null);
@@ -135,83 +94,83 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
 
     /**
      * Selects Side Menu and emulate side menu behaviour with given index
+     *
      * @param index required to specify the position of menu item in side menu
      */
     private void selectSideMenu(int index) {
-        drawer.closeDrawers();
+        binder.drawerLayout.closeDrawers();
         switch (index) {
 
             case 0:
-                ImageViewCompat.setImageTintList(menuImg1, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
-                ImageViewCompat.setImageTintList(menuImg2, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
-                ImageViewCompat.setImageTintList(menuImg3, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
+                ImageViewCompat.setImageTintList(binder.menuImage1, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
+                ImageViewCompat.setImageTintList(binder.menuImage2, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
+                ImageViewCompat.setImageTintList(binder.menuImage3, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
 
-                menuTv1.setTextColor(getColor(R.color.colorLightDarkGray));
-                menuTv2.setTextColor(getColor(R.color.colorLightDarkGray));
-                menuTv3.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.menuTitle1.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.menuTitle2.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.menuTitle3.setTextColor(getColor(R.color.colorLightDarkGray));
 
-                menuBar1.setBackgroundColor(getColor(R.color.colorLightDarkGray));
-                menuBar2.setBackgroundColor(getColor(R.color.colorLightDarkGray));
-                menuBar3.setBackgroundColor(getColor(R.color.colorLightDarkGray));
+                binder.menuBar1.setBackgroundColor(getColor(R.color.colorLightDarkGray));
+                binder.menuBar2.setBackgroundColor(getColor(R.color.colorLightDarkGray));
+                binder.menuBar3.setBackgroundColor(getColor(R.color.colorLightDarkGray));
                 break;
 
             case 1:
-                ImageViewCompat.setImageTintList(menuImg1, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(menuImg2, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
-                ImageViewCompat.setImageTintList(menuImg3, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
+                ImageViewCompat.setImageTintList(binder.menuImage1, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.menuImage2, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
+                ImageViewCompat.setImageTintList(binder.menuImage3, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
 
-                menuTv1.setTextColor(getColor(R.color.colorAccent));
-                menuTv2.setTextColor(getColor(R.color.colorLightDarkGray));
-                menuTv3.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.menuTitle1.setTextColor(getColor(R.color.colorAccent));
+                binder.menuTitle2.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.menuTitle3.setTextColor(getColor(R.color.colorLightDarkGray));
 
-                menuBar1.setBackgroundColor(getColor(R.color.colorAccent));
-                menuBar2.setBackgroundColor(getColor(R.color.colorLightDarkGray));
-                menuBar3.setBackgroundColor(getColor(R.color.colorLightDarkGray));
+                binder.menuBar1.setBackgroundColor(getColor(R.color.colorAccent));
+                binder.menuBar2.setBackgroundColor(getColor(R.color.colorLightDarkGray));
+                binder.menuBar3.setBackgroundColor(getColor(R.color.colorLightDarkGray));
                 break;
             case 2:
-                ImageViewCompat.setImageTintList(menuImg2, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(menuImg1, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
-                ImageViewCompat.setImageTintList(menuImg3, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
+                ImageViewCompat.setImageTintList(binder.menuImage2, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.menuImage1, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
+                ImageViewCompat.setImageTintList(binder.menuImage3, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
 
-                menuTv2.setTextColor(getColor(R.color.colorAccent));
-                menuTv1.setTextColor(getColor(R.color.colorLightDarkGray));
-                menuTv3.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.menuTitle2.setTextColor(getColor(R.color.colorAccent));
+                binder.menuTitle1.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.menuTitle3.setTextColor(getColor(R.color.colorLightDarkGray));
 
-                menuBar2.setBackgroundColor(getColor(R.color.colorAccent));
-                menuBar1.setBackgroundColor(getColor(R.color.colorLightDarkGray));
-                menuBar3.setBackgroundColor(getColor(R.color.colorLightDarkGray));
+                binder.menuBar2.setBackgroundColor(getColor(R.color.colorAccent));
+                binder.menuBar1.setBackgroundColor(getColor(R.color.colorLightDarkGray));
+                binder.menuBar3.setBackgroundColor(getColor(R.color.colorLightDarkGray));
                 break;
             case 3:
-                ImageViewCompat.setImageTintList(menuImg3, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(menuImg2, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
-                ImageViewCompat.setImageTintList(menuImg1, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
+                ImageViewCompat.setImageTintList(binder.menuImage3, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.menuImage2, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
+                ImageViewCompat.setImageTintList(binder.menuImage1, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
 
-                menuTv3.setTextColor(getColor(R.color.colorAccent));
-                menuTv2.setTextColor(getColor(R.color.colorLightDarkGray));
-                menuTv1.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.menuTitle3.setTextColor(getColor(R.color.colorAccent));
+                binder.menuTitle2.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.menuTitle1.setTextColor(getColor(R.color.colorLightDarkGray));
 
-                menuBar3.setBackgroundColor(getColor(R.color.colorAccent));
-                menuBar2.setBackgroundColor(getColor(R.color.colorLightDarkGray));
-                menuBar1.setBackgroundColor(getColor(R.color.colorLightDarkGray));
+                binder.menuBar3.setBackgroundColor(getColor(R.color.colorAccent));
+                binder.menuBar2.setBackgroundColor(getColor(R.color.colorLightDarkGray));
+                binder.menuBar1.setBackgroundColor(getColor(R.color.colorLightDarkGray));
                 break;
             case 4:
-                ImageViewCompat.setImageTintList(menuImg2, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
-                ImageViewCompat.setImageTintList(menuImg3, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
-                ImageViewCompat.setImageTintList(menuImg1, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
+                ImageViewCompat.setImageTintList(binder.menuImage2, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
+                ImageViewCompat.setImageTintList(binder.menuImage3, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
+                ImageViewCompat.setImageTintList(binder.menuImage1, ColorStateList.valueOf(ContextCompat.getColor(MainActivity.this, R.color.colorLightDarkGray)));
 
-                menuTv2.setTextColor(getColor(R.color.colorLightDarkGray));
-                menuTv3.setTextColor(getColor(R.color.colorLightDarkGray));
-                menuTv1.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.menuTitle2.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.menuTitle3.setTextColor(getColor(R.color.colorLightDarkGray));
+                binder.menuTitle1.setTextColor(getColor(R.color.colorLightDarkGray));
 
-                menuBar2.setBackgroundColor(getColor(R.color.colorLightDarkGray));
-                menuBar3.setBackgroundColor(getColor(R.color.colorLightDarkGray));
-                menuBar1.setBackgroundColor(getColor(R.color.colorLightDarkGray));
+                binder.menuBar2.setBackgroundColor(getColor(R.color.colorLightDarkGray));
+                binder.menuBar3.setBackgroundColor(getColor(R.color.colorLightDarkGray));
+                binder.menuBar1.setBackgroundColor(getColor(R.color.colorLightDarkGray));
                 break;
         }
     }
@@ -219,12 +178,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binder = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        if(!LoginManager.isTermsAgreed(getApplicationContext())){
+        if (!LoginManager.isTermsAgreed(getApplicationContext())) {
             NavigateToWelcomeScreen();
-        }else{
-            if(!LoginManager.isLoggedIn(getApplicationContext())){
+        } else {
+            if (!LoginManager.isLoggedIn(getApplicationContext())) {
                 NavigateToLogin();
             }
         }
@@ -233,12 +192,8 @@ public class MainActivity extends AppCompatActivity {
         initSideMenu();
 
         mHandler = new Handler();
-        drawer = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
-        menuIcon = findViewById(R.id.menuIcon);
-        goalIcon = findViewById(R.id.goalIcon);
-        actionBarTitle = findViewById(R.id.actionBarTitle);
 
+        selectBottomBar(1);
 
         if (getIntent().hasExtra("tag")) {
             CURRENT_TAG = getIntent().getStringExtra("tag");
@@ -282,14 +237,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        menuIcon.setOnClickListener(new View.OnClickListener() {
+        binder.menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                drawer.openDrawer(Gravity.LEFT);
+                binder.drawerLayout.openDrawer(Gravity.LEFT);
             }
         });
 
-        goalIcon.setOnClickListener(new View.OnClickListener() {
+        binder.goalIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CURRENT_TAG = TAG_GOAL;
@@ -305,31 +260,8 @@ public class MainActivity extends AppCompatActivity {
      * Initialize view and sets up listener for bottom menu
      */
     private void initBottomBar() {
-        bottomMenu1 = findViewById(R.id.barLin1);
-        bottomMenu2 = findViewById(R.id.barLin2);
-        bottomMenu3 = findViewById(R.id.barLin3);
-        bottomMenu4 = findViewById(R.id.barLin4);
-        bottomMenu5 = findViewById(R.id.barLin5);
 
-        barIndicator1 = findViewById(R.id.bar1);
-        barIndicator2 = findViewById(R.id.bar2);
-        barIndicator3 = findViewById(R.id.bar3);
-        barIndicator4 = findViewById(R.id.bar4);
-        barIndicator5 = findViewById(R.id.bar5);
-
-        barImage1 = findViewById(R.id.barImg1);
-        barImage2 = findViewById(R.id.barImg2);
-        barImage3 = findViewById(R.id.barImg3);
-        barImage4 = findViewById(R.id.barImg4);
-        barImage5 = findViewById(R.id.barImg5);
-
-        barTitle1 = findViewById(R.id.tvBar1);
-        barTitle2 = findViewById(R.id.tvBar2);
-        barTitle3 = findViewById(R.id.tvBar3);
-        barTitle4 = findViewById(R.id.tvBar4);
-        barTitle5 = findViewById(R.id.tvBar5);
-
-        bottomMenu1.setOnClickListener(new View.OnClickListener() {
+        binder.barLin1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selectBottomBar(1);
@@ -337,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        bottomMenu2.setOnClickListener(new View.OnClickListener() {
+        binder.barLin2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selectBottomBar(2);
@@ -345,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        bottomMenu3.setOnClickListener(new View.OnClickListener() {
+        binder.barLin3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selectBottomBar(3);
@@ -353,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        bottomMenu4.setOnClickListener(new View.OnClickListener() {
+        binder.barLin4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selectBottomBar(4);
@@ -361,7 +293,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        bottomMenu5.setOnClickListener(new View.OnClickListener() {
+        binder.barLin5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selectBottomBar(5);
@@ -371,6 +303,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Emulates the sselecting behaviour for the menus at the bottom
+     *
      * @param index required to specify the position of menu item in side menu
      */
     private void selectBottomBar(int index) {
@@ -379,46 +312,46 @@ public class MainActivity extends AppCompatActivity {
 
             case 0:
 
-                barIndicator1.setBackgroundColor(getColor(R.color.colorPrimary));
-                barIndicator2.setBackgroundColor(getColor(R.color.colorPrimary));
-                barIndicator3.setBackgroundColor(getColor(R.color.colorPrimary));
-                barIndicator4.setBackgroundColor(getColor(R.color.colorPrimary));
-                barIndicator5.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar1.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar2.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar3.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar4.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar5.setBackgroundColor(getColor(R.color.colorPrimary));
 
-                ImageViewCompat.setImageTintList(barImage1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(barImage2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(barImage3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(barImage4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(barImage5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
 
-                barTitle1.setTextColor(getColor(R.color.colorAccent));
-                barTitle2.setTextColor(getColor(R.color.colorAccent));
-                barTitle3.setTextColor(getColor(R.color.colorAccent));
-                barTitle4.setTextColor(getColor(R.color.colorAccent));
-                barTitle5.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar1.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar2.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar3.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar4.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar5.setTextColor(getColor(R.color.colorAccent));
 
                 break;
 
             case 1:
                 CURRENT_TAG = TAG_HOME;
 
-                barIndicator1.setBackgroundColor(getColor(R.color.colorWhite));
-                barIndicator2.setBackgroundColor(getColor(R.color.colorPrimary));
-                barIndicator3.setBackgroundColor(getColor(R.color.colorPrimary));
-                barIndicator4.setBackgroundColor(getColor(R.color.colorPrimary));
-                barIndicator5.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar1.setBackgroundColor(getColor(R.color.colorWhite));
+                binder.bar2.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar3.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar4.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar5.setBackgroundColor(getColor(R.color.colorPrimary));
 
-                ImageViewCompat.setImageTintList(barImage1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorWhite)));
-                ImageViewCompat.setImageTintList(barImage2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(barImage3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(barImage4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(barImage5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorWhite)));
+                ImageViewCompat.setImageTintList(binder.barImg2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
 
-                barTitle1.setTextColor(getColor(R.color.colorWhite));
-                barTitle2.setTextColor(getColor(R.color.colorAccent));
-                barTitle3.setTextColor(getColor(R.color.colorAccent));
-                barTitle4.setTextColor(getColor(R.color.colorAccent));
-                barTitle5.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar1.setTextColor(getColor(R.color.colorWhite));
+                binder.tvBar2.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar3.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar4.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar5.setTextColor(getColor(R.color.colorAccent));
 
                 break;
 
@@ -426,23 +359,23 @@ public class MainActivity extends AppCompatActivity {
             case 2:
                 CURRENT_TAG = TAG_CHART;
 
-                barIndicator2.setBackgroundColor(getColor(R.color.colorWhite));
-                barIndicator1.setBackgroundColor(getColor(R.color.colorPrimary));
-                barIndicator3.setBackgroundColor(getColor(R.color.colorPrimary));
-                barIndicator4.setBackgroundColor(getColor(R.color.colorPrimary));
-                barIndicator5.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar2.setBackgroundColor(getColor(R.color.colorWhite));
+                binder.bar1.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar3.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar4.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar5.setBackgroundColor(getColor(R.color.colorPrimary));
 
-                ImageViewCompat.setImageTintList(barImage2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorWhite)));
-                ImageViewCompat.setImageTintList(barImage1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(barImage3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(barImage4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(barImage5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorWhite)));
+                ImageViewCompat.setImageTintList(binder.barImg1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
 
-                barTitle2.setTextColor(getColor(R.color.colorWhite));
-                barTitle1.setTextColor(getColor(R.color.colorAccent));
-                barTitle3.setTextColor(getColor(R.color.colorAccent));
-                barTitle4.setTextColor(getColor(R.color.colorAccent));
-                barTitle5.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar2.setTextColor(getColor(R.color.colorWhite));
+                binder.tvBar1.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar3.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar4.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar5.setTextColor(getColor(R.color.colorAccent));
 
                 break;
 
@@ -450,23 +383,23 @@ public class MainActivity extends AppCompatActivity {
             case 3:
                 CURRENT_TAG = TAG_MEDICATION;
 
-                barIndicator3.setBackgroundColor(getColor(R.color.colorWhite));
-                barIndicator2.setBackgroundColor(getColor(R.color.colorPrimary));
-                barIndicator1.setBackgroundColor(getColor(R.color.colorPrimary));
-                barIndicator4.setBackgroundColor(getColor(R.color.colorPrimary));
-                barIndicator5.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar3.setBackgroundColor(getColor(R.color.colorWhite));
+                binder.bar2.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar1.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar4.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar5.setBackgroundColor(getColor(R.color.colorPrimary));
 
-                ImageViewCompat.setImageTintList(barImage3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorWhite)));
-                ImageViewCompat.setImageTintList(barImage2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(barImage1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(barImage4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(barImage5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorWhite)));
+                ImageViewCompat.setImageTintList(binder.barImg2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
 
-                barTitle3.setTextColor(getColor(R.color.colorWhite));
-                barTitle2.setTextColor(getColor(R.color.colorAccent));
-                barTitle1.setTextColor(getColor(R.color.colorAccent));
-                barTitle4.setTextColor(getColor(R.color.colorAccent));
-                barTitle5.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar3.setTextColor(getColor(R.color.colorWhite));
+                binder.tvBar2.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar1.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar4.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar5.setTextColor(getColor(R.color.colorAccent));
 
                 break;
 
@@ -474,23 +407,23 @@ public class MainActivity extends AppCompatActivity {
             case 4:
                 CURRENT_TAG = TAG_FOOD;
 
-                barIndicator4.setBackgroundColor(getColor(R.color.colorWhite));
-                barIndicator2.setBackgroundColor(getColor(R.color.colorPrimary));
-                barIndicator3.setBackgroundColor(getColor(R.color.colorPrimary));
-                barIndicator1.setBackgroundColor(getColor(R.color.colorPrimary));
-                barIndicator5.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar4.setBackgroundColor(getColor(R.color.colorWhite));
+                binder.bar2.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar3.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar1.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar5.setBackgroundColor(getColor(R.color.colorPrimary));
 
-                ImageViewCompat.setImageTintList(barImage4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorWhite)));
-                ImageViewCompat.setImageTintList(barImage2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(barImage3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(barImage1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(barImage5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorWhite)));
+                ImageViewCompat.setImageTintList(binder.barImg2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
 
-                barTitle4.setTextColor(getColor(R.color.colorWhite));
-                barTitle2.setTextColor(getColor(R.color.colorAccent));
-                barTitle3.setTextColor(getColor(R.color.colorAccent));
-                barTitle1.setTextColor(getColor(R.color.colorAccent));
-                barTitle5.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar4.setTextColor(getColor(R.color.colorWhite));
+                binder.tvBar2.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar3.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar1.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar5.setTextColor(getColor(R.color.colorAccent));
 
                 break;
 
@@ -498,23 +431,23 @@ public class MainActivity extends AppCompatActivity {
             case 5:
                 CURRENT_TAG = TAG_WORKOUT;
 
-                barIndicator5.setBackgroundColor(getColor(R.color.colorWhite));
-                barIndicator2.setBackgroundColor(getColor(R.color.colorPrimary));
-                barIndicator3.setBackgroundColor(getColor(R.color.colorPrimary));
-                barIndicator4.setBackgroundColor(getColor(R.color.colorPrimary));
-                barIndicator1.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar5.setBackgroundColor(getColor(R.color.colorWhite));
+                binder.bar2.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar3.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar4.setBackgroundColor(getColor(R.color.colorPrimary));
+                binder.bar1.setBackgroundColor(getColor(R.color.colorPrimary));
 
-                ImageViewCompat.setImageTintList(barImage5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorWhite)));
-                ImageViewCompat.setImageTintList(barImage2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(barImage3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(barImage4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(barImage1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorWhite)));
+                ImageViewCompat.setImageTintList(binder.barImg2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
 
-                barTitle5.setTextColor(getColor(R.color.colorWhite));
-                barTitle2.setTextColor(getColor(R.color.colorAccent));
-                barTitle3.setTextColor(getColor(R.color.colorAccent));
-                barTitle4.setTextColor(getColor(R.color.colorAccent));
-                barTitle1.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar5.setTextColor(getColor(R.color.colorWhite));
+                binder.tvBar2.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar3.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar4.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar1.setTextColor(getColor(R.color.colorAccent));
 
                 break;
         }
@@ -528,7 +461,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void loadHomeFragment() {
         if (getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
-            drawer.closeDrawers();
+            binder.drawerLayout.closeDrawers();
 
             return;
         }
@@ -541,12 +474,12 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
                 fragmentTransaction.commitAllowingStateLoss();
                 if (UserData.get() != null && !UserData.get().isSetupgoals()) {
-                    goalIcon.setVisibility(View.GONE);
+                    binder.goalIcon.setVisibility(View.GONE);
                 }
             }
         };
         mHandler.post(mPendingRunnable);
-        drawer.closeDrawers();
+        binder.drawerLayout.closeDrawers();
         invalidateOptionsMenu();
 
     }
@@ -556,12 +489,12 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
 
 
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawers();
+        if (binder.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binder.drawerLayout.closeDrawers();
             return;
         }
         if (shouldLoadHomeFragOnBackPress) {
-            if (navItemIndex != 1 || CURRENT_TAG!=TAG_HOME) {
+            if (navItemIndex != 1 || CURRENT_TAG != TAG_HOME) {
                 navItemIndex = 1;
                 CURRENT_TAG = TAG_HOME;
                 loadHomeFragment();
@@ -574,60 +507,61 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Returns require fragment for current TAG
+     *
      * @return The fragment specified by the CURRENT_TAG is returned
      */
     private Fragment getHomeFragment() {
         switch (CURRENT_TAG) {
 
             case TAG_MYPROFILE:
-                goalIcon.setVisibility(View.GONE);
-                actionBarTitle.setText("MY PRofile");
+                binder.goalIcon.setVisibility(View.GONE);
+                binder.actionBarTitle.setText("MY PRofile");
                 return new MyProfileFragment();
 
             case TAG_RESOURCES:
-                goalIcon.setVisibility(View.GONE);
-                actionBarTitle.setText("Resources");
+                binder.goalIcon.setVisibility(View.GONE);
+                binder.actionBarTitle.setText("Resources");
                 return new ResourcesFragment();
 
             case TAG_HOME:
-                goalIcon.setVisibility(View.VISIBLE);
-                actionBarTitle.setText("Home");
+                binder.goalIcon.setVisibility(View.VISIBLE);
+                binder.actionBarTitle.setText("Home");
                 return new HomeFragment();
 
 
             case TAG_CHART:
-                goalIcon.setVisibility(View.VISIBLE);
-                actionBarTitle.setText("History & Metrics");
+                binder.goalIcon.setVisibility(View.VISIBLE);
+                binder.actionBarTitle.setText("History & Metrics");
                 return new ChartMenuFragment();
 
 
             case TAG_MEDICATION:
-                goalIcon.setVisibility(View.VISIBLE);
-                actionBarTitle.setText("Recommendations");
+                binder.goalIcon.setVisibility(View.VISIBLE);
+                binder.actionBarTitle.setText("Recommendations");
                 return new RecommendationsFragment();
 
 
             case TAG_FOOD:
-                goalIcon.setVisibility(View.VISIBLE);
-                actionBarTitle.setText("Food Intake");
+                binder.goalIcon.setVisibility(View.VISIBLE);
+                binder.actionBarTitle.setText("Food/Drug Intake");
                 return new FoodFragment();
 
 
             case TAG_WORKOUT:
-                goalIcon.setVisibility(View.VISIBLE);
-                actionBarTitle.setText("Daily Workout");
+                binder.goalIcon.setVisibility(View.VISIBLE);
+                binder.actionBarTitle.setText("Daily Workout");
                 return new WorkoutFragment();
 
 
             case TAG_GOAL:
-                goalIcon.setVisibility(View.GONE);
-                actionBarTitle.setText("Goal");
+                binder.goalIcon.setVisibility(View.GONE);
+                binder.actionBarTitle.setText("Goal");
                 return new GoalFragment();
 
 
             default:
-                goalIcon.setVisibility(View.VISIBLE);
-                actionBarTitle.setText("Home");
+                binder.goalIcon.setVisibility(View.VISIBLE);
+                binder.actionBarTitle.setText("Home");
                 return new HomeFragment();
 
         }
@@ -647,7 +581,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     *Navigates to Login Screen
+     * Navigates to Login Screen
      */
     private void NavigateToLogin() {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -657,7 +591,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
 
 
 }

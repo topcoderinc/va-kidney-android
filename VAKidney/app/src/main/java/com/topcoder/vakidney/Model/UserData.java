@@ -36,33 +36,16 @@ public class UserData extends SugarRecord<UserData> {
     private int jumpgoal;
     private int swimmingcurrent;
     private int swimminggoal;
-
+    private boolean comorbiditiesHypertension;
+    private boolean comorbiditiesDiabetesmellitus;
+    private boolean comorbiditiesCongestiveheartfailure;
     private String tag;
 
-    public UserData() {}
+    public UserData() {
+    }
 
-    public UserData(
-            String tag,
-            String username,
-            String password,
-            String fullname,
-            int points,
-            int age,
-            long birthday,
-            int height,
-            int heightFeet,
-            int heightInch,
-            int weight,
-            boolean dialysis,
-            int diseaseCategory,
-            boolean setupgoals,
-            boolean avatar,
-            boolean biometric,
-            double runningcurrent,
-            double runninggoal,
-            int stepcurrent,
-            int stepgoal) {
-        this.tag = tag;
+
+    public UserData(String username, String password, String fullname, int points, int age, long birthday, int height, int heightFeet, int heightInch, int weight, boolean dialysis, int diseaseCategory, boolean setupgoals, boolean avatar, boolean biometric, double runningcurrent, double runninggoal, int stepcurrent, int stepgoal, int jumpcurrent, int jumpgoal, int swimmingcurrent, int swimminggoal, boolean comorbiditiesHypertension, boolean comorbiditiesDiabetesmellitus, boolean comorbiditiesCongestiveheartfailure, String tag) {
         this.username = username;
         this.password = password;
         this.fullname = fullname;
@@ -82,6 +65,14 @@ public class UserData extends SugarRecord<UserData> {
         this.runninggoal = runninggoal;
         this.stepcurrent = stepcurrent;
         this.stepgoal = stepgoal;
+        this.jumpcurrent = jumpcurrent;
+        this.jumpgoal = jumpgoal;
+        this.swimmingcurrent = swimmingcurrent;
+        this.swimminggoal = swimminggoal;
+        this.comorbiditiesHypertension = comorbiditiesHypertension;
+        this.comorbiditiesDiabetesmellitus = comorbiditiesDiabetesmellitus;
+        this.comorbiditiesCongestiveheartfailure = comorbiditiesCongestiveheartfailure;
+        this.tag = tag;
     }
 
     public String getUsername() {
@@ -266,6 +257,30 @@ public class UserData extends SugarRecord<UserData> {
 
     public void setBirthday(long birthday) {
         this.birthday = birthday;
+    }
+
+    public boolean isComorbiditiesHypertension() {
+        return comorbiditiesHypertension;
+    }
+
+    public void setComorbiditiesHypertension(boolean comorbiditiesHypertension) {
+        this.comorbiditiesHypertension = comorbiditiesHypertension;
+    }
+
+    public boolean isComorbiditiesDiabetesmellitus() {
+        return comorbiditiesDiabetesmellitus;
+    }
+
+    public void setComorbiditiesDiabetesmellitus(boolean comorbiditiesDiabetesmellitus) {
+        this.comorbiditiesDiabetesmellitus = comorbiditiesDiabetesmellitus;
+    }
+
+    public boolean isComorbiditiesCongestiveheartfailure() {
+        return comorbiditiesCongestiveheartfailure;
+    }
+
+    public void setComorbiditiesCongestiveheartfailure(boolean comorbiditiesCongestiveheartfailure) {
+        this.comorbiditiesCongestiveheartfailure = comorbiditiesCongestiveheartfailure;
     }
 
     @Override

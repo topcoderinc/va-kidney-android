@@ -1,6 +1,7 @@
 package com.topcoder.vakidney.fragments.charts;
 
 
+import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,8 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.topcoder.vakidney.databinding.FragmentBloodSugarBinding;
+import com.topcoder.vakidney.databinding.FragmentBodyWeightBinding;
 import com.topcoder.vakidney.model.ChartData;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.util.JsondataUtil;
@@ -32,15 +35,12 @@ import java.util.List;
 public class BodyWeightFragment extends Fragment {
 
 
-
     private ArrayList<ChartData> chartDataArrayListActual2016;
     private ArrayList<ChartData> chartDataArrayListGoals2016;
 
     private ArrayList<ChartData> chartDataArrayListActual2017;
     private ArrayList<ChartData> chartDataArrayListGoals2017;
 
-    private LineChart lineChart;
-    private LineChart lineChart2;
 
     private LineData lineData;
 
@@ -50,6 +50,7 @@ public class BodyWeightFragment extends Fragment {
 
     private final List<Entry> entriesActual2017 = new ArrayList<>();
     private final List<Entry> entriesGoals2017 = new ArrayList<>();
+    private FragmentBodyWeightBinding binder;
 
     public BodyWeightFragment() {
         // Required empty public constructor
@@ -60,10 +61,9 @@ public class BodyWeightFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_body_weight, container, false);
+        binder = DataBindingUtil.inflate(inflater, R.layout.fragment_body_weight, container, false);
+        final View view = binder.getRoot();
 
-        lineChart=view.findViewById(R.id.lineChart);
-        lineChart2=view.findViewById(R.id.lineChart2);
 
         chartDataArrayListActual2016 = JsondataUtil.getBodyWeightDataActual(2016, getActivity());
         chartDataArrayListGoals2016 = JsondataUtil.getBodyWeightDataGoal(2016, getActivity());
@@ -71,28 +71,29 @@ public class BodyWeightFragment extends Fragment {
         chartDataArrayListActual2017 = JsondataUtil.getBodyWeightDataActual(2017, getActivity());
         chartDataArrayListGoals2017 = JsondataUtil.getBodyWeightDataGoal(2017, getActivity());
 
-        PopulateData(lineChart, chartDataArrayListActual2016, chartDataArrayListGoals2016, entriesActual2016, entriesGoals2016);
-        PopulateData(lineChart2, chartDataArrayListActual2017, chartDataArrayListGoals2017, entriesActual2017, entriesGoals2017);
+        PopulateData(binder.lineChart, chartDataArrayListActual2016, chartDataArrayListGoals2016, entriesActual2016, entriesGoals2016);
+        PopulateData(binder.lineChart2, chartDataArrayListActual2017, chartDataArrayListGoals2017, entriesActual2017, entriesGoals2017);
         return view;
     }
 
 
     /**
      * Used to populate and modify the chartView with corresponding data
-     * @param lineChart is just a chartView
+     *
+     * @param lineChart                    is just a chartView
      * @param chartDataArrayListActual2016 chart data for year 2016
-     * @param chartDataArrayListGoals2016 chart data for year 2017
-     * @param entries chart data entries for 2016
-     * @param entries2 chart data entries for 2017
+     * @param chartDataArrayListGoals2016  chart data for year 2017
+     * @param entries                      chart data entries for 2016
+     * @param entries2                     chart data entries for 2017
      */
     private void PopulateData(LineChart lineChart, ArrayList<ChartData> chartDataArrayListActual2016, ArrayList<ChartData> chartDataArrayListGoals2016, List<Entry> entries, List<Entry> entries2) {
-        int i=1;
-        for(ChartData chartData : chartDataArrayListActual2016){
+        int i = 1;
+        for (ChartData chartData : chartDataArrayListActual2016) {
 //            entries.add(new Entry(i, Float.parseFloat(chartData.getValue()+"f"), chartData.getMonth()));
             i++;
         }
-        i=1;
-        for(ChartData chartData : chartDataArrayListGoals2016){
+        i = 1;
+        for (ChartData chartData : chartDataArrayListGoals2016) {
 //            entries2.add(new Entry(i, Float.parseFloat(chartData.getValue()+"f"), chartData.getMonth()));
             i++;
         }
@@ -151,7 +152,6 @@ public class BodyWeightFragment extends Fragment {
         rightAxis.setEnabled(false);
 
 
-
     }
 
     private class MyValueFormatter implements IAxisValueFormatter {
@@ -163,7 +163,7 @@ public class BodyWeightFragment extends Fragment {
 
         @Override
         public String getFormattedValue(float value, AxisBase axis) {
-            return (int)value+" lbs";
+            return (int) value + " lbs";
         }
     }
 

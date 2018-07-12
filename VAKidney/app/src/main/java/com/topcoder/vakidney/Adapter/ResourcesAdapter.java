@@ -47,17 +47,24 @@ public class ResourcesAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view=activity.getLayoutInflater().inflate(R.layout.item_resources, viewGroup, false);
-        TextView tvTitle=view.findViewById(R.id.title);
-        TextView tvDesc=view.findViewById(R.id.desc);
-        final Resources resources=resourcesArrayList.get(i);
-        tvTitle.setText(resources.getTitle());
-        tvDesc.setText(resources.getDesc().replace("\n\n", ""));
+        ViewHolder viewHolder;
+        if (view == null) {
+            viewHolder = new ViewHolder();
+            view = activity.getLayoutInflater().inflate(R.layout.item_resources, viewGroup, false);
+            viewHolder.tvTitle = view.findViewById(R.id.title);
+            viewHolder.tvDesc = view.findViewById(R.id.desc);
+            view.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) view.getTag();
+        }
+        final Resources resources = resourcesArrayList.get(i);
+        viewHolder.tvTitle.setText(resources.getTitle());
+        viewHolder.tvDesc.setText(resources.getDesc().replace("\n\n", ""));
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 activity.finish();
-                Intent intent=new Intent(activity, ResourcesDetailActivity.class);
+                Intent intent = new Intent(activity, ResourcesDetailActivity.class);
                 intent.putExtra("title", resources.getTitle());
                 intent.putExtra("url", resources.getUrl());
                 intent.putExtra("actionbartitle", "Resource Details");
@@ -66,5 +73,10 @@ public class ResourcesAdapter extends BaseAdapter {
             }
         });
         return view;
+    }
+
+    static class ViewHolder {
+        private TextView tvTitle;
+        private TextView tvDesc;
     }
 }

@@ -6,7 +6,7 @@ package com.topcoder.vakidney.constant;
 
 public class DiseaseCategory {
 
-    public final static String[] LABELS = new String[] {
+    public final static String[] LABELS = new String[]{
             "Stage 1",
             "Stage 2",
             "Stage 3a",

@@ -41,7 +41,7 @@ public class ServiceCallUtil {
             final String name) {
         if (FoodRecommendation.getByName(name.toLowerCase()).size() > 0) return;
 
-        final NDBServiceAPI ndbServiceAPI = NDBRestClient.getService(NDBServiceAPI.class);
+        final NDBServiceAPI ndbServiceAPI = NDBRestClient.getService(NDBServiceAPI.class, context);
         Call<String> result = ndbServiceAPI.searchFood(BuildConfig.NDB_API_KEY, name);
         Log.d("TOPCODER", "call searchFoodRecommendation ");
         result.enqueue(new Callback<String>() {
@@ -51,6 +51,7 @@ public class ServiceCallUtil {
                 JSONObject jsonObject;
                 try {
                     Log.d("TOPCODER", "response.body() " + response.body());
+
                     jsonObject = new JSONObject(response.body());
                     JSONArray items = jsonObject.getJSONObject("list").getJSONArray("item");
                     if (items.length() > 0) {
@@ -68,7 +69,7 @@ public class ServiceCallUtil {
 
                                     UserData userData = UserData.get();
                                     if (userData == null) return;
-                                    List<Goal> goals = Goal.get(
+                                    List<Goal> goals = Goal.getWithoutComorbidities(
                                             userData.getDiseaseCategory(),
                                             userData.isDialysis());
 
@@ -118,10 +119,10 @@ public class ServiceCallUtil {
 //                                                nutrients.toString()
 //                                        ).save();
 
-                                        Toast.makeText(
-                                                context.getApplicationContext(),
-                                                "New Food Recommendation Found",
-                                                Toast.LENGTH_LONG).show();
+                                    Toast.makeText(
+                                            context.getApplicationContext(),
+                                            "New Food Recommendation Found",
+                                            Toast.LENGTH_LONG).show();
 //                                    }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -155,7 +156,7 @@ public class ServiceCallUtil {
             final String foodName,
             final String nutrientName) {
 
-        final NDBServiceAPI ndbServiceAPI = NDBRestClient.getService(NDBServiceAPI.class);
+        final NDBServiceAPI ndbServiceAPI = NDBRestClient.getService(NDBServiceAPI.class, context);
         Call<String> result = ndbServiceAPI.searchNutritionFoods(
                 BuildConfig.NDB_API_KEY,
                 nutrientId,
@@ -214,7 +215,7 @@ public class ServiceCallUtil {
             final String nutrientName,
             final int offset) {
 
-        final NDBServiceAPI ndbServiceAPI = NDBRestClient.getService(NDBServiceAPI.class);
+        final NDBServiceAPI ndbServiceAPI = NDBRestClient.getService(NDBServiceAPI.class, context);
         Call<String> result = ndbServiceAPI.searchNutritionFoods(
                 BuildConfig.NDB_API_KEY,
                 nutrientId,
@@ -263,7 +264,7 @@ public class ServiceCallUtil {
             final Context context,
             final DrugInteraction drugInteraction) {
 
-        FDAServiceAPI fdaServiceAPI = FDARestClient.getService(FDAServiceAPI.class);
+        FDAServiceAPI fdaServiceAPI = FDARestClient.getService(FDAServiceAPI.class, context);
         Call<String> result = fdaServiceAPI.searchDrugInteractions(
                 "patient.drug.medicinalproduct:\""
                         + drugInteraction.getQuery()

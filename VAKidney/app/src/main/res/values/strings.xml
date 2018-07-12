@@ -13,8 +13,10 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
+    <string name="systolic">Systolic</string>
+    <string name="diastolic">Diastolic</string>
     <string name="title_notifications">Notifications</string>
-
+    <string name="weight_description">Always measure either before or after going to toilet in the morning. If your weight is 3kg or higher than usual, speak to your general practitioner to adjust diuretics.</string>
     <string name="nutrition_detail">Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.
 
 Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo.
@@ -32,4 +34,19 @@ Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit
     <string name="terms_of_service_and_nliability_release">TERMS OF SERVICE AND  LIABILITY RELEASE</string>
     <string name="validate_email">Please enter valid email address</string>
     <string name="welcome_string">Welcome </string>
+    <string name="daily_weight_measurement_message">Always measure either before or after going to toilet in the morning.If your weight is 3kg or higher than usual, speak to your general practitioner to adjust diuretics</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="filter">Filter</string>
+    <string name="done">Done</string>
+    <string name="select_filter_date">Select Date</string>
+    <string name="select_filter_type">Select Type</string>
+    <string name="select_filter_date_string">Filter by date: %s</string>
+    <string name="select_filter_type_string">Filter by type: %s</string>
+    <string name="reset">Reset</string>
+    <string name="meal_type_breakfast">Breakfast</string>
+    <string name="meal_type_lunch">Lunch</string>
+    <string name="meal_type_dinner">Dinner</string>
+    <string name="meal_type_snacks">Snack</string>
+    <string name="meal_type_casual">Casual</string>
 </resources>

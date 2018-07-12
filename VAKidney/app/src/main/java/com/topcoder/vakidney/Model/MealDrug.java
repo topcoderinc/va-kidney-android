@@ -19,7 +19,8 @@ public class MealDrug extends SugarRecord<MealDrug> implements Serializable {
     double amount;
     int type = TYPE_MEAL;
 
-    public MealDrug() {}
+    public MealDrug() {
+    }
 
     public MealDrug(long mealId, String name, String unit, double amount, int type) {
         this.mealId = mealId;
