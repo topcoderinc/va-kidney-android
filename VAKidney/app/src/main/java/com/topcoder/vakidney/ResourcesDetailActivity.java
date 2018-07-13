@@ -3,7 +3,9 @@ package com.topcoder.vakidney;
 import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
@@ -38,7 +40,10 @@ public class ResourcesDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        initBottomBar();
+
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.nexa_bold);
+        binder.actionBarTitle.setTypeface(typeface);
+        binder.tvTitle.setTypeface(typeface);
     }
 
     /**
@@ -69,58 +74,6 @@ public class ResourcesDetailActivity extends AppCompatActivity {
         if (actionbartitle != null) {
             binder.actionBarTitle.setText(actionbartitle);
         }
-    }
-
-
-    /**
-     * Initialize view and sets up listener for bottom menu
-     */
-    private void initBottomBar() {
-        binder.barLin1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ResourcesDetailActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_HOME);
-                startActivity(intent);
-                finish();
-            }
-        });
-        binder.barLin2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ResourcesDetailActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_CHART);
-                startActivity(intent);
-                finish();
-            }
-        });
-        binder.barLin3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ResourcesDetailActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_MEDICATION);
-                startActivity(intent);
-                finish();
-            }
-        });
-        binder.barLin4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ResourcesDetailActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_FOOD);
-                startActivity(intent);
-                finish();
-            }
-        });
-        binder.barLin5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ResourcesDetailActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_WORKOUT);
-                startActivity(intent);
-                finish();
-            }
-        });
     }
 
     @Override

@@ -7,12 +7,14 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
@@ -245,6 +247,9 @@ public class AddNewMealActivity extends AppCompatActivity implements
             mMeal.setMealId(System.currentTimeMillis());
             mMeal.setType(Meal.MEAL_TYPE_BREAKFAST);
         }
+
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.nexa_bold);
+        binder.actionBarTitle.setTypeface(typeface);
     }
 
     private void initSavedMeal(Meal meal) {

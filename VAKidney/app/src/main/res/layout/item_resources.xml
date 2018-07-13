@@ -19,8 +19,8 @@
             android:layout_height="wrap_content"
             android:text="The best food List for you"
             android:textColor="@color/colorAccent"
-            android:textSize="14dp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/nexa_bold"
+            android:textSize="14dp" />
 
 
         <TextView

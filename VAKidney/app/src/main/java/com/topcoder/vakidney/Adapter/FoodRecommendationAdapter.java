@@ -2,6 +2,8 @@ package com.topcoder.vakidney.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
@@ -51,6 +53,9 @@ public class FoodRecommendationAdapter extends Adapter implements View.OnClickLi
         viewHolder.itemView.setTag(foodRecommendation);
 
         viewHolder.textTitle.setText(TextUtil.capitalizeFirstLetter(foodRecommendation.getName()));
+        Typeface typeface = ResourcesCompat.getFont(mContext, R.font.nexa_bold);
+        viewHolder.textTitle.setTypeface(typeface);
+
         viewHolder.textDesc.setText(foodRecommendation.getDesc());
     }
 

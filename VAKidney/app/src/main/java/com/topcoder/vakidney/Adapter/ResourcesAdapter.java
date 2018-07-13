@@ -2,6 +2,8 @@ package com.topcoder.vakidney.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -58,7 +60,11 @@ public class ResourcesAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
         final Resources resources = resourcesArrayList.get(i);
+
         viewHolder.tvTitle.setText(resources.getTitle());
+        Typeface typeface = ResourcesCompat.getFont(activity, R.font.nexa_bold);
+        viewHolder.tvTitle.setTypeface(typeface);
+
         viewHolder.tvDesc.setText(resources.getDesc().replace("\n\n", ""));
         view.setOnClickListener(new View.OnClickListener() {
             @Override

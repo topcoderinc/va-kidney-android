@@ -2,7 +2,9 @@ package com.topcoder.vakidney;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatSpinner;
@@ -179,6 +181,10 @@ public class AddNewGoalActivity extends AppCompatActivity
                         }, null);
             }
         });
+
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.nexa_bold);
+        binder.actionBarTitle.setTypeface(typeface);
+
         populateSpinner();
     }
 

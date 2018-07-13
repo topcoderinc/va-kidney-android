@@ -3,11 +3,13 @@ package com.topcoder.vakidney;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.databinding.DataBindingUtil;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.ImageViewCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -252,6 +254,9 @@ public class MainActivity extends AppCompatActivity {
                 selectBottomBar(0);
             }
         });
+
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.nexa_bold);
+        binder.actionBarTitle.setTypeface(typeface);
 
     }
 

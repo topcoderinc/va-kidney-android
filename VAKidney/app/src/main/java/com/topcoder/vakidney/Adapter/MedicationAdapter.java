@@ -3,6 +3,8 @@ package com.topcoder.vakidney.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
@@ -60,6 +62,9 @@ public class MedicationAdapter extends Adapter {
         viewHolder.itemView.setTag(drugInteraction);
 
         viewHolder.textTitle.setText(TextUtil.capitalizeFirstLetter(drugInteraction.getName()));
+        Typeface typeface = ResourcesCompat.getFont(mContext, R.font.nexa_bold);
+        viewHolder.textTitle.setTypeface(typeface);
+
         viewHolder.textDesc.setText(
                 "Report: #" + drugInteraction.getReportId() +
                         "\n" +

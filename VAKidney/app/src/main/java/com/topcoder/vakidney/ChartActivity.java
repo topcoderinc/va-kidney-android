@@ -2,7 +2,9 @@ package com.topcoder.vakidney;
 
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
@@ -67,6 +69,9 @@ public class ChartActivity extends AppCompatActivity implements
         if (mChartData != null && mChartData.size() > 0) {
             populateData(binder.chart, mChartData);
         }
+
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.nexa_bold);
+        binder.actionBarTitle.setTypeface(typeface);
     }
 
 
@@ -99,7 +104,7 @@ public class ChartActivity extends AppCompatActivity implements
         ChartData lastChartData = chartDataArray.get(chartDataArray.size() - 1);
 
         LineDataSet dataSet = new LineDataSet(entries, "Actual");
-        dataSet.setColor(getColor(R.color.colorAccent));
+        dataSet.setColor(getColor(R.color.colorPrimaryDark));
         dataSet.setDrawCircles(true);
         dataSet.setLineWidth(3.0f);
         dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);

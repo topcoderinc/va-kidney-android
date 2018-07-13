@@ -60,7 +60,7 @@ public class Home1Fragment extends Fragment {
         NoOfGoalsDisplayed=0;
         NoOfGoalsDisplayed+=getComorbiditiesGoals();
         goalArrayList = Goal.getWithoutComorbidities(currentUser.getDiseaseCategory(), currentUser.isDialysis());
-        binder.tvWelcomeName.setText(getString(R.string.welcome_string) + currentUser.getFullname().split(" ")[0] + ",");
+        binder.tvWelcomeName.setText(getString(R.string.welcome_string) + " " + currentUser.getFullname().split(" ")[0] + ",");
         binder.btnPoints.setText(currentUser.getPoints() + " Points");
         fillComorbiditiesGoals();
         fillRemainingGoals();
