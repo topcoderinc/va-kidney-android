@@ -35,7 +35,7 @@
             android:layout_height="20dp"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:tint="@color/colorAccent"
+            android:tint="@color/brandBlueLight"
             app:srcCompat="@drawable/ic_bar_home" />
 
         <TextView
@@ -45,7 +45,7 @@
             android:layout_marginBottom="4dp"
             android:gravity="center"
             android:text="Home"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/brandBlueLight"
             android:textSize="10sp" />
     </LinearLayout>
 
@@ -75,7 +75,7 @@
             android:layout_height="20dp"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:tint="@color/colorAccent"
+            android:tint="@color/brandBlueLight"
             app:srcCompat="@drawable/ic_bar_chart" />
 
         <TextView
@@ -85,7 +85,7 @@
             android:layout_marginBottom="4dp"
             android:gravity="center"
             android:text="Chart"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/brandBlueLight"
             android:textSize="10sp" />
     </LinearLayout>
 
@@ -115,7 +115,7 @@
             android:layout_height="20dp"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:tint="@color/colorAccent"
+            android:tint="@color/brandBlueLight"
             app:srcCompat="@drawable/tab3" />
 
         <TextView
@@ -125,7 +125,7 @@
             android:layout_marginBottom="4dp"
             android:gravity="center"
             android:text="Recommendations"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/brandBlueLight"
             android:textSize="10sp" />
     </LinearLayout>
 
@@ -155,7 +155,7 @@
             android:layout_height="20dp"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:tint="@color/colorAccent"
+            android:tint="@color/brandBlueLight"
             app:srcCompat="@drawable/ic_bar_food" />
 
         <TextView
@@ -165,7 +165,7 @@
             android:layout_marginBottom="4dp"
             android:gravity="center"
             android:text="Food/Drug"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/brandBlueLight"
             android:textSize="10sp" />
     </LinearLayout>
 
@@ -195,7 +195,7 @@
             android:layout_height="20dp"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:tint="@color/colorAccent"
+            android:tint="@color/brandBlueLight"
             app:srcCompat="@drawable/ic_bar_workout" />
 
         <TextView
@@ -205,7 +205,7 @@
             android:layout_marginBottom="4dp"
             android:gravity="center"
             android:text="Activity"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/brandBlueLight"
             android:textSize="10sp" />
     </LinearLayout>
 

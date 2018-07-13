@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.res.ResourcesCompat;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -101,7 +102,10 @@ public class Home1Fragment extends Fragment {
                         getContext().startActivity(intent);
                     }
                 });
-                binder.arcProgress1.setFinishedStrokeColor(Color.parseColor("#" + goal1.getColorCode()));
+                binder.arcProgress1.setFinishedStrokeColor(
+                        ResourcesCompat.getColor(getResources(),
+                                R.color.colorAccent,
+                                null));
                 binder.arcProgress1.setIcon(goal1.getIcon());
                 binder.arcProgress1.setIconColor(Color.WHITE);
                 binder.arcProgress1.setUnfinishedStrokeColor(Color.WHITE);
@@ -132,7 +136,10 @@ public class Home1Fragment extends Fragment {
                 });
                 binder.arcProgress2.setProgress((int) goal2.getCurrentLevel());
                 binder.arcProgress2.setMax((int) goal2.getGoalMax());
-                binder.arcProgress2.setFinishedStrokeColor(Color.parseColor("#" + goal2.getColorCode()));
+                binder.arcProgress2.setFinishedStrokeColor(
+                        ResourcesCompat.getColor(getResources(),
+                                R.color.colorAccent,
+                                null));
                 binder.arcProgress2.setIcon(goal2.getIcon());
                 binder.arcProgress2.setIconColor(Color.WHITE);
                 binder.arcProgress2.setUnfinishedStrokeColor(Color.WHITE);
@@ -156,7 +163,10 @@ public class Home1Fragment extends Fragment {
                 }
                 binder.arcProgress3.setProgress((int) goal3.getCurrentLevel());
                 binder.arcProgress3.setMax((int) goal3.getGoalMax());
-                binder.arcProgress3.setFinishedStrokeColor(Color.parseColor("#" + goal3.getColorCode()));
+                binder.arcProgress3.setFinishedStrokeColor(
+                        ResourcesCompat.getColor(getResources(),
+                                R.color.colorAccent,
+                                null));
                 binder.arcProgress3.setIcon(goal3.getIcon());
                 binder.arcProgress3.setIconColor(Color.WHITE);
                 binder.arcProgress3.setUnfinishedStrokeColor(Color.WHITE);
@@ -181,7 +191,10 @@ public class Home1Fragment extends Fragment {
                 binder.arcProgress4.setMax((int) goal4.getGoalMax());
                 binder.arcProgress4.setBottomText(goal4.getTitleStr());
 
-                binder.arcProgress4.setFinishedStrokeColor(Color.parseColor("#" + goal4.getColorCode()));
+                binder.arcProgress4.setFinishedStrokeColor(
+                        ResourcesCompat.getColor(getResources(),
+                                R.color.colorAccent,
+                                null));
                 binder.arcProgress4.setIcon(goal4.getIcon());
                 binder.arcProgress4.setIconColor(Color.WHITE);
                 binder.arcProgress4.setUnfinishedStrokeColor(Color.WHITE);

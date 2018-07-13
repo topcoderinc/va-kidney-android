@@ -318,40 +318,40 @@ public class MainActivity extends AppCompatActivity {
                 binder.bar4.setBackgroundColor(getColor(R.color.colorPrimary));
                 binder.bar5.setBackgroundColor(getColor(R.color.colorPrimary));
 
-                ImageViewCompat.setImageTintList(binder.barImg1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(binder.barImg2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(binder.barImg3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(binder.barImg4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(binder.barImg5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
+                ImageViewCompat.setImageTintList(binder.barImg2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
+                ImageViewCompat.setImageTintList(binder.barImg3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
+                ImageViewCompat.setImageTintList(binder.barImg4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
+                ImageViewCompat.setImageTintList(binder.barImg5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
 
-                binder.tvBar1.setTextColor(getColor(R.color.colorAccent));
-                binder.tvBar2.setTextColor(getColor(R.color.colorAccent));
-                binder.tvBar3.setTextColor(getColor(R.color.colorAccent));
-                binder.tvBar4.setTextColor(getColor(R.color.colorAccent));
-                binder.tvBar5.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar1.setTextColor(getColor(R.color.brandBlueLight));
+                binder.tvBar2.setTextColor(getColor(R.color.brandBlueLight));
+                binder.tvBar3.setTextColor(getColor(R.color.brandBlueLight));
+                binder.tvBar4.setTextColor(getColor(R.color.brandBlueLight));
+                binder.tvBar5.setTextColor(getColor(R.color.brandBlueLight));
 
                 break;
 
             case 1:
                 CURRENT_TAG = TAG_HOME;
 
-                binder.bar1.setBackgroundColor(getColor(R.color.colorWhite));
+                binder.bar1.setBackgroundResource(R.drawable.bg_brand_line);
                 binder.bar2.setBackgroundColor(getColor(R.color.colorPrimary));
                 binder.bar3.setBackgroundColor(getColor(R.color.colorPrimary));
                 binder.bar4.setBackgroundColor(getColor(R.color.colorPrimary));
                 binder.bar5.setBackgroundColor(getColor(R.color.colorPrimary));
 
                 ImageViewCompat.setImageTintList(binder.barImg1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorWhite)));
-                ImageViewCompat.setImageTintList(binder.barImg2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(binder.barImg3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(binder.barImg4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(binder.barImg5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
+                ImageViewCompat.setImageTintList(binder.barImg3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
+                ImageViewCompat.setImageTintList(binder.barImg4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
+                ImageViewCompat.setImageTintList(binder.barImg5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
 
                 binder.tvBar1.setTextColor(getColor(R.color.colorWhite));
-                binder.tvBar2.setTextColor(getColor(R.color.colorAccent));
-                binder.tvBar3.setTextColor(getColor(R.color.colorAccent));
-                binder.tvBar4.setTextColor(getColor(R.color.colorAccent));
-                binder.tvBar5.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar2.setTextColor(getColor(R.color.brandBlueLight));
+                binder.tvBar3.setTextColor(getColor(R.color.brandBlueLight));
+                binder.tvBar4.setTextColor(getColor(R.color.brandBlueLight));
+                binder.tvBar5.setTextColor(getColor(R.color.brandBlueLight));
 
                 break;
 
@@ -359,23 +359,23 @@ public class MainActivity extends AppCompatActivity {
             case 2:
                 CURRENT_TAG = TAG_CHART;
 
-                binder.bar2.setBackgroundColor(getColor(R.color.colorWhite));
+                binder.bar2.setBackgroundResource(R.drawable.bg_brand_line);
                 binder.bar1.setBackgroundColor(getColor(R.color.colorPrimary));
                 binder.bar3.setBackgroundColor(getColor(R.color.colorPrimary));
                 binder.bar4.setBackgroundColor(getColor(R.color.colorPrimary));
                 binder.bar5.setBackgroundColor(getColor(R.color.colorPrimary));
 
                 ImageViewCompat.setImageTintList(binder.barImg2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorWhite)));
-                ImageViewCompat.setImageTintList(binder.barImg1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(binder.barImg3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(binder.barImg4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(binder.barImg5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
+                ImageViewCompat.setImageTintList(binder.barImg3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
+                ImageViewCompat.setImageTintList(binder.barImg4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
+                ImageViewCompat.setImageTintList(binder.barImg5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
 
                 binder.tvBar2.setTextColor(getColor(R.color.colorWhite));
-                binder.tvBar1.setTextColor(getColor(R.color.colorAccent));
-                binder.tvBar3.setTextColor(getColor(R.color.colorAccent));
-                binder.tvBar4.setTextColor(getColor(R.color.colorAccent));
-                binder.tvBar5.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar1.setTextColor(getColor(R.color.brandBlueLight));
+                binder.tvBar3.setTextColor(getColor(R.color.brandBlueLight));
+                binder.tvBar4.setTextColor(getColor(R.color.brandBlueLight));
+                binder.tvBar5.setTextColor(getColor(R.color.brandBlueLight));
 
                 break;
 
@@ -383,23 +383,23 @@ public class MainActivity extends AppCompatActivity {
             case 3:
                 CURRENT_TAG = TAG_MEDICATION;
 
-                binder.bar3.setBackgroundColor(getColor(R.color.colorWhite));
+                binder.bar3.setBackgroundResource(R.drawable.bg_brand_line);
                 binder.bar2.setBackgroundColor(getColor(R.color.colorPrimary));
                 binder.bar1.setBackgroundColor(getColor(R.color.colorPrimary));
                 binder.bar4.setBackgroundColor(getColor(R.color.colorPrimary));
                 binder.bar5.setBackgroundColor(getColor(R.color.colorPrimary));
 
                 ImageViewCompat.setImageTintList(binder.barImg3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorWhite)));
-                ImageViewCompat.setImageTintList(binder.barImg2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(binder.barImg1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(binder.barImg4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(binder.barImg5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
+                ImageViewCompat.setImageTintList(binder.barImg1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
+                ImageViewCompat.setImageTintList(binder.barImg4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
+                ImageViewCompat.setImageTintList(binder.barImg5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
 
                 binder.tvBar3.setTextColor(getColor(R.color.colorWhite));
-                binder.tvBar2.setTextColor(getColor(R.color.colorAccent));
-                binder.tvBar1.setTextColor(getColor(R.color.colorAccent));
-                binder.tvBar4.setTextColor(getColor(R.color.colorAccent));
-                binder.tvBar5.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar2.setTextColor(getColor(R.color.brandBlueLight));
+                binder.tvBar1.setTextColor(getColor(R.color.brandBlueLight));
+                binder.tvBar4.setTextColor(getColor(R.color.brandBlueLight));
+                binder.tvBar5.setTextColor(getColor(R.color.brandBlueLight));
 
                 break;
 
@@ -407,23 +407,23 @@ public class MainActivity extends AppCompatActivity {
             case 4:
                 CURRENT_TAG = TAG_FOOD;
 
-                binder.bar4.setBackgroundColor(getColor(R.color.colorWhite));
+                binder.bar4.setBackgroundResource(R.drawable.bg_brand_line);
                 binder.bar2.setBackgroundColor(getColor(R.color.colorPrimary));
                 binder.bar3.setBackgroundColor(getColor(R.color.colorPrimary));
                 binder.bar1.setBackgroundColor(getColor(R.color.colorPrimary));
                 binder.bar5.setBackgroundColor(getColor(R.color.colorPrimary));
 
                 ImageViewCompat.setImageTintList(binder.barImg4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorWhite)));
-                ImageViewCompat.setImageTintList(binder.barImg2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(binder.barImg3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(binder.barImg1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(binder.barImg5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
+                ImageViewCompat.setImageTintList(binder.barImg3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
+                ImageViewCompat.setImageTintList(binder.barImg1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
+                ImageViewCompat.setImageTintList(binder.barImg5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
 
                 binder.tvBar4.setTextColor(getColor(R.color.colorWhite));
-                binder.tvBar2.setTextColor(getColor(R.color.colorAccent));
-                binder.tvBar3.setTextColor(getColor(R.color.colorAccent));
-                binder.tvBar1.setTextColor(getColor(R.color.colorAccent));
-                binder.tvBar5.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar2.setTextColor(getColor(R.color.brandBlueLight));
+                binder.tvBar3.setTextColor(getColor(R.color.brandBlueLight));
+                binder.tvBar1.setTextColor(getColor(R.color.brandBlueLight));
+                binder.tvBar5.setTextColor(getColor(R.color.brandBlueLight));
 
                 break;
 
@@ -431,23 +431,23 @@ public class MainActivity extends AppCompatActivity {
             case 5:
                 CURRENT_TAG = TAG_WORKOUT;
 
-                binder.bar5.setBackgroundColor(getColor(R.color.colorWhite));
+                binder.bar5.setBackgroundResource(R.drawable.bg_brand_line);
                 binder.bar2.setBackgroundColor(getColor(R.color.colorPrimary));
                 binder.bar3.setBackgroundColor(getColor(R.color.colorPrimary));
                 binder.bar4.setBackgroundColor(getColor(R.color.colorPrimary));
                 binder.bar1.setBackgroundColor(getColor(R.color.colorPrimary));
 
                 ImageViewCompat.setImageTintList(binder.barImg5, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorWhite)));
-                ImageViewCompat.setImageTintList(binder.barImg2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(binder.barImg3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(binder.barImg4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-                ImageViewCompat.setImageTintList(binder.barImg1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                ImageViewCompat.setImageTintList(binder.barImg2, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
+                ImageViewCompat.setImageTintList(binder.barImg3, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
+                ImageViewCompat.setImageTintList(binder.barImg4, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
+                ImageViewCompat.setImageTintList(binder.barImg1, ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.brandBlueLight)));
 
                 binder.tvBar5.setTextColor(getColor(R.color.colorWhite));
-                binder.tvBar2.setTextColor(getColor(R.color.colorAccent));
-                binder.tvBar3.setTextColor(getColor(R.color.colorAccent));
-                binder.tvBar4.setTextColor(getColor(R.color.colorAccent));
-                binder.tvBar1.setTextColor(getColor(R.color.colorAccent));
+                binder.tvBar2.setTextColor(getColor(R.color.brandBlueLight));
+                binder.tvBar3.setTextColor(getColor(R.color.brandBlueLight));
+                binder.tvBar4.setTextColor(getColor(R.color.brandBlueLight));
+                binder.tvBar1.setTextColor(getColor(R.color.brandBlueLight));
 
                 break;
         }

@@ -102,7 +102,6 @@ public class AddNewGoalActivity extends AppCompatActivity
             }
         });
 
-        SetupBotomMenu();
 
         if (getIntent().hasExtra("goal")) {
             Goal goalFromIntent = (Goal) getIntent().getSerializableExtra("goal");
@@ -235,59 +234,6 @@ public class AddNewGoalActivity extends AppCompatActivity
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-        });
-    }
-
-    /**
-     * Initialize view and sets up listener for bottom menu
-     */
-    private void SetupBotomMenu() {
-
-
-        binder.barLin1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AddNewGoalActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_HOME);
-                startActivity(intent);
-                finish();
-            }
-        });
-        binder.barLin1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AddNewGoalActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_CHART);
-                startActivity(intent);
-                finish();
-            }
-        });
-        binder.barLin1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AddNewGoalActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_MEDICATION);
-                startActivity(intent);
-                finish();
-            }
-        });
-        binder.barLin1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AddNewGoalActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_FOOD);
-                startActivity(intent);
-                finish();
-            }
-        });
-        binder.barLin1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AddNewGoalActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_WORKOUT);
-                startActivity(intent);
-                finish();
             }
         });
     }
