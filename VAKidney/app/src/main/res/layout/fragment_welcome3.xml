@@ -18,10 +18,11 @@
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/image1"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="80dp"
             android:layout_margin="15dp"
             android:padding="3dp"
-            app:srcCompat="@drawable/ic_welcome3_valogo" />
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/logo_primary" />
 
 
         <TextView

@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_bottom_rounded"
+        android:background="@color/colorPrimary"
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_above="@+id/bottom"
@@ -250,40 +250,89 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="30dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="60dp"
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvWelcomeName"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Welcome John"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:layout_marginBottom="@dimen/app_standard_padding"
-            android:textColor="@color/colorDarkGray" />
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Welcome,"
+                android:textSize="20sp"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/app_standard_padding"
+                android:layout_weight="1"
+                android:textColor="@color/colorDarkGray" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You have"
+                android:layout_gravity="center_vertical"
+                android:paddingRight="70dp"
+                android:textSize="14sp"
+                android:textColor="@color/colorDarkGray" />
 
-        <TextView
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="You have"
-            android:gravity="center"
-            android:layout_marginBottom="@dimen/app_standard_padding"
-            android:textSize="14dp"
-            android:textColor="@color/colorDarkGray" />
-
-        <Button
-            android:id="@+id/btnPoints"
-            android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
-            android:textColor="@color/colorWhite"
-            android:text="120 Points"
-            android:background="@drawable/bg_primary_rounded"
-            />
+            android:orientation="horizontal">
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:layout_marginRight="-20dp">
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorWhite"
+                    android:lines="1"
+                    android:textSize="16sp"
+                    android:text="John Smith"
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
+            </FrameLayout>
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:rotation="180"
+                android:tint="@color/colorPrimary"
+                android:src="@drawable/bg_triangle">
+            </ImageView>
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:tint="@color/colorAccent"
+                android:src="@drawable/bg_triangle">
+            </ImageView>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="-20dp"
+                android:background="@color/colorAccent">
+                <TextView
+                    android:id="@+id/tvPoints"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorWhite"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:textSize="16sp"
+                    android:text="120 Points"
+                    android:layout_gravity="center"/>
+            </FrameLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 

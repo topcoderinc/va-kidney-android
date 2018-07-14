@@ -2,6 +2,8 @@ package com.topcoder.vakidney.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +55,7 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         switch (holder.getItemViewType()) {
             case 1: {
                 ViewHolder1 viewHolder1 = (ViewHolder1) holder;
+
                 viewHolder1.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

@@ -22,10 +22,10 @@
             android:background="@color/colorWhite"
             android:elevation="0dp"
             app:tabGravity="fill"
-            app:tabIndicatorColor="@color/colorAccent"
+            app:tabIndicatorColor="@color/colorPrimaryDark"
             app:tabIndicatorHeight="2dp"
             app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/colorPrimary"
+            app:tabSelectedTextColor="@color/colorPrimaryDark"
             app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
             app:tabTextColor="@color/colorLightDarkGray" />
     </android.support.design.widget.AppBarLayout>

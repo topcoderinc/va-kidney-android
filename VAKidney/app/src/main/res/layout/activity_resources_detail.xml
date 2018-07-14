@@ -1,102 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorLightGray">
-
-
-    <RelativeLayout
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:padding="@dimen/cardStandardPadding">
-
-
-        <TextView
-            android:id="@+id/actionBarTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:gravity="center"
-            android:text="Nutritions Details"
-            android:textAllCaps="true"
-            android:textColor="@color/colorWhite"
-            android:textSize="18dp" />
-
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/backBtn"
-            android:layout_width="23dp"
-            android:layout_height="25dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:scaleType="fitXY"
-            android:tint="@color/colorWhite"
-            app:srcCompat="@drawable/ic_keyboard_arrow_left"
-            tools:ignore="VectorDrawableCompat" />
-
-    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bottomBar"
-        android:layout_below="@+id/toolbar"
-        android:padding="30dp">
+        android:layout_height="match_parent"
+        android:background="@color/colorLightGray">
 
-        <LinearLayout
+
+        <RelativeLayout
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_white_rounded"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="30dp">
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:padding="@dimen/cardStandardPadding">
+
 
             <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="match_parent"
+                android:id="@+id/actionBarTitle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:gravity="center"
-                android:text="The best food List For You"
-                android:textColor="#666666"
-                android:fontFamily="@font/nexa_bold"
-                android:textSize="14dp"
-                android:textStyle="bold" />
+                android:text="Nutritions Details"
+                android:textAllCaps="true"
+                android:textColor="@color/colorWhite"
+                android:textSize="18dp" />
 
             <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/image1"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="15dp"
-                android:tint="#557630"
-                app:srcCompat="@drawable/ic_welcome1_fruits" />
+                android:id="@+id/backBtn"
+                android:layout_width="23dp"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:tint="@color/colorWhite"
+                app:srcCompat="@drawable/ic_keyboard_arrow_left"
+                tools:ignore="VectorDrawableCompat" />
 
-            <ScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottomBar"
+            android:layout_below="@+id/toolbar"
+            android:background="@color/colorWhite"
+            android:paddingStart="@dimen/app_standard_padding"
+            android:paddingEnd="@dimen/app_standard_padding">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="30dp"
+                android:paddingLeft="@dimen/app_standard_padding"
+                android:paddingRight="@dimen/app_standard_padding">
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nexa_bold"
+                    android:text="The best food List For You"
+                    android:textColor="#666666"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:layout_marginBottom="@dimen/app_standard_padding"/>
+
+                <LinearLayout
+                    android:layout_width="140dp"
+                    android:layout_height="6dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/app_standard_padding">
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="match_parent"
+                        android:tint="@color/colorAccent"
+                        android:src="@drawable/bg_triangle"/>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/colorAccent"
+                        android:layout_marginLeft="-4dp"
+                        android:layout_marginRight="-4dp"/>
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="match_parent"
+                        android:rotation="180"
+                        android:tint="@color/colorAccent"
+                        android:src="@drawable/bg_triangle"/>
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/tvDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="left"
                     android:autoLink="web"
+                    android:gravity="left"
                     android:text="@string/nutrition_detail"
                     android:textColor="#666666"
-                    android:textSize="13dp" />
-            </ScrollView>
+                    android:textSize="16sp"
+                    android:layout_marginTop="@dimen/app_standard_padding"
+                    android:lineSpacingExtra="@dimen/app_standard_padding"/>
 
-        </LinearLayout>
+            </LinearLayout>
 
+        </ScrollView>
+
+        <com.topcoder.vakidney.customview.BottomMenu
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
     </RelativeLayout>
-    <com.topcoder.vakidney.customview.BottomMenu
-        android:id="@+id/bottomBar"
-        android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"/>
-</RelativeLayout>
 </layout>

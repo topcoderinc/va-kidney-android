@@ -19,6 +19,7 @@
         android:paddingTop="20dp">
 
         <TextView
+            android:id="@+id/title_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -52,11 +53,13 @@
 
 
         <TextView
+            android:id="@+id/title_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Take Your Medication as Prescribed"
             android:textColor="#666666"
+            android:textAllCaps="true"
             android:layout_marginTop="30dp"
             android:textSize="14dp"
             android:textStyle="bold" />

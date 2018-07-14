@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.ResourcesDetailActivity;
 import com.topcoder.vakidney.model.DrugInteraction;
-import com.topcoder.vakidney.model.FoodRecommendation;
 import com.topcoder.vakidney.util.TextUtil;
 
 import org.json.JSONArray;
@@ -50,7 +49,7 @@ public class MedicationAdapter extends Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_medicationresource_titledesc, parent, false);
+                .inflate(R.layout.item_recommendations, parent, false);
         return new ViewHolder(v);
     }
 
