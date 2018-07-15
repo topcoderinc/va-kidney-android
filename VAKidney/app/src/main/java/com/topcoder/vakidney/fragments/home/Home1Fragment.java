@@ -4,6 +4,7 @@ package com.topcoder.vakidney.fragments.home;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
@@ -43,6 +44,13 @@ public class Home1Fragment extends Fragment {
                              Bundle savedInstanceState) {
         binder = DataBindingUtil.inflate(inflater, R.layout.fragment_home1, container, false);
         final View view = binder.getRoot();
+
+        if (getActivity() != null) {
+            Typeface boldTypeface = ResourcesCompat.getFont(getActivity(), R.font.nexa_bold);
+            binder.tvPoints.setTypeface(boldTypeface);
+        }
+
+
         return view;
     }
 
@@ -85,7 +93,7 @@ public class Home1Fragment extends Fragment {
             final Goal goal1 = goalArrayList.size() > mGoalIndex ? goalArrayList.get(mGoalIndex) : null;
             if (goal1 != null) {
                 binder.arcLayout1.setVisibility(View.VISIBLE);
-                binder.arcProgress1.setBottomText(goal1.getTitleStr());
+                binder.arcProgressText1.setText(goal1.getTitleStr());
                 binder.tvUnit1.setText(goal1.getUnitStr());
                 if ((goal1.getCurrentLevel() == Math.floor(goal1.getCurrentLevel())) && !Double.isInfinite(goal1.getCurrentLevel())) {
                     binder.tvStat1.setText((int) goal1.getCurrentLevel() + "/" + (int) goal1.getGoal());
@@ -119,7 +127,7 @@ public class Home1Fragment extends Fragment {
             final Goal goal2 = goalArrayList.size() > mGoalIndex ? goalArrayList.get(mGoalIndex) : null;
             if (goal2 != null) {
                 binder.arcLayout2.setVisibility(View.VISIBLE);
-                binder.arcProgress2.setBottomText(goal2.getTitleStr());
+                binder.arcProgressText2.setText(goal2.getTitleStr());
                 binder.tvUnit2.setText(goal2.getUnitStr());
                 if ((goal2.getCurrentLevel() == Math.floor(goal2.getCurrentLevel())) && !Double.isInfinite(goal2.getCurrentLevel())) {
                     binder.tvStat2.setText((int) goal2.getCurrentLevel() + "/" + (int) goal2.getGoal());
@@ -154,7 +162,7 @@ public class Home1Fragment extends Fragment {
             final Goal goal3 = goalArrayList.size() > mGoalIndex ? goalArrayList.get(mGoalIndex) : null;
             if (goal3 != null) {
                 binder.arcLayout3.setVisibility(View.VISIBLE);
-                binder.arcProgress3.setBottomText(goal3.getTitleStr());
+                binder.arcProgressText3.setText(goal3.getTitleStr());
                 binder.tvUnit3.setText(goal3.getUnitStr());
                 if ((goal3.getCurrentLevel() == Math.floor(goal3.getCurrentLevel())) && !Double.isInfinite(goal3.getCurrentLevel())) {
                     binder.tvStat3.setText((int) goal3.getCurrentLevel() + "/" + (int) goal3.getGoal());
@@ -189,7 +197,7 @@ public class Home1Fragment extends Fragment {
                 binder.arcLayout4.setVisibility(View.VISIBLE);
                 binder.arcProgress4.setProgress((int) goal4.getCurrentLevel());
                 binder.arcProgress4.setMax((int) goal4.getGoalMax());
-                binder.arcProgress4.setBottomText(goal4.getTitleStr());
+                binder.arcProgressText4.setText(goal4.getTitleStr());
 
                 binder.arcProgress4.setFinishedStrokeColor(
                         ResourcesCompat.getColor(getResources(),
@@ -224,7 +232,7 @@ public class Home1Fragment extends Fragment {
             binder.tvUnit1.setText("");
             binder.tvStat1.setText("");
             goal1 = Goal.getByTitleStr("Blood Pressure").get(0);
-            binder.arcProgress1.setBottomText(goal1.getTitleStr());
+            binder.arcProgressText1.setText(goal1.getTitleStr());
             binder.arcProgress1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -253,7 +261,7 @@ public class Home1Fragment extends Fragment {
         if (currentUser.isComorbiditiesCongestiveheartfailure()) {
             goal3 = Goal.getByTitleStr("Body Weight").get(0);
             binder.arcLayout3.setVisibility(View.VISIBLE);
-            binder.arcProgress3.setBottomText(goal3.getTitleStr());
+            binder.arcProgressText3.setText(goal3.getTitleStr());
             binder.tvUnit3.setText("");
             binder.tvStat3.setText("");
             binder.arcProgress3.setOnClickListener(new View.OnClickListener() {
@@ -288,7 +296,7 @@ public class Home1Fragment extends Fragment {
             binder.tvUnit2.setText("");
             binder.tvStat2.setText("");
             goal2 = Goal.getByTitleStr("Blood Glucose").get(0);
-            binder.arcProgress2.setBottomText(goal2.getTitleStr());
+            binder.arcProgressText2.setText(goal2.getTitleStr());
             binder.arcProgress2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

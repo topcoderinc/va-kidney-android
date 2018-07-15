@@ -2,8 +2,10 @@ package com.topcoder.vakidney.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +57,8 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         switch (holder.getItemViewType()) {
             case 1: {
                 ViewHolder1 viewHolder1 = (ViewHolder1) holder;
+                Typeface typeface = ResourcesCompat.getFont(activity, R.font.nexa_bold);
+                viewHolder1.tvAddMeal.setTypeface(typeface);
 
                 viewHolder1.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -132,8 +136,13 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public class ViewHolder1 extends RecyclerView.ViewHolder {
+
+        TextView tvAddMeal;
+
         public ViewHolder1(View itemView) {
             super(itemView);
+            tvAddMeal = itemView.findViewById(R.id.tvAddMeal);
+
         }
     }
 }

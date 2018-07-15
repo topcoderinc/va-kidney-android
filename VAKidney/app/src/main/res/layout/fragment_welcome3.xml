@@ -13,8 +13,6 @@
     tools:context=".fragments.welcome.Welcome1Fragment">
 
 
-
-
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/image1"
             android:layout_width="match_parent"
@@ -58,6 +56,7 @@
                     android:layout_marginRight="15dp"
                     android:text="@string/terms_and_conditions"
                     android:textColor="#666666"
+                    android:lineSpacingExtra="@dimen/standard_padding_half"
                     android:textSize="13dp" />
 
             </LinearLayout>

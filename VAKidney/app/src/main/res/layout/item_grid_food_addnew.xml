@@ -15,21 +15,40 @@
         >
 
         <android.support.v7.widget.AppCompatImageView
-            android:layout_width="80dp"
-            android:layout_height="90dp"
-            android:layout_margin="@dimen/app_standard_padding"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="20dp"
             app:srcCompat="@drawable/ic_addmeal"
             app:tint="@color/colorAccent"
             />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/colorLightGray"
-            />
-
+            android:paddingStart="@dimen/standard_padding_half"
+            android:paddingEnd="@dimen/standard_padding_half"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="match_parent"
+                android:tint="@color/colorAccent"
+                android:src="@drawable/bg_triangle"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:layout_marginLeft="-4dp"
+                android:layout_marginRight="-4dp"/>
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="match_parent"
+                android:rotation="180"
+                android:tint="@color/colorAccent"
+                android:src="@drawable/bg_triangle"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvAddMeal"

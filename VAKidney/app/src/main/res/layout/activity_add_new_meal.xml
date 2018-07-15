@@ -156,7 +156,7 @@
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:padding="10dp"
-                                android:tint="@color/colorAccent"
+                                android:tint="@color/colorDarkGray"
                                 app:srcCompat="@drawable/ic_date" />
 
                             <LinearLayout
@@ -189,9 +189,31 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="2dp"
                             android:layout_marginBottom="@dimen/app_standard_padding"
-                            android:background="@color/colorLightGray" />
+                            android:paddingStart="@dimen/standard_padding_half"
+                            android:paddingEnd="@dimen/standard_padding_half"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="8dp"
+                                android:layout_height="match_parent"
+                                android:tint="@color/colorAccent"
+                                android:src="@drawable/bg_triangle"/>
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@color/colorAccent"
+                                android:layout_marginLeft="-4dp"
+                                android:layout_marginRight="-4dp"/>
+                            <ImageView
+                                android:layout_width="8dp"
+                                android:layout_height="match_parent"
+                                android:rotation="180"
+                                android:tint="@color/colorAccent"
+                                android:src="@drawable/bg_triangle"/>
+                        </LinearLayout>
+
 
                         <TextView
                             android:id="@+id/tvChangeDate"
@@ -232,7 +254,7 @@
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:padding="10dp"
-                                android:tint="@color/colorAccent"
+                                android:tint="@color/colorDarkGray"
                                 app:srcCompat="@drawable/ic_clock" />
 
                             <LinearLayout
@@ -265,9 +287,31 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="2dp"
                             android:layout_marginBottom="@dimen/app_standard_padding"
-                            android:background="@color/colorLightGray" />
+                            android:paddingStart="@dimen/standard_padding_half"
+                            android:paddingEnd="@dimen/standard_padding_half"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="8dp"
+                                android:layout_height="match_parent"
+                                android:tint="@color/colorAccent"
+                                android:src="@drawable/bg_triangle"/>
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@color/colorAccent"
+                                android:layout_marginLeft="-4dp"
+                                android:layout_marginRight="-4dp"/>
+                            <ImageView
+                                android:layout_width="8dp"
+                                android:layout_height="match_parent"
+                                android:rotation="180"
+                                android:tint="@color/colorAccent"
+                                android:src="@drawable/bg_triangle"/>
+                        </LinearLayout>
+
 
                         <TextView
                             android:id="@+id/tvChangeTime"
@@ -334,16 +378,17 @@
                     <LinearLayout
                         android:id="@+id/addPhotoBtn"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="120dp"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
                         android:background="@drawable/bg_round_white"
                         android:gravity="center">
 
                         <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
                             android:layout_margin="@dimen/app_standard_padding"
+                            android:tint="@color/colorLightDarkGray"
                             app:srcCompat="@drawable/ic_addphotos" />
 
                     </LinearLayout>

@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
     android:layout_margin="5dp"
     android:background="@drawable/bg_white_rounded"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="5dp">
+
     <LinearLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
@@ -19,15 +20,24 @@
             android:id="@+id/goalProgress"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="@dimen/app_standard_padding"
-            app:arc_bottom_text="Steps"
+            android:layout_marginTop="18dp"
             app:arc_bottom_text_size="12dp"
+            app:arc_bottom_text=""
             app:arc_finished_color="#f3cf45"
             app:arc_progress="0"
             app:arc_text_color="@color/colorDarkGray"
-            app:arc_unfinished_color="#e5e5e5"
-            />
+            app:arc_unfinished_color="#e5e5e5" />
 
+        <TextView
+            android:id="@+id/arcBottomText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Steps"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="14sp"
+            android:layout_marginBottom="2dp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,15 +65,33 @@
                 android:textColor="@color/colorDarkGray"
                 android:textSize="14dp" />
 
-
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:layout_marginTop="15dp"
-        android:background="@color/colorLightGray" />
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="match_parent"
+            android:tint="@color/colorAccent"
+            android:src="@drawable/bg_triangle"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:layout_marginLeft="-4dp"
+            android:layout_marginRight="-4dp"/>
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="match_parent"
+            android:rotation="180"
+            android:tint="@color/colorAccent"
+            android:src="@drawable/bg_triangle"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tvAddGoalString"
@@ -73,7 +101,7 @@
         android:gravity="center"
         android:text="Sync Now"
         android:textColor="@color/colorAccent"
-        android:textSize="13dp"
+        android:textSize="13sp"
         android:textStyle="bold" />
 
 </LinearLayout>

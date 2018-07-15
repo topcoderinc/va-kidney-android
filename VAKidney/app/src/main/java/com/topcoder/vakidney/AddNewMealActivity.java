@@ -250,6 +250,8 @@ public class AddNewMealActivity extends AppCompatActivity implements
 
         Typeface typeface = ResourcesCompat.getFont(this, R.font.nexa_bold);
         binder.actionBarTitle.setTypeface(typeface);
+        binder.tvChangeDate.setTypeface(typeface);
+        binder.tvChangeTime.setTypeface(typeface);
     }
 
     private void initSavedMeal(Meal meal) {

@@ -2,9 +2,11 @@ package com.topcoder.vakidney.fragments;
 
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,13 +53,21 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         binder = DataBindingUtil.inflate(inflater, R.layout.fragment_workout, container, false);
         final View view = binder.getRoot();
-        View syncData = view.findViewById(R.id.llSyncData);
-        View syncDistance = view.findViewById(R.id.llSyncDistance);
-        View syncSteps = view.findViewById(R.id.llSyncStep);
 
-        syncData.setOnClickListener(this);
-        syncDistance.setOnClickListener(this);
-        syncSteps.setOnClickListener(this);
+        binder.tvSyncData.setOnClickListener(this);
+        binder.tvSyncDistance.setOnClickListener(this);
+        binder.tvSyncStep.setOnClickListener(this);
+
+        if (getActivity() != null) {
+            Typeface boldTypeface = ResourcesCompat.getFont(getActivity(), R.font.nexa_bold);
+            binder.tvSyncData.setTypeface(boldTypeface);
+            binder.tvSyncDistance.setTypeface(boldTypeface);
+            binder.tvSyncStep.setTypeface(boldTypeface);
+            binder.tvManageDevice.setTypeface(boldTypeface);
+            binder.tvDataSync.setTypeface(boldTypeface);
+            binder.arcBottomText1.setTypeface(boldTypeface);
+            binder.arcBottomText.setTypeface(boldTypeface);
+        }
 
         return view;
     }
@@ -95,14 +105,14 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.llSyncData: {
+            case R.id.tvSyncData: {
                 if (getView() != null) {
-                    getView().findViewById(R.id.llSyncDistance).performClick();
-                    getView().findViewById(R.id.llSyncStep).performClick();
+                    getView().findViewById(R.id.tvSyncDistance).performClick();
+                    getView().findViewById(R.id.tvSyncStep).performClick();
                 }
             }
             break;
-            case R.id.llSyncDistance: {
+            case R.id.tvSyncDistance: {
                 GoogleFitUtil.getDistance(
                         getContext(),
                         new OnSuccessListener<DataReadResponse>() {
@@ -134,7 +144,7 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
                         });
             }
             break;
-            case R.id.llSyncStep: {
+            case R.id.tvSyncStep: {
                 GoogleFitUtil.getStep(
                         getContext(),
                         new OnSuccessListener<DataReadResponse>() {

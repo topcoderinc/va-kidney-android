@@ -41,9 +41,9 @@ public class ResourcesDetailActivity extends AppCompatActivity {
             }
         });
 
-        Typeface typeface = ResourcesCompat.getFont(this, R.font.nexa_bold);
-        binder.actionBarTitle.setTypeface(typeface);
-        binder.tvTitle.setTypeface(typeface);
+        Typeface boldTypeface = ResourcesCompat.getFont(this, R.font.nexa_bold);
+        binder.actionBarTitle.setTypeface(boldTypeface);
+        binder.tvTitle.setTypeface(boldTypeface);
     }
 
     /**

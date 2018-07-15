@@ -3,6 +3,8 @@ package com.topcoder.vakidney.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +58,10 @@ public class GoalAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         if (i == 0) {
             view = activity.getLayoutInflater().inflate(R.layout.item_grid_goal_addnew, viewGroup, false);
+
+            Typeface boldTypeface = ResourcesCompat.getFont(activity, R.font.nexa_bold);
+            ((TextView) view.findViewById(R.id.tvAddGoalString)).setTypeface(boldTypeface);
+
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -73,7 +79,13 @@ public class GoalAdapter extends BaseAdapter {
                 viewHolder.layout = view.findViewById(R.id.layout);
                 viewHolder.tvCurrentGoals = view.findViewById(R.id.tvCurrentGoals);
                 viewHolder.tvGoalUnit = view.findViewById(R.id.tvGoalUnit);
+                viewHolder.tvArcBottomText = view.findViewById(R.id.arcBottomText);
+
                 viewHolder.tvAddGoalString = view.findViewById(R.id.tvAddGoalString);
+                Typeface boldTypeface = ResourcesCompat.getFont(activity, R.font.nexa_bold);
+                viewHolder.tvAddGoalString.setTypeface(boldTypeface);
+                viewHolder.tvArcBottomText.setTypeface(boldTypeface);
+
                 view.setTag(viewHolder);
             }
             final Goal goal = goalArrayList.get(i - 1);
@@ -96,6 +108,7 @@ public class GoalAdapter extends BaseAdapter {
         TextView tvCurrentGoals;
         TextView tvGoalUnit;
         TextView tvAddGoalString;
+        TextView tvArcBottomText;
 
         public void setItem(final Goal goal) {
             goalProgress.setMax((int) goal.getGoalMax());
@@ -104,7 +117,7 @@ public class GoalAdapter extends BaseAdapter {
             goalProgress.setIconColor(Color.parseColor("#" + goal.getColorCode()));
             goalProgress.setFinishedStrokeColor(Color.parseColor("#" + goal.getColorCode()));
             goalProgress.setProgress((int) goal.getCurrentLevel());
-            goalProgress.setBottomText(goal.getTitleStr());
+            tvArcBottomText.setText(goal.getTitleStr());
             if ((goal.getCurrentLevel() == Math.floor(goal.getCurrentLevel())) && !Double.isInfinite(goal.getCurrentLevel())) {
                 tvCurrentGoals.setText((int) goal.getCurrentLevel() + "/" + (int) goal.getGoal());
             } else {
