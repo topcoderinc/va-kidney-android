@@ -15,6 +15,7 @@ import android.support.v4.widget.ImageViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.topcoder.vakidney.databinding.ActivityMainBinding;
 import com.topcoder.vakidney.fragments.ChartMenuFragment;

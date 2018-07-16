@@ -55,8 +55,7 @@
         android:gravity="center"
         android:layout_margin="5dp"
         android:layout_below="@id/toolbar"
-        android:id="@+id/headingLayout"
-        >
+        android:id="@+id/headingLayout">
 
         <TextView
             android:id="@+id/tvHeading"

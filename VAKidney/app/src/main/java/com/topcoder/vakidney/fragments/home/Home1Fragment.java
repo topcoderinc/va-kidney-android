@@ -114,7 +114,7 @@ public class Home1Fragment extends Fragment {
                         ResourcesCompat.getColor(getResources(),
                                 R.color.colorAccent,
                                 null));
-                binder.arcProgress1.setIcon(goal1.getIcon());
+                if (goal1.getIcon() > 0) binder.arcProgress1.setIcon(goal1.getIcon());
                 binder.arcProgress1.setIconColor(Color.WHITE);
                 binder.arcProgress1.setUnfinishedStrokeColor(Color.WHITE);
                 NoOfGoalsDisplayed++;
@@ -148,7 +148,7 @@ public class Home1Fragment extends Fragment {
                         ResourcesCompat.getColor(getResources(),
                                 R.color.colorAccent,
                                 null));
-                binder.arcProgress2.setIcon(goal2.getIcon());
+                if (goal2.getIcon() > 0) binder.arcProgress2.setIcon(goal2.getIcon());
                 binder.arcProgress2.setIconColor(Color.WHITE);
                 binder.arcProgress2.setUnfinishedStrokeColor(Color.WHITE);
                 NoOfGoalsDisplayed++;
@@ -175,7 +175,7 @@ public class Home1Fragment extends Fragment {
                         ResourcesCompat.getColor(getResources(),
                                 R.color.colorAccent,
                                 null));
-                binder.arcProgress3.setIcon(goal3.getIcon());
+                if (goal3.getIcon() > 0) binder.arcProgress3.setIcon(goal3.getIcon());
                 binder.arcProgress3.setIconColor(Color.WHITE);
                 binder.arcProgress3.setUnfinishedStrokeColor(Color.WHITE);
                 binder.arcProgress3.setOnClickListener(new View.OnClickListener() {
@@ -203,7 +203,7 @@ public class Home1Fragment extends Fragment {
                         ResourcesCompat.getColor(getResources(),
                                 R.color.colorAccent,
                                 null));
-                binder.arcProgress4.setIcon(goal4.getIcon());
+                if (goal4.getIcon() > 0) binder.arcProgress4.setIcon(goal4.getIcon());
                 binder.arcProgress4.setIconColor(Color.WHITE);
                 binder.arcProgress4.setUnfinishedStrokeColor(Color.WHITE);
                 if ((goal4.getCurrentLevel() == Math.floor(goal4.getCurrentLevel())) && !Double.isInfinite(goal4.getCurrentLevel())) {
@@ -252,7 +252,7 @@ public class Home1Fragment extends Fragment {
                 }
             }
             binder.arcProgress1.setFinishedStrokeColor(Color.parseColor("#" + goal1.getColorCode()));
-            binder.arcProgress1.setIcon(goal1.getIcon());
+            if (goal1.getIcon() > 0) binder.arcProgress1.setIcon(goal1.getIcon());
             binder.arcProgress1.setIconColor(Color.WHITE);
             binder.arcProgress1.setUnfinishedStrokeColor(Color.WHITE);
             binder.arcLayout1.setVisibility(View.VISIBLE);
@@ -287,7 +287,7 @@ public class Home1Fragment extends Fragment {
                 binder.arcProgress3.setMax(100);
             }
             binder.arcProgress3.setFinishedStrokeColor(Color.parseColor("#" + goal3.getColorCode()));
-            binder.arcProgress3.setIcon(goal3.getIcon());
+            if (goal3.getIcon() > 0) binder.arcProgress3.setIcon(goal3.getIcon());
             binder.arcProgress3.setIconColor(Color.WHITE);
             binder.arcProgress3.setUnfinishedStrokeColor(Color.WHITE);
         }
@@ -316,7 +316,7 @@ public class Home1Fragment extends Fragment {
             }
             binder.arcLayout2.setVisibility(View.VISIBLE);
             binder.arcProgress2.setFinishedStrokeColor(Color.parseColor("#" + goal2.getColorCode()));
-            binder.arcProgress2.setIcon(goal2.getIcon());
+            if (goal2.getIcon() > 0) binder.arcProgress2.setIcon(goal2.getIcon());
             binder.arcProgress2.setIconColor(Color.WHITE);
             binder.arcProgress2.setUnfinishedStrokeColor(Color.WHITE);
         }
