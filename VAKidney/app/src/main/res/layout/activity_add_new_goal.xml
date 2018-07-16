@@ -1,548 +1,306 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorLightGray">
-
-
-    <RelativeLayout
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:padding="@dimen/cardStandardPadding">
-
-
-        <TextView
-            android:id="@+id/actionBarTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:gravity="center"
-            android:text="Add New Meal"
-            android:textAllCaps="true"
-            android:textColor="@color/colorWhite"
-            android:textSize="18dp" />
-
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/backBtn"
-            android:layout_width="23dp"
-            android:layout_height="25dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:scaleType="fitXY"
-            android:tint="@color/colorWhite"
-            app:srcCompat="@drawable/ic_keyboard_arrow_left"
-            tools:ignore="VectorDrawableCompat" />
-
-
-    </RelativeLayout>
-
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bottomBar"
-        android:layout_below="@+id/toolbar">
+        android:layout_height="match_parent"
+        android:background="@color/colorLightGray">
 
-        <ScrollView
+        <RelativeLayout
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none">
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:padding="@dimen/cardStandardPadding">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/actionBarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="Add New Meal"
+                android:textAllCaps="true"
+                android:textColor="@color/colorWhite"
+                android:textSize="18dp" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/backBtn"
+                android:layout_width="23dp"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:tint="@color/colorWhite"
+                app:srcCompat="@drawable/ic_keyboard_arrow_left"
+                tools:ignore="VectorDrawableCompat" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottomBar"
+            android:layout_below="@+id/toolbar">
+
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorLightGray"
-                android:orientation="vertical">
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/seekButtonRecycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:divider="@null"
-                    android:orientation="horizontal"
-                    android:layout_margin="@dimen/app_standard_padding"
-                    android:background="@drawable/bg_seekbar_background"
-                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+                android:scrollbars="none">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorWhite"
-                    android:orientation="horizontal"
-                    android:weightSum="3"
-                    android:gravity="center"
-                    >
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Unit"
-                        android:layout_weight="1"
-                        android:textStyle="bold"
-                        android:layout_marginLeft="@dimen/app_standard_padding"
-                        android:textColor="@color/colorDarkGray"
-                        />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_weight="2"
-                        android:layout_alignParentRight="true"
-                        android:padding="@dimen/app_standard_padding"
-                        >
-
-                        <android.support.v7.widget.AppCompatSpinner
-                            android:id="@+id/unitSpinner"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:pointerIcon="text"
-                            android:background="@drawable/bg_round_white" />
-
-
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            app:srcCompat="@drawable/ic_keyboard_arrow_right"
-                            android:tint="@color/colorLightGray"
-                            />
-                    </RelativeLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:paddingRight="@dimen/app_standard_padding"
-                    android:paddingLeft="@dimen/app_standard_padding"
+                    android:layout_height="match_parent"
                     android:background="@color/colorLightGray"
-                    />
+                    android:orientation="vertical">
 
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorWhite"
-                    android:gravity="center"
-                    android:weightSum="3"
-                    android:orientation="horizontal"
-                    >
-                    <TextView
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/seekButtonRecycler"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Frequency"
-                        android:layout_weight="1"
-                        android:textStyle="bold"
-                        android:layout_marginLeft="@dimen/app_standard_padding"
-                        android:textColor="@color/colorDarkGray"
-                        />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_margin="@dimen/app_standard_padding"
+                        android:background="@drawable/bg_seekbar_background"
+                        android:divider="@null"
                         android:orientation="horizontal"
-                        android:layout_weight="2"
-                        android:layout_alignParentRight="true"
-                        android:padding="@dimen/app_standard_padding"
-                        >
-
-                        <android.support.v7.widget.AppCompatSpinner
-                            android:id="@+id/frequencySpinner"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:pointerIcon="text"
-                            android:background="@drawable/bg_round_white" />
-
-
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentRight="true"
-                            app:srcCompat="@drawable/ic_keyboard_arrow_right"
-                            android:tint="@color/colorLightGray"
-                            />
-                    </RelativeLayout>
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:paddingRight="@dimen/app_standard_padding"
-                    android:paddingLeft="@dimen/app_standard_padding"
-                    android:background="@color/colorLightGray"
-                    />
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorWhite"
-                    android:orientation="horizontal"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Reminder"
-                        android:textStyle="bold"
-                        android:layout_marginLeft="@dimen/app_standard_padding"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:textColor="@color/colorDarkGray"
-                        />
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
                     <LinearLayout
-
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/colorWhite"
+                        android:gravity="center"
                         android:orientation="horizontal"
-                        android:layout_alignParentRight="true"
-                        android:padding="@dimen/app_standard_padding"
-                        >
+                        android:weightSum="3">
 
-                        <Switch
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/app_standard_padding"
+                            android:layout_weight="1"
+                            android:text="Unit"
+                            android:textColor="@color/colorDarkGray"
+                            android:textStyle="bold" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_weight="2"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/app_standard_padding">
+
+                            <android.support.v7.widget.AppCompatSpinner
+                                android:id="@+id/unitSpinner"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:background="@drawable/bg_round_white"
+                                android:pointerIcon="text" />
+
+                            <android.support.v7.widget.AppCompatImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:tint="@color/colorLightGray"
+                                app:srcCompat="@drawable/ic_keyboard_arrow_right" />
+                        </RelativeLayout>
                     </LinearLayout>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="20dp"
-                    >
-
-                    <android.support.v7.widget.AppCompatImageView
-                        android:id="@+id/rewardIcon"
-                        android:layout_width="80dp"
-                        android:layout_height="100dp"
-                        app:srcCompat="@drawable/ic_reward" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorLightGray"
+                        android:paddingLeft="@dimen/app_standard_padding"
+                        android:paddingRight="@dimen/app_standard_padding" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/colorWhite"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/app_standard_padding"
+                            android:layout_weight="1"
+                            android:text="Frequency"
+                            android:textColor="@color/colorDarkGray"
+                            android:textStyle="bold" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_weight="2"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/app_standard_padding">
+
+                            <android.support.v7.widget.AppCompatSpinner
+                                android:id="@+id/frequencySpinner"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:background="@drawable/bg_round_white"
+                                android:pointerIcon="text" />
+
+                            <android.support.v7.widget.AppCompatImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:tint="@color/colorLightGray"
+                                app:srcCompat="@drawable/ic_keyboard_arrow_right" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorLightGray"
+                        android:paddingLeft="@dimen/app_standard_padding"
+                        android:paddingRight="@dimen/app_standard_padding" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/app_standard_padding"
+                            android:text="Reminder"
+                            android:textColor="@color/colorDarkGray"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/app_standard_padding">
+
+                            <Switch
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/rewardIcon"
+                            android:layout_width="80dp"
+                            android:layout_height="100dp"
+                            app:srcCompat="@drawable/ic_reward" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/app_standard_padding"
+                            android:layout_toRightOf="@+id/rewardIcon"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Points Reward"
+                                android:textColor="@color/colorLightDarkGray"
+                                android:textSize="16dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Get 50 Points for every day 1 acheived"
+                                android:textColor="@color/colorLightDarkGray"
+                                android:textSize="13dp" />
+
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/app_standard_padding"
+                        android:background="@drawable/bg_white_rounded"
                         android:orientation="vertical"
-                        android:layout_marginLeft="@dimen/app_standard_padding"
-                        android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/rewardIcon"
-                        >
-
+                        android:padding="@dimen/app_standard_padding">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Points Reward"
-                            android:textStyle="bold"
-                            android:textSize="16dp"
+                            android:text="Tips &amp; Suggestions"
                             android:textColor="@color/colorLightDarkGray"
-                            />
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Get 50 Points for every day 1 acheived"
-                            android:textSize="13dp"
+                            android:maxLines="4"
+                            android:text="@string/nutrition_detail"
                             android:textColor="@color/colorLightDarkGray"
-                            />
-
-
+                            android:textSize="13dp" />
 
                     </LinearLayout>
-                </RelativeLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_margin="@dimen/app_standard_padding"
-                    android:padding="@dimen/app_standard_padding"
-                    android:background="@drawable/bg_white_rounded"
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tips &amp; Suggestions"
-                        android:textColor="@color/colorLightDarkGray"
-                        android:textSize="14dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/nutrition_detail"
-                        android:textSize="13dp"
-                        android:maxLines="4"
-                        android:textColor="@color/colorLightDarkGray"
-                        />
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/app_standard_padding"
-                    android:layout_marginLeft="@dimen/app_standard_padding"
-                    android:layout_marginRight="@dimen/app_standard_padding"
-                    android:weightSum="2">
-
-
-                    <Button
-                        android:id="@+id/btnDeleteGoal"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:layout_marginRight="@dimen/standard_padding_half"
-                        android:background="@drawable/bg_delete_goal"
-                        android:elevation="5dp"
-                        android:text="Delete Goal"
-                        android:textColor="@android:color/holo_red_dark"
-                        android:textSize="13dp" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/app_standard_padding"
+                        android:layout_marginLeft="@dimen/app_standard_padding"
+                        android:layout_marginRight="@dimen/app_standard_padding"
+                        android:weightSum="2">
 
-                    <Button
-                        android:id="@+id/btnAddNewGoal"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="@dimen/standard_padding_half"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_login_btn"
-                        android:elevation="5dp"
-                        android:text="Save My Goal"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="13dp" />
+                        <Button
+                            android:id="@+id/btnDeleteGoal"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginRight="@dimen/standard_padding_half"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_delete_goal"
+                            android:elevation="5dp"
+                            android:text="Delete Goal"
+                            android:textColor="@android:color/holo_red_dark"
+                            android:textSize="13dp" />
 
+                        <Button
+                            android:id="@+id/btnAddNewGoal"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="@dimen/standard_padding_half"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_login_btn"
+                            android:elevation="5dp"
+                            android:text="Save My Goal"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="13dp" />
+                    </LinearLayout>
                 </LinearLayout>
+            </ScrollView>
 
-            </LinearLayout>
+        </RelativeLayout>
 
-        </ScrollView>
-
+        <com.topcoder.vakidney.customview.BottomMenu
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
-
-
-    <LinearLayout
-        android:id="@+id/bottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
-        android:weightSum="5.3"
-        >
-
-        <LinearLayout
-            android:id="@+id/barLin1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center"
-            >
-
-            <LinearLayout
-                android:id="@+id/bar1"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:orientation="horizontal"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@color/colorPrimary"
-                />
-
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/barImg1"
-                android:layout_width="35dp"
-                android:layout_height="20dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:tint="@color/colorAccent"
-                app:srcCompat="@drawable/ic_bar_home" />
-
-            <TextView
-                android:id="@+id/tvBar1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:gravity="center"
-                android:text="Home"
-                android:textColor="@color/colorAccent"
-                android:textSize="10sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/barLin2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center"
-            >
-
-            <LinearLayout
-                android:id="@+id/bar2"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:orientation="horizontal"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@color/colorPrimary"
-                />
-
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/barImg2"
-                android:layout_width="35dp"
-                android:layout_height="20dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:tint="@color/colorAccent"
-                app:srcCompat="@drawable/ic_bar_chart" />
-
-            <TextView
-                android:id="@+id/tvBar2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:gravity="center"
-                android:text="Chart"
-                android:textColor="@color/colorAccent"
-                android:textSize="10sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/barLin3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1.3"
-            android:gravity="center"
-            >
-
-            <LinearLayout
-                android:id="@+id/bar3"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:orientation="horizontal"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@color/colorPrimary"
-                />
-
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/barImg3"
-                android:layout_width="35dp"
-                android:layout_height="20dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:tint="@color/colorAccent"
-                app:srcCompat="@drawable/tab3" />
-
-            <TextView
-                android:id="@+id/tvBar3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:gravity="center"
-                android:text="Recommendations"
-                android:textColor="@color/colorAccent"
-                android:textSize="10sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/barLin4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center"
-            >
-
-            <LinearLayout
-                android:id="@+id/bar4"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:orientation="horizontal"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@color/colorPrimary"
-                />
-
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/barImg4"
-                android:layout_width="35dp"
-                android:layout_height="20dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:tint="@color/colorAccent"
-                app:srcCompat="@drawable/ic_bar_food" />
-
-            <TextView
-                android:id="@+id/tvBar4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:gravity="center"
-                android:text="Food/Drug"
-
-                android:textColor="@color/colorAccent"
-                android:textSize="10sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/barLin5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center"
-            >
-
-            <LinearLayout
-                android:id="@+id/bar5"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:orientation="horizontal"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@color/colorPrimary"
-
-                />
-
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/barImg5"
-                android:layout_width="35dp"
-                android:layout_height="20dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:tint="@color/colorAccent"
-                app:srcCompat="@drawable/ic_bar_workout" />
-
-            <TextView
-                android:id="@+id/tvBar5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:gravity="center"
-                android:text="Activity"
-                android:textColor="@color/colorAccent"
-                android:textSize="10sp" />
-        </LinearLayout>
-
-
-    </LinearLayout>
-</RelativeLayout>
 </layout>

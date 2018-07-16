@@ -17,14 +17,15 @@
         android:layout_centerHorizontal="true"
         >
 
-
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/image1"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_margin="15dp"
+            android:layout_height="140dp"
+            android:layout_marginBottom="30dp"
+            android:tint="@color/colorWhite"
             android:padding="3dp"
-            app:srcCompat="@drawable/ic_va_health_logo" />
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/logo_primary" />
 
         <RelativeLayout
             android:id="@+id/emailLayout"
@@ -38,7 +39,7 @@
                 android:id="@+id/emailicon"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:tint="#003f72"
+                android:tint="@color/brandBlue"
                 app:srcCompat="@drawable/ic_email" />
 
             <EditText
@@ -82,7 +83,7 @@
                 android:id="@+id/passwordIcon"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:tint="#003f72"
+                android:tint="@color/brandBlue"
                 app:srcCompat="@drawable/ic_password" />
 
             <EditText
@@ -120,7 +121,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
             android:layout_marginTop="15dp"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:gravity="center"
             android:text="Forgot Password?"
             />
@@ -134,7 +135,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/bg_login_btn"
             android:elevation="5dp"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
             android:text="Login"
@@ -150,7 +151,7 @@
             android:background="@drawable/bg_signup_btn"
             android:elevation="5dp"
             android:textAllCaps="false"
-            android:textSize="13dp"
+            android:textSize="14sp"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
             android:text="New User ? Sign Up Now"

@@ -3,28 +3,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="5dp"
     android:background="@drawable/bg_white_rounded"
     android:gravity="center"
-    android:padding="5dp"
-    android:layout_margin="5dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="5dp">
 
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_margin="42dp"
+        android:tint="@color/colorAccent"
+        app:srcCompat="@drawable/ic_goal" />
 
-
-        <android.support.v7.widget.AppCompatImageView
-            android:layout_width="100dp"
-            android:layout_height="120dp"
-            android:layout_margin="10dp"
-            app:srcCompat="@drawable/ic_goal" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/colorLightGray" />
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="match_parent"
+            android:tint="@color/colorAccent"
+            android:src="@drawable/bg_triangle"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:layout_marginLeft="-4dp"
+            android:layout_marginRight="-4dp"/>
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="match_parent"
+            android:rotation="180"
+            android:tint="@color/colorAccent"
+            android:src="@drawable/bg_triangle"/>
+    </LinearLayout>
 
     <TextView
+        android:id="@+id/tvAddGoalString"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/app_standard_padding"

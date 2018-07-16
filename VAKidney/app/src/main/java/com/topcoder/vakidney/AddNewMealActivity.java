@@ -7,12 +7,14 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
@@ -90,7 +92,6 @@ public class AddNewMealActivity extends AppCompatActivity implements
             }
         });
         SetupSeekBar();
-        SetupBotomMenu();
 
         binder.btnAddNewMeal.setEnabled(false);
 
@@ -246,6 +247,11 @@ public class AddNewMealActivity extends AppCompatActivity implements
             mMeal.setMealId(System.currentTimeMillis());
             mMeal.setType(Meal.MEAL_TYPE_BREAKFAST);
         }
+
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.nexa_bold);
+        binder.actionBarTitle.setTypeface(typeface);
+        binder.tvChangeDate.setTypeface(typeface);
+        binder.tvChangeTime.setTypeface(typeface);
     }
 
     private void initSavedMeal(Meal meal) {
@@ -313,58 +319,6 @@ public class AddNewMealActivity extends AppCompatActivity implements
         }
         intent.putExtra("tag", MainActivity.TAG_FOOD);
         startActivity(intent);
-    }
-
-
-    /**
-     * Initialize view and sets up listener for bottom menu
-     */
-    private void SetupBotomMenu() {
-        binder.barLin1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AddNewMealActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_HOME);
-                startActivity(intent);
-                finish();
-            }
-        });
-        binder.barLin2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AddNewMealActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_CHART);
-                startActivity(intent);
-                finish();
-            }
-        });
-        binder.barLin3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AddNewMealActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_MEDICATION);
-                startActivity(intent);
-                finish();
-            }
-        });
-        binder.barLin4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AddNewMealActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_FOOD);
-                startActivity(intent);
-                finish();
-            }
-        });
-        binder.barLin5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AddNewMealActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_WORKOUT);
-                startActivity(intent);
-                finish();
-            }
-        });
     }
 
     /**

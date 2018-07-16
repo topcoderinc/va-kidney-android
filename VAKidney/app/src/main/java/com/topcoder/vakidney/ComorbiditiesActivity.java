@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -65,6 +67,9 @@ public class ComorbiditiesActivity extends AppCompatActivity implements View.OnC
         if (mChartData != null && mChartData.size() > 0) {
             populateScatterData(mBinding.chart, mChartData);
         }
+
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.nexa_bold);
+        mBinding.actionBarTitle.setTypeface(typeface);
     }
 
     public static Intent getIntent(Context context, long chartType) {

@@ -2,7 +2,9 @@ package com.topcoder.vakidney;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatSpinner;
@@ -102,7 +104,6 @@ public class AddNewGoalActivity extends AppCompatActivity
             }
         });
 
-        SetupBotomMenu();
 
         if (getIntent().hasExtra("goal")) {
             Goal goalFromIntent = (Goal) getIntent().getSerializableExtra("goal");
@@ -180,6 +181,10 @@ public class AddNewGoalActivity extends AppCompatActivity
                         }, null);
             }
         });
+
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.nexa_bold);
+        binder.actionBarTitle.setTypeface(typeface);
+
         populateSpinner();
     }
 
@@ -235,59 +240,6 @@ public class AddNewGoalActivity extends AppCompatActivity
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-        });
-    }
-
-    /**
-     * Initialize view and sets up listener for bottom menu
-     */
-    private void SetupBotomMenu() {
-
-
-        binder.barLin1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AddNewGoalActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_HOME);
-                startActivity(intent);
-                finish();
-            }
-        });
-        binder.barLin1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AddNewGoalActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_CHART);
-                startActivity(intent);
-                finish();
-            }
-        });
-        binder.barLin1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AddNewGoalActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_MEDICATION);
-                startActivity(intent);
-                finish();
-            }
-        });
-        binder.barLin1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AddNewGoalActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_FOOD);
-                startActivity(intent);
-                finish();
-            }
-        });
-        binder.barLin1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AddNewGoalActivity.this, MainActivity.class);
-                intent.putExtra("tag", MainActivity.TAG_WORKOUT);
-                startActivity(intent);
-                finish();
             }
         });
     }

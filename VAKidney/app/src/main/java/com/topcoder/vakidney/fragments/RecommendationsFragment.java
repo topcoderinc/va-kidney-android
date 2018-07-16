@@ -3,7 +3,6 @@ package com.topcoder.vakidney.fragments;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -11,8 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.topcoder.vakidney.adapter.ViewPagerAdapter;
-import com.topcoder.vakidney.databinding.FragmentBloodSugarBinding;
-import com.topcoder.vakidney.databinding.FragmentMedicationBinding;
+import com.topcoder.vakidney.databinding.FragmentRecommendationsBinding;
 import com.topcoder.vakidney.fragments.recommendations.DrugFragment;
 import com.topcoder.vakidney.fragments.recommendations.NutritionFragment;
 import com.topcoder.vakidney.R;
@@ -24,7 +22,7 @@ import com.topcoder.vakidney.R;
 public class RecommendationsFragment extends Fragment {
 
 
-    FragmentMedicationBinding binder;
+    FragmentRecommendationsBinding binder;
 
     public RecommendationsFragment() {
         // Required empty public constructor
@@ -34,7 +32,7 @@ public class RecommendationsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binder = DataBindingUtil.inflate(inflater, R.layout.fragment_medication, container, false);
+        binder = DataBindingUtil.inflate(inflater, R.layout.fragment_recommendations, container, false);
         final View view = binder.getRoot();
 
         setupViewPager(binder.viewpager);

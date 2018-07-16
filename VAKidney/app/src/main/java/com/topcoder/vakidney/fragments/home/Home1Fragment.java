@@ -4,8 +4,10 @@ package com.topcoder.vakidney.fragments.home;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.res.ResourcesCompat;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +44,13 @@ public class Home1Fragment extends Fragment {
                              Bundle savedInstanceState) {
         binder = DataBindingUtil.inflate(inflater, R.layout.fragment_home1, container, false);
         final View view = binder.getRoot();
+
+        if (getActivity() != null) {
+            Typeface boldTypeface = ResourcesCompat.getFont(getActivity(), R.font.nexa_bold);
+            binder.tvPoints.setTypeface(boldTypeface);
+        }
+
+
         return view;
     }
 
@@ -59,8 +68,8 @@ public class Home1Fragment extends Fragment {
         NoOfGoalsDisplayed=0;
         NoOfGoalsDisplayed+=getComorbiditiesGoals();
         goalArrayList = Goal.getWithoutComorbidities(currentUser.getDiseaseCategory(), currentUser.isDialysis());
-        binder.tvWelcomeName.setText(getString(R.string.welcome_string) + currentUser.getFullname().split(" ")[0] + ",");
-        binder.btnPoints.setText(currentUser.getPoints() + " Points");
+        binder.tvName.setText(currentUser.getFullname());
+        binder.tvPoints.setText(currentUser.getPoints() + " Points");
         fillComorbiditiesGoals();
         fillRemainingGoals();
     }
@@ -84,7 +93,7 @@ public class Home1Fragment extends Fragment {
             final Goal goal1 = goalArrayList.size() > mGoalIndex ? goalArrayList.get(mGoalIndex) : null;
             if (goal1 != null) {
                 binder.arcLayout1.setVisibility(View.VISIBLE);
-                binder.arcProgress1.setBottomText(goal1.getTitleStr());
+                binder.arcProgressText1.setText(goal1.getTitleStr());
                 binder.tvUnit1.setText(goal1.getUnitStr());
                 if ((goal1.getCurrentLevel() == Math.floor(goal1.getCurrentLevel())) && !Double.isInfinite(goal1.getCurrentLevel())) {
                     binder.tvStat1.setText((int) goal1.getCurrentLevel() + "/" + (int) goal1.getGoal());
@@ -101,8 +110,11 @@ public class Home1Fragment extends Fragment {
                         getContext().startActivity(intent);
                     }
                 });
-                binder.arcProgress1.setFinishedStrokeColor(Color.parseColor("#" + goal1.getColorCode()));
-                binder.arcProgress1.setIcon(goal1.getIcon());
+                binder.arcProgress1.setFinishedStrokeColor(
+                        ResourcesCompat.getColor(getResources(),
+                                R.color.colorAccent,
+                                null));
+                if (goal1.getIcon() > 0) binder.arcProgress1.setIcon(goal1.getIcon());
                 binder.arcProgress1.setIconColor(Color.WHITE);
                 binder.arcProgress1.setUnfinishedStrokeColor(Color.WHITE);
                 NoOfGoalsDisplayed++;
@@ -115,7 +127,7 @@ public class Home1Fragment extends Fragment {
             final Goal goal2 = goalArrayList.size() > mGoalIndex ? goalArrayList.get(mGoalIndex) : null;
             if (goal2 != null) {
                 binder.arcLayout2.setVisibility(View.VISIBLE);
-                binder.arcProgress2.setBottomText(goal2.getTitleStr());
+                binder.arcProgressText2.setText(goal2.getTitleStr());
                 binder.tvUnit2.setText(goal2.getUnitStr());
                 if ((goal2.getCurrentLevel() == Math.floor(goal2.getCurrentLevel())) && !Double.isInfinite(goal2.getCurrentLevel())) {
                     binder.tvStat2.setText((int) goal2.getCurrentLevel() + "/" + (int) goal2.getGoal());
@@ -132,8 +144,11 @@ public class Home1Fragment extends Fragment {
                 });
                 binder.arcProgress2.setProgress((int) goal2.getCurrentLevel());
                 binder.arcProgress2.setMax((int) goal2.getGoalMax());
-                binder.arcProgress2.setFinishedStrokeColor(Color.parseColor("#" + goal2.getColorCode()));
-                binder.arcProgress2.setIcon(goal2.getIcon());
+                binder.arcProgress2.setFinishedStrokeColor(
+                        ResourcesCompat.getColor(getResources(),
+                                R.color.colorAccent,
+                                null));
+                if (goal2.getIcon() > 0) binder.arcProgress2.setIcon(goal2.getIcon());
                 binder.arcProgress2.setIconColor(Color.WHITE);
                 binder.arcProgress2.setUnfinishedStrokeColor(Color.WHITE);
                 NoOfGoalsDisplayed++;
@@ -147,7 +162,7 @@ public class Home1Fragment extends Fragment {
             final Goal goal3 = goalArrayList.size() > mGoalIndex ? goalArrayList.get(mGoalIndex) : null;
             if (goal3 != null) {
                 binder.arcLayout3.setVisibility(View.VISIBLE);
-                binder.arcProgress3.setBottomText(goal3.getTitleStr());
+                binder.arcProgressText3.setText(goal3.getTitleStr());
                 binder.tvUnit3.setText(goal3.getUnitStr());
                 if ((goal3.getCurrentLevel() == Math.floor(goal3.getCurrentLevel())) && !Double.isInfinite(goal3.getCurrentLevel())) {
                     binder.tvStat3.setText((int) goal3.getCurrentLevel() + "/" + (int) goal3.getGoal());
@@ -156,8 +171,11 @@ public class Home1Fragment extends Fragment {
                 }
                 binder.arcProgress3.setProgress((int) goal3.getCurrentLevel());
                 binder.arcProgress3.setMax((int) goal3.getGoalMax());
-                binder.arcProgress3.setFinishedStrokeColor(Color.parseColor("#" + goal3.getColorCode()));
-                binder.arcProgress3.setIcon(goal3.getIcon());
+                binder.arcProgress3.setFinishedStrokeColor(
+                        ResourcesCompat.getColor(getResources(),
+                                R.color.colorAccent,
+                                null));
+                if (goal3.getIcon() > 0) binder.arcProgress3.setIcon(goal3.getIcon());
                 binder.arcProgress3.setIconColor(Color.WHITE);
                 binder.arcProgress3.setUnfinishedStrokeColor(Color.WHITE);
                 binder.arcProgress3.setOnClickListener(new View.OnClickListener() {
@@ -179,10 +197,13 @@ public class Home1Fragment extends Fragment {
                 binder.arcLayout4.setVisibility(View.VISIBLE);
                 binder.arcProgress4.setProgress((int) goal4.getCurrentLevel());
                 binder.arcProgress4.setMax((int) goal4.getGoalMax());
-                binder.arcProgress4.setBottomText(goal4.getTitleStr());
+                binder.arcProgressText4.setText(goal4.getTitleStr());
 
-                binder.arcProgress4.setFinishedStrokeColor(Color.parseColor("#" + goal4.getColorCode()));
-                binder.arcProgress4.setIcon(goal4.getIcon());
+                binder.arcProgress4.setFinishedStrokeColor(
+                        ResourcesCompat.getColor(getResources(),
+                                R.color.colorAccent,
+                                null));
+                if (goal4.getIcon() > 0) binder.arcProgress4.setIcon(goal4.getIcon());
                 binder.arcProgress4.setIconColor(Color.WHITE);
                 binder.arcProgress4.setUnfinishedStrokeColor(Color.WHITE);
                 if ((goal4.getCurrentLevel() == Math.floor(goal4.getCurrentLevel())) && !Double.isInfinite(goal4.getCurrentLevel())) {
@@ -211,7 +232,7 @@ public class Home1Fragment extends Fragment {
             binder.tvUnit1.setText("");
             binder.tvStat1.setText("");
             goal1 = Goal.getByTitleStr("Blood Pressure").get(0);
-            binder.arcProgress1.setBottomText(goal1.getTitleStr());
+            binder.arcProgressText1.setText(goal1.getTitleStr());
             binder.arcProgress1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -231,7 +252,7 @@ public class Home1Fragment extends Fragment {
                 }
             }
             binder.arcProgress1.setFinishedStrokeColor(Color.parseColor("#" + goal1.getColorCode()));
-            binder.arcProgress1.setIcon(goal1.getIcon());
+            if (goal1.getIcon() > 0) binder.arcProgress1.setIcon(goal1.getIcon());
             binder.arcProgress1.setIconColor(Color.WHITE);
             binder.arcProgress1.setUnfinishedStrokeColor(Color.WHITE);
             binder.arcLayout1.setVisibility(View.VISIBLE);
@@ -240,7 +261,7 @@ public class Home1Fragment extends Fragment {
         if (currentUser.isComorbiditiesCongestiveheartfailure()) {
             goal3 = Goal.getByTitleStr("Body Weight").get(0);
             binder.arcLayout3.setVisibility(View.VISIBLE);
-            binder.arcProgress3.setBottomText(goal3.getTitleStr());
+            binder.arcProgressText3.setText(goal3.getTitleStr());
             binder.tvUnit3.setText("");
             binder.tvStat3.setText("");
             binder.arcProgress3.setOnClickListener(new View.OnClickListener() {
@@ -266,7 +287,7 @@ public class Home1Fragment extends Fragment {
                 binder.arcProgress3.setMax(100);
             }
             binder.arcProgress3.setFinishedStrokeColor(Color.parseColor("#" + goal3.getColorCode()));
-            binder.arcProgress3.setIcon(goal3.getIcon());
+            if (goal3.getIcon() > 0) binder.arcProgress3.setIcon(goal3.getIcon());
             binder.arcProgress3.setIconColor(Color.WHITE);
             binder.arcProgress3.setUnfinishedStrokeColor(Color.WHITE);
         }
@@ -275,7 +296,7 @@ public class Home1Fragment extends Fragment {
             binder.tvUnit2.setText("");
             binder.tvStat2.setText("");
             goal2 = Goal.getByTitleStr("Blood Glucose").get(0);
-            binder.arcProgress2.setBottomText(goal2.getTitleStr());
+            binder.arcProgressText2.setText(goal2.getTitleStr());
             binder.arcProgress2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -295,7 +316,7 @@ public class Home1Fragment extends Fragment {
             }
             binder.arcLayout2.setVisibility(View.VISIBLE);
             binder.arcProgress2.setFinishedStrokeColor(Color.parseColor("#" + goal2.getColorCode()));
-            binder.arcProgress2.setIcon(goal2.getIcon());
+            if (goal2.getIcon() > 0) binder.arcProgress2.setIcon(goal2.getIcon());
             binder.arcProgress2.setIconColor(Color.WHITE);
             binder.arcProgress2.setUnfinishedStrokeColor(Color.WHITE);
         }

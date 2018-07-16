@@ -3,6 +3,8 @@ package com.topcoder.vakidney.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
@@ -13,7 +15,6 @@ import android.widget.TextView;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.ResourcesDetailActivity;
 import com.topcoder.vakidney.model.DrugInteraction;
-import com.topcoder.vakidney.model.FoodRecommendation;
 import com.topcoder.vakidney.util.TextUtil;
 
 import org.json.JSONArray;
@@ -48,7 +49,7 @@ public class MedicationAdapter extends Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_medicationresource_titledesc, parent, false);
+                .inflate(R.layout.item_recommendations, parent, false);
         return new ViewHolder(v);
     }
 
@@ -60,6 +61,9 @@ public class MedicationAdapter extends Adapter {
         viewHolder.itemView.setTag(drugInteraction);
 
         viewHolder.textTitle.setText(TextUtil.capitalizeFirstLetter(drugInteraction.getName()));
+        Typeface typeface = ResourcesCompat.getFont(mContext, R.font.nexa_bold);
+        viewHolder.textTitle.setTypeface(typeface);
+
         viewHolder.textDesc.setText(
                 "Report: #" + drugInteraction.getReportId() +
                         "\n" +

@@ -5,7 +5,9 @@ import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -43,6 +45,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 binder.mViewPager.setCurrentItem(binder.mViewPager.getCurrentItem() + 1);
             }
         });
+
         setIndicator(1);
         binder.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override

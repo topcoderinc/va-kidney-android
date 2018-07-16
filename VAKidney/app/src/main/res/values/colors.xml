@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#003f72</color>
-    <color name="colorPrimaryDark">#003f72</color>
-    <color name="colorAccent">#0083be</color>
+    <color name="colorPrimary">@color/brandBlue</color>
+    <color name="colorPrimaryDark">#006b99</color>
+    <color name="colorAccent">@color/brandGreen</color>
+
+    <color name="brandBlue">#0098da</color>
+    <color name="brandBlueLight">#99e0ff</color>
+    <color name="brandGreen">#69c622</color>
+
+
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorPitchBlack">#000000</color>
     <color name="welcomeCircleIndicatorNormal">#8996a0</color>

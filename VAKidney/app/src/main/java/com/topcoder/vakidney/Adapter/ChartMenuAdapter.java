@@ -3,6 +3,8 @@ package com.topcoder.vakidney.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.util.Log;
@@ -59,6 +61,11 @@ public class ChartMenuAdapter extends Adapter implements View.OnClickListener {
                         mChartTypes.get(position - mGoals.size()) :
                         mGoals.get(position).getGoalId();
 
+        Typeface boldTypeface = ResourcesCompat.getFont(mContext, R.font.nexa_bold);
+        Typeface lightTypeface = ResourcesCompat.getFont(mContext, R.font.nexa_light);
+        viewHolder.textHeader.setTypeface(boldTypeface);
+
+
         if (position == 0) {
             viewHolder.viewHeader.setVisibility(View.VISIBLE);
             viewHolder.textHeader.setText("Major");
@@ -75,9 +82,11 @@ public class ChartMenuAdapter extends Adapter implements View.OnClickListener {
         viewHolder.textLabel.setText(ChartType.getChartLabel(chartType));
 
         if (ChartType.isChartFilled(mContext, chartType)) {
-            viewHolder.textLabel.setTypeface(null, Typeface.BOLD);
+            viewHolder.textLabel.setTypeface(boldTypeface);
+            viewHolder.textLabel.setTextColor(ContextCompat.getColor(mContext, R.color.colorAccent));
         } else {
-            viewHolder.textLabel.setTypeface(null, Typeface.NORMAL);
+            viewHolder.textLabel.setTypeface(lightTypeface);
+            viewHolder.textLabel.setTextColor(ContextCompat.getColor(mContext, R.color.text_black));
         }
     }
 

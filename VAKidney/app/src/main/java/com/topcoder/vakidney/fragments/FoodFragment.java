@@ -202,11 +202,11 @@ public class FoodFragment extends Fragment {
                 noCheckedItems=false;
                 StringBuilder stringBuilder = new StringBuilder();
                 StringBuilder stringBuilderquery = new StringBuilder();
-                checkedItems[Meal.MEAL_BREAKFAST]=binding.mealBreakfast.isChecked();
-                checkedItems[Meal.MEAL_LUNCH]=binding.mealLunch.isChecked();
-                checkedItems[Meal.MEAL_DINNER]=binding.mealDinner.isChecked();
-                checkedItems[Meal.MEAL_SNACK]=binding.mealSnack.isChecked();
-                checkedItems[Meal.MEAL_CASUAL]=binding.mealCasual.isChecked();
+                checkedItems[Meal.MEAL_BREAKFAST] = binding.mealBreakfast.isChecked();
+                checkedItems[Meal.MEAL_LUNCH] = binding.mealLunch.isChecked();
+                checkedItems[Meal.MEAL_DINNER] = binding.mealDinner.isChecked();
+                checkedItems[Meal.MEAL_SNACK] = binding.mealSnack.isChecked();
+                checkedItems[Meal.MEAL_CASUAL] = binding.mealCasual.isChecked();
                 for (int i = 0; i < typeLabels.length; i++) {
                     if (checkedItems[i]) {
                         if (stringBuilder.length() > 0) {

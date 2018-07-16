@@ -2,6 +2,8 @@ package com.topcoder.vakidney.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
@@ -13,9 +15,6 @@ import com.topcoder.vakidney.model.FoodRecommendation;
 import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.ResourcesDetailActivity;
 import com.topcoder.vakidney.util.TextUtil;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class FoodRecommendationAdapter extends Adapter implements View.OnClickLi
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_medicationresource_titledesc, parent, false);
+                .inflate(R.layout.item_recommendations, parent, false);
         return new ViewHolder(v);
     }
 
@@ -51,6 +50,9 @@ public class FoodRecommendationAdapter extends Adapter implements View.OnClickLi
         viewHolder.itemView.setTag(foodRecommendation);
 
         viewHolder.textTitle.setText(TextUtil.capitalizeFirstLetter(foodRecommendation.getName()));
+        Typeface typeface = ResourcesCompat.getFont(mContext, R.font.nexa_bold);
+        viewHolder.textTitle.setTypeface(typeface);
+
         viewHolder.textDesc.setText(foodRecommendation.getDesc());
     }
 

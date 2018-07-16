@@ -1,616 +1,450 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorLightGray">
-
-
-    <RelativeLayout
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:padding="@dimen/cardStandardPadding">
-
-
-        <TextView
-            android:id="@+id/actionBarTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:gravity="center"
-            android:text="Add New Meal"
-            android:textAllCaps="true"
-            android:textColor="@color/colorWhite"
-            android:textSize="18dp" />
-
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/backBtn"
-            android:layout_width="23dp"
-            android:layout_height="25dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:scaleType="fitXY"
-            android:tint="@color/colorWhite"
-            app:srcCompat="@drawable/ic_keyboard_arrow_left"
-            tools:ignore="VectorDrawableCompat" />
-
-
-    </RelativeLayout>
-
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bottomBar"
-        android:layout_below="@+id/toolbar">
+        android:layout_height="match_parent"
+        android:background="@color/colorLightGray">
 
-        <ScrollView
+        <RelativeLayout
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none">
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:padding="@dimen/cardStandardPadding">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/actionBarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="Add New Meal"
+                android:textAllCaps="true"
+                android:textColor="@color/colorWhite"
+                android:textSize="18dp" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/backBtn"
+                android:layout_width="23dp"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:tint="@color/colorWhite"
+                app:srcCompat="@drawable/ic_keyboard_arrow_left"
+                tools:ignore="VectorDrawableCompat" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottomBar"
+            android:layout_below="@+id/toolbar">
+
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorLightGray"
-                android:orientation="vertical"
-                android:padding="@dimen/app_standard_padding"
-                tools:context="com.topcoder.vakidney.AddNewMealActivity">
+                android:scrollbars="none">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="@drawable/bg_seekbar_background"
-                    android:orientation="horizontal"
-                    android:weightSum="5">
-
-                    <Button
-                        android:id="@+id/seekBtn1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_seekbar_selected"
-                        android:text="Breakfast"
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="12dp" />
-
-                    <Button
-                        android:id="@+id/seekBtn2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:text="Lunch"
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorLightDarkGray"
-                        android:textSize="12dp" />
-
-                    <Button
-                        android:id="@+id/seekBtn3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:text="Dinner"
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorLightDarkGray"
-                        android:textSize="12dp" />
-
-                    <Button
-                        android:id="@+id/seekBtn4"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:text="Snack"
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorLightDarkGray"
-                        android:textSize="12dp" />
-
-                    <Button
-                        android:id="@+id/seekBtn5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:text="Casual"
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorLightDarkGray"
-                        android:textSize="12dp" />
-
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:layout_height="match_parent"
+                    android:background="@color/colorLightGray"
+                    android:orientation="vertical"
+                    android:padding="@dimen/app_standard_padding"
+                    tools:context="com.topcoder.vakidney.AddNewMealActivity">
 
                     <LinearLayout
-                        android:id="@+id/dateLayout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginTop="@dimen/app_standard_padding"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_white_rounded"
+                        android:layout_height="30dp"
+                        android:background="@drawable/bg_seekbar_background"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
 
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="20dp"
-                            android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <android.support.v7.widget.AppCompatImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:padding="10dp"
-                                android:tint="@color/colorAccent"
-                                app:srcCompat="@drawable/ic_date" />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/app_standard_padding"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Today"
-                                    android:textColor="@color/colorDarkGray"
-                                    android:textSize="17dp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:id="@+id/tveMealDate"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="12/22/2017"
-                                    android:textColor="@color/colorDarkGray"
-                                    android:textSize="13dp" />
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginBottom="@dimen/app_standard_padding"
-                            android:background="@color/colorLightGray" />
-
-                        <TextView
-                            android:id="@+id/tvChangeDate"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/app_standard_padding"
-                            android:layout_marginTop="3dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="Change Date"
-                            android:textColor="@color/colorAccent"
-                            android:textSize="13dp"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:id="@+id/timeLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="@dimen/app_standard_padding"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_white_rounded"
-
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="20dp"
-                            android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <android.support.v7.widget.AppCompatImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:padding="10dp"
-                                android:tint="@color/colorAccent"
-                                app:srcCompat="@drawable/ic_clock" />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/app_standard_padding"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Time"
-                                    android:textColor="@color/colorDarkGray"
-                                    android:textSize="17dp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:id="@+id/tvMealTime"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="07:00 Am"
-                                    android:textColor="@color/colorDarkGray"
-                                    android:textSize="13dp" />
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginBottom="@dimen/app_standard_padding"
-                            android:background="@color/colorLightGray" />
-
-                        <TextView
-                            android:id="@+id/tvChangeTime"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/app_standard_padding"
-                            android:layout_marginTop="3dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="Change Time"
-                            android:textColor="@color/colorAccent"
-                            android:textSize="13dp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/llMealDrug"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/app_standard_padding"
-                    android:orientation="vertical" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/app_standard_padding"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tvAddMeal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:padding="@dimen/app_standard_padding"
-                        android:text="Add Meal"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/tvAddDrug"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:padding="@dimen/app_standard_padding"
-                        android:text="Add Drug"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:layout_marginTop="@dimen/app_standard_padding"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <LinearLayout
-                        android:id="@+id/addPhotoBtn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_round_white"
-                        android:gravity="center">
-
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_margin="@dimen/app_standard_padding"
-                            app:srcCompat="@drawable/ic_addphotos" />
-
-                    </LinearLayout>
-
-
-                    <RelativeLayout
-                        android:id="@+id/addImageLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:visibility="invisible">
-
-                        <android.support.v7.widget.AppCompatImageView
-                            android:id="@+id/addedImage"
+                        <Button
+                            android:id="@+id/seekBtn1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/profile_bg"
-                            />
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_seekbar_selected"
+                            android:text="Breakfast"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="12dp" />
 
-                        <android.support.v7.widget.AppCompatImageView
-                            android:id="@+id/removeImageBtn"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_margin="@dimen/app_standard_padding"
-                            app:srcCompat="@drawable/ic_cross_in_circle" />
+                        <Button
+                            android:id="@+id/seekBtn2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:text="Lunch"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorLightDarkGray"
+                            android:textSize="12dp" />
+
+                        <Button
+                            android:id="@+id/seekBtn3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:text="Dinner"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorLightDarkGray"
+                            android:textSize="12dp" />
+
+                        <Button
+                            android:id="@+id/seekBtn4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:text="Snack"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorLightDarkGray"
+                            android:textSize="12dp" />
+
+                        <Button
+                            android:id="@+id/seekBtn5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:text="Casual"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorLightDarkGray"
+                            android:textSize="12dp" />
 
 
-                    </RelativeLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:id="@+id/dateLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="@dimen/app_standard_padding"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_white_rounded"
+
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="20dp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <android.support.v7.widget.AppCompatImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:padding="10dp"
+                                    android:tint="@color/colorDarkGray"
+                                    app:srcCompat="@drawable/ic_date" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/app_standard_padding"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Today"
+                                        android:textColor="@color/colorDarkGray"
+                                        android:textSize="17dp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tveMealDate"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="12/22/2017"
+                                        android:textColor="@color/colorDarkGray"
+                                        android:textSize="13dp" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_marginBottom="@dimen/app_standard_padding"
+                                android:orientation="horizontal"
+                                android:paddingEnd="@dimen/standard_padding_half"
+                                android:paddingStart="@dimen/standard_padding_half">
+
+                                <ImageView
+                                    android:layout_width="8dp"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/bg_triangle"
+                                    android:tint="@color/colorAccent" />
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="-4dp"
+                                    android:layout_marginRight="-4dp"
+                                    android:layout_weight="1"
+                                    android:background="@color/colorAccent" />
+
+                                <ImageView
+                                    android:layout_width="8dp"
+                                    android:layout_height="match_parent"
+                                    android:rotation="180"
+                                    android:src="@drawable/bg_triangle"
+                                    android:tint="@color/colorAccent" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvChangeDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/app_standard_padding"
+                                android:layout_marginTop="3dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Change Date"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="13dp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/timeLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="@dimen/app_standard_padding"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_white_rounded"
+
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="20dp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <android.support.v7.widget.AppCompatImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:padding="10dp"
+                                    android:tint="@color/colorDarkGray"
+                                    app:srcCompat="@drawable/ic_clock" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/app_standard_padding"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Time"
+                                        android:textColor="@color/colorDarkGray"
+                                        android:textSize="17dp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvMealTime"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="07:00 Am"
+                                        android:textColor="@color/colorDarkGray"
+                                        android:textSize="13dp" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_marginBottom="@dimen/app_standard_padding"
+                                android:orientation="horizontal"
+                                android:paddingEnd="@dimen/standard_padding_half"
+                                android:paddingStart="@dimen/standard_padding_half">
+
+                                <ImageView
+                                    android:layout_width="8dp"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/bg_triangle"
+                                    android:tint="@color/colorAccent" />
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="-4dp"
+                                    android:layout_marginRight="-4dp"
+                                    android:layout_weight="1"
+                                    android:background="@color/colorAccent" />
+
+                                <ImageView
+                                    android:layout_width="8dp"
+                                    android:layout_height="match_parent"
+                                    android:rotation="180"
+                                    android:src="@drawable/bg_triangle"
+                                    android:tint="@color/colorAccent" />
+                            </LinearLayout>
+
+
+                            <TextView
+                                android:id="@+id/tvChangeTime"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/app_standard_padding"
+                                android:layout_marginTop="3dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Change Time"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="13dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llMealDrug"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/app_standard_padding"
+                        android:orientation="vertical" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/app_standard_padding"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvAddMeal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="@dimen/app_standard_padding"
+                            android:text="Add Meal"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tvAddDrug"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="@dimen/app_standard_padding"
+                            android:text="Add Drug"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:layout_marginTop="@dimen/app_standard_padding"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:id="@+id/addPhotoBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_round_white"
+                            android:gravity="center">
+
+                            <android.support.v7.widget.AppCompatImageView
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_margin="@dimen/app_standard_padding"
+                                android:tint="@color/colorLightDarkGray"
+                                app:srcCompat="@drawable/ic_addphotos" />
+
+                        </LinearLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/addImageLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:visibility="invisible">
+
+                            <android.support.v7.widget.AppCompatImageView
+                                android:id="@+id/addedImage"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/profile_bg" />
+
+                            <android.support.v7.widget.AppCompatImageView
+                                android:id="@+id/removeImageBtn"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_margin="@dimen/app_standard_padding"
+                                app:srcCompat="@drawable/ic_cross_in_circle" />
+
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btnAddNewMeal"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="@dimen/app_standard_padding"
+                        android:background="@drawable/bg_login_btn"
+                        android:elevation="5dp"
+                        android:text="Add New Meal"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="13dp" />
+
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/btnAddNewMeal"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="@dimen/app_standard_padding"
-                    android:background="@drawable/bg_login_btn"
-                    android:elevation="5dp"
-                    android:text="Add New Meal"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="13dp" />
+            </ScrollView>
 
-            </LinearLayout>
+        </RelativeLayout>
 
-        </ScrollView>
-
+        <com.topcoder.vakidney.customview.BottomMenu
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
-
-
-    <LinearLayout
-        android:id="@+id/bottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
-        android:weightSum="5.3"
-        >
-
-        <LinearLayout
-            android:id="@+id/barLin1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center"
-            >
-
-            <LinearLayout
-                android:id="@+id/bar1"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:orientation="horizontal"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@color/colorPrimary"
-                />
-
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/barImg1"
-                android:layout_width="35dp"
-                android:layout_height="20dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:tint="@color/colorAccent"
-                app:srcCompat="@drawable/ic_bar_home" />
-
-            <TextView
-                android:id="@+id/tvBar1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:gravity="center"
-                android:text="Home"
-                android:textColor="@color/colorAccent"
-                android:textSize="10sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/barLin2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center"
-            >
-
-            <LinearLayout
-                android:id="@+id/bar2"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:orientation="horizontal"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@color/colorPrimary"
-                />
-
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/barImg2"
-                android:layout_width="35dp"
-                android:layout_height="20dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:tint="@color/colorAccent"
-                app:srcCompat="@drawable/ic_bar_chart" />
-
-            <TextView
-                android:id="@+id/tvBar2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:gravity="center"
-                android:text="Chart"
-                android:textColor="@color/colorAccent"
-                android:textSize="10sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/barLin3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1.3"
-            android:gravity="center"
-            >
-
-            <LinearLayout
-                android:id="@+id/bar3"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:orientation="horizontal"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@color/colorPrimary"
-                />
-
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/barImg3"
-                android:layout_width="35dp"
-                android:layout_height="20dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:tint="@color/colorAccent"
-                app:srcCompat="@drawable/tab3" />
-
-            <TextView
-                android:id="@+id/tvBar3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:gravity="center"
-                android:text="Recommendations"
-                android:textColor="@color/colorAccent"
-                android:textSize="10sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/barLin4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center"
-            >
-
-            <LinearLayout
-                android:id="@+id/bar4"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:orientation="horizontal"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@color/colorWhite"
-                />
-
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/barImg4"
-                android:layout_width="35dp"
-                android:layout_height="20dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:tint="@color/colorWhite"
-                app:srcCompat="@drawable/ic_bar_food" />
-
-            <TextView
-                android:id="@+id/tvBar4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:gravity="center"
-                android:text="Food/Drug"
-
-                android:textColor="@color/colorWhite"
-                android:textSize="10sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/barLin5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center"
-            >
-
-            <LinearLayout
-                android:id="@+id/bar5"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:orientation="horizontal"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@color/colorPrimary"
-
-                />
-
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/barImg5"
-                android:layout_width="35dp"
-                android:layout_height="20dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:tint="@color/colorAccent"
-                app:srcCompat="@drawable/ic_bar_workout" />
-
-            <TextView
-                android:id="@+id/tvBar5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:gravity="center"
-                android:text="Activity"
-                android:textColor="@color/colorAccent"
-                android:textSize="10sp" />
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-</RelativeLayout>
 </layout>
 
