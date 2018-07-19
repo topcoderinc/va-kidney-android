@@ -7,15 +7,14 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_alignParentBottom="true"
-    android:background="@color/colorPrimary"
-    android:weightSum="5.3">
+    android:background="@color/colorPrimary">
 
     <LinearLayout
         android:id="@+id/barLin1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="1"
+        android:layout_weight="0.9"
         android:gravity="center"
         >
 
@@ -46,7 +45,7 @@
             android:gravity="center"
             android:text="Home"
             android:textColor="@color/brandBlueLight"
-            android:textSize="10sp" />
+            android:textSize="11sp" />
     </LinearLayout>
 
 
@@ -55,7 +54,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="1"
+        android:layout_weight="0.9"
         android:gravity="center"
         >
 
@@ -86,7 +85,7 @@
             android:gravity="center"
             android:text="Chart"
             android:textColor="@color/brandBlueLight"
-            android:textSize="10sp" />
+            android:textSize="11sp" />
     </LinearLayout>
 
 
@@ -95,7 +94,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="1.3"
+        android:layout_weight="1.4"
         android:gravity="center"
         >
 
@@ -124,9 +123,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:gravity="center"
+            android:lines="1"
             android:text="Recommendations"
             android:textColor="@color/brandBlueLight"
-            android:textSize="10sp" />
+            android:textSize="11sp" />
     </LinearLayout>
 
 
@@ -166,7 +166,7 @@
             android:gravity="center"
             android:text="Food/Drug"
             android:textColor="@color/brandBlueLight"
-            android:textSize="10sp" />
+            android:textSize="11sp" />
     </LinearLayout>
 
 
@@ -175,7 +175,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="1"
+        android:layout_weight="0.9"
         android:gravity="center"
         >
 
@@ -206,7 +206,7 @@
             android:gravity="center"
             android:text="Activity"
             android:textColor="@color/brandBlueLight"
-            android:textSize="10sp" />
+            android:textSize="11sp" />
     </LinearLayout>
 
 

@@ -5,7 +5,7 @@
     <color name="colorAccent">@color/brandGreen</color>
 
     <color name="brandBlue">#0098da</color>
-    <color name="brandBlueLight">#99e0ff</color>
+    <color name="brandBlueLight">#ccf0ff</color>
     <color name="brandGreen">#69c622</color>
 
 
