@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         binder.tvLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginManager.setLoggedIn(getApplicationContext(), false, null);
+                LoginManager.setLoggedIn(getApplicationContext(), false, UserData.get());
                 NavigateToLogin();
             }
         });

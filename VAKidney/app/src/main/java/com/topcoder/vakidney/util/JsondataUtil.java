@@ -40,9 +40,6 @@ public class JsondataUtil {
             String jsonString = loadJSONFromAsset(context, "UserData.json");
             JSONObject jsonObject = new JSONObject(jsonString);
             UserData userData = new UserData();
-            userData.setUsername(jsonObject.getString("username"));
-            userData.setPassword(jsonObject.getString("password"));
-            userData.setFullname(jsonObject.getString("fullname"));
             userData.setAge(jsonObject.getInt("age"));
             userData.setBirthday(new Date().getTime() - ((long) userData.getAge() * 1000 * 60 * 60 * 24 * 360));
             userData.setPoints(jsonObject.getInt("points"));

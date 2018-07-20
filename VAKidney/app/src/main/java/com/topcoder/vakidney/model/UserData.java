@@ -1,5 +1,7 @@
 package com.topcoder.vakidney.model;
 
+import android.content.Context;
+
 import com.orm.SugarRecord;
 
 import java.util.List;
@@ -285,13 +287,33 @@ public class UserData extends SugarRecord<UserData> {
 
     @Override
     public void save() {
+        super.save();
+    }
+
+    /* Mark User Data as logged in */
+    public void logIn() {
         this.tag = TAG;
         super.save();
     }
 
+    /* Mark User Data as logged out */
+    public void logOut() {
+        this.tag = "";
+        super.save();
+    }
+
+    /* Get Logged in User */
     public static UserData get() {
         List<UserData> userData = UserData.find(UserData.class, "tag = ?", TAG);
         if (userData.size() > 0) return userData.get(0);
         return null;
     }
+
+    /* Get User Data by Email / Username */
+    public static UserData get(String email) {
+        List<UserData> userData = UserData.find(UserData.class, "username = ?", email);
+        if (userData.size() > 0) return userData.get(0);
+        return null;
+    }
+
 }

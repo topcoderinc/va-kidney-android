@@ -26,19 +26,12 @@ import com.topcoder.vakidney.util.LoginManager;
  */
 public class LoginActivity extends AppCompatActivity {
 
-    private String username;
-    private String password;
-    private UserData currentUser;
-
     ActivityLoginBinding binder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binder = DataBindingUtil.setContentView(this, R.layout.activity_login);
-        currentUser = JsondataUtil.getUserData(getApplicationContext());
-        username = currentUser.getUsername();
-        password = currentUser.getPassword();
         binder.btnLogin.setEnabled(false);
         binder.emailField.clearFocus();
 
@@ -85,23 +78,33 @@ public class LoginActivity extends AppCompatActivity {
                     binder.emailErrorTv.setText(R.string.validate_email);
                     binder.emailLayout.setBackgroundResource(R.drawable.bg_login_field_error);
                     binder.passwordLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
-                } else if ((!binder.emailField.getText().toString().equals(username)) || (!binder.passwordField.getText().toString().equals(password))) {
-                    binder.emailErrorTv.setVisibility(View.VISIBLE);
-                    binder.emailErrorTv.setText(R.string.error_email);
-                    binder.passwordErrorTv.setVisibility(View.VISIBLE);
-                    binder.passwordErrorTv.setText(R.string.error_password);
-                    binder.emailLayout.setBackgroundResource(R.drawable.bg_login_field_error);
-                    binder.passwordLayout.setBackgroundResource(R.drawable.bg_login_field_error);
-                } else if ((binder.emailField.getText().toString().equals(username)) && (binder.passwordField.getText().toString().equals(password)) && isValidEmail(binder.emailField.getText().toString())) {
-                    LoginManager.setLoggedIn(getApplicationContext(), true, currentUser);
-                    NavigateHome();
+                }
+                else {
+                    String username = binder.emailField.getText().toString();
+                    String password = binder.passwordField.getText().toString();
+                    UserData user = UserData.get(username);
+                    if ((user == null) || (!user.getPassword().equals(password))) {
+                        binder.emailErrorTv.setVisibility(View.VISIBLE);
+                        binder.emailErrorTv.setText(R.string.error_email);
+                        binder.passwordErrorTv.setVisibility(View.VISIBLE);
+                        binder.passwordErrorTv.setText(R.string.error_password);
+                        binder.emailLayout.setBackgroundResource(R.drawable.bg_login_field_error);
+                        binder.passwordLayout.setBackgroundResource(R.drawable.bg_login_field_error);
+                    }
+                    else {
+                        LoginManager.setLoggedIn(getApplicationContext(), true, user);
+                        NavigateHome();
+                    }
                 }
             }
         });
         binder.btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogManager.showOkDialog(LoginActivity.this, getString(R.string.feature_not_implemented), null);
+                Intent intent = new Intent(
+                        LoginActivity.this,
+                        RegisterActivity.class);
+                startActivity(intent);
             }
         });
         binder.forgotPasswordTv.setOnClickListener(new View.OnClickListener() {

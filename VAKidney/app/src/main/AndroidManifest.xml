@@ -46,6 +46,7 @@
         <activity android:name=".AddNewGoalActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ChartActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ComorbiditiesActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".RegisterActivity" android:screenOrientation="portrait" />
     </application>
 
 </manifest>
