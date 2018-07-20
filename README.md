@@ -29,10 +29,7 @@ https://developers.google.com/fit/android/get-started
 - USDA NDB API
 
 ## Testing Account
-- Email: email@email.com
-- Password: demo
-
-These credentials can be changed from UserData.json file in the assets folder.
+We can register to the app and the data will be stored in the local database. We can log in to the app using the registered account.
 
 
 ## Configurations
