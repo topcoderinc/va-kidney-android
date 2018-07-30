@@ -44,11 +44,12 @@ public class LoginManager {
         editor.commit();
         if (isLoggedIn) {
             initializeData(context);
-            userData.save();
+            userData.logIn();
         } else {
-            UserData.deleteAll(UserData.class);
-            Meal.deleteAll(Meal.class);
-            MealDrug.deleteAll(MealDrug.class);
+//            Meal.deleteAll(Meal.class);
+//            MealDrug.deleteAll(MealDrug.class);
+            Goal.deleteAll(Goal.class);
+            userData.logOut();
         }
     }
 

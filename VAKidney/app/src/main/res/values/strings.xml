@@ -7,6 +7,7 @@
     <string name="welcome1_title">SET YOUR GOALS FOR BETTER \nAND HEALTHY LIFE</string>
     <string name="terms_and_conditions">Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Etiam pharetra, erat sed fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in orci enim. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit.</string>
     <string name="error_empty_email">*Please enter email</string>
+    <string name="error_empty_fullname">*Please enter full name</string>
     <string name="error_empty_password">*Please enter password</string>
     <string name="error_email">*Please re-enter email address</string>
     <string name="error_password">*Please re-enter Password</string>
@@ -49,4 +50,6 @@ Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit
     <string name="meal_type_dinner">Dinner</string>
     <string name="meal_type_snacks">Snack</string>
     <string name="meal_type_casual">Casual</string>
+    <string name="error_password_not_match">The password does not match</string>
+    <string name="error_password_min">The password does not meet the minimum length (%d Characters)</string>
 </resources>

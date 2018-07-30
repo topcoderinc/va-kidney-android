@@ -95,7 +95,7 @@
                 android:layout_toRightOf="@+id/passwordIcon"
                 android:background="@android:color/transparent"
                 android:hint="PASSWORD"
-                android:inputType="textEmailAddress"
+                android:inputType="textPassword"
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"
                 android:textCursorDrawable="@null"
