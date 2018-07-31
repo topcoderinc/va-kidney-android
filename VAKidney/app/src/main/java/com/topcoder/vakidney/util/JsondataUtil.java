@@ -40,11 +40,8 @@ public class JsondataUtil {
             String jsonString = loadJSONFromAsset(context, "UserData.json");
             JSONObject jsonObject = new JSONObject(jsonString);
             UserData userData = new UserData();
-            userData.setAge(jsonObject.getInt("age"));
             userData.setBirthday(new Date().getTime() - ((long) userData.getAge() * 1000 * 60 * 60 * 24 * 360));
             userData.setPoints(jsonObject.getInt("points"));
-            userData.setHeight(jsonObject.getInt("height"));
-            userData.setWeight(jsonObject.getInt("weight"));
             userData.setDialysis(jsonObject.getBoolean("dialysis"));
             userData.setDiseaseCategory(jsonObject.getInt("diseasecategory"));
             userData.setSetupgoals(jsonObject.getBoolean("setupgoals"));

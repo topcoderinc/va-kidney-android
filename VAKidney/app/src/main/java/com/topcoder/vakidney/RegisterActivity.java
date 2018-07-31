@@ -56,27 +56,10 @@ public class RegisterActivity extends AppCompatActivity {
         binder.btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (binder.nameField.getText().toString().isEmpty()) {
-                    binder.nameErrorTv.setVisibility(View.VISIBLE);
-                    binder.nameErrorTv.setText(R.string.error_empty_fullname);
-                    binder.nameLayout.setBackgroundResource(R.drawable.bg_login_field_error);
-
-                    binder.emailErrorTv.setVisibility(View.GONE);
-                    binder.emailLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
-
-                    binder.passwordErrorTv.setVisibility(View.GONE);
-                    binder.passwordLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
-
-                    binder.confirmErrorTv.setVisibility(View.GONE);
-                    binder.confirmLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
-                }
-                else if (binder.emailField.getText().toString().isEmpty()) {
+                if (binder.emailField.getText().toString().isEmpty()) {
                     binder.emailErrorTv.setVisibility(View.VISIBLE);
                     binder.emailErrorTv.setText(R.string.error_empty_email);
                     binder.emailLayout.setBackgroundResource(R.drawable.bg_login_field_error);
-
-                    binder.nameErrorTv.setVisibility(View.GONE);
-                    binder.nameLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
 
                     binder.passwordLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
                     binder.passwordErrorTv.setVisibility(View.GONE);
@@ -89,9 +72,6 @@ public class RegisterActivity extends AppCompatActivity {
                     binder.passwordErrorTv.setVisibility(View.VISIBLE);
                     binder.passwordErrorTv.setText(R.string.error_empty_password);
                     binder.passwordLayout.setBackgroundResource(R.drawable.bg_login_field_error);
-
-                    binder.nameErrorTv.setVisibility(View.GONE);
-                    binder.nameLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
 
                     binder.emailErrorTv.setVisibility(View.GONE);
                     binder.emailLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
@@ -110,9 +90,6 @@ public class RegisterActivity extends AppCompatActivity {
                     );
                     binder.passwordLayout.setBackgroundResource(R.drawable.bg_login_field_error);
 
-                    binder.nameErrorTv.setVisibility(View.GONE);
-                    binder.nameLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
-
                     binder.emailErrorTv.setVisibility(View.GONE);
                     binder.emailLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
 
@@ -124,9 +101,6 @@ public class RegisterActivity extends AppCompatActivity {
                     binder.confirmErrorTv.setVisibility(View.VISIBLE);
                     binder.confirmErrorTv.setText(R.string.error_empty_password);
                     binder.confirmLayout.setBackgroundResource(R.drawable.bg_login_field_error);
-
-                    binder.nameErrorTv.setVisibility(View.GONE);
-                    binder.nameLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
 
                     binder.emailErrorTv.setVisibility(View.GONE);
                     binder.emailLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
@@ -142,9 +116,6 @@ public class RegisterActivity extends AppCompatActivity {
                     binder.emailLayout.setBackgroundResource(R.drawable.bg_login_field_error);
                     binder.passwordLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
 
-                    binder.nameErrorTv.setVisibility(View.GONE);
-                    binder.nameLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
-
                     binder.confirmErrorTv.setVisibility(View.GONE);
                     binder.confirmLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
 
@@ -155,9 +126,6 @@ public class RegisterActivity extends AppCompatActivity {
                     binder.confirmErrorTv.setText(R.string.error_password_not_match);
                     binder.confirmLayout.setBackgroundResource(R.drawable.bg_login_field_error);
 
-                    binder.nameErrorTv.setVisibility(View.GONE);
-                    binder.nameLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
-
                     binder.emailErrorTv.setVisibility(View.GONE);
                     binder.emailLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
 
@@ -165,16 +133,14 @@ public class RegisterActivity extends AppCompatActivity {
                     binder.passwordLayout.setBackgroundResource(R.drawable.bg_login_field_normal);
                 }
                 else {
-                    String fullname = binder.nameField.getText().toString();
                     String username = binder.emailField.getText().toString();
                     String password = binder.passwordField.getText().toString();
                     if (UserData.get(username) == null) {
                         UserData user = JsondataUtil.getUserData(getApplicationContext());
-                        user.setFullname(fullname);
                         user.setUsername(username);
                         user.setPassword(password);
                         LoginManager.setLoggedIn(getApplicationContext(), true, user);
-                        NavigateHome();
+                        navigateSetProfile();
                     }
                     else {
                         Toast.makeText(
@@ -205,13 +171,13 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     /**
-     * Navigate to Home Screen
+     * Navigate to Set Profile Screen
      */
-    private void NavigateHome() {
-        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    private void navigateSetProfile() {
+        Intent intent = new Intent(RegisterActivity.this, SetProfileActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
         finish();
     }

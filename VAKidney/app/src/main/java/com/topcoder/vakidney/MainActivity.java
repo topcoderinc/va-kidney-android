@@ -185,10 +185,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (!LoginManager.isTermsAgreed(getApplicationContext())) {
             NavigateToWelcomeScreen();
-        } else {
-            if (!LoginManager.isLoggedIn(getApplicationContext())) {
-                NavigateToLogin();
-            }
+        } else if (!LoginManager.isLoggedIn(getApplicationContext())) {
+            NavigateToLogin();
+        } else if (UserData.get().getFullname() == null) {
+            NavigateToSetProfile();
         }
 
         initBottomBar();
@@ -259,6 +259,8 @@ public class MainActivity extends AppCompatActivity {
         Typeface typeface = ResourcesCompat.getFont(this, R.font.nexa_bold);
         binder.actionBarTitle.setTypeface(typeface);
 
+        UserData userData = UserData.get();
+        binder.tvDrawerName.setText(userData.getFullname());
     }
 
 
@@ -579,9 +581,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private void NavigateToWelcomeScreen() {
         Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
         finish();
     }
@@ -591,12 +593,23 @@ public class MainActivity extends AppCompatActivity {
      */
     private void NavigateToLogin() {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
         finish();
     }
 
+    /**
+     * Navigates to Set Profile
+     */
+    private void NavigateToSetProfile() {
+        Intent intent = new Intent(MainActivity.this, SetProfileActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
+        finish();
+    }
 
 }
