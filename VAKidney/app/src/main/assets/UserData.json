@@ -1,10 +1,7 @@
 {
   "points":120,
-  "age":53,
-  "height":162,
-  "weight":195,
   "dialysis":false,
-  "diseasecategory":1,
+  "diseasecategory":0,
   "setupgoals":true,
   "avatar":true,
   "biometric":false,

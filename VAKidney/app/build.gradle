@@ -32,9 +32,9 @@ android {
             buildConfigField 'String', 'NDB_API_KEY', "\"" + NDB_API_KEY + "\""
         }
     }
-   dataBinding{
-       enabled=true
-   }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {

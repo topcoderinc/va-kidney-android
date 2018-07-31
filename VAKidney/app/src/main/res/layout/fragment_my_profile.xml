@@ -84,9 +84,65 @@
             android:orientation="vertical"
             android:padding="@dimen/app_standard_padding">
 
+
+            <RelativeLayout
+
+                android:id="@+id/profileFieldName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_white_rounded_small">
+
+                <LinearLayout
+                    android:id="@+id/iconName"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_left_rounded_accent"
+                    android:orientation="horizontal"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/app_standard_padding"
+                    android:layout_toRightOf="@+id/iconName"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:textColor="@color/colorDarkGray"
+                        android:textSize="11dp"/>
+
+
+                    <TextView
+                        android:id="@+id/tvNameEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/app_standard_padding"
+                    android:tint="@color/colorLightDarkGray"
+                    app:srcCompat="@drawable/ic_keyboard_arrow_right" />
+
+
+            </RelativeLayout>
+
+
+
             <RelativeLayout
 
                 android:id="@+id/profileFieldAge"
+                android:layout_marginTop="@dimen/app_standard_padding"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_white_rounded_small">
@@ -128,7 +184,7 @@
                         android:id="@+id/tvAge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="53 Years"
+                        android:text="- Years"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14dp"
                         android:textStyle="bold" />
@@ -190,7 +246,7 @@
                         android:id="@+id/tvHeight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="162 cm"
+                        android:text="- cm"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14dp"
                         android:textStyle="bold" />
@@ -252,7 +308,7 @@
                         android:id="@+id/tvWeight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="195 Pounds"
+                        android:text="- Pounds"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14dp"
                         android:textStyle="bold" />

@@ -319,6 +319,7 @@
                     android:paddingRight="@dimen/app_standard_padding">
 
                     <TextView
+                        android:id="@+id/tvDrawerName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="John Smith"

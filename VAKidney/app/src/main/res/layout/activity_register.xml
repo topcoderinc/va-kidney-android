@@ -27,51 +27,6 @@
                 android:tint="@color/colorWhite"
                 app:srcCompat="@drawable/logo_primary" />
 
-
-            <RelativeLayout
-                android:id="@+id/nameLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/bg_login_field_normal"
-                android:padding="6dp">
-
-                <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/nameicon"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:tint="@color/brandBlue"
-                    app:srcCompat="@drawable/ic_email" />
-
-                <EditText
-                    android:id="@+id/nameField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/nameicon"
-                    android:background="@android:color/transparent"
-                    android:hint="FULLNAME"
-                    android:inputType="textEmailAddress"
-                    android:textColor="@color/colorWhite"
-                    android:textColorHint="@color/colorWhite"
-                    android:textCursorDrawable="@null"
-                    android:textSize="18sp" />
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/nameErrorTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@string/error_email"
-                android:textColor="#ff7f32"
-                android:textSize="15dp"
-                android:visibility="gone" />
-
-
-
             <RelativeLayout
                 android:id="@+id/emailLayout"
                 android:layout_width="match_parent"

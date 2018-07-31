@@ -262,6 +262,40 @@ public class MyProfileFragment extends Fragment {
             }
         });
 
+        binder.profileFieldName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                final EditText edittext = new EditText(getContext());
+                edittext.setText(currentUserData.getFullname());
+                alert.setTitle("Enter Your Full Name");
+
+                alert.setView(edittext);
+
+                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                    }
+                });
+
+                alert.setNegativeButton("Cancel", null);
+
+                final AlertDialog dialog = alert.create();
+                dialog.show();
+
+                //Overriding the handler immediately after show is probably a better approach than OnShowListener as described below
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String fullname = edittext.getText().toString();
+                        currentUserData.setFullname(fullname);
+                        populateFields();
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+
 
         binder.profileFieldWeight.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -444,11 +478,31 @@ public class MyProfileFragment extends Fragment {
         birthDay = calendar.get(Calendar.DAY_OF_MONTH);
 
         binder.tvName.setText(currentUserData.getFullname());
-        binder.tvAge.setText(currentUserData.getAge() + " years");
+        binder.tvNameEdit.setText(currentUserData.getFullname());
+
+        String ageStr = (currentUserData.getAge() > 0 ? currentUserData.getAge() : "-")
+                + " years";
+        binder.tvAge.setText(ageStr);
+
+        String heightFeetStr = currentUserData.getHeightFeet() > 0 ?
+                String.valueOf(currentUserData.getHeightFeet()) : "-";
+
+        String heightInchStr = currentUserData.getHeightInch() > 0 ?
+                String.valueOf(currentUserData.getHeightInch()) : "-";
+
+        if (currentUserData.getHeightFeet() > 0 && currentUserData.getHeightInch() == 0) {
+            heightInchStr = "0";
+        }
+
         binder.tvHeight.setText(
-                currentUserData.getHeightFeet() + " feet " +
-                        currentUserData.getHeightInch() + " inch(es)");
-        binder.tvWeight.setText(currentUserData.getWeight() + " pounds");
+                heightFeetStr + " feet " +
+                heightInchStr + " inch(es)");
+
+        String weightStr =
+                (currentUserData.getWeight() > 0 ? currentUserData.getWeight() : "-")
+                        + " pounds";
+
+        binder.tvWeight.setText(weightStr);
         binder.tvBirthDate.setText(getFormattedDate(birthYear, birthMonth, birthDay));
         if (currentUserData.isDialysis()) {
             binder.tvDialysis.setText("Yes");
