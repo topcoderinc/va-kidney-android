@@ -260,7 +260,9 @@ public class MainActivity extends AppCompatActivity {
         binder.actionBarTitle.setTypeface(typeface);
 
         UserData userData = UserData.get();
-        binder.tvDrawerName.setText(userData.getFullname());
+        if (userData != null) {
+            binder.tvDrawerName.setText(userData.getFullname());
+        }
     }
 
 
