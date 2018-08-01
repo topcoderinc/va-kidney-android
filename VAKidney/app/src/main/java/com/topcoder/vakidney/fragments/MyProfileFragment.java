@@ -401,6 +401,10 @@ public class MyProfileFragment extends Fragment {
                 .setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            if (currentUserData.getDiseaseCategory() < 0) {
+                                Toast.makeText(getActivity(), "No goals to reset", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
                             final List<Goal> goals = Goal.getAllWithoutComorbidities(currentUserData.getDiseaseCategory(),
                                     currentUserData.isDialysis());
                             if (goals.size() > 0) {
@@ -426,6 +430,11 @@ public class MyProfileFragment extends Fragment {
         binder.btnGenerateGoals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (currentUserData.getDiseaseCategory() < 0) {
+                    Toast.makeText(getActivity(), "Select disease category to generate goals.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 final List<Goal> goals = Goal.getAllWithoutComorbidities(currentUserData.getDiseaseCategory(), currentUserData.isDialysis());
                 if (goals.size() > 0) {
                     Toast.makeText(getActivity(), "Goals have been already generated", Toast.LENGTH_SHORT).show();
@@ -509,9 +518,14 @@ public class MyProfileFragment extends Fragment {
         } else {
             binder.tvDialysis.setText("No");
         }
-        binder.tvDiseaseCategory.setText(
-                DiseaseCategory.LABELS[currentUserData.getDiseaseCategory()]
-        );
+        if (currentUserData.getDiseaseCategory() >=0 ) {
+            binder.tvDiseaseCategory.setText(
+                    DiseaseCategory.LABELS[currentUserData.getDiseaseCategory()]
+            );
+        }
+        else {
+            binder.tvDiseaseCategory.setText("-");
+        }
         if (currentUserData.isBiometric()) {
             binder.tvBiometricDevice.setText("Yes");
         } else {

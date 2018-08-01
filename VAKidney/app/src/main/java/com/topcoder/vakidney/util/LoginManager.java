@@ -46,9 +46,6 @@ public class LoginManager {
             initializeData(context);
             userData.logIn();
         } else {
-//            Meal.deleteAll(Meal.class);
-//            MealDrug.deleteAll(MealDrug.class);
-            Goal.deleteAll(Goal.class);
             userData.logOut();
         }
     }
