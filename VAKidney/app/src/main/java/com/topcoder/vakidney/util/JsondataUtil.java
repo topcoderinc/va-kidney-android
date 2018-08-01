@@ -43,7 +43,6 @@ public class JsondataUtil {
             userData.setBirthday(new Date().getTime() - ((long) userData.getAge() * 1000 * 60 * 60 * 24 * 360));
             userData.setPoints(jsonObject.getInt("points"));
             userData.setDialysis(jsonObject.getBoolean("dialysis"));
-            userData.setDiseaseCategory(jsonObject.getInt("diseasecategory"));
             userData.setSetupgoals(jsonObject.getBoolean("setupgoals"));
             userData.setAvatar(jsonObject.getBoolean("avatar"));
             userData.setBiometric(jsonObject.getBoolean("biometric"));
@@ -58,6 +57,7 @@ public class JsondataUtil {
             userData.setComorbiditiesCongestiveheartfailure(jsonObject.getBoolean("comorbiditiescongestiveheartfailure"));
             userData.setComorbiditiesDiabetesmellitus(jsonObject.getBoolean("comorbiditiesdiabetesmellitus"));
             userData.setComorbiditiesHypertension(jsonObject.getBoolean("comorbiditiesHypertension"));
+            userData.setDiseaseCategory(-1);
             return userData;
 
         } catch (JSONException e) {
