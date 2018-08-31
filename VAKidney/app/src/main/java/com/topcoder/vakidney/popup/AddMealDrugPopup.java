@@ -1,35 +1,21 @@
 package com.topcoder.vakidney.popup;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.Dialog;
-import android.content.ComponentName;
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.ViewUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Display;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.topcoder.vakidney.AddNewMealActivity;
 import com.topcoder.vakidney.BuildConfig;
 
 import com.topcoder.vakidney.adapter.DropDownItemAdapter;
@@ -38,7 +24,6 @@ import com.topcoder.vakidney.api.NDBServiceAPI;
 import com.topcoder.vakidney.databinding.PopupAddMealdrugBinding;
 import com.topcoder.vakidney.model.MealDrug;
 import com.topcoder.vakidney.R;
-import com.topcoder.vakidney.util.DialogManager;
 import com.topcoder.vakidney.util.ViewUtil;
 
 import org.json.JSONArray;
@@ -174,11 +159,7 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    mSavedMealDrug.delete();
-                } catch (Exception e) {
-                }
-                if (mListener != null) mListener.onDeleted(parentView, mSavedMealDrug);
+                if (mListener != null) mListener.onDelete(parentView, mSavedMealDrug);
                 AddMealDrugPopup.this.dismiss();
             }
         });
@@ -321,7 +302,7 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
 
         void onCanceled();
 
-        void onDeleted(View view, MealDrug mealDrug);
+        void onDelete(View view, MealDrug mealDrug);
 
         void onEdited(View view, MealDrug mealDrug);
     }

@@ -75,6 +75,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
     private Meal mMeal;
     private DrugInteraction mDrugInteraction;
     private final List<MealDrug> mAddedMealDrugs = new ArrayList<>();
+    private final List<MealDrug> mDeletedMealDrugs = new ArrayList<>();
     public static Activity activity;
     ActivityAddNewMealBinding binder;
 
@@ -198,6 +199,9 @@ public class AddNewMealActivity extends AppCompatActivity implements
                     mealDrug.setMealId(mMeal.getMealId());
                     mealDrug.save();
                 }
+                for (MealDrug mealDrug : mDeletedMealDrugs) {
+                    mealDrug.delete();
+                }
                 mMeal.save();
 
                 for (MealDrug mealDrug : mAddedMealDrugs) {
@@ -307,7 +311,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
-        if (mAddedMealDrugs.size() > 0) {
+        if (mAddedMealDrugs.size() > 0 || mDeletedMealDrugs.size() > 0) {
             new AlertDialog.Builder(this)
                     .setTitle(R.string.dialog_title_add_meal_cancel_changes)
                     .setMessage(R.string.dialog_message_add_meal_cancel_changes)
@@ -315,6 +319,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             mAddedMealDrugs.clear();
+                            mDeletedMealDrugs.clear();
                             onBackPressed();
                         }
                     })
@@ -542,12 +547,12 @@ public class AddNewMealActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onDeleted(View parent, MealDrug deleted) {
+    public void onDelete(View parent, MealDrug delete) {
         binder.llMealDrug.removeView(parent);
-        if (mAddedMealDrugs != null && mAddedMealDrugs.contains(deleted)) {
-            mAddedMealDrugs.remove(deleted);
+        if (mAddedMealDrugs.contains(delete)) {
+            mAddedMealDrugs.remove(delete);
         }
-
+        mDeletedMealDrugs.add(delete);
     }
 
     @Override
