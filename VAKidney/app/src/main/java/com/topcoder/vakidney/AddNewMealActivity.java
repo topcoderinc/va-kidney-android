@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
@@ -15,16 +16,14 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -75,7 +74,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
     private DatePickerDialog.OnDateSetListener date;
     private Meal mMeal;
     private DrugInteraction mDrugInteraction;
-    private List<MealDrug> mAddedMealDrugs = new ArrayList<>();
+    private final List<MealDrug> mAddedMealDrugs = new ArrayList<>();
     public static Activity activity;
     ActivityAddNewMealBinding binder;
 
@@ -190,6 +189,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
 
             @Override
             public void onClick(View view) {
+
                 String name = mMeal.getType().substring(0, 1).toUpperCase()
                         + mMeal.getType().substring(1);
                 mMeal.setName(name);
@@ -307,7 +307,22 @@ public class AddNewMealActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
-        NavigateHome(false);
+        if (mAddedMealDrugs.size() > 0) {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.dialog_title_add_meal_cancel_changes)
+                    .setMessage(R.string.dialog_message_add_meal_cancel_changes)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            mAddedMealDrugs.clear();
+                            onBackPressed();
+                        }
+                    })
+                    .setNegativeButton(R.string.no, null)
+                    .show();
+        } else {
+            NavigateHome(false);
+        }
     }
 
     private void NavigateHome(boolean save) {
