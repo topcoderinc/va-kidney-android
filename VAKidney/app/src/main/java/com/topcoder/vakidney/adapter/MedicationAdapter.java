@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
@@ -38,10 +39,13 @@ public class MedicationAdapter extends Adapter {
     public static final int DrugInteractionWarning = 1;
     private int mMode;
 
-    public MedicationAdapter(RecyclerView parent, List<DrugInteraction> mDrugInteractionList, Activity activity, int mode) {
+    public MedicationAdapter(RecyclerView parent,
+                             List<DrugInteraction> mDrugInteractionList,
+                             Fragment fragment,
+                             int mode) {
         mRecycleView = parent;
         this.mDrugInteractionList = mDrugInteractionList;
-        this.activity = activity;
+        this.activity = fragment.getActivity();
         mContext = parent.getContext();
         mMode = mode;
     }
@@ -71,7 +75,6 @@ public class MedicationAdapter extends Adapter {
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activity.finish();
                 Intent intent = new Intent(activity, ResourcesDetailActivity.class);
                 intent.putExtra("title", drugInteraction.getName());
                 intent.putExtra("actionbartitle", "Drug Interaction Details");

@@ -1,6 +1,7 @@
 package com.topcoder.vakidney.fragments.recommendations;
 
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -30,7 +31,6 @@ public class DrugFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class DrugFragment extends Fragment {
 
         MedicationAdapter adapter1 = new MedicationAdapter(
                 binder.rvDrugInteraction, drugInteractionList,
-                getActivity(),
+                this,
                 MedicationAdapter.DrugInteractionWarning
         );
         binder.rvMedications.setAdapter(adapter1);
@@ -64,7 +64,7 @@ public class DrugFragment extends Fragment {
         MedicationAdapter adapter2 = new MedicationAdapter(
                 binder.rvMedications,
                 drugInteractionList,
-                getActivity(),
+                this,
                 MedicationAdapter.Medication
         );
         binder.rvDrugInteraction.setAdapter(adapter2);
@@ -72,5 +72,11 @@ public class DrugFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == MedicationAdapter.RC_RESOURCE_DETAILS) {
 
+        }
+    }
 }
