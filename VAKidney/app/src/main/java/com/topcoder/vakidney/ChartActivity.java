@@ -161,6 +161,7 @@ public class ChartActivity extends AppCompatActivity implements
         xAxis.setEnabled(false);
         xAxis.setGranularityEnabled(false);
         xAxis.setGranularity(1f); // one hour
+        xAxis.setYOffset(-1.0f);
 
         YAxis leftAxis = lineChart.getAxisLeft();
         leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
