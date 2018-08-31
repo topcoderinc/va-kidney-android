@@ -1,44 +1,29 @@
 package com.topcoder.vakidney.popup;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.Dialog;
-import android.content.ComponentName;
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.ViewUtils;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Display;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.topcoder.vakidney.AddNewMealActivity;
 import com.topcoder.vakidney.BuildConfig;
-
+import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.adapter.DropDownItemAdapter;
 import com.topcoder.vakidney.api.NDBRestClient;
 import com.topcoder.vakidney.api.NDBServiceAPI;
 import com.topcoder.vakidney.databinding.PopupAddMealdrugBinding;
 import com.topcoder.vakidney.model.MealDrug;
-import com.topcoder.vakidney.R;
-import com.topcoder.vakidney.util.DialogManager;
 import com.topcoder.vakidney.util.ViewUtil;
 
 import org.json.JSONArray;
@@ -186,7 +171,7 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
         ArrayAdapter<String> gameKindArray = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, unitSpinnerItems);
         gameKindArray.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.unitSpinner.setAdapter(gameKindArray);
-        binding.unitSpinner.setSelection(0);
+        binding.unitSpinner.setSelection(getUnitsIndex(unitSpinnerItems, mealDrug));
 
         enableDisableAddMealButton();
     }
@@ -326,4 +311,17 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
         void onEdited(View view, MealDrug mealDrug);
     }
 
+    private int getUnitsIndex(String[] units, MealDrug mealDrug) {
+        if (mealDrug == null || TextUtils.isEmpty(mealDrug.getUnit())) {
+            return 0;
+        }
+
+        for (int i = 0; i < units.length; i++) {
+            if (units[i].equals(mealDrug.getUnit())) {
+                return i;
+            }
+        }
+
+        return 0;
+    }
 }
