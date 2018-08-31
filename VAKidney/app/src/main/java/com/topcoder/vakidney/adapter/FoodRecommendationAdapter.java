@@ -1,5 +1,12 @@
 package com.topcoder.vakidney.adapter;
 
+import java.util.List;
+
+import com.topcoder.vakidney.R;
+import com.topcoder.vakidney.ResourcesDetailActivity;
+import com.topcoder.vakidney.model.FoodRecommendation;
+import com.topcoder.vakidney.util.TextUtil;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -10,13 +17,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.topcoder.vakidney.model.FoodRecommendation;
-import com.topcoder.vakidney.R;
-import com.topcoder.vakidney.ResourcesDetailActivity;
-import com.topcoder.vakidney.util.TextUtil;
-
-import java.util.List;
 
 /**
  * This is adapter class to show food recommendation list.
@@ -73,11 +73,8 @@ public class FoodRecommendationAdapter extends Adapter implements View.OnClickLi
                             "Unsafe Food" : "Food Recommendation"
             );
             String description = foodRecommendation.getDesc();
-            description =
-                    description +
-                            "\nRelated nutrients: " +
-                            foodRecommendation.getNutritionArray();
             intent.putExtra("desc", description);
+            intent.putExtra("nutrients", foodRecommendation.getNutritionArray());
             mContext.startActivity(intent);
         }
     }
