@@ -68,7 +68,7 @@ public class MedicationAdapter extends Adapter {
                 "Report: #" + drugInteraction.getReportId() +
                         "\n" +
                         "Date: " + new SimpleDateFormat("MMM dd yyyy", Locale.US).format(drugInteraction.getDate()));
-        viewHolder.textDesc.setOnClickListener(new View.OnClickListener() {
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 activity.finish();
