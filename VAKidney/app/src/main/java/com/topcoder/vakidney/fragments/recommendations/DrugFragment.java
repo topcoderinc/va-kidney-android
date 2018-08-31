@@ -1,7 +1,6 @@
 package com.topcoder.vakidney.fragments.recommendations;
 
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,7 +16,6 @@ import com.topcoder.vakidney.R;
 
 import java.util.List;
 
-import static com.orm.SugarRecord.find;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,13 +68,5 @@ public class DrugFragment extends Fragment {
         binder.rvDrugInteraction.setAdapter(adapter2);
 
         return view;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == MedicationAdapter.RC_RESOURCE_DETAILS) {
-
-        }
     }
 }
