@@ -120,7 +120,7 @@ public class ChartActivity extends AppCompatActivity implements
         maxGoalDataSet.setColor(getColor(android.R.color.holo_red_dark));
         maxGoalDataSet.setDrawCircles(false);
         maxGoalDataSet.setLineWidth(1.0f);
-        maxGoalDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        maxGoalDataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 
         // Build minimum goal chart
         List<Entry> minGoalEntries = new ArrayList<>();
@@ -131,7 +131,7 @@ public class ChartActivity extends AppCompatActivity implements
         minGoalDataSet.setColor(getColor(android.R.color.holo_green_dark));
         minGoalDataSet.setDrawCircles(false);
         minGoalDataSet.setLineWidth(1.0f);
-        minGoalDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        minGoalDataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 
         LineData lineData;
         lineData = new LineData();
