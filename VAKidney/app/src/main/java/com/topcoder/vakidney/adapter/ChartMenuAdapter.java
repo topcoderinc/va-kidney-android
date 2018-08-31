@@ -76,8 +76,8 @@ public class ChartMenuAdapter extends Adapter implements View.OnClickListener {
             viewHolder.viewHeader.setVisibility(View.GONE);
         }
 
-        viewHolder.itemView.setOnClickListener(this);
-        viewHolder.itemView.setTag(chartType);
+        viewHolder.textLabel.setOnClickListener(this);
+        viewHolder.textLabel.setTag(chartType);
 
         viewHolder.textLabel.setText(ChartType.getChartLabel(chartType));
 
