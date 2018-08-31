@@ -117,6 +117,15 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
         btnAddNewMeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                double amount = 0;
+                try {
+                    if (!binding.amountField.getText().toString().isEmpty()) {
+                        amount = Double.parseDouble(binding.amountField.getText().toString());
+                    }
+                }
+                catch (Exception e) {
+                    amount = 0;
+                }
                 if (binding.mealOrliquidField.getText().toString().isEmpty()
                         || binding.amountField.getText().toString().isEmpty()) {
                     binding.mealOrliquidFieldErrorTv.setVisibility(View.GONE);
@@ -138,7 +147,13 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
                         binding.unitSpinner.setBackgroundResource(R.drawable.bg_round_white_error);
                     }
 
-                } else if (suggestions.size() > 0 && !suggestions.contains(binding.mealOrliquidField.getText().toString())
+                }
+                else if (amount == 0) {
+                    binding.amountFieldErrorTv.setVisibility(View.VISIBLE);
+                    binding.amountField.setBackgroundResource(R.drawable.bg_round_white_error);
+                    binding.amountFieldErrorTv.setText("Please input valid amount");
+                }
+                else if (suggestions.size() > 0 && !suggestions.contains(binding.mealOrliquidField.getText().toString())
                         && POPUP_MODE_MEAL == mMode ) {
                     binding.mealOrliquidFieldErrorTv.setVisibility(View.VISIBLE);
                     binding.mealOrliquidFieldErrorTv.setBackgroundResource(R.drawable.bg_round_white_error);
@@ -152,7 +167,7 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
                         mealDrug.setType(mMode == POPUP_MODE_DRUG ? MealDrug.TYPE_DRUG : MealDrug.TYPE_MEAL);
                         if (mListener != null) mListener.onAdded(mealDrug);
                     } else if (mAction == POPUP_ACTION_EDIT) {
-                        mSavedMealDrug.setAmount(Double.parseDouble(binding.amountField.getText().toString()));
+                        mSavedMealDrug.setAmount(amount);
                         mSavedMealDrug.setName(binding.mealOrliquidField.getText().toString());
                         mSavedMealDrug.setUnit(unitSpinnerItems[binding.unitSpinner.getSelectedItemPosition()]);
                         mSavedMealDrug.setType(mMode == POPUP_MODE_DRUG ? MealDrug.TYPE_DRUG : MealDrug.TYPE_MEAL);
