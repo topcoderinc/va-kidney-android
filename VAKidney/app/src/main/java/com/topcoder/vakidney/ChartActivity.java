@@ -107,7 +107,7 @@ public class ChartActivity extends AppCompatActivity implements
         dataSet.setColor(getColor(R.color.colorPrimaryDark));
         dataSet.setDrawCircles(true);
         dataSet.setLineWidth(3.0f);
-        dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 
         ChartType.ChartThreshold threshold = ChartType.getChartThreshold(mChartType);
 
