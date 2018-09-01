@@ -634,19 +634,7 @@ public class MyProfileFragment extends Fragment {
     }
 
     private void initGoogleFit() {
-        FitnessOptions fitnessOptions = FitnessOptions.builder()
-                .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
-                .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
-                .addDataType(DataType.AGGREGATE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
-                .addDataType(DataType.AGGREGATE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
-                .addDataType(DataType.TYPE_NUTRITION, FitnessOptions.ACCESS_WRITE)
-                .addDataType(DataType.TYPE_WEIGHT, FitnessOptions.ACCESS_WRITE)
-                .addDataType(DataType.TYPE_WEIGHT, FitnessOptions.ACCESS_READ)
-                .addDataType(DataType.TYPE_NUTRITION, FitnessOptions.ACCESS_READ)
-                .addDataType(DataType.TYPE_HEIGHT, FitnessOptions.ACCESS_WRITE)
-                .addDataType(DataType.TYPE_HEIGHT, FitnessOptions.ACCESS_READ)
-                .build();
-
+        FitnessOptions fitnessOptions = GoogleFitUtil.getFitnessOptions();
         if (!GoogleSignIn.hasPermissions(GoogleSignIn.getLastSignedInAccount(this.getActivity()), fitnessOptions)) {
             GoogleSignIn.requestPermissions(
                     this,
