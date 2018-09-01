@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
@@ -15,8 +16,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -228,7 +229,23 @@ public class AddNewMealActivity extends AppCompatActivity implements
                         }
                     }
                 }
-                NavigateHome(false);
+                if( mMeal.getMealDrugs().size() <= 0){
+                    AlertDialog alertDialog = new AlertDialog.Builder(AddNewMealActivity.this).create();
+                    alertDialog.setTitle("Error");
+                    alertDialog.setMessage("Please add at least one meal/drug");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+
+
+                }
+                else{
+                    NavigateHome(false);
+                }
 
             }
 
