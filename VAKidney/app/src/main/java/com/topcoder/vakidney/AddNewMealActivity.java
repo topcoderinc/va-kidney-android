@@ -16,7 +16,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -83,6 +82,8 @@ public class AddNewMealActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binder = DataBindingUtil.setContentView(this, R.layout.activity_add_new_meal);
+        LinearLayout bar4 = findViewById(R.id.bar4);
+        bar4.setBackgroundResource(R.drawable.bg_brand_line);
         activity = this;
 
         binder.backBtn.setOnClickListener(new View.OnClickListener() {
@@ -599,6 +600,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
+
 
     private void pickPhotoProfile() {
         Intent chooseImageIntent = ImagePicker.getPickImageIntent(AddNewMealActivity.this);
