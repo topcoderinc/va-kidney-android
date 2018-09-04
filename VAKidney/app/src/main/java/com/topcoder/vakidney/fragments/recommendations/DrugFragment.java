@@ -16,7 +16,6 @@ import com.topcoder.vakidney.R;
 
 import java.util.List;
 
-import static com.orm.SugarRecord.find;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,7 +28,6 @@ public class DrugFragment extends Fragment {
     public DrugFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,7 +53,7 @@ public class DrugFragment extends Fragment {
 
         MedicationAdapter adapter1 = new MedicationAdapter(
                 binder.rvDrugInteraction, drugInteractionList,
-                getActivity(),
+                this,
                 MedicationAdapter.DrugInteractionWarning
         );
         binder.rvMedications.setAdapter(adapter1);
@@ -64,13 +62,11 @@ public class DrugFragment extends Fragment {
         MedicationAdapter adapter2 = new MedicationAdapter(
                 binder.rvMedications,
                 drugInteractionList,
-                getActivity(),
+                this,
                 MedicationAdapter.Medication
         );
         binder.rvDrugInteraction.setAdapter(adapter2);
 
         return view;
     }
-
-
 }
