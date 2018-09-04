@@ -118,7 +118,8 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
             @Override
             public void onClick(View view) {
                 if (binding.mealOrliquidField.getText().toString().isEmpty()
-                        || binding.amountField.getText().toString().isEmpty()) {
+                        || binding.amountField.getText().toString().isEmpty()
+                        || binding.amountField.getText().toString().equals(".")) {
                     binding.mealOrliquidFieldErrorTv.setVisibility(View.GONE);
                     binding.mealOrliquidFieldErrorTv.setBackgroundResource(R.drawable.bg_round_white);
                     binding.amountFieldErrorTv.setVisibility(View.GONE);
@@ -129,7 +130,8 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
                         binding.mealOrliquidFieldErrorTv.setVisibility(View.VISIBLE);
                         binding.mealOrliquidFieldErrorTv.setBackgroundResource(R.drawable.bg_round_white_error);
                     }
-                    if (binding.amountField.getText().toString().isEmpty()) {
+                    if (binding.amountField.getText().toString().isEmpty()
+                            || binding.amountField.getText().toString().equals(".")) {
                         binding.amountFieldErrorTv.setVisibility(View.VISIBLE);
                         binding.amountField.setBackgroundResource(R.drawable.bg_round_white_error);
                     }
