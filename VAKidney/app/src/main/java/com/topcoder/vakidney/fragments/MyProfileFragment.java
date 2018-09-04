@@ -79,6 +79,7 @@ public class MyProfileFragment extends Fragment {
     public final static int GOOGLE_FIT_PERMISSIONS_REQUEST_CODE = 0x00000002;
     private static final String TAG = "MyProfileFragment";
     private static final String PROFILE_IMAGE_PATH = "/profile_image.png";
+    private static final int MINIMUM_AGE = 16;
 
     private UserData currentUserData;
     private Bitmap profileBitmap = null;
@@ -155,7 +156,9 @@ public class MyProfileFragment extends Fragment {
             public void onClick(View view) {
                 DatePickerDialog pickerDialog = new DatePickerDialog(getActivity(), date, birthYear, birthMonth,
                         birthDay);
-                pickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                Calendar c = Calendar.getInstance();
+                c.set(c.get(Calendar.YEAR) - MINIMUM_AGE, 11, 31);
+                pickerDialog.getDatePicker().setMaxDate(c.getTimeInMillis());
                 pickerDialog.show();
             }
         });
