@@ -73,7 +73,7 @@
                         android:background="@color/colorWhite"
                         android:gravity="center"
                         android:orientation="horizontal"
-                        android:weightSum="3">
+                        android:weightSum="2.8">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -88,7 +88,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
-                            android:layout_weight="2"
+                            android:layout_weight="1.8"
                             android:orientation="horizontal"
                             android:padding="@dimen/app_standard_padding">
 
@@ -123,7 +123,7 @@
                         android:background="@color/colorWhite"
                         android:gravity="center"
                         android:orientation="horizontal"
-                        android:weightSum="3">
+                        android:weightSum="2.8">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -138,7 +138,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
-                            android:layout_weight="2"
+                            android:layout_weight="1.8"
                             android:orientation="horizontal"
                             android:padding="@dimen/app_standard_padding">
 
