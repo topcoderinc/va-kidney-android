@@ -39,11 +39,13 @@ public class Goal extends SugarRecord implements Serializable {
     private String unitStr;
     private String nutrient;
     private String addString;
+    private int frequency;
     private int icon;
     private int type;
     private int action;
     private boolean dialysisOnly;
     private boolean hidden;
+    private boolean reminder;
     private int minCategory;
 
     public Goal() {
@@ -60,11 +62,13 @@ public class Goal extends SugarRecord implements Serializable {
             String unit,
             String nutrient,
             String addString,
+            int frequency,
             int icon,
             int type,
             int action,
             boolean dialysisOnly,
             boolean hidden,
+            boolean reminder,
             int minCategory) {
         this.goalId = goalId;
         this.titleStr = title;
@@ -76,11 +80,13 @@ public class Goal extends SugarRecord implements Serializable {
         this.unitStr = unit;
         this.nutrient = nutrient;
         this.addString = addString;
+        this.frequency = frequency;
         this.icon = icon;
         this.type = type;
         this.action = action;
         this.dialysisOnly = dialysisOnly;
         this.hidden = hidden;
+        this.reminder = reminder;
         this.minCategory = minCategory;
     }
 
@@ -226,6 +232,22 @@ public class Goal extends SugarRecord implements Serializable {
 
     public void setGoalStep(double goalStep) {
         this.goalStep = goalStep;
+    }
+
+    public int getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(int frequency) {
+        this.frequency = frequency;
+    }
+
+    public boolean isReminder() {
+        return reminder;
+    }
+
+    public void setReminder(boolean reminder) {
+        this.reminder = reminder;
     }
 
     public boolean isHidden() {

@@ -14,11 +14,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.topcoder.vakidney.adapter.GoalBarButtonAdapter;
 import com.topcoder.vakidney.constant.DiseaseCategory;
+import com.topcoder.vakidney.constant.GoalFrequency;
 import com.topcoder.vakidney.databinding.ActivityAddNewGoalBinding;
 import com.topcoder.vakidney.model.Goal;
 import com.topcoder.vakidney.model.UserData;
@@ -36,8 +38,6 @@ import static android.view.View.GONE;
  */
 public class AddNewGoalActivity extends AppCompatActivity
         implements GoalBarButtonAdapter.OnSeekBarButtonChangeListener {
-
-    private String[] frequencyString = {"Daily", "Weekly", "Monthly"};
 
     private enum Activity {EDIT, DELETE, ADD, NOTHING}
 
@@ -196,10 +196,28 @@ public class AddNewGoalActivity extends AppCompatActivity
         ArrayAdapter<String> frequencySpinnerAdapter = new ArrayAdapter<>(
                 AddNewGoalActivity.this,
                 android.R.layout.simple_spinner_item,
-                frequencyString);
+                GoalFrequency.LABELS);
         frequencySpinnerAdapter.setDropDownViewResource(
                 android.R.layout.simple_spinner_dropdown_item);
         binder.frequencySpinner.setAdapter(frequencySpinnerAdapter);
+        if (mGoal != null) {
+            binder.frequencySpinner.setSelection(mGoal.getFrequency());
+        }
+        binder.frequencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (mGoal != null) {
+                  mGoal.setFrequency(i);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
 
         List<String> spinnerItemArray = new ArrayList<>();
         double value = mGoal.getGoalMin();
@@ -240,6 +258,13 @@ public class AddNewGoalActivity extends AppCompatActivity
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+
+        binder.reminderSwitch.setChecked(mGoal.isReminder());
+        binder.reminderSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mGoal.setReminder(isChecked);
             }
         });
     }
