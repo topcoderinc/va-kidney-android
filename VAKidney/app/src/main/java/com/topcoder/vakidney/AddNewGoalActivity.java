@@ -1,22 +1,9 @@
 package com.topcoder.vakidney;
 
-import android.content.Intent;
-import android.databinding.DataBindingUtil;
-import android.graphics.Typeface;
-import android.os.Bundle;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.AppCompatSpinner;
-import android.support.v7.widget.RecyclerView;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.topcoder.vakidney.adapter.GoalBarButtonAdapter;
 import com.topcoder.vakidney.constant.DiseaseCategory;
@@ -26,10 +13,16 @@ import com.topcoder.vakidney.model.Goal;
 import com.topcoder.vakidney.model.UserData;
 import com.topcoder.vakidney.util.DialogManager;
 
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
+import android.databinding.DataBindingUtil;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 
 import static android.view.View.GONE;
 
@@ -60,7 +53,7 @@ public class AddNewGoalActivity extends AppCompatActivity
         mGoals = Goal.getAllWithoutComorbidities(mUserData.getDiseaseCategory(), mUserData.isDialysis());
 
         //Add new goal was not implemented
-        if(mGoals.size()==0) {
+        if (mGoals.size() == 0) {
             Goal sGoalRun = new Goal();
             sGoalRun.setTitleStr("Workout");
             sGoalRun.setGoal(2.0);
@@ -207,7 +200,7 @@ public class AddNewGoalActivity extends AppCompatActivity
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (mGoal != null) {
-                  mGoal.setFrequency(i);
+                    mGoal.setFrequency(i);
                 }
             }
 
@@ -216,7 +209,6 @@ public class AddNewGoalActivity extends AppCompatActivity
 
             }
         });
-
 
 
         List<String> spinnerItemArray = new ArrayList<>();

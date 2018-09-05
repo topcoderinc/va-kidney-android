@@ -65,8 +65,8 @@ public class Goal extends SugarRecord<Goal> implements Serializable {
             int action,
             boolean dialysisOnly,
             boolean hidden,
-            boolean reminder,
-            int minCategory) {
+            int minCategory,
+            boolean reminder) {
         this.goalId = goalId;
         this.titleStr = title;
         this.goal = goal;
@@ -85,6 +85,7 @@ public class Goal extends SugarRecord<Goal> implements Serializable {
         this.hidden = hidden;
         this.reminder = reminder;
         this.minCategory = minCategory;
+        this.reminder = reminder;
     }
 
     public long getGoalId() {
