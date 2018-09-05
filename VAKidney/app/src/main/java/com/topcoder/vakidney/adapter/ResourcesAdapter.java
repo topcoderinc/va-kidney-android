@@ -69,7 +69,6 @@ public class ResourcesAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activity.finish();
                 Intent intent = new Intent(activity, ResourcesDetailActivity.class);
                 intent.putExtra("title", resources.getTitle());
                 intent.putExtra("url", resources.getUrl());

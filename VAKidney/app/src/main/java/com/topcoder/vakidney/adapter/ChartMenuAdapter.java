@@ -31,13 +31,15 @@ public class ChartMenuAdapter extends Adapter implements View.OnClickListener {
 
     private final Context mContext;
     private final RecyclerView mRecycleView;
-    private final List<Long> mChartTypes;
+    private final List<Long> mChartTypes = new ArrayList<>();
     private List<Goal> mGoals = new ArrayList<>();
     private final UserData mUserData;
 
     public ChartMenuAdapter(RecyclerView parent, List<Long> chartTypes) {
         mRecycleView = parent;
-        mChartTypes = chartTypes;
+        if (chartTypes != null) {
+            mChartTypes.addAll(chartTypes);
+        }
         mContext = parent.getContext();
 
         mUserData = UserData.get();
