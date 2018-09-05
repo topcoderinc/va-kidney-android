@@ -1,13 +1,10 @@
 package com.topcoder.vakidney.model;
 
-import android.os.Bundle;
-
-import com.orm.SugarRecord;
-import com.topcoder.vakidney.R;
-import com.topcoder.vakidney.constant.Comorbidities;
-
 import java.io.Serializable;
 import java.util.List;
+
+import com.orm.SugarRecord;
+import com.topcoder.vakidney.constant.Comorbidities;
 
 /**
  * Created by Abinash Neupane on 2/8/2018.
@@ -68,8 +65,8 @@ public class Goal extends SugarRecord<Goal> implements Serializable {
             int action,
             boolean dialysisOnly,
             boolean hidden,
-            boolean reminder,
-            int minCategory) {
+            int minCategory,
+            boolean reminder) {
         this.goalId = goalId;
         this.titleStr = title;
         this.goal = goal;
@@ -88,6 +85,7 @@ public class Goal extends SugarRecord<Goal> implements Serializable {
         this.hidden = hidden;
         this.reminder = reminder;
         this.minCategory = minCategory;
+        this.reminder = reminder;
     }
 
     public long getGoalId() {
