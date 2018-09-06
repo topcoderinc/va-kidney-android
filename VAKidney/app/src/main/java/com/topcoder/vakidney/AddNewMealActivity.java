@@ -93,8 +93,6 @@ public class AddNewMealActivity extends AppCompatActivity implements
         });
         SetupSeekBar();
 
-        binder.btnAddNewMeal.setEnabled(false);
-
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
@@ -190,6 +188,13 @@ public class AddNewMealActivity extends AppCompatActivity implements
 
             @Override
             public void onClick(View view) {
+                if(mAddedMealDrugs.size() == 0) {
+                    new AlertDialog.Builder(AddNewMealActivity.this)
+                            .setMessage("Please add at least one meal/drug")
+                            .setPositiveButton("OK", null)
+                            .show();
+                    return;
+                }
 
                 String name = mMeal.getType().substring(0, 1).toUpperCase()
                         + mMeal.getType().substring(1);
@@ -277,7 +282,6 @@ public class AddNewMealActivity extends AppCompatActivity implements
         binder.tvMealTime.setText(timeStr);
 
         binder.btnAddNewMeal.setText("Save Meal");
-        binder.btnAddNewMeal.setEnabled(true);
 
         if (mMeal.getPhotoUrl() != null) {
             binder.addImageLayout.setVisibility(View.VISIBLE);
@@ -533,7 +537,6 @@ public class AddNewMealActivity extends AppCompatActivity implements
     @Override
     public void onAdded(MealDrug mealDrug) {
         addMealDrug(mealDrug);
-        binder.btnAddNewMeal.setEnabled(true);
         if (mealDrug.getType() == MealDrug.TYPE_DRUG) {
             mMeal.setHasDrug(true);
         }
