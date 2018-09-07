@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -66,9 +67,10 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
     private static final int AUTO_COMPLETION_THRESHOLD = 3;
 
     private String[] unitSpinnerItems;
-    private final String[] unitMealSpinnerItems = {"oz (mass)", "oz (fluid)", "g", "mg", "L", "mL", "lb", "st", "cups", "pints"};
-    private final String[] unitDrugSpinnerItems = {"g", "mg"};
+    private final String[] unitMealSpinnerItems = {"Select", "oz (mass)", "oz (fluid)", "g", "mg", "L", "mL", "lb", "st", "cups", "pints"};
+    private final String[] unitDrugSpinnerItems = {"Select", "g", "mg"};
     private Button btnAddNewMeal;
+    private ImageView btnClose;
     private Context mContext;
     private int mMode = POPUP_MODE_MEAL;
     private int mAction = POPUP_ACTION_ADD;
@@ -78,6 +80,7 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
     DropDownItemAdapter adapter;
     View parentView;
     PopupAddMealdrugBinding binding;
+
     public AddMealDrugPopup(
             final Activity context,
             int mode,
@@ -98,25 +101,33 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         View view = LayoutInflater.from(getContext()).inflate(R.layout.popup_add_mealdrug, null, false);
         setContentView(view);
-        binding= PopupAddMealdrugBinding.bind(view);
+        binding = PopupAddMealdrugBinding.bind(view);
         binding.mealOrliquidField.setMinHeight(ViewUtil.dpToPx(35, getContext()));
         adapter = new DropDownItemAdapter(mContext, android.R.layout.simple_dropdown_item_1line, suggestions);
 
         binding.mealOrliquidField.setAdapter(adapter);
         if (mMode == POPUP_MODE_DRUG) {
-            binding.textTitle.setText("Drug/medications");
+            binding.textTitle.setText("Drug name");
             unitSpinnerItems = unitDrugSpinnerItems;
         } else {
             unitSpinnerItems = unitMealSpinnerItems;
         }
+        btnClose = findViewById(R.id.btnClose);
         btnAddNewMeal = findViewById(R.id.btnAddNewMeal);
         String btnLabel = mAction == POPUP_ACTION_ADD ? "Add " : "Edit ";
         btnLabel = btnLabel + (mMode == POPUP_MODE_DRUG ? "Drug" : "Meal");
         btnAddNewMeal.setText(btnLabel);
         btnAddNewMeal.setEnabled(false);
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddMealDrugPopup.this.dismiss();
+            }
+        });
         btnAddNewMeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (binding.mealOrliquidField.getText().toString().isEmpty()
                         || binding.amountField.getText().toString().isEmpty()) {
                     binding.mealOrliquidFieldErrorTv.setVisibility(View.GONE);
@@ -138,8 +149,11 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
                         binding.unitSpinner.setBackgroundResource(R.drawable.bg_round_white_error);
                     }
 
+                } else if (binding.unitSpinner.getSelectedItemPosition() == 0) {
+                    binding.unitSpinnerErroTv.setVisibility(View.VISIBLE);
+                    binding.unitSpinner.setBackgroundResource(R.drawable.bg_round_white_error);
                 } else if (suggestions.size() > 0 && !suggestions.contains(binding.mealOrliquidField.getText().toString())
-                        && POPUP_MODE_MEAL == mMode ) {
+                        && POPUP_MODE_MEAL == mMode) {
                     binding.mealOrliquidFieldErrorTv.setVisibility(View.VISIBLE);
                     binding.mealOrliquidFieldErrorTv.setBackgroundResource(R.drawable.bg_round_white_error);
                     binding.mealOrliquidFieldErrorTv.setText("Choose from suggestions below");
