@@ -28,12 +28,12 @@
             ></LinearLayout>
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/photoAndBirthDayLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp">
+        android:layout_marginTop="47dp"
+        android:layout_marginLeft="60dp">
 
         <ImageView
             android:layout_width="70dp"
@@ -46,7 +46,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/app_standard_padding"
             android:layout_toRightOf="@+id/profileImageView"
             android:orientation="vertical">
@@ -59,7 +59,10 @@
                 android:textAllCaps="true"
                 android:textColor="@color/colorWhite"
                 android:textSize="15dp"
-                android:textStyle="bold" />
+                android:paddingRight="15dp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end" />
 
 
             <TextView
@@ -70,7 +73,7 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="14dp" />
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
