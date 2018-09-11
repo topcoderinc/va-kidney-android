@@ -2,6 +2,7 @@ package com.topcoder.vakidney.popup;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -22,6 +23,7 @@ import com.topcoder.vakidney.api.NDBRestClient;
 import com.topcoder.vakidney.api.NDBServiceAPI;
 import com.topcoder.vakidney.databinding.PopupAddMealdrugBinding;
 import com.topcoder.vakidney.model.MealDrug;
+import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.util.ViewUtil;
 
 import org.json.JSONArray;
@@ -162,11 +164,7 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    mSavedMealDrug.delete();
-                } catch (Exception e) {
-                }
-                if (mListener != null) mListener.onDeleted(parentView, mSavedMealDrug);
+                if (mListener != null) mListener.onDelete(parentView, mSavedMealDrug);
                 AddMealDrugPopup.this.dismiss();
             }
         });
@@ -288,7 +286,7 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
 
         void onCanceled();
 
-        void onDeleted(View view, MealDrug mealDrug);
+        void onDelete(View view, MealDrug mealDrug);
 
         void onEdited(View view, MealDrug mealDrug);
     }

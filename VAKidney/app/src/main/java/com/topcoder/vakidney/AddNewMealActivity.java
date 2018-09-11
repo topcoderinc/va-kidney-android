@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
@@ -21,10 +22,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -76,6 +75,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
     private Meal mMeal;
     private DrugInteraction mDrugInteraction;
     private final List<MealDrug> mAddedMealDrugs = new ArrayList<>();
+    private final List<MealDrug> mDeletedMealDrugs = new ArrayList<>();
     public static Activity activity;
     ActivityAddNewMealBinding binder;
 
@@ -206,6 +206,9 @@ public class AddNewMealActivity extends AppCompatActivity implements
                     mealDrug.setMealId(mMeal.getMealId());
                     mealDrug.save();
                 }
+                for (MealDrug mealDrug : mDeletedMealDrugs) {
+                    mealDrug.delete();
+                }
                 mMeal.save();
 
                 for (MealDrug mealDrug : mAddedMealDrugs) {
@@ -314,7 +317,23 @@ public class AddNewMealActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
-        NavigateHome(false);
+        if (mAddedMealDrugs.size() > 0 || mDeletedMealDrugs.size() > 0) {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.dialog_title_add_meal_cancel_changes)
+                    .setMessage(R.string.dialog_message_add_meal_cancel_changes)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            mAddedMealDrugs.clear();
+                            mDeletedMealDrugs.clear();
+                            onBackPressed();
+                        }
+                    })
+                    .setNegativeButton(R.string.no, null)
+                    .show();
+        } else {
+            NavigateHome(false);
+        }
     }
 
     private void NavigateHome(boolean save) {
@@ -533,12 +552,12 @@ public class AddNewMealActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onDeleted(View parent, MealDrug deleted) {
+    public void onDelete(View parent, MealDrug delete) {
         binder.llMealDrug.removeView(parent);
-        if (mAddedMealDrugs != null && mAddedMealDrugs.contains(deleted)) {
-            mAddedMealDrugs.remove(deleted);
+        if (mAddedMealDrugs.contains(delete)) {
+            mAddedMealDrugs.remove(delete);
         }
-
+        mDeletedMealDrugs.add(delete);
     }
 
     @Override
