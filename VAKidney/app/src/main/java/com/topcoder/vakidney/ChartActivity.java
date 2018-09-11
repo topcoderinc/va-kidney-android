@@ -8,6 +8,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -48,7 +49,8 @@ public class ChartActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binder = DataBindingUtil.setContentView(this, R.layout.activity_chart);
-
+        LinearLayout bar2 = findViewById(R.id.bar2);
+        bar2.setBackgroundResource(R.drawable.bg_brand_line);
 
         binder.backBtn.setOnClickListener(this);
         binder.addBtn.setOnClickListener(this);
