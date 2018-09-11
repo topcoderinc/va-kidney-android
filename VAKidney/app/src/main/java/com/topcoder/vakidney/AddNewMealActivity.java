@@ -35,6 +35,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.topcoder.vakidney.databinding.ActivityAddNewMealBinding;
 import com.topcoder.vakidney.databinding.ItemAddMealdrugBinding;
 import com.topcoder.vakidney.model.DrugInteraction;
+import com.topcoder.vakidney.model.FoodRecommendation;
 import com.topcoder.vakidney.model.Meal;
 import com.topcoder.vakidney.model.MealDrug;
 import com.topcoder.vakidney.util.ImagePicker;
@@ -207,6 +208,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
                 }
                 mMeal.save();
 
+                FoodRecommendation.removeUnlinkFoodRecommendation();
                 for (MealDrug mealDrug : mAddedMealDrugs) {
                     if (mealDrug.getType() == MealDrug.TYPE_MEAL) {
                         ServiceCallUtil.searchFoodRecommendation(
