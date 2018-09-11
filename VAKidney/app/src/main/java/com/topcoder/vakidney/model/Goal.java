@@ -14,7 +14,7 @@ import java.util.List;
  * This model class is used to store data of a particular goal. This model class is used in various fragments such as GoalFragment, HOme1Fragment and WorkoutFragment
  */
 
-public class Goal extends SugarRecord implements Serializable {
+public class Goal extends SugarRecord<Goal> implements Serializable {
 
     public final static int TYPE_PILL = 0x00000001;
     public final static int TYPE_FLUID = 0x00000002;
@@ -259,13 +259,13 @@ public class Goal extends SugarRecord implements Serializable {
 
         if (dialysis) {
             return Goal.find(Goal.class, "min_category <= ? and hidden = 0 and title_str NOT IN (?,?,?)" +
-                            "and order by title_str DESC",
+                            " ORDER BY title_str DESC",
                     String.valueOf(diseaseCategry),
                     Comorbidities.ComorbiditiesGoals[0], Comorbidities.ComorbiditiesGoals[1], Comorbidities.ComorbiditiesGoals[2]
             );
         } else {
             return Goal.find(Goal.class, "min_category <= ? and dialysis_only = ? and hidden = 0  and title_str NOT IN (?,?,?)"
-                    +" order by title_str DESC",
+                            + " order by title_str DESC",
                     String.valueOf(diseaseCategry),
                     "0",
                     Comorbidities.ComorbiditiesGoals[0], Comorbidities.ComorbiditiesGoals[1], Comorbidities.ComorbiditiesGoals[2]

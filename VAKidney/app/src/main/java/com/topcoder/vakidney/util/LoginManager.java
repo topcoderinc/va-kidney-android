@@ -25,7 +25,7 @@ public class LoginManager {
      */
     public static boolean isLoggedIn(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(PREF_LOGGING, 0);
-        return preferences.getBoolean(IS_LOGGED_IN, false);
+        return UserData.get() != null && preferences.getBoolean(IS_LOGGED_IN, false);
     }
 
     /**
