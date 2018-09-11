@@ -3,10 +3,7 @@ package com.topcoder.vakidney.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.topcoder.vakidney.constant.Comorbidities;
 import com.topcoder.vakidney.model.Goal;
-import com.topcoder.vakidney.model.Meal;
-import com.topcoder.vakidney.model.MealDrug;
 import com.topcoder.vakidney.model.UserData;
 
 /**
@@ -43,16 +40,18 @@ public class LoginManager {
         editor.putBoolean(IS_LOGGED_IN, isLoggedIn);
         editor.commit();
         if (isLoggedIn) {
-            initializeData(context);
+            initializeData();
             userData.logIn();
         } else {
             userData.logOut();
         }
     }
 
-    private static void initializeData(Context context) {
-//        JsondataUtil.getMeals(context);
-        GoalGenerator.generateGoals();
+    private static void initializeData() {
+        long count = Goal.count(Goal.class, "", new String[0]);
+        if (count <= 0) {
+            GoalGenerator.generateGoals();
+        }
     }
 
     /**

@@ -1,16 +1,11 @@
 package com.topcoder.vakidney;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.topcoder.vakidney.databinding.ActivityResourcesDetailBinding;
 
@@ -31,13 +26,6 @@ public class ResourcesDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
-                Intent intent = new Intent(ResourcesDetailActivity.this, MainActivity.class);
-                if (actionbartitle.equalsIgnoreCase("Resource Details")) {
-                    intent.putExtra("tag", MainActivity.TAG_RESOURCES);
-                } else {
-                    intent.putExtra("tag", MainActivity.TAG_MEDICATION);
-                }
-                startActivity(intent);
             }
         });
 
@@ -74,18 +62,5 @@ public class ResourcesDetailActivity extends AppCompatActivity {
         if (actionbartitle != null) {
             binder.actionBarTitle.setText(actionbartitle);
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        finish();
-        Intent intent = new Intent(ResourcesDetailActivity.this, MainActivity.class);
-        if (actionbartitle.equalsIgnoreCase("Resource Details")) {
-            intent.putExtra("tag", MainActivity.TAG_RESOURCES);
-        } else {
-            intent.putExtra("tag", MainActivity.TAG_MEDICATION);
-        }
-        startActivity(intent);
-
     }
 }

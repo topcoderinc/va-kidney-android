@@ -15,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
@@ -75,7 +76,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
     private DatePickerDialog.OnDateSetListener date;
     private Meal mMeal;
     private DrugInteraction mDrugInteraction;
-    private List<MealDrug> mAddedMealDrugs = new ArrayList<>();
+    private final List<MealDrug> mAddedMealDrugs = new ArrayList<>();
     public static Activity activity;
     ActivityAddNewMealBinding binder;
 
@@ -92,8 +93,6 @@ public class AddNewMealActivity extends AppCompatActivity implements
             }
         });
         SetupSeekBar();
-
-        binder.btnAddNewMeal.setEnabled(false);
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
@@ -190,6 +189,14 @@ public class AddNewMealActivity extends AppCompatActivity implements
 
             @Override
             public void onClick(View view) {
+                if(mAddedMealDrugs.size() == 0) {
+                    new AlertDialog.Builder(AddNewMealActivity.this)
+                            .setMessage("Please add at least one meal/drug")
+                            .setPositiveButton("OK", null)
+                            .show();
+                    return;
+                }
+
                 String name = mMeal.getType().substring(0, 1).toUpperCase()
                         + mMeal.getType().substring(1);
                 mMeal.setName(name);
@@ -273,7 +280,6 @@ public class AddNewMealActivity extends AppCompatActivity implements
         binder.tvMealTime.setText(timeStr);
 
         binder.btnAddNewMeal.setText("Save Meal");
-        binder.btnAddNewMeal.setEnabled(true);
 
         if (mMeal.getPhotoUrl() != null) {
             binder.addImageLayout.setVisibility(View.VISIBLE);
@@ -513,7 +519,6 @@ public class AddNewMealActivity extends AppCompatActivity implements
     @Override
     public void onAdded(MealDrug mealDrug) {
         addMealDrug(mealDrug);
-        binder.btnAddNewMeal.setEnabled(true);
         if (mealDrug.getType() == MealDrug.TYPE_DRUG) {
             mMeal.setHasDrug(true);
         }

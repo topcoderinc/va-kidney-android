@@ -3,16 +3,14 @@ package com.topcoder.vakidney.fragments;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.topcoder.vakidney.adapter.ViewPagerAdapter;
 import com.topcoder.vakidney.R;
-import com.topcoder.vakidney.databinding.FragmentResourceBinding;
+import com.topcoder.vakidney.adapter.ViewPagerAdapter;
 import com.topcoder.vakidney.databinding.FragmentResourcesBinding;
 import com.topcoder.vakidney.fragments.resources.DoMoreFragment;
 import com.topcoder.vakidney.fragments.resources.LearnMoreFragment;
@@ -26,11 +24,6 @@ public class ResourcesFragment extends Fragment {
 
 
     FragmentResourcesBinding binder;
-
-    public ResourcesFragment() {
-        // Required empty public constructor
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
