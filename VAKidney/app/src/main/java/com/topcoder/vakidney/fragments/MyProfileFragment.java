@@ -16,6 +16,7 @@ import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
 import android.util.Log;
@@ -91,6 +92,8 @@ public class MyProfileFragment extends Fragment {
     private int birthYear = 1960, birthMonth = 1, birthDay = 1;
     private FragmentMyProfileBinding binder;
 
+    private boolean firstInput = false;
+
     public MyProfileFragment() {
         // Required empty public constructor
     }
@@ -114,6 +117,10 @@ public class MyProfileFragment extends Fragment {
 
         addFieldListeners();
         populateFields();
+
+        if (currentUserData.getFullname() == null) {
+            firstInput = true;
+        }
 
         return view;
     }
@@ -444,6 +451,9 @@ public class MyProfileFragment extends Fragment {
                 } else {
                     GoalGenerator.generateGoals();
                     Toast.makeText(getActivity(), "Goals have been generated", Toast.LENGTH_SHORT).show();
+                }
+                if (!firstInput) {
+                    navigateToGoalFragment();
                 }
             }
         });
@@ -788,5 +798,12 @@ public class MyProfileFragment extends Fragment {
             e.printStackTrace();
         }
         return bitmap;
+    }
+
+    private void navigateToGoalFragment() {
+        GoalFragment fragment = new GoalFragment();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.frame, fragment);
+        ft.commitAllowingStateLoss();
     }
 }
