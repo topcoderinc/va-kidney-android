@@ -183,6 +183,7 @@ public class ComorbiditiesActivity extends AppCompatActivity implements View.OnC
         xAxis.setAxisMinimum(getMinVisibleX(chartDataArray));
         xAxis.setAxisMaximum(getMaxVisibleX(chartDataArray));
         xAxis.setCenterAxisLabels(false);
+        xAxis.setYOffset(-1.0f);
 
 
         xAxis.setValueFormatter(new IAxisValueFormatter() {
