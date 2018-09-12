@@ -172,11 +172,7 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
         ArrayAdapter<String> gameKindArray = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, unitSpinnerItems);
         gameKindArray.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.unitSpinner.setAdapter(gameKindArray);
-        if(mealDrug != null) {
-            binding.unitSpinner.setSelection(mealDrug.getType());
-        } else {
-            binding.unitSpinner.setSelection(0);
-        }
+        binding.unitSpinner.setSelection(getUnitsIndex(unitSpinnerItems, mealDrug));
         enableDisableAddMealButton();
     }
 
@@ -291,4 +287,15 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
         void onEdited(View view, MealDrug mealDrug);
     }
 
+    private int getUnitsIndex(String[] units, MealDrug mealDrug) {
+        if (mealDrug == null || TextUtils.isEmpty(mealDrug.getUnit())) {
+            return 0;
+        }
+        for (int i = 0; i < units.length; i++) {
+            if (units[i].equals(mealDrug.getUnit())) {
+                return i;
+            }
+        }
+        return 0;
+    }
 }
