@@ -239,7 +239,23 @@ public class AddNewMealActivity extends AppCompatActivity implements
                         }
                     }
                 }
-                NavigateHome(false);
+                if( mMeal.getMealDrugs().size() <= 0){
+                    AlertDialog alertDialog = new AlertDialog.Builder(AddNewMealActivity.this).create();
+                    alertDialog.setTitle("Error");
+                    alertDialog.setMessage("Please add at least one meal/drug");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+
+
+                }
+                else{
+                    NavigateHome(false);
+                }
 
             }
 
