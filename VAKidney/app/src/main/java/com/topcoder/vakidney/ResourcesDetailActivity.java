@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.topcoder.vakidney.databinding.ActivityResourcesDetailBinding;
 
@@ -20,7 +21,8 @@ public class ResourcesDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         binder = DataBindingUtil.setContentView(this, R.layout.activity_resources_detail);
-
+        LinearLayout bar3 = findViewById(R.id.bar3);
+        bar3.setBackgroundResource(R.drawable.bg_brand_line);
         PopulateFields();
         binder.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override

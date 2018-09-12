@@ -22,7 +22,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:gravity="center"
-                android:text="Add New Meal"
+                android:text="ADD NEW MEAL/DRUG"
                 android:textAllCaps="true"
                 android:textColor="@color/colorWhite"
                 android:textSize="18dp" />
@@ -429,7 +429,7 @@
                         android:layout_marginTop="@dimen/app_standard_padding"
                         android:background="@drawable/bg_login_btn"
                         android:elevation="5dp"
-                        android:text="Add New Meal"
+                        android:text="ADD NEW MEAL/DRUG"
                         android:textColor="@color/colorWhite"
                         android:textSize="13dp" />
 

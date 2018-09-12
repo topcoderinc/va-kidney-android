@@ -8,6 +8,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -48,7 +49,8 @@ public class ChartActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binder = DataBindingUtil.setContentView(this, R.layout.activity_chart);
-
+        LinearLayout bar2 = findViewById(R.id.bar2);
+        bar2.setBackgroundResource(R.drawable.bg_brand_line);
 
         binder.backBtn.setOnClickListener(this);
         binder.addBtn.setOnClickListener(this);
@@ -107,7 +109,7 @@ public class ChartActivity extends AppCompatActivity implements
         dataSet.setColor(getColor(R.color.colorPrimaryDark));
         dataSet.setDrawCircles(true);
         dataSet.setLineWidth(3.0f);
-        dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 
         ChartType.ChartThreshold threshold = ChartType.getChartThreshold(mChartType);
 
@@ -120,7 +122,7 @@ public class ChartActivity extends AppCompatActivity implements
         maxGoalDataSet.setColor(getColor(android.R.color.holo_red_dark));
         maxGoalDataSet.setDrawCircles(false);
         maxGoalDataSet.setLineWidth(1.0f);
-        maxGoalDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        maxGoalDataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 
         // Build minimum goal chart
         List<Entry> minGoalEntries = new ArrayList<>();
@@ -131,7 +133,7 @@ public class ChartActivity extends AppCompatActivity implements
         minGoalDataSet.setColor(getColor(android.R.color.holo_green_dark));
         minGoalDataSet.setDrawCircles(false);
         minGoalDataSet.setLineWidth(1.0f);
-        minGoalDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        minGoalDataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 
         LineData lineData;
         lineData = new LineData();
@@ -161,6 +163,7 @@ public class ChartActivity extends AppCompatActivity implements
         xAxis.setEnabled(false);
         xAxis.setGranularityEnabled(false);
         xAxis.setGranularity(1f); // one hour
+        xAxis.setYOffset(-1.0f);
 
         YAxis leftAxis = lineChart.getAxisLeft();
         leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);

@@ -1,11 +1,14 @@
 package com.topcoder.vakidney.util;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
-import android.util.Log;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.fitness.Fitness;
+import com.google.android.gms.fitness.FitnessOptions;
 import com.google.android.gms.fitness.data.DataPoint;
 import com.google.android.gms.fitness.data.DataSet;
 import com.google.android.gms.fitness.data.DataSource;
@@ -20,11 +23,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.topcoder.vakidney.model.UserData;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.util.Log;
 
 import static com.github.mikephil.charting.charts.Chart.LOG_TAG;
 
@@ -322,6 +323,22 @@ public class GoogleFitUtil {
             data.getValue(Field.FIELD_NUTRIENTS).setKeyValue(key, values.get(key));
         }
 
+    }
+
+
+    public static FitnessOptions getFitnessOptions() {
+        return FitnessOptions.builder()
+                             .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+                             .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
+                             .addDataType(DataType.AGGREGATE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+                             .addDataType(DataType.AGGREGATE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
+                             .addDataType(DataType.TYPE_NUTRITION, FitnessOptions.ACCESS_WRITE)
+                             .addDataType(DataType.TYPE_WEIGHT, FitnessOptions.ACCESS_WRITE)
+                             .addDataType(DataType.TYPE_WEIGHT, FitnessOptions.ACCESS_READ)
+                             .addDataType(DataType.TYPE_NUTRITION, FitnessOptions.ACCESS_READ)
+                             .addDataType(DataType.TYPE_HEIGHT, FitnessOptions.ACCESS_WRITE)
+                             .addDataType(DataType.TYPE_HEIGHT, FitnessOptions.ACCESS_READ)
+                             .build();
     }
 
 }

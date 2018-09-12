@@ -14,7 +14,7 @@ import java.util.List;
  * This model class is used to store data of a particular goal. This model class is used in various fragments such as GoalFragment, HOme1Fragment and WorkoutFragment
  */
 
-public class Goal extends SugarRecord implements Serializable {
+public class Goal extends SugarRecord<Goal> implements Serializable {
 
     public final static int TYPE_PILL = 0x00000001;
     public final static int TYPE_FLUID = 0x00000002;
@@ -39,11 +39,13 @@ public class Goal extends SugarRecord implements Serializable {
     private String unitStr;
     private String nutrient;
     private String addString;
+    private int frequency;
     private int icon;
     private int type;
     private int action;
     private boolean dialysisOnly;
     private boolean hidden;
+    private boolean reminder;
     private int minCategory;
 
     public Goal() {
@@ -60,11 +62,13 @@ public class Goal extends SugarRecord implements Serializable {
             String unit,
             String nutrient,
             String addString,
+            int frequency,
             int icon,
             int type,
             int action,
             boolean dialysisOnly,
             boolean hidden,
+            boolean reminder,
             int minCategory) {
         this.goalId = goalId;
         this.titleStr = title;
@@ -76,11 +80,13 @@ public class Goal extends SugarRecord implements Serializable {
         this.unitStr = unit;
         this.nutrient = nutrient;
         this.addString = addString;
+        this.frequency = frequency;
         this.icon = icon;
         this.type = type;
         this.action = action;
         this.dialysisOnly = dialysisOnly;
         this.hidden = hidden;
+        this.reminder = reminder;
         this.minCategory = minCategory;
     }
 
@@ -228,6 +234,22 @@ public class Goal extends SugarRecord implements Serializable {
         this.goalStep = goalStep;
     }
 
+    public int getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(int frequency) {
+        this.frequency = frequency;
+    }
+
+    public boolean isReminder() {
+        return reminder;
+    }
+
+    public void setReminder(boolean reminder) {
+        this.reminder = reminder;
+    }
+
     public boolean isHidden() {
         return hidden;
     }
@@ -259,13 +281,13 @@ public class Goal extends SugarRecord implements Serializable {
 
         if (dialysis) {
             return Goal.find(Goal.class, "min_category <= ? and hidden = 0 and title_str NOT IN (?,?,?)" +
-                            "and order by title_str DESC",
+                            " ORDER BY title_str DESC",
                     String.valueOf(diseaseCategry),
                     Comorbidities.ComorbiditiesGoals[0], Comorbidities.ComorbiditiesGoals[1], Comorbidities.ComorbiditiesGoals[2]
             );
         } else {
             return Goal.find(Goal.class, "min_category <= ? and dialysis_only = ? and hidden = 0  and title_str NOT IN (?,?,?)"
-                    +" order by title_str DESC",
+                            + " order by title_str DESC",
                     String.valueOf(diseaseCategry),
                     "0",
                     Comorbidities.ComorbiditiesGoals[0], Comorbidities.ComorbiditiesGoals[1], Comorbidities.ComorbiditiesGoals[2]

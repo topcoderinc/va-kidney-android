@@ -8,6 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/nexa_light</item>
         <item name="fontFamily">@font/nexa_light</item>
+
+        <item name="android:textViewStyle">@style/TextViewStyle</item>
+    </style>
+
+    <style name="TextViewStyle" parent="android:Widget.TextView">
+        <!--Add line spacing to combat Nexa font descender rendering issues with lowercase 'g'-->
+        <item name="android:lineSpacingExtra">1dp</item>
     </style>
 
 </resources>

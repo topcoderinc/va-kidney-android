@@ -244,6 +244,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 binder.drawerLayout.openDrawer(Gravity.LEFT);
+                updateProfileInfo();
             }
         });
 
@@ -259,6 +260,13 @@ public class MainActivity extends AppCompatActivity {
         Typeface typeface = ResourcesCompat.getFont(this, R.font.nexa_bold);
         binder.actionBarTitle.setTypeface(typeface);
 
+        updateProfileInfo();
+    }
+
+    /**
+     * update profile info
+     */
+    private void updateProfileInfo() {
         UserData userData = UserData.get();
         if (userData != null) {
             binder.tvDrawerName.setText(userData.getFullname());

@@ -2,6 +2,7 @@ package com.topcoder.vakidney.popup;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -22,6 +23,7 @@ import com.topcoder.vakidney.api.NDBRestClient;
 import com.topcoder.vakidney.api.NDBServiceAPI;
 import com.topcoder.vakidney.databinding.PopupAddMealdrugBinding;
 import com.topcoder.vakidney.model.MealDrug;
+import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.util.ViewUtil;
 
 import org.json.JSONArray;
@@ -97,6 +99,16 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
         btnAddNewMeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                double amount = 0;
+                try {
+                    if (!binding.amountField.getText().toString().isEmpty()) {
+                        amount = Double.parseDouble(binding.amountField.getText().toString());
+                    }
+                }
+                catch (Exception e) {
+                    amount = 0;
+                }
+
                 Editable mealOrLiquidField = binding.mealOrliquidField.getText();
                 Editable amountField = binding.amountField.getText();
 
@@ -121,6 +133,13 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
                     }
                 }
 
+                if (amount == 0) {
+                    binding.amountFieldErrorTv.setVisibility(View.VISIBLE);
+                    binding.amountField.setBackgroundResource(R.drawable.bg_round_white_error);
+                    binding.amountFieldErrorTv.setText("Please input valid amount");
+                    isValid = false;
+                }
+
                 if (suggestions.size() > 0 && !suggestions.contains(mealOrLiquidField.toString())
                         && POPUP_MODE_MEAL == mMode ) {
                     binding.mealOrliquidFieldErrorTv.setVisibility(View.VISIBLE);
@@ -129,12 +148,12 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
                 } else if(isValid) {
                     if (mAction == POPUP_ACTION_ADD) {
                         MealDrug mealDrug = new MealDrug();
-                        applyMealDrugFields(mealDrug, mealOrLiquidField, amountField);
+                        applyMealDrugFields(mealDrug, mealOrLiquidField, amount);
                         if (mListener != null) {
                             mListener.onAdded(mealDrug);
                         }
                     } else if (mAction == POPUP_ACTION_EDIT) {
-                        applyMealDrugFields(mealDrug, mealOrLiquidField, amountField);
+                        applyMealDrugFields(mealDrug, mealOrLiquidField, amount);
                         mSavedMealDrug.save();
                         if (mListener != null) {
                             mListener.onEdited(parentView, mSavedMealDrug);
@@ -144,8 +163,8 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
                 }
             }
 
-            private void applyMealDrugFields(MealDrug mealDrug, Editable mealOrLiquidField, Editable amountField) {
-                mealDrug.setAmount(Double.parseDouble(amountField.toString()));
+            private void applyMealDrugFields(MealDrug mealDrug, Editable mealOrLiquidField, double amount) {
+                mealDrug.setAmount(amount);
                 mealDrug.setName(mealOrLiquidField.toString());
                 mealDrug.setUnit(unitSpinnerItems[binding.unitSpinner.getSelectedItemPosition()]);
                 mealDrug.setType(mMode == POPUP_MODE_DRUG ? MealDrug.TYPE_DRUG : MealDrug.TYPE_MEAL);
@@ -162,11 +181,7 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    mSavedMealDrug.delete();
-                } catch (Exception e) {
-                }
-                if (mListener != null) mListener.onDeleted(parentView, mSavedMealDrug);
+                if (mListener != null) mListener.onDelete(parentView, mSavedMealDrug);
                 AddMealDrugPopup.this.dismiss();
             }
         });
@@ -174,11 +189,7 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
         ArrayAdapter<String> gameKindArray = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, unitSpinnerItems);
         gameKindArray.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.unitSpinner.setAdapter(gameKindArray);
-        if(mealDrug != null) {
-            binding.unitSpinner.setSelection(mealDrug.getType());
-        } else {
-            binding.unitSpinner.setSelection(0);
-        }
+        binding.unitSpinner.setSelection(getUnitsIndex(unitSpinnerItems, mealDrug));
         enableDisableAddMealButton();
     }
 
@@ -288,9 +299,20 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
 
         void onCanceled();
 
-        void onDeleted(View view, MealDrug mealDrug);
+        void onDelete(View view, MealDrug mealDrug);
 
         void onEdited(View view, MealDrug mealDrug);
     }
 
+    private int getUnitsIndex(String[] units, MealDrug mealDrug) {
+        if (mealDrug == null || TextUtils.isEmpty(mealDrug.getUnit())) {
+            return 0;
+        }
+        for (int i = 0; i < units.length; i++) {
+            if (units[i].equals(mealDrug.getUnit())) {
+                return i;
+            }
+        }
+        return 0;
+    }
 }
