@@ -1,156 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@color/colorLightGray"
-    android:padding="@dimen/app_standard_padding">
-
-    <TextView
-        android:id="@+id/textTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/app_standard_padding"
-        android:text="Meal or Liquid Item"
-        android:textColor="@color/colorLightDarkGray"
-        android:textSize="12dp"
-        />
-
-    <AutoCompleteTextView
-        android:completionThreshold="3"
-        android:id="@+id/mealOrliquidField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/bg_round_white"
-        android:paddingLeft="@dimen/app_standard_padding"
-        android:paddingRight="@dimen/app_standard_padding"
-        android:textSize="20sp"
-        android:spinnerMode="dialog"
-        android:dropDownVerticalOffset="5dp"
-        android:dropDownHeight="wrap_content"
-        android:dropDownWidth="wrap_content"/>
-
-
-    <TextView
-        android:id="@+id/mealOrliquidFieldErrorTv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#ff7f32"
-        android:visibility="gone"
-        android:textSize="12dp"
-        android:text="@string/generic_error_field"
-        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/app_standard_padding"
-                android:text="Amount"
-                android:textColor="@color/colorLightDarkGray"
-                android:textSize="12dp" />
-
-            <EditText
-                android:id="@+id/amountField"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginTop="5dp"
-                android:maxLength="6"
-                android:background="@drawable/bg_round_white"
-                android:inputType="numberDecimal"
-                android:paddingLeft="@dimen/app_standard_padding"
-                android:paddingRight="@dimen/app_standard_padding" />
-
-
-            <TextView
-                android:id="@+id/amountFieldErrorTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#ff7f32"
-                android:textSize="12dp"
-                android:visibility="gone"
-                android:text="@string/generic_error_field"
-                />
-
-        </LinearLayout>
+        android:background="@color/colorLightGray"
+        android:orientation="vertical"
+        android:padding="@dimen/app_standard_padding">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:gravity="right">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/app_standard_padding"
-                android:text="Unit"
-                android:textColor="@color/colorLightDarkGray"
-                android:textSize="12dp" />
-
-            <android.support.v7.widget.AppCompatSpinner
-                android:id="@+id/unitSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginTop="5dp"
-                android:spinnerMode="dialog"
-                android:background="@drawable/bg_round_white" />
-
-
-            <TextView
-                android:id="@+id/unitSpinnerErroTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#ff7f32"
-                android:textSize="12dp"
-                android:visibility="gone"
-                android:text="@string/generic_error_field"
-                />
+            <ImageView
+                android:id="@+id/btnClose"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="@dimen/app_standard_padding"
+                android:elevation="5dp"
+                android:src="@drawable/ic_cross_in_circle"
+                android:textColor="@color/colorWhite"
+                android:tint="@color/brandBlue" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/app_standard_padding"
+            android:text="Meal or Liquid Item"
+            android:textColor="@color/colorLightDarkGray"
+            android:textSize="12dp" />
+
+        <AutoCompleteTextView
+            android:id="@+id/mealOrliquidField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_round_white"
+            android:completionThreshold="3"
+            android:dropDownHeight="wrap_content"
+            android:dropDownVerticalOffset="5dp"
+            android:dropDownWidth="wrap_content"
+            android:paddingLeft="@dimen/app_standard_padding"
+            android:paddingRight="@dimen/app_standard_padding"
+            android:spinnerMode="dialog"
+            android:textSize="20sp" />
+
+
+        <TextView
+            android:id="@+id/mealOrliquidFieldErrorTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/non_empty_string"
+            android:textColor="#ff7f32"
+            android:textSize="12dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/app_standard_padding"
+                    android:text="Amount"
+                    android:textColor="@color/colorLightDarkGray"
+                    android:textSize="12dp" />
+
+                <EditText
+                    android:id="@+id/amountField"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bg_round_white"
+                    android:inputType="numberDecimal"
+                    android:paddingLeft="@dimen/app_standard_padding"
+                    android:paddingRight="@dimen/app_standard_padding" />
+
+
+                <TextView
+                    android:id="@+id/amountFieldErrorTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/positive_number"
+                    android:textColor="#ff7f32"
+                    android:textSize="12dp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/app_standard_padding"
+                    android:text="Unit"
+                    android:textColor="@color/colorLightDarkGray"
+                    android:textSize="12dp" />
+
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/unitSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bg_round_white"
+                    android:spinnerMode="dialog" />
+
+
+                <TextView
+                    android:id="@+id/unitSpinnerErroTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_unit"
+                    android:textColor="#ff7f32"
+                    android:textSize="12dp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/app_standard_padding"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnDeleteMeal"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="@dimen/app_standard_padding"
+                android:layout_weight="1"
+                android:background="@drawable/bg_red_btn"
+                android:elevation="5dp"
+                android:text="Delete"
+                android:textColor="@color/colorWhite"
+                android:textSize="13dp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnAddNewMeal"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_login_btn"
+                android:elevation="5dp"
+                android:text="Add Meal"
+                android:textColor="@color/colorWhite"
+                android:textSize="13dp" />
+        </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/app_standard_padding"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/btnDeleteMeal"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="40dp"
-            android:elevation="5dp"
-            android:textSize="13dp"
-            android:text="Delete"
-            android:visibility="gone"
-            android:background="@drawable/bg_red_btn"
-            android:layout_marginEnd="@dimen/app_standard_padding"
-            android:textColor="@color/colorWhite"/>
-        <Button
-            android:id="@+id/btnAddNewMeal"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="40dp"
-            android:background="@drawable/bg_login_btn"
-            android:elevation="5dp"
-            android:textSize="13dp"
-            android:text="Add Meal"
-            android:textColor="@color/colorWhite" />
-    </LinearLayout>
-</LinearLayout></layout>
+</layout>
