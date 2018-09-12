@@ -57,7 +57,7 @@
             android:layout_marginBottom="@dimen/app_standard_padding"
             android:layout_marginTop="@dimen/app_standard_padding"
             android:gravity="center"
-            android:text="Add New Meal"
+            android:text="ADD NEW MEAL/DRUG"
             android:textColor="@color/colorAccent"
             android:textSize="12dp"
             android:textStyle="bold" />
