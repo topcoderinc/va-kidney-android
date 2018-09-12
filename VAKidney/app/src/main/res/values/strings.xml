@@ -55,4 +55,8 @@ Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit
     <string name="meal_type_casual">Casual</string>
     <string name="error_password_not_match">The password does not match</string>
     <string name="error_password_min">The password does not meet the minimum length (%d Characters)</string>
+    <string name="dialog_title_add_meal_cancel_changes">Cancel Changes</string>
+    <string name="dialog_message_add_meal_cancel_changes">Are you sure you want to cancel the changes?</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
 </resources>
