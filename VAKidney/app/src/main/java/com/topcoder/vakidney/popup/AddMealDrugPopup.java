@@ -99,6 +99,16 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
         btnAddNewMeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                double amount = 0;
+                try {
+                    if (!binding.amountField.getText().toString().isEmpty()) {
+                        amount = Double.parseDouble(binding.amountField.getText().toString());
+                    }
+                }
+                catch (Exception e) {
+                    amount = 0;
+                }
+
                 Editable mealOrLiquidField = binding.mealOrliquidField.getText();
                 Editable amountField = binding.amountField.getText();
 
@@ -123,6 +133,13 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
                     }
                 }
 
+                if (amount == 0) {
+                    binding.amountFieldErrorTv.setVisibility(View.VISIBLE);
+                    binding.amountField.setBackgroundResource(R.drawable.bg_round_white_error);
+                    binding.amountFieldErrorTv.setText("Please input valid amount");
+                    isValid = false;
+                }
+
                 if (suggestions.size() > 0 && !suggestions.contains(mealOrLiquidField.toString())
                         && POPUP_MODE_MEAL == mMode ) {
                     binding.mealOrliquidFieldErrorTv.setVisibility(View.VISIBLE);
@@ -131,12 +148,12 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
                 } else if(isValid) {
                     if (mAction == POPUP_ACTION_ADD) {
                         MealDrug mealDrug = new MealDrug();
-                        applyMealDrugFields(mealDrug, mealOrLiquidField, amountField);
+                        applyMealDrugFields(mealDrug, mealOrLiquidField, amount);
                         if (mListener != null) {
                             mListener.onAdded(mealDrug);
                         }
                     } else if (mAction == POPUP_ACTION_EDIT) {
-                        applyMealDrugFields(mealDrug, mealOrLiquidField, amountField);
+                        applyMealDrugFields(mealDrug, mealOrLiquidField, amount);
                         mSavedMealDrug.save();
                         if (mListener != null) {
                             mListener.onEdited(parentView, mSavedMealDrug);
@@ -146,8 +163,8 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
                 }
             }
 
-            private void applyMealDrugFields(MealDrug mealDrug, Editable mealOrLiquidField, Editable amountField) {
-                mealDrug.setAmount(Double.parseDouble(amountField.toString()));
+            private void applyMealDrugFields(MealDrug mealDrug, Editable mealOrLiquidField, double amount) {
+                mealDrug.setAmount(amount);
                 mealDrug.setName(mealOrLiquidField.toString());
                 mealDrug.setUnit(unitSpinnerItems[binding.unitSpinner.getSelectedItemPosition()]);
                 mealDrug.setType(mMode == POPUP_MODE_DRUG ? MealDrug.TYPE_DRUG : MealDrug.TYPE_MEAL);
