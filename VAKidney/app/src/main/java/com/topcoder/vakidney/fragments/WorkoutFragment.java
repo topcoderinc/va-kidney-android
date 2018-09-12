@@ -1,6 +1,27 @@
 package com.topcoder.vakidney.fragments;
 
 
+import java.util.List;
+import java.util.Locale;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.fitness.Fitness;
+import com.google.android.gms.fitness.data.Bucket;
+import com.google.android.gms.fitness.data.DataPoint;
+import com.google.android.gms.fitness.data.DataSet;
+import com.google.android.gms.fitness.data.DataType;
+import com.google.android.gms.fitness.data.Field;
+import com.google.android.gms.fitness.result.DataReadResponse;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.topcoder.vakidney.R;
+import com.topcoder.vakidney.databinding.FragmentWorkoutBinding;
+import com.topcoder.vakidney.model.UserData;
+import com.topcoder.vakidney.util.GoogleFitUtil;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -11,24 +32,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-import com.google.android.gms.fitness.data.Bucket;
-import com.google.android.gms.fitness.data.DataPoint;
-import com.google.android.gms.fitness.data.DataSet;
-import com.google.android.gms.fitness.data.DataType;
-import com.google.android.gms.fitness.data.Field;
-import com.google.android.gms.fitness.data.Value;
-import com.google.android.gms.fitness.result.DataReadResponse;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.topcoder.vakidney.databinding.FragmentWorkoutBinding;
-import com.topcoder.vakidney.model.UserData;
-import com.topcoder.vakidney.R;
-import com.topcoder.vakidney.util.GoogleFitUtil;
-
-import java.util.List;
-import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,6 +39,10 @@ import java.util.Locale;
  */
 public class WorkoutFragment extends Fragment implements View.OnClickListener {
 
+
+    private static final int REQUEST_SYNC_DATA_OAUTH_REQUEST_CODE = 0x1001;
+    private static final int REQUEST_SYNC_STEPS_OAUTH_REQUEST_CODE = 0x1002;
+    private static final int REQUEST_SYNC_DISTANCE_OAUTH_REQUEST_CODE = 0x1003;
 
     private UserData currentUserData;
     private FragmentWorkoutBinding binder;
@@ -49,7 +56,7 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binder = DataBindingUtil.inflate(inflater, R.layout.fragment_workout, container, false);
         final View view = binder.getRoot();
@@ -78,6 +85,109 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
         populateData();
     }
 
+    public void initGoogleData(int requestCode) {
+        if (!GoogleSignIn.hasPermissions(GoogleSignIn.getLastSignedInAccount(getContext()), GoogleFitUtil.getFitnessOptions())) {
+            GoogleSignIn.requestPermissions(
+                    this,
+                    requestCode,
+                    GoogleSignIn.getLastSignedInAccount(getContext()),
+                    GoogleFitUtil.getFitnessOptions());
+        } else {
+            syncFitData(requestCode);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+            case REQUEST_SYNC_DATA_OAUTH_REQUEST_CODE:
+            case REQUEST_SYNC_DISTANCE_OAUTH_REQUEST_CODE:
+            case REQUEST_SYNC_STEPS_OAUTH_REQUEST_CODE:
+                syncFitData(requestCode);
+                break;
+            }
+        }
+    }
+
+    private void syncFitData(int requestCode) {
+        Context context = getContext();
+        switch (requestCode) {
+        case REQUEST_SYNC_DATA_OAUTH_REQUEST_CODE:
+            syncDistance(context);
+            syncSteps(context);
+            break;
+        case REQUEST_SYNC_DISTANCE_OAUTH_REQUEST_CODE:
+            syncDistance(context);
+            break;
+        case REQUEST_SYNC_STEPS_OAUTH_REQUEST_CODE:
+            syncSteps(context);
+            break;
+        }
+    }
+
+    void syncSteps(Context context) {
+        Fitness.getHistoryClient(context, GoogleSignIn.getLastSignedInAccount(context))
+               .readDailyTotal(DataType.TYPE_STEP_COUNT_DELTA)
+               .addOnSuccessListener(
+                       new OnSuccessListener<DataSet>() {
+                           @Override
+                           public void onSuccess(DataSet dataSet) {
+                               int total = dataSet.isEmpty() ? 0 : dataSet.getDataPoints().get(0).getValue(Field.FIELD_STEPS).asInt();
+                               currentUserData.setStepcurrent(total);
+                               populateData();
+                               currentUserData.save();
+                               Log.i(TAG, "Total steps: " + total);
+                           }
+                       })
+               .addOnFailureListener(
+                       new OnFailureListener() {
+                           @Override
+                           public void onFailure(@NonNull Exception e) {
+                               Log.w(TAG, "There was a problem getting the step count.", e);
+                           }
+                       });
+    }
+
+    void syncDistance(Context context) {
+        Fitness.getHistoryClient(context, GoogleSignIn.getLastSignedInAccount(context))
+               .readDailyTotal(DataType.TYPE_DISTANCE_DELTA)
+               .addOnSuccessListener(
+                       new OnSuccessListener<DataSet>() {
+                           @Override
+                           public void onSuccess(DataSet dataSet) {
+                               float total = dataSet.isEmpty() ? 0 : dataSet.getDataPoints().get(0).getValue(Field.FIELD_DISTANCE).asFloat();
+                               currentUserData.setRunningcurrent(total * 0.000621);
+                               populateData();
+                               currentUserData.save();
+                               Log.i(TAG, "Total distance: " + total);
+                           }
+                       })
+               .addOnFailureListener(
+                       new OnFailureListener() {
+                           @Override
+                           public void onFailure(@NonNull Exception e) {
+                               Log.w(TAG, "There was a problem getting the step count.", e);
+                           }
+                       });
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+        case R.id.tvSyncData:
+            initGoogleData(REQUEST_SYNC_DATA_OAUTH_REQUEST_CODE);
+            break;
+        case R.id.tvSyncDistance:
+            initGoogleData(REQUEST_SYNC_DISTANCE_OAUTH_REQUEST_CODE);
+            break;
+        case R.id.tvSyncStep:
+            initGoogleData(REQUEST_SYNC_STEPS_OAUTH_REQUEST_CODE);
+            break;
+        }
+    }
+
+
     /**
      * Populates the fields with respective data
      */
@@ -92,90 +202,13 @@ public class WorkoutFragment extends Fragment implements View.OnClickListener {
                 currentUserData.getRunninggoal());
         binder.tvRunning.setText(
                 distanceStr +
-                        "/" +
-                        distanceGoalStr);
+                "/" +
+                distanceGoalStr);
         binder.tvSteps.setText(currentUserData.getStepcurrent() + "/" + currentUserData.getStepgoal());
         binder.arcRunning.setMax((int) currentUserData.getRunninggoal());
         binder.arcRunning.setProgress((float) currentUserData.getRunningcurrent());
         binder.arcSteps.setMax(currentUserData.getStepgoal());
         binder.arcSteps.setProgress(currentUserData.getStepcurrent());
-    }
-
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.tvSyncData: {
-                if (getView() != null) {
-                    getView().findViewById(R.id.tvSyncDistance).performClick();
-                    getView().findViewById(R.id.tvSyncStep).performClick();
-                }
-            }
-            break;
-            case R.id.tvSyncDistance: {
-                GoogleFitUtil.getDistance(
-                        getContext(),
-                        new OnSuccessListener<DataReadResponse>() {
-                            @Override
-                            public void onSuccess(DataReadResponse dataReadResponse) {
-                                try {
-                                    float distance = 0;
-                                    List<DataPoint> dps = dataReadResponse
-                                            .getDataSet(DataType.TYPE_DISTANCE_DELTA)
-                                            .getDataPoints();
-                                    for (DataPoint dp : dps) {
-                                        Value value = dp.getValue(Field.FIELD_DISTANCE);
-                                        distance = distance + value.asFloat();
-                                    }
-                                    currentUserData.setRunningcurrent(distance * 0.000621);
-                                    populateData();
-                                    currentUserData.save();
-                                } catch (Exception e) {
-                                    Log.e(TAG, e.getMessage());
-                                }
-
-                            }
-                        },
-                        new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.e(TAG, e.getMessage());
-                            }
-                        });
-            }
-            break;
-            case R.id.tvSyncStep: {
-                GoogleFitUtil.getStep(
-                        getContext(),
-                        new OnSuccessListener<DataReadResponse>() {
-                            @Override
-                            public void onSuccess(DataReadResponse dataReadResponse) {
-                                printData(dataReadResponse);
-                                try {
-                                    int steps = 0;
-                                    List<DataPoint> dps = dataReadResponse
-                                            .getDataSet(DataType.TYPE_STEP_COUNT_DELTA)
-                                            .getDataPoints();
-                                    for (DataPoint dp : dps) {
-                                        Value value = dp.getValue(Field.FIELD_STEPS);
-                                        steps = steps + value.asInt();
-                                    }
-                                    currentUserData.setStepcurrent(steps);
-                                    populateData();
-                                    currentUserData.save();
-                                } catch (Exception e) {
-                                }
-                            }
-                        },
-                        new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.e(TAG, e.getMessage());
-                            }
-                        });
-            }
-            break;
-        }
     }
 
 
