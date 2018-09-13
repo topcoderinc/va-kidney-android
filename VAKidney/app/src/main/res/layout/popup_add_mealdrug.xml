@@ -7,15 +7,32 @@
     android:background="@color/colorLightGray"
     android:padding="@dimen/app_standard_padding">
 
-    <TextView
-        android:id="@+id/textTitle"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/app_standard_padding"
-        android:text="Meal or Liquid Item"
-        android:textColor="@color/colorLightDarkGray"
-        android:textSize="12dp"
-        />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/app_standard_padding"
+            android:layout_weight="1"
+            android:text="Meal or Liquid Item"
+            android:textColor="@color/colorLightDarkGray"
+            android:textSize="12dp" />
+
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="@dimen/app_standard_padding"
+            android:elevation="5dp"
+            android:src="@drawable/ic_cross_in_circle"
+            android:textColor="@color/colorWhite"
+            android:tint="@color/brandBlue" />
+
+    </LinearLayout>
 
     <AutoCompleteTextView
         android:completionThreshold="3"
@@ -120,7 +137,7 @@
                 android:textColor="#ff7f32"
                 android:textSize="12dp"
                 android:visibility="gone"
-                android:text="@string/generic_error_field"
+                android:text="@string/select_units_error_field"
                 />
 
         </LinearLayout>
