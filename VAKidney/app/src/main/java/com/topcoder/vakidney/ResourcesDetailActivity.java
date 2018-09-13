@@ -1,5 +1,10 @@
 package com.topcoder.vakidney;
 
+import android.app.Activity;
+import android.content.Intent;
+import com.topcoder.vakidney.databinding.ActivityResourcesDetailBinding;
+
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -8,12 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.topcoder.vakidney.databinding.ActivityResourcesDetailBinding;
-
 public class ResourcesDetailActivity extends AppCompatActivity {
 
 
-    private String title, desc, url, actionbartitle;
+    private String title, desc, url, actionbartitle, nutrients;
     ActivityResourcesDetailBinding binder;
 
     @Override
@@ -34,6 +37,7 @@ public class ResourcesDetailActivity extends AppCompatActivity {
         Typeface boldTypeface = ResourcesCompat.getFont(this, R.font.nexa_bold);
         binder.actionBarTitle.setTypeface(boldTypeface);
         binder.tvTitle.setTypeface(boldTypeface);
+        binder.tvNutrients.setTypeface(boldTypeface);
     }
 
     /**
@@ -49,6 +53,9 @@ public class ResourcesDetailActivity extends AppCompatActivity {
         if (getIntent().hasExtra("desc")) {
             desc = getIntent().getStringExtra("desc");
         }
+        if (getIntent().hasExtra("nutrients")) {
+            nutrients = getIntent().getStringExtra("nutrients");
+        }
         if (getIntent().hasExtra("url")) {
             url = getIntent().getStringExtra("url");
         }
@@ -57,6 +64,10 @@ public class ResourcesDetailActivity extends AppCompatActivity {
         }
         if (desc != null) {
             binder.tvDesc.setText(desc);
+        }
+
+        if (nutrients != null) {
+            binder.tvNutrients.setText("Related nutrients: " + nutrients);
         }
         if (url != null) {
             binder.tvDesc.setText(binder.tvDesc.getText() + "\n\n" + url);
