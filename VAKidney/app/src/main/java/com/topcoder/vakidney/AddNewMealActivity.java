@@ -33,6 +33,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.topcoder.vakidney.databinding.ActivityAddNewMealBinding;
 import com.topcoder.vakidney.databinding.ItemAddMealdrugBinding;
 import com.topcoder.vakidney.model.DrugInteraction;
+import com.topcoder.vakidney.model.FoodRecommendation;
 import com.topcoder.vakidney.model.Meal;
 import com.topcoder.vakidney.model.MealDrug;
 import com.topcoder.vakidney.util.ImagePicker;
@@ -190,13 +191,6 @@ public class AddNewMealActivity extends AppCompatActivity implements
 
             @Override
             public void onClick(View view) {
-                if(mAddedMealDrugs.size() == 0) {
-                    new AlertDialog.Builder(AddNewMealActivity.this)
-                            .setMessage("Please add at least one meal/drug")
-                            .setPositiveButton("OK", null)
-                            .show();
-                    return;
-                }
 
                 String name = mMeal.getType().substring(0, 1).toUpperCase()
                         + mMeal.getType().substring(1);
@@ -211,52 +205,15 @@ public class AddNewMealActivity extends AppCompatActivity implements
                 }
                 mMeal.save();
 
-                for (MealDrug mealDrug : mAddedMealDrugs) {
-                    if (mealDrug.getType() == MealDrug.TYPE_MEAL) {
-                        ServiceCallUtil.searchFoodRecommendation(
-                                AddNewMealActivity.this,
-                                mealDrug.getName());
-                    }
+
+                if(mMeal.getMealDrugs().size() == 0) {
+                    new AlertDialog.Builder(AddNewMealActivity.this)
+                            .setMessage("Please add at least one meal/drug")
+                            .setPositiveButton("OK", null)
+                            .show();
+                    return;
                 }
-
-                if (mMeal.isHasDrug()) {
-                    List<String> drugs = new ArrayList<>();
-                    for (MealDrug mealDrug : mMeal.getMealDrugs()) {
-                        if (mealDrug.getType() == MealDrug.TYPE_DRUG) drugs.add(mealDrug.getName());
-                    }
-                    if (drugs.size() > 0) {
-                        String[] drugsStr = new String[drugs.size()];
-                        drugs.toArray(drugsStr);
-                        if (DrugInteraction.findByDrugs(drugsStr) == null) {
-
-                            mDrugInteraction = new DrugInteraction();
-                            mDrugInteraction.setDrugs(drugsStr);
-
-                            ServiceCallUtil.searchDrugInteraction(
-                                    AddNewMealActivity.this,
-                                    mDrugInteraction);
-
-                        }
-                    }
-                }
-                if( mMeal.getMealDrugs().size() <= 0){
-                    AlertDialog alertDialog = new AlertDialog.Builder(AddNewMealActivity.this).create();
-                    alertDialog.setTitle("Error");
-                    alertDialog.setMessage("Please add at least one meal/drug");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.show();
-
-
-                }
-                else{
-                    NavigateHome(false);
-                }
-
+                NavigateHome(false);
             }
 
         });
@@ -279,6 +236,39 @@ public class AddNewMealActivity extends AppCompatActivity implements
         binder.actionBarTitle.setTypeface(typeface);
         binder.tvChangeDate.setTypeface(typeface);
         binder.tvChangeTime.setTypeface(typeface);
+    }
+
+    private void updateFoodRecommendation() {
+
+        FoodRecommendation.removeUnlinkFoodRecommendation();
+        for (MealDrug mealDrug : mAddedMealDrugs) {
+            if (mealDrug.getType() == MealDrug.TYPE_MEAL) {
+                ServiceCallUtil.searchFoodRecommendation(
+                        AddNewMealActivity.this,
+                        mealDrug.getName());
+            }
+        }
+
+        if (mMeal.isHasDrug()) {
+            List<String> drugs = new ArrayList<>();
+            for (MealDrug mealDrug : mMeal.getMealDrugs()) {
+                if (mealDrug.getType() == MealDrug.TYPE_DRUG) drugs.add(mealDrug.getName());
+            }
+            if (drugs.size() > 0) {
+                String[] drugsStr = new String[drugs.size()];
+                drugs.toArray(drugsStr);
+                if (DrugInteraction.findByDrugs(drugsStr) == null) {
+
+                    mDrugInteraction = new DrugInteraction();
+                    mDrugInteraction.setDrugs(drugsStr);
+
+                    ServiceCallUtil.searchDrugInteraction(
+                            AddNewMealActivity.this,
+                            mDrugInteraction);
+
+                }
+            }
+        }
     }
 
     private void initSavedMeal(Meal meal) {
@@ -353,6 +343,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
     }
 
     private void NavigateHome(boolean save) {
+        updateFoodRecommendation();
         finish();
         Intent intent = new Intent(AddNewMealActivity.this, MainActivity.class);
         if (save) {

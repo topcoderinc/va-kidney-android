@@ -3,6 +3,8 @@ package com.topcoder.vakidney.model;
 import com.orm.SugarRecord;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -116,5 +118,39 @@ public class FoodRecommendation extends SugarRecord<FoodRecommendation>
                 FoodRecommendation.class,
                 "type = ?",
                 String.valueOf(TYPE_GOOD));
+    }
+
+    public static void removeUnlinkFoodRecommendation() {
+        Iterator it = FoodRecommendation.findAll(FoodRecommendation.class);
+        Iterator itMeal = Meal.findAll(Meal.class);
+        List<Meal> mealList = new ArrayList<Meal>();
+
+        while(itMeal.hasNext()) {
+            mealList.add((Meal)itMeal.next());
+        }
+        while(it.hasNext()) {
+            FoodRecommendation foodRecommenndation = (FoodRecommendation)it.next();
+            String nameOfFoodRecommenndation = foodRecommenndation.getName();
+
+            boolean isExistMeal = false;
+            int len = mealList.size();
+            for (int i = 0; i < len; i++) {
+                Meal meal = mealList.get(i);
+                for (int j = 0; j < meal.getMealDrugs().size(); j++) {
+                    MealDrug mealDrug = meal.getMealDrugs().get(j);
+                    String mealDrugName = "Reduce " + mealDrug.getName();
+                    if (mealDrugName.equals(nameOfFoodRecommenndation)) {
+                        isExistMeal = true;
+                        break;
+                    }
+                }
+                if (isExistMeal) {
+                    break;
+                }
+            }
+            if (!isExistMeal) {
+                foodRecommenndation.delete();
+            }
+        }
     }
 }
