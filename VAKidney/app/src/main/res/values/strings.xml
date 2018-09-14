@@ -56,4 +56,5 @@ Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit
     <string name="dialog_message_add_meal_cancel_changes">Are you sure you want to cancel the changes?</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
+    <string name="select_units_error_field">*Select units</string>
 </resources>

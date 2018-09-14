@@ -13,8 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.topcoder.vakidney.BuildConfig;
 import com.topcoder.vakidney.R;
@@ -51,8 +53,9 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
     private static final int AUTO_COMPLETION_THRESHOLD = 3;
 
     private String[] unitSpinnerItems;
-    private final String[] unitMealSpinnerItems = {"oz (mass)", "oz (fluid)", "g", "mg", "L", "mL", "lb", "st", "cups", "pints"};
-    private final String[] unitDrugSpinnerItems = {"g", "mg"};
+    private final String[] unitMealSpinnerItems = {"Select", "oz (mass)", "oz (fluid)", "g", "mg", "L", "mL", "lb", "st", "cups", "pints"};
+    private final String[] unitDrugSpinnerItems = {"Select", "g", "mg"};
+    private ImageView btnClose;
     private Button btnAddNewMeal;
     private int mMode = POPUP_MODE_MEAL;
     private int mAction = POPUP_ACTION_ADD;
@@ -87,11 +90,18 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
 
         binding.mealOrliquidField.setAdapter(adapter);
         if (mMode == POPUP_MODE_DRUG) {
-            binding.textTitle.setText("Drug/medications");
+            binding.textTitle.setText("Drug name");
             unitSpinnerItems = unitDrugSpinnerItems;
         } else {
             unitSpinnerItems = unitMealSpinnerItems;
         }
+        btnClose = findViewById(R.id.btnClose);
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddMealDrugPopup.this.dismiss();
+            }
+        });
         btnAddNewMeal = findViewById(R.id.btnAddNewMeal);
         String btnLabel = mAction == POPUP_ACTION_ADD ? "Add " : "Edit ";
         btnLabel = btnLabel + (mMode == POPUP_MODE_DRUG ? "Drug" : "Meal");
@@ -131,6 +141,12 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
                         binding.amountField.setBackgroundResource(R.drawable.bg_round_white_error);
                         isValid = false;
                     }
+                }
+
+                if(binding.unitSpinner.getSelectedItemPosition()==0){
+                    binding.unitSpinnerErroTv.setVisibility(View.VISIBLE);
+                    binding.unitSpinner.setBackgroundResource(R.drawable.bg_round_white_error);
+                    isValid = false;
                 }
 
                 if (amount == 0) {
@@ -289,6 +305,20 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
 
             @Override
             public void afterTextChanged(Editable editable) {
+            }
+        });
+
+        binding.unitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(binding.unitSpinner.getSelectedItemPosition()!=0){
+                    binding.unitSpinnerErroTv.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
