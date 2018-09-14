@@ -282,6 +282,54 @@ public class AddMealDrugPopup extends Dialog implements View.OnClickListener {
                         }
                     });
 
+                } else if (charSequence.toString().length() >= AUTO_COMPLETION_THRESHOLD && POPUP_MODE_DRUG == mMode) {
+                    final NDBServiceAPI ndbServiceAPI = NDBRestClient.getService(NDBServiceAPI.class, getContext());
+                    Call<String> result = ndbServiceAPI.searchDrug(BuildConfig.NDB_API_KEY, charSequence.toString());
+                    Log.d("TOPCODER", "call searchDrugRecommendation ");
+                    result.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+
+                            JSONObject jsonObject = null;
+
+                            Log.d("TOPCODER", "response.body() " + response.body());
+
+                            try {
+                                jsonObject = new JSONObject(response.body());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            try {
+                                JSONArray items = jsonObject.getJSONObject("list").getJSONArray("item");
+                                suggestions.clear();
+                                for (int i = 0; i < items.length(); i++) {
+                                    JSONObject jsonObject1 = items.getJSONObject(i);
+                                    Log.d("JSONOBJECT", items.getJSONObject(i).toString());
+                                    suggestions.add(jsonObject1.get("name").toString());
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            new Handler().post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    //suggestions is the result of the http request with the suggestions
+
+                                    adapter = new DropDownItemAdapter(getContext(),
+                                            android.R.layout.simple_dropdown_item_1line, suggestions);
+                                    binding.mealOrliquidField.setAdapter(adapter);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            });
+
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+                            t.getStackTrace();
+                        }
+                    });
                 }
             }
 

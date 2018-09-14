@@ -30,4 +30,9 @@ public interface NDBServiceAPI {
 
     );
 
+    @GET("/ndb/search?format=json&sort=r&max=20&offset=0")
+    Call<String> searchDrug(
+            @Query("api_key") String apiKey,
+            @Query("q") String query);
+
 }
