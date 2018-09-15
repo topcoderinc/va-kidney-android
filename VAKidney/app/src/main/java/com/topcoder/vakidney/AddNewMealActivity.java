@@ -655,8 +655,11 @@ public class AddNewMealActivity extends AppCompatActivity implements
     @Override
     public void onRemoveMealDrugImage(MealDrugImage mealDrug) {
         if (mealDrug.getMealId() == 0) {
-            return;
+            if (mealDrugImages.contains(mealDrug)) {
+                mealDrugImages.remove(mealDrug);
+            }
+        } else {
+            deletedDrugImages.add(mealDrug);
         }
-        deletedDrugImages.add(mealDrug);
     }
 }
