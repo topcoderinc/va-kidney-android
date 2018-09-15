@@ -31,7 +31,7 @@
             android:value="va_data.db" />
         <meta-data
             android:name="VERSION"
-            android:value="3" />
+            android:value="4" />
         <meta-data
             android:name="QUERY_LOG"
             android:value="false" />
@@ -72,7 +72,8 @@
         <activity
             android:name=".RegisterActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".SetProfileActivity"
+        <activity
+            android:name=".SetProfileActivity"
             android:screenOrientation="portrait" />
     </application>
 

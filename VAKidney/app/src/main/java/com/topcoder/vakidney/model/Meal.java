@@ -28,31 +28,10 @@ public class Meal extends SugarRecord<Meal> implements Serializable {
 
     long mealId;
     String name;
-    String photoUrl;
     String desc;
     Date date;
     String type;
     boolean hasDrug;
-
-    public Meal() {
-    }
-
-    public Meal(
-            long mealId,
-            String name,
-            String photoUrl,
-            String desc,
-            Date date,
-            String type,
-            boolean hasDrug) {
-        this.mealId = mealId;
-        this.name = name;
-        this.photoUrl = photoUrl;
-        this.desc = desc;
-        this.date = date;
-        this.type = type;
-        this.hasDrug = hasDrug;
-    }
 
     public long getMealId() {
         return mealId;
@@ -82,15 +61,19 @@ public class Meal extends SugarRecord<Meal> implements Serializable {
         return MealDrug.find(MealDrug.class, "meal_id = ?", String.valueOf(this.getMealId()));
     }
 
+    public List<MealDrugImage> getMealDrugImages() {
+        return MealDrugImage.find(MealDrugImage.class, "meal_id = ?", String.valueOf(this.getMealId()));
+    }
+
     public static List<Meal> getMealUsingFilter(Date date, String type) {
-        if (type.length()==0) {
+        if (type.length() == 0) {
             return Meal.find(Meal.class, "date >= ?  and date <= ?", String.valueOf(getStartOfDay(date))
                     , String.valueOf(getEndOfDay(date)));
         }
         if (date == null) {
-            return Meal.find(Meal.class, "type IN ("+type+")");
+            return Meal.find(Meal.class, "type IN (" + type + ")");
         }
-        return Meal.find(Meal.class, "date >= ?  and date <= ? and type IN ("+type+" )", String.valueOf(getStartOfDay(date))
+        return Meal.find(Meal.class, "date >= ?  and date <= ? and type IN (" + type + " )", String.valueOf(getStartOfDay(date))
                 , String.valueOf(getEndOfDay(date)));
     }
 
@@ -110,14 +93,6 @@ public class Meal extends SugarRecord<Meal> implements Serializable {
         this.date = date;
     }
 
-    public String getPhotoUrl() {
-        return photoUrl;
-    }
-
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
-    }
-
     public boolean isHasDrug() {
         return hasDrug;
     }
@@ -126,27 +101,6 @@ public class Meal extends SugarRecord<Meal> implements Serializable {
         this.hasDrug = hasDrug;
     }
 
-    public static List<Meal> getAllWithDrug() {
-        return Meal.find(Meal.class, "has_drug = ?", "true");
-    }
-
-    //    public Bundle getBundle(){
-//        Bundle bundle=new Bundle();
-//        bundle.putString("name", name);
-//        bundle.putString("desc", desc);
-//        bundle.putSerializable("mealDrugs", mealDrugs);
-//        bundle.putString("type", type);
-//        return bundle;
-//    }
-//
-//    public static Meal getMealFromBundle(Bundle bundle){
-//        Meal meal = new Meal();
-//        meal.setName(bundle.getString("name"));
-//        meal.setDesc(bundle.getString("desc"));
-//        meal.setMealDrugs((ArrayList<MealDrug>) bundle.getSerializable("mealDrugs"));
-//        meal.setType(bundle.getString("type"));
-//        return meal;
-//    }
     private static long getStartOfDay(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -175,18 +129,5 @@ public class Meal extends SugarRecord<Meal> implements Serializable {
         calendar.set(Calendar.MILLISECOND, 999);
         System.out.println(calendar.getTimeInMillis());
         return calendar.getTimeInMillis();
-    }
-    static String makePlaceholders(int len) {
-        if (len < 1) {
-            // It will lead to an invalid query anyway ..
-            throw new RuntimeException("No placeholders");
-        } else {
-            StringBuilder sb = new StringBuilder(len * 2 - 1);
-            sb.append("?");
-            for (int i = 1; i < len; i++) {
-                sb.append(",?");
-            }
-            return sb.toString();
-        }
     }
 }

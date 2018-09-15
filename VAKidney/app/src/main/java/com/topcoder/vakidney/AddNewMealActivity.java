@@ -17,6 +17,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -27,17 +28,17 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.topcoder.vakidney.adapter.MealDrugImageAdapter;
 import com.topcoder.vakidney.databinding.ActivityAddNewMealBinding;
 import com.topcoder.vakidney.databinding.ItemAddMealdrugBinding;
 import com.topcoder.vakidney.model.DrugInteraction;
 import com.topcoder.vakidney.model.FoodRecommendation;
 import com.topcoder.vakidney.model.Meal;
 import com.topcoder.vakidney.model.MealDrug;
+import com.topcoder.vakidney.model.MealDrugImage;
+import com.topcoder.vakidney.popup.AddMealDrugPopup;
 import com.topcoder.vakidney.util.ImagePicker;
 import com.topcoder.vakidney.util.ServiceCallUtil;
-import com.topcoder.vakidney.popup.AddMealDrugPopup;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -54,7 +55,7 @@ import java.util.Map;
  */
 public class AddNewMealActivity extends AppCompatActivity implements
         View.OnClickListener,
-        AddMealDrugPopup.AddMealDrugPopupListener {
+        AddMealDrugPopup.AddMealDrugPopupListener, MealDrugImageAdapter.OnMealDrugActions {
 
     private final static int REQUEST_CODE_PICK_IMAGE = 1;
 
@@ -75,6 +76,8 @@ public class AddNewMealActivity extends AppCompatActivity implements
     private Meal mMeal;
     private final List<MealDrug> mAddedMealDrugs = new ArrayList<>();
     private final List<MealDrug> mDeletedMealDrugs = new ArrayList<>();
+    private final List<MealDrugImage> mealDrugImages = new ArrayList<>();
+    private final List<MealDrugImage> deletedDrugImages = new ArrayList<>();
     ActivityAddNewMealBinding binder;
 
     @Override
@@ -94,23 +97,6 @@ public class AddNewMealActivity extends AppCompatActivity implements
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
-
-        binder.removeImageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                binder.addImageLayout.setVisibility(View.INVISIBLE);
-                binder.addedImage.setImageBitmap(null);
-                if (mMeal != null && mMeal.getPhotoUrl() != null) {
-                    mMeal.setPhotoUrl(null);
-                }
-            }
-        });
-        binder.addPhotoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkPermissionThenPickPhoto();
-            }
-        });
 
         myCalendar = Calendar.getInstance();
         binder.tveMealDate.setText(myCalendar.get(Calendar.MONTH) + 1
@@ -199,6 +185,13 @@ public class AddNewMealActivity extends AppCompatActivity implements
                 for (MealDrug mealDrug : mDeletedMealDrugs) {
                     mealDrug.delete();
                 }
+                for (MealDrugImage mealDrugImage : mealDrugImages) {
+                    mealDrugImage.setMealId(mMeal.getMealId());
+                    mealDrugImage.save();
+                }
+                for (MealDrugImage mealDrugImage : deletedDrugImages) {
+                    mealDrugImage.delete();
+                }
                 mMeal.save();
 
 
@@ -218,15 +211,20 @@ public class AddNewMealActivity extends AppCompatActivity implements
         binder.tvAddMeal.setOnClickListener(this);
         binder.tvAddDrug.setOnClickListener(this);
 
+        List<MealDrugImage> mealDrugImages = new ArrayList<>();
         if (getIntent().hasExtra("meal")) {
             Meal meal = (Meal) getIntent().getSerializableExtra("meal");
             initSavedMeal(meal);
+            mealDrugImages.addAll(mMeal.getMealDrugImages());
             binder.actionBarTitle.setText("Edit Meal");
         } else {
             mMeal = new Meal();
             mMeal.setMealId(System.currentTimeMillis());
             mMeal.setType(Meal.MEAL_TYPE_BREAKFAST);
         }
+
+        binder.mealDrugImageRecycler.setLayoutManager(new GridLayoutManager(this, 2));
+        binder.mealDrugImageRecycler.setAdapter(new MealDrugImageAdapter(mealDrugImages, this));
 
         Typeface typeface = ResourcesCompat.getFont(this, R.font.nexa_bold);
         binder.actionBarTitle.setTypeface(typeface);
@@ -283,30 +281,21 @@ public class AddNewMealActivity extends AppCompatActivity implements
         binder.tvMealTime.setText(timeStr);
 
         binder.btnAddNewMeal.setText("Save Meal");
-
-        if (mMeal.getPhotoUrl() != null) {
-            binder.addImageLayout.setVisibility(View.VISIBLE);
-            Glide.with(this)
-                    .load(mMeal.getPhotoUrl())
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(binder.addedImage);
-        }
-
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_CANCELED) return;
         switch (requestCode) {
             case REQUEST_CODE_PICK_IMAGE:
-                binder.addImageLayout.setVisibility(View.VISIBLE);
                 String filePath = ImagePicker.getImagePathFromResult(this, resultCode, data);
-                Glide.with(this)
-                        .load(filePath)
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(binder.addedImage);
-                mMeal.setPhotoUrl(filePath);
+                MealDrugImage mealDrugImage = new MealDrugImage();
+                mealDrugImage.setUrl(filePath);
+                mealDrugImages.add(mealDrugImage);
+
+                MealDrugImageAdapter mealDrugImageAdapter =
+                        (MealDrugImageAdapter) binder.mealDrugImageRecycler.getAdapter();
+                mealDrugImageAdapter.addMealDrugImage(mealDrugImage);
                 break;
             default:
                 super.onActivityResult(requestCode, resultCode, data);
@@ -656,5 +645,18 @@ public class AddNewMealActivity extends AppCompatActivity implements
         } else {
             pickPhotoProfile();
         }
+    }
+
+    @Override
+    public void onAddMealDrugImage() {
+        checkPermissionThenPickPhoto();
+    }
+
+    @Override
+    public void onRemoveMealDrugImage(MealDrugImage mealDrug) {
+        if (mealDrug.getMealId() == 0) {
+            return;
+        }
+        deletedDrugImages.add(mealDrug);
     }
 }

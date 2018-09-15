@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +19,7 @@ import com.topcoder.vakidney.AddNewMealActivity;
 import com.topcoder.vakidney.model.Meal;
 import com.topcoder.vakidney.model.MealDrug;
 import com.topcoder.vakidney.R;
+import com.topcoder.vakidney.model.MealDrugImage;
 
 import java.util.List;
 
@@ -86,10 +86,14 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
                 viewHolder2.tvMealName.setText(currentMeal.getName());
-                Glide.with(activity)
-                        .load(currentMeal.getPhotoUrl())
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(viewHolder2.imageView);
+
+                List<MealDrugImage> mealDrugImages = currentMeal.getMealDrugImages();
+                if (mealDrugImages.size() > 0) {
+                    Glide.with(activity)
+                            .load(mealDrugImages.get(0).getUrl())
+                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .into(viewHolder2.imageView);
+                }
 
                 String desc = "";
                 for (int j = 0; j < currentMeal.getMealDrugs().size(); j++) {
