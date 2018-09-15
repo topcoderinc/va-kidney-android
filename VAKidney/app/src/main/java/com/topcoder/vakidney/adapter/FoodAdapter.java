@@ -97,7 +97,7 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     viewHolder2.imageView.setVisibility(View.GONE);
                     viewHolder2.mealDrugImageRecycler.setLayoutManager(new GridLayoutManager(activity, 2));
                     viewHolder2.mealDrugImageRecycler.setAdapter(new MealDrugImageAdapter(mealDrugImages));
-                } else if (mealDrugImages.size() > 1) {
+                } else if (mealDrugImages.size() >= 1) {
                     viewHolder2.mealDrugImageRecycler.setVisibility(View.GONE);
                     viewHolder2.imageView.setVisibility(View.VISIBLE);
                     Glide.with(activity)
