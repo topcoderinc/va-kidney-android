@@ -5,6 +5,7 @@ import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +70,7 @@ public class MealDrugImageAdapter extends RecyclerView.Adapter<RecyclerView.View
             case ViewType.VIEW_TYPE_IMAGE:
                 final MealDrugImageViewHolder mealDrugImageViewHolder = (MealDrugImageViewHolder) holder;
                 View.OnClickListener onRemoveItemClickListener = null;
-                ImageView addedImage = null;
+                ImageView addedImage;
                 ViewDataBinding binding;
                 if (mealDrugImageViewHolder.binding != null) {
                     binding = mealDrugImageViewHolder.binding;
@@ -89,9 +90,11 @@ public class MealDrugImageAdapter extends RecyclerView.Adapter<RecyclerView.View
                 }
                 binding.setVariable(BR.viewModel, new MealDrugImageViewModel(onRemoveItemClickListener));
                 MealDrugImage mealDrugImage = mealDrugImages.get(position - getItemCountOffset());
-                Glide.with(holder.itemView.getContext())
-                        .load(mealDrugImage.getUrl())
-                        .into(addedImage);
+                if(!TextUtils.isEmpty(mealDrugImage.getUrl())) {
+                    Glide.with(holder.itemView.getContext())
+                            .load(mealDrugImage.getUrl())
+                            .into(addedImage);
+                }
                 break;
         }
     }

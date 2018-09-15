@@ -92,7 +92,10 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 viewHolder2.tvMealName.setText(currentMeal.getName());
 
                 List<MealDrugImage> mealDrugImages = currentMeal.getMealDrugImages(4);
-                if (mealDrugImages.size() >= 3) {
+                if (mealDrugImages.size() > 1) {
+                    if(mealDrugImages.size() == 2) {
+                        mealDrugImages.add(new MealDrugImage());
+                    }
                     viewHolder2.mealDrugImageRecycler.setVisibility(View.VISIBLE);
                     viewHolder2.imageView.setVisibility(View.GONE);
                     viewHolder2.mealDrugImageRecycler.setLayoutManager(new GridLayoutManager(activity, 2));
@@ -100,9 +103,7 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 } else {
                     viewHolder2.mealDrugImageRecycler.setVisibility(View.GONE);
                     viewHolder2.imageView.setVisibility(View.VISIBLE);
-                    if (mealDrugImages.size() >= 1) {
-                        viewHolder2.mealDrugImageRecycler.setVisibility(View.GONE);
-                        viewHolder2.imageView.setVisibility(View.VISIBLE);
+                    if (mealDrugImages.size() > 0) {
                         Glide.with(activity)
                                 .load(mealDrugImages.get(0).getUrl())
                                 .into(viewHolder2.imageView);
