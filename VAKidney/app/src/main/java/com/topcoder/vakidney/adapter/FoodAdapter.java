@@ -3,22 +3,21 @@ package com.topcoder.vakidney.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.topcoder.vakidney.AddNewMealActivity;
+import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.model.Meal;
 import com.topcoder.vakidney.model.MealDrug;
-import com.topcoder.vakidney.R;
 import com.topcoder.vakidney.model.MealDrugImage;
 
 import java.util.List;
@@ -70,28 +69,45 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
             break;
             case 2: {
-                ViewHolder2 viewHolder2 = (ViewHolder2) holder;
+                final ViewHolder2 viewHolder2 = (ViewHolder2) holder;
                 Meal currentMeal = mealArrayList.get(position - 1);
-                viewHolder2.itemView.setTag(currentMeal);
-                viewHolder2.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Meal meal = (Meal) view.getTag();
-                        activity.finish();
-                        Intent intent = new Intent(activity, AddNewMealActivity.class);
-                        intent.putExtra("meal", meal);
-                        activity.startActivity(intent);
-                    }
-                });
 
+                View.OnTouchListener onTouchListener = new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View view, MotionEvent motionEvent) {
+                        if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                            Meal meal = mealArrayList.get(viewHolder2.getAdapterPosition() - 1);
+                            activity.finish();
+                            Intent intent = new Intent(activity, AddNewMealActivity.class);
+                            intent.putExtra("meal", meal);
+                            activity.startActivity(intent);
+                        }
+                        return true;
+                    }
+                };
+
+                viewHolder2.itemView.setOnTouchListener(onTouchListener);
+                viewHolder2.mealDrugImageRecycler.setOnTouchListener(onTouchListener);
 
                 viewHolder2.tvMealName.setText(currentMeal.getName());
 
-                List<MealDrugImage> mealDrugImages = currentMeal.getMealDrugImages();
-                if (mealDrugImages.size() > 0) {
+                List<MealDrugImage> mealDrugImages = currentMeal.getMealDrugImages(4);
+                if (mealDrugImages.size() >= 3) {
+                    viewHolder2.mealDrugImageRecycler.setVisibility(View.VISIBLE);
+                    viewHolder2.imageView.setVisibility(View.GONE);
+                    viewHolder2.mealDrugImageRecycler.setLayoutManager(new GridLayoutManager(activity, 2));
+                    viewHolder2.mealDrugImageRecycler.setAdapter(new MealDrugImageAdapter(mealDrugImages));
+                } else if (mealDrugImages.size() > 1) {
+                    viewHolder2.mealDrugImageRecycler.setVisibility(View.GONE);
+                    viewHolder2.imageView.setVisibility(View.VISIBLE);
                     Glide.with(activity)
                             .load(mealDrugImages.get(0).getUrl())
-                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .into(viewHolder2.imageView);
+                } else {
+                    viewHolder2.mealDrugImageRecycler.setVisibility(View.GONE);
+                    viewHolder2.imageView.setVisibility(View.VISIBLE);
+                    Glide.with(activity)
+                            .load(R.drawable.profile_bg)
                             .into(viewHolder2.imageView);
                 }
 
@@ -130,12 +146,14 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         TextView tvMealName;
         TextView tvMealDesc;
         ImageView imageView;
+        RecyclerView mealDrugImageRecycler;
 
         public ViewHolder2(View itemView) {
             super(itemView);
             tvMealName = itemView.findViewById(R.id.tvMealName);
             tvMealDesc = itemView.findViewById(R.id.tvMealDesc);
             imageView = itemView.findViewById(R.id.image);
+            mealDrugImageRecycler = itemView.findViewById(R.id.mealDrugImageRecycler);
         }
     }
 

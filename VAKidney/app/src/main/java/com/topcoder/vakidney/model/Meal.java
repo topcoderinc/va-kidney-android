@@ -1,6 +1,8 @@
 package com.topcoder.vakidney.model;
 
 import com.orm.SugarRecord;
+import com.orm.query.Condition;
+import com.orm.query.Select;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -62,7 +64,16 @@ public class Meal extends SugarRecord<Meal> implements Serializable {
     }
 
     public List<MealDrugImage> getMealDrugImages() {
-        return MealDrugImage.find(MealDrugImage.class, "meal_id = ?", String.valueOf(this.getMealId()));
+        return getMealDrugImages(-1);
+    }
+
+    public List<MealDrugImage> getMealDrugImages(int limit) {
+        Select<MealDrugImage> select = Select.from(MealDrugImage.class)
+                .where(Condition.prop("meal_id").eq(getMealId()));
+        if (limit > 0) {
+            select.limit(String.valueOf(limit));
+        }
+        return select.list();
     }
 
     public static List<Meal> getMealUsingFilter(Date date, String type) {

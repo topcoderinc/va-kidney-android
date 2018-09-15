@@ -1,15 +1,20 @@
 package com.topcoder.vakidney.adapter;
 
 import android.databinding.BaseObservable;
+import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.topcoder.vakidney.BR;
 import com.topcoder.vakidney.databinding.ItemAddMealDrugImageBinding;
 import com.topcoder.vakidney.databinding.ItemMealDrugImageBinding;
+import com.topcoder.vakidney.databinding.ItemMealDrugImageSmallBinding;
 import com.topcoder.vakidney.model.MealDrugImage;
 
 import java.util.ArrayList;
@@ -22,9 +27,13 @@ public class MealDrugImageAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     public MealDrugImageAdapter(
             @NonNull List<MealDrugImage> mealDrugImages,
-            OnMealDrugActions onMealDrugActions) {
+            @Nullable OnMealDrugActions onMealDrugActions) {
         this.onMealDrugActions = onMealDrugActions;
         this.mealDrugImages.addAll(mealDrugImages);
+    }
+
+    public MealDrugImageAdapter(@NonNull List<MealDrugImage> mealDrugImages) {
+        this(mealDrugImages, null);
     }
 
     @Override
@@ -36,9 +45,15 @@ public class MealDrugImageAdapter extends RecyclerView.Adapter<RecyclerView.View
                         ItemAddMealDrugImageBinding.inflate(inflater, parent, false);
                 return new AddMealDrugImageViewHolder(addMealDrugImageBinding);
             case ViewType.VIEW_TYPE_IMAGE:
-                ItemMealDrugImageBinding mealDrugImageBinding =
-                        ItemMealDrugImageBinding.inflate(inflater, parent, false);
-                return new MealDrugImageViewHolder(mealDrugImageBinding);
+                if (onMealDrugActions == null) {
+                    ItemMealDrugImageSmallBinding mealDrugImageBinding =
+                            ItemMealDrugImageSmallBinding.inflate(inflater, parent, false);
+                    return new MealDrugImageViewHolder(mealDrugImageBinding);
+                } else {
+                    ItemMealDrugImageBinding mealDrugImageBinding =
+                            ItemMealDrugImageBinding.inflate(inflater, parent, false);
+                    return new MealDrugImageViewHolder(mealDrugImageBinding);
+                }
         }
         return null;
     }
@@ -53,20 +68,30 @@ public class MealDrugImageAdapter extends RecyclerView.Adapter<RecyclerView.View
                 break;
             case ViewType.VIEW_TYPE_IMAGE:
                 final MealDrugImageViewHolder mealDrugImageViewHolder = (MealDrugImageViewHolder) holder;
-                mealDrugImageViewHolder.binding
-                        .setViewModel(new MealDrugImageViewModel(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                int position = mealDrugImageViewHolder.getAdapterPosition();
-                                MealDrugImage mealDrugImage = mealDrugImages.remove(position - 1);
-                                notifyItemRemoved(position);
-                                onMealDrugActions.onRemoveMealDrugImage(mealDrugImage);
-                            }
-                        }));
-                MealDrugImage mealDrugImage = mealDrugImages.get(position - 1);
+                View.OnClickListener onRemoveItemClickListener = null;
+                ImageView addedImage = null;
+                ViewDataBinding binding;
+                if (mealDrugImageViewHolder.binding != null) {
+                    binding = mealDrugImageViewHolder.binding;
+                    addedImage = mealDrugImageViewHolder.binding.addedImage;
+                    onRemoveItemClickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            int position = mealDrugImageViewHolder.getAdapterPosition();
+                            MealDrugImage mealDrugImage = mealDrugImages.remove(position - getItemCountOffset());
+                            notifyItemRemoved(position);
+                            onMealDrugActions.onRemoveMealDrugImage(mealDrugImage);
+                        }
+                    };
+                } else {
+                    binding = mealDrugImageViewHolder.smallBinding;
+                    addedImage = mealDrugImageViewHolder.smallBinding.addedImage;
+                }
+                binding.setVariable(BR.viewModel, new MealDrugImageViewModel(onRemoveItemClickListener));
+                MealDrugImage mealDrugImage = mealDrugImages.get(position - getItemCountOffset());
                 Glide.with(holder.itemView.getContext())
                         .load(mealDrugImage.getUrl())
-                        .into(mealDrugImageViewHolder.binding.addedImage);
+                        .into(addedImage);
                 break;
         }
     }
@@ -74,17 +99,21 @@ public class MealDrugImageAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     @ViewType
     public int getItemViewType(int position) {
-        return position == 0 ? ViewType.VIEW_TYPE_ADD : ViewType.VIEW_TYPE_IMAGE;
+        return (position == 0 && onMealDrugActions != null) ? ViewType.VIEW_TYPE_ADD : ViewType.VIEW_TYPE_IMAGE;
     }
 
     @Override
     public int getItemCount() {
-        return 1 + mealDrugImages.size();
+        return getItemCountOffset() + mealDrugImages.size();
     }
 
     public void addMealDrugImage(MealDrugImage mealDrugImage) {
         mealDrugImages.add(mealDrugImage);
-        notifyItemInserted(mealDrugImages.size() + 1);
+        notifyItemInserted(mealDrugImages.size() + getItemCountOffset());
+    }
+
+    private int getItemCountOffset() {
+        return onMealDrugActions == null ? 0 : 1;
     }
 
     class AddMealDrugImageViewHolder extends RecyclerView.ViewHolder {
@@ -100,10 +129,16 @@ public class MealDrugImageAdapter extends RecyclerView.Adapter<RecyclerView.View
     class MealDrugImageViewHolder extends RecyclerView.ViewHolder {
 
         private ItemMealDrugImageBinding binding;
+        private ItemMealDrugImageSmallBinding smallBinding;
 
         public MealDrugImageViewHolder(ItemMealDrugImageBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+        }
+
+        public MealDrugImageViewHolder(ItemMealDrugImageSmallBinding smallBinding) {
+            super(smallBinding.getRoot());
+            this.smallBinding = smallBinding;
         }
     }
 
@@ -125,17 +160,18 @@ public class MealDrugImageAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     public static class MealDrugImageViewModel extends BaseObservable {
 
-        private View.OnClickListener onRemoveMealDrugImageClickListener;
+        @Nullable
+        private View.OnClickListener onRemoveItemClickListener;
 
-        public MealDrugImageViewModel(View.OnClickListener onRemoveMealDrugImageClickListener) {
-            this.onRemoveMealDrugImageClickListener = onRemoveMealDrugImageClickListener;
+        public MealDrugImageViewModel(@Nullable View.OnClickListener onRemoveItemClickListener) {
+            this.onRemoveItemClickListener = onRemoveItemClickListener;
         }
 
         public void onRemoveItemClick(View view) {
-            if (onRemoveMealDrugImageClickListener == null) {
+            if (onRemoveItemClickListener == null) {
                 return;
             }
-            onRemoveMealDrugImageClickListener.onClick(view);
+            onRemoveItemClickListener.onClick(view);
         }
 
     }
