@@ -1,7 +1,6 @@
 package com.topcoder.vakidney;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
@@ -74,10 +73,8 @@ public class AddNewMealActivity extends AppCompatActivity implements
     private Calendar myCalendar;
     private DatePickerDialog.OnDateSetListener date;
     private Meal mMeal;
-    private DrugInteraction mDrugInteraction;
     private final List<MealDrug> mAddedMealDrugs = new ArrayList<>();
     private final List<MealDrug> mDeletedMealDrugs = new ArrayList<>();
-    public static Activity activity;
     ActivityAddNewMealBinding binder;
 
     @Override
@@ -86,7 +83,6 @@ public class AddNewMealActivity extends AppCompatActivity implements
         binder = DataBindingUtil.setContentView(this, R.layout.activity_add_new_meal);
         LinearLayout bar4 = findViewById(R.id.bar4);
         bar4.setBackgroundResource(R.drawable.bg_brand_line);
-        activity = this;
 
         binder.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,11 +145,11 @@ public class AddNewMealActivity extends AppCompatActivity implements
         binder.dateLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               DatePickerDialog datePickerDialog=new DatePickerDialog(AddNewMealActivity.this, date, myCalendar
+                DatePickerDialog datePickerDialog = new DatePickerDialog(AddNewMealActivity.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH));
-               datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-               datePickerDialog.show();
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                datePickerDialog.show();
             }
         });
 
@@ -206,7 +202,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
                 mMeal.save();
 
 
-                if(mMeal.getMealDrugs().size() == 0) {
+                if (mMeal.getMealDrugs().size() == 0) {
                     new AlertDialog.Builder(AddNewMealActivity.this)
                             .setMessage("Please add at least one meal/drug")
                             .setPositiveButton("OK", null)
@@ -259,13 +255,10 @@ public class AddNewMealActivity extends AppCompatActivity implements
                 drugs.toArray(drugsStr);
                 if (DrugInteraction.findByDrugs(drugsStr) == null) {
 
-                    mDrugInteraction = new DrugInteraction();
-                    mDrugInteraction.setDrugs(drugsStr);
+                    DrugInteraction drugInteraction = new DrugInteraction();
+                    drugInteraction.setDrugs(drugsStr);
 
-                    ServiceCallUtil.searchDrugInteraction(
-                            AddNewMealActivity.this,
-                            mDrugInteraction);
-
+                    ServiceCallUtil.searchDrugInteraction(AddNewMealActivity.this, drugInteraction);
                 }
             }
         }
@@ -578,7 +571,7 @@ public class AddNewMealActivity extends AppCompatActivity implements
     }
 
     private void addMealDrug(MealDrug mealDrug) {
-        final ItemAddMealdrugBinding itemAddMealdrugBinding=ItemAddMealdrugBinding.bind(
+        final ItemAddMealdrugBinding itemAddMealdrugBinding = ItemAddMealdrugBinding.bind(
                 LayoutInflater.from(this).inflate(R.layout.item_add_mealdrug, null));
         itemAddMealdrugBinding.getRoot().setClickable(true);
         itemAddMealdrugBinding.getRoot().setFocusable(true);
