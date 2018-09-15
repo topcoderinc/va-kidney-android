@@ -97,18 +97,16 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     viewHolder2.imageView.setVisibility(View.GONE);
                     viewHolder2.mealDrugImageRecycler.setLayoutManager(new GridLayoutManager(activity, 2));
                     viewHolder2.mealDrugImageRecycler.setAdapter(new MealDrugImageAdapter(mealDrugImages));
-                } else if (mealDrugImages.size() >= 1) {
-                    viewHolder2.mealDrugImageRecycler.setVisibility(View.GONE);
-                    viewHolder2.imageView.setVisibility(View.VISIBLE);
-                    Glide.with(activity)
-                            .load(mealDrugImages.get(0).getUrl())
-                            .into(viewHolder2.imageView);
                 } else {
                     viewHolder2.mealDrugImageRecycler.setVisibility(View.GONE);
                     viewHolder2.imageView.setVisibility(View.VISIBLE);
-                    Glide.with(activity)
-                            .load(R.drawable.profile_bg)
-                            .into(viewHolder2.imageView);
+                    if (mealDrugImages.size() >= 1) {
+                        viewHolder2.mealDrugImageRecycler.setVisibility(View.GONE);
+                        viewHolder2.imageView.setVisibility(View.VISIBLE);
+                        Glide.with(activity)
+                                .load(mealDrugImages.get(0).getUrl())
+                                .into(viewHolder2.imageView);
+                    }
                 }
 
                 String desc = "";
