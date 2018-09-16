@@ -40,15 +40,17 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_above="@+id/bottomBar"
-            android:layout_below="@+id/toolbar">
+            android:layout_below="@+id/toolbar"
+            android:orientation="vertical">
 
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:scrollbars="none">
 
                 <LinearLayout
@@ -63,8 +65,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:background="@drawable/bg_seekbar_background"
-                        android:orientation="horizontal"
-                        android:weightSum="5">
+                        android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/seekBtn1"
@@ -124,12 +125,10 @@
 
                     </LinearLayout>
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
+                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:id="@+id/dateLayout"
@@ -367,77 +366,34 @@
                             android:textSize="14sp" />
                     </LinearLayout>
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="120dp"
+                        android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/app_standard_padding"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
+                        android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:id="@+id/addPhotoBtn"
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/mealDrugImageRecycler"
                             android:layout_width="match_parent"
-                            android:layout_height="120dp"
-                            android:layout_marginRight="5dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/bg_round_white"
-                            android:gravity="center">
+                            android:layout_height="match_parent" />
 
-                            <android.support.v7.widget.AppCompatImageView
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"
-                                android:layout_margin="@dimen/app_standard_padding"
-                                android:tint="@color/colorLightDarkGray"
-                                app:srcCompat="@drawable/ic_addphotos" />
-
-                        </LinearLayout>
-
-
-                        <RelativeLayout
-                            android:id="@+id/addImageLayout"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:visibility="invisible">
-
-                            <android.support.v7.widget.AppCompatImageView
-                                android:id="@+id/addedImage"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/profile_bg" />
-
-                            <android.support.v7.widget.AppCompatImageView
-                                android:id="@+id/removeImageBtn"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_alignParentRight="true"
-                                android:layout_margin="@dimen/app_standard_padding"
-                                app:srcCompat="@drawable/ic_cross_in_circle" />
-
-
-                        </RelativeLayout>
                     </LinearLayout>
-
-                    <Button
-                        android:id="@+id/btnAddNewMeal"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="@dimen/app_standard_padding"
-                        android:background="@drawable/bg_login_btn"
-                        android:elevation="5dp"
-                        android:text="ADD NEW MEAL/DRUG"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="13dp" />
 
                 </LinearLayout>
 
             </ScrollView>
 
-        </RelativeLayout>
+            <Button
+                android:id="@+id/btnAddNewMeal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="@dimen/app_standard_padding"
+                android:background="@drawable/bg_login_btn"
+                android:elevation="5dp"
+                android:text="ADD NEW MEAL/DRUG"
+                android:textColor="@color/colorWhite"
+                android:textSize="13dp" />
+        </LinearLayout>
 
         <com.topcoder.vakidney.customview.BottomMenu
             android:id="@+id/bottomBar"

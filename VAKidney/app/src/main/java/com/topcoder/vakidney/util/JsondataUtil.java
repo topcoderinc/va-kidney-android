@@ -553,55 +553,6 @@ public class JsondataUtil {
         return chartDataArrayList;
     }
 
-
-    /**
-     * Returns an array of Meals Object read from meals.json  File
-     *
-     * @param context The context it was called from
-     * @return An ArrayList of Meal Object is returned by parsing Meals.json file
-     */
-    public static ArrayList<Meal> getMeals(Context context) {
-        ArrayList<Meal> meals = new ArrayList<>();
-        try {
-            String jsonString = loadJSONFromAsset(context, "Meals.json");
-            JSONArray jsonArray = new JSONArray(jsonString);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                Meal meal = new Meal();
-                meal.setName(jsonObject.getString("name"));
-                meal.setPhotoUrl(jsonObject.getString("photoUrl"));
-                meal.setDesc(jsonObject.getString("desc"));
-                meal.setType(jsonObject.getString("type"));
-                meal.setDate(DateUtil.fromISO8601UTC(jsonObject.getString("date")));
-                meal.setMealId(System.currentTimeMillis());
-                meal.save();
-
-                JSONArray arrayMealDrugs = jsonObject.getJSONArray("mealDrugs");
-                for (int j = 0; j < arrayMealDrugs.length(); j++) {
-                    JSONObject objectMealDrugs = arrayMealDrugs.getJSONObject(j);
-                    MealDrug mealDrug = new MealDrug();
-                    mealDrug.setName(objectMealDrugs.getString("name"));
-                    mealDrug.setAmount(objectMealDrugs.getDouble("amount"));
-                    mealDrug.setUnit(objectMealDrugs.getString("unit"));
-                    mealDrug.setType(objectMealDrugs.getString("type").equals("meal") ?
-                            MealDrug.TYPE_MEAL : MealDrug.TYPE_DRUG);
-                    mealDrug.setMealId(meal.getMealId());
-                    if (mealDrug.getType() == MealDrug.TYPE_DRUG && !meal.isHasDrug()) {
-                        meal.setHasDrug(true);
-                        meal.save();
-                    }
-                    mealDrug.save();
-                }
-                meals.add(meal);
-            }
-        } catch (JSONException e) {
-            Log.e("json Exception", e.getMessage() + "");
-        }
-
-        return meals;
-    }
-
-
     /**
      * Reads string from json file
      *
